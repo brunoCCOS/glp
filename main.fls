@@ -290,9 +290,11 @@ OUTPUT main.toc
 INPUT C:\Users\brunotrotti\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\brunotrotti\AppData\Local\MiKTeX\luatex-cache\generic\fonts\otl\lmroman7-regular.luc
 INPUT C:\Users\brunotrotti\AppData\Local\MiKTeX\luatex-cache\generic\fonts\otl\lmroman5-regular.luc
-INPUT .\images\RelProg.pdf
-INPUT .\images\RelProg.pdf
-INPUT .\images\RelProg.pdf
+INPUT .\images\Overview.png
+INPUT .\images\Overview.png
+INPUT .\images\Overview.png
+INPUT .\images\Overview.png
+INPUT .\images\Overview.png
 INPUT C:\Users\brunotrotti\AppData\Local\MiKTeX\luatex-cache\generic\fonts\otl\lmroman7-italic.luc
 INPUT .\images\froberniusDiagram.png
 INPUT .\images\froberniusDiagram.png

@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1777502699.24967 "main.bcf" "main.bbl" "main" 1777506572.42656 0
+["biber main"] 1777502699.24967 "main.bcf" "main.bbl" "main" 1777588667.47937 0
   "bib.bib" 1777053407 16818 7e29d76eb8b666ddd701ffc7f90438a5 ""
-  "main.bcf" 1777506571 113020 a7481746c9104cc32cb5d4358542013e "lualatex"
+  "main.bcf" 1777588666 113020 a7481746c9104cc32cb5d4358542013e "lualatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["lualatex"] 1777506564.2167 "c:/Users/brunotrotti/Downloads/Dissertação___João_Paixão__Iago_Leal/main.tex" "main.pdf" "main" 1777506572.42752 0
+["lualatex"] 1777588659.27484 "c:/Users/brunotrotti/Downloads/Dissertação___João_Paixão__Iago_Leal/main.tex" "main.pdf" "main" 1777588667.48033 0
   "C:/Users/brunotrotti/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1776721954 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/brunotrotti/AppData/Local/MiKTeX/luatex-cache/generic/fonts/otl/lmmono10-regular.luc" 1776721963 81853 abce6e7eb70a016b5fe7d75a15df1ee4 ""
   "C:/Users/brunotrotti/AppData/Local/MiKTeX/luatex-cache/generic/fonts/otl/lmroman10-bold.luc" 1776721677 128426 4b6764b7f62fd93bb1fd8910847647ba ""
@@ -183,7 +183,7 @@
   "C:/Users/brunotrotti/AppData/Local/Programs/MiKTeX/tex/luatex/luaotfload/luaotfload-tounicode.lua" 1740607740 7529 21fe79d2526f3c3d789a9cc0366347ab ""
   "C:/Users/brunotrotti/AppData/Local/Programs/MiKTeX/tex/luatex/luaotfload/luaotfload-unicode.lua" 1740607740 7918 4272855a25780b80472f3b58edd95e33 ""
   "C:/Users/brunotrotti/AppData/Local/Programs/MiKTeX/tex/luatex/luaotfload/luaotfload.lua" 1740607740 13566 16df94dd2de231b2bca0aaa0190941fe ""
-  "c:/Users/brunotrotti/Downloads/Dissertação___João_Paixão__Iago_Leal/main.tex" 1777506555 126132 ede2d973cb3cc2d045146353cfaee7db ""
+  "c:/Users/brunotrotti/Downloads/Dissertação___João_Paixão__Iago_Leal/main.tex" 1777588650 126821 be95cf212bc19d7c7a66002094381131 ""
   "c:/users/brunotrotti/appdata/local/programs/miktex/fonts/opentype/public/lm/lmmono10-regular.otf" 1256929440 64684 c6f5a48921f83c1a51d9384f785ddd5a ""
   "c:/users/brunotrotti/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman10-bold.otf" 1256929440 111240 1d60e9def74b1102bb4defa7cb772ee3 ""
   "c:/users/brunotrotti/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman10-regular.otf" 1256929440 111536 fc712364c8d0a1b548d46c76f2678030 ""
@@ -259,16 +259,16 @@
   "images/GQA/subspaceProj.png" 1777122206 4234 7d635e8ce6611fb5755586833d4ed687 ""
   "images/LeftAlgebra.png" 1776637660 1641 1fe8b3bc39d4392e4a6587d60134ee25 ""
   "images/Overview.pdf" 1776637660 90773 104f9bfe0897cb3fc9c4d1525de4d5f1 ""
-  "images/RelProg.pdf" 1760467038 91052 1064ab22c6c448a8a7648f2151a76e35 ""
+  "images/Overview.png" 1777588152 156198 da9b46ea43256918b01940eef4cf7059 ""
   "images/RightAlgebra.png" 1776637660 1721 4c1093ec2f31e8cd689e45cf41106439 ""
   "images/States.png" 1776637660 10222 1ef5e5611354f7f793cf4ffdc26b639c ""
   "images/froberniusDiagram.png" 1776637660 16848 eae8f71acbbf5740d6f14ebb48d9c4b5 ""
-  "main.aux" 1777506571 10871 4236ebf2b0322a35321655991f665977 "lualatex"
+  "main.aux" 1777588666 12266 68743abc451325a0f92c34ba20150a9b "lualatex"
   "main.bbl" 1777502731 47247 fa5de2fe5c6b4fed4fc3962c1fefe7d7 "biber main"
-  "main.out" 1777506571 2799 6b476b245c9c4785cd29558b00d5fcd7 "lualatex"
-  "main.run.xml" 1777506571 2339 bde9ab218ab5b3920ae6da884556625b "lualatex"
-  "main.tex" 1777506555 126132 ede2d973cb3cc2d045146353cfaee7db ""
-  "main.toc" 1777506571 1337 0aa834a63d6342a786da702a26f14efb "lualatex"
+  "main.out" 1777588666 2799 6b476b245c9c4785cd29558b00d5fcd7 "lualatex"
+  "main.run.xml" 1777588666 2339 bde9ab218ab5b3920ae6da884556625b "lualatex"
+  "main.tex" 1777588650 126821 be95cf212bc19d7c7a66002094381131 ""
+  "main.toc" 1777588666 1337 0aa834a63d6342a786da702a26f14efb "lualatex"
   (generated)
   "main.aux"
   "main.bcf"
