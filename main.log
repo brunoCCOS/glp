@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.20)  30 APR 2026 19:37
+This is LuaHBTeX, Version 1.24.0 (MiKTeX 25.12) (format=lualatex 2026.4.20)  1 MAY 2026 11:58
  restricted system commands enabled.
  file:line:error style messages enabled.
 **c:/Users/brunotrotti/Downloads/Dissertação___João_Paixão__Iago_Leal/main.
@@ -1272,256 +1272,256 @@ Package luatex.def Info: images//GQA/GQAInterpretation.png  used on input line
 (luatex.def)             Requested size: 345.0pt x 85.93353pt.
  [29<./images/GQA/GQAAxioms.png><./images//GQA/GQAInterpretation.png>] [30] [31
 ]
-<images/GQA/subspaceProj.png, id=377, 286.06876pt x 73.02281pt>
+<images/GQA/subspaceProj.png, id=386, 286.06876pt x 73.02281pt>
 File: images/GQA/subspaceProj.png Graphic file (type png)
 <use images/GQA/subspaceProj.png>
-Package luatex.def Info: images/GQA/subspaceProj.png  used on input line 1934.
+Package luatex.def Info: images/GQA/subspaceProj.png  used on input line 1961.
 (luatex.def)             Requested size: 345.0pt x 88.06703pt.
-<images/GQA/ProofProjection.png, id=378, 415.5525pt x 280.04625pt>
+ [32]
+<images/GQA/ProofProjection.png, id=392, 415.5525pt x 280.04625pt>
 File: images/GQA/ProofProjection.png Graphic file (type png)
 <use images/GQA/ProofProjection.png>
-Package luatex.def Info: images/GQA/ProofProjection.png  used on input line 194
-3.
+Package luatex.def Info: images/GQA/ProofProjection.png  used on input line 197
+0.
 (luatex.def)             Requested size: 345.0pt x 232.51096pt.
- [32<./images/GQA/subspaceProj.png>]
-<images//GQA/GQAeNormalForm.png, id=385, 346.29375pt x 98.61844pt>
+ [33<./images/GQA/subspaceProj.png><./images/GQA/ProofProjection.png>]
+<images//GQA/GQAeNormalForm.png, id=399, 346.29375pt x 98.61844pt>
 File: images//GQA/GQAeNormalForm.png Graphic file (type png)
 <use images//GQA/GQAeNormalForm.png>
-Package luatex.def Info: images//GQA/GQAeNormalForm.png  used on input line 197
-1.
+Package luatex.def Info: images//GQA/GQAeNormalForm.png  used on input line 199
+8.
 (luatex.def)             Requested size: 345.0pt x 98.2525pt.
- [33<./images/GQA/ProofProjection.png>]
-<images//GQA/preliminary form.png, id=393, 452.4403pt x 290.58563pt>
+<images//GQA/preliminary form.png, id=401, 452.4403pt x 290.58563pt>
 File: images//GQA/preliminary form.png Graphic file (type png)
 <use images//GQA/preliminary form.png>
-Package luatex.def Info: images//GQA/preliminary form.png  used on input line 1
-982.
+Package luatex.def Info: images//GQA/preliminary form.png  used on input line 2
+009.
 (luatex.def)             Requested size: 345.0pt x 221.57896pt.
  [34<./images//GQA/GQAeNormalForm.png><./images//GQA/preliminary form.png>]
-<images//GQA/NormalFormScalar.png, id=400, 252.19218pt x 105.39375pt>
+<images//GQA/NormalFormScalar.png, id=409, 252.19218pt x 105.39375pt>
 File: images//GQA/NormalFormScalar.png Graphic file (type png)
 <use images//GQA/NormalFormScalar.png>
 Package luatex.def Info: images//GQA/NormalFormScalar.png  used on input line 2
-059.
+086.
 (luatex.def)             Requested size: 258.75pt x 108.1354pt.
-<images/States.png, id=401, 753.5653pt x 238.64156pt>
+ [35]
+<images/States.png, id=415, 753.5653pt x 238.64156pt>
 File: images/States.png Graphic file (type png)
 <use images/States.png>
-Package luatex.def Info: images/States.png  used on input line 2071.
+Package luatex.def Info: images/States.png  used on input line 2098.
 (luatex.def)             Requested size: 345.0pt x 109.25572pt.
- [35<./images//GQA/NormalFormScalar.png>]
-<images//GQA/CollectDiagrams.png, id=407, 137.01187pt x 98.61844pt>
+<images//GQA/CollectDiagrams.png, id=416, 137.01187pt x 98.61844pt>
 File: images//GQA/CollectDiagrams.png Graphic file (type png)
 <use images//GQA/CollectDiagrams.png>
-Package luatex.def Info: images//GQA/CollectDiagrams.png  used on input line 20
-80.
+Package luatex.def Info: images//GQA/CollectDiagrams.png  used on input line 21
+07.
 (luatex.def)             Requested size: 103.50105pt x 74.49933pt.
-<images//GQA/ProofNormalForm1.png, id=408, 169.38281pt x 122.70844pt>
+<images//GQA/ProofNormalForm1.png, id=417, 169.38281pt x 122.70844pt>
 File: images//GQA/ProofNormalForm1.png Graphic file (type png)
 <use images//GQA/ProofNormalForm1.png>
 Package luatex.def Info: images//GQA/ProofNormalForm1.png  used on input line 2
-088.
+115.
 (luatex.def)             Requested size: 103.50105pt x 74.9831pt.
-<images//GQA/ProofNormalForm2.png, id=410, 681.29532pt x 420.06938pt>
+ [36<./images//GQA/NormalFormScalar.png><./images/States.png><./images//GQA/Coll
+ectDiagrams.png>]
+<images//GQA/ProofNormalForm2.png, id=423, 681.29532pt x 420.06938pt>
 File: images//GQA/ProofNormalForm2.png Graphic file (type png)
 <use images//GQA/ProofNormalForm2.png>
 Package luatex.def Info: images//GQA/ProofNormalForm2.png  used on input line 2
-096.
+123.
 (luatex.def)             Requested size: 345.0pt x 212.71985pt.
- [36<./images/States.png><./images//GQA/CollectDiagrams.png><./images//GQA/Proof
-NormalForm1.png>]
-<images//GQA/ProofNormalForm3.png, id=416, 632.3625pt x 310.15875pt>
+<images//GQA/ProofNormalForm3.png, id=424, 632.3625pt x 310.15875pt>
 File: images//GQA/ProofNormalForm3.png Graphic file (type png)
 <use images//GQA/ProofNormalForm3.png>
 Package luatex.def Info: images//GQA/ProofNormalForm3.png  used on input line 2
-106.
+133.
 (luatex.def)             Requested size: 345.0pt x 169.21536pt.
-<images//GQA/ProofNormalForm4.png, id=417, 760.34062pt x 633.86812pt>
+ [37<./images//GQA/ProofNormalForm1.png><./images//GQA/ProofNormalForm2.png>]
+<images//GQA/ProofNormalForm4.png, id=430, 760.34062pt x 633.86812pt>
 File: images//GQA/ProofNormalForm4.png Graphic file (type png)
 <use images//GQA/ProofNormalForm4.png>
 Package luatex.def Info: images//GQA/ProofNormalForm4.png  used on input line 2
-113.
+140.
 (luatex.def)             Requested size: 345.0pt x 287.61734pt.
- [37<./images//GQA/ProofNormalForm2.png><./images//GQA/ProofNormalForm3.png>]
-<images//GQA/ProofNormalForm5.png, id=422, 443.40656pt x 657.95813pt>
+<images//GQA/ProofNormalForm5.png, id=431, 443.40656pt x 657.95813pt>
 File: images//GQA/ProofNormalForm5.png Graphic file (type png)
 <use images//GQA/ProofNormalForm5.png>
 Package luatex.def Info: images//GQA/ProofNormalForm5.png  used on input line 2
-120.
+147.
 (luatex.def)             Requested size: 345.0pt x 511.97041pt.
- [38<./images//GQA/ProofNormalForm4.png>]
-<images//GQA/ProofNormalForm6.png, id=427, 134.00063pt x 85.06781pt>
+ [38<./images//GQA/ProofNormalForm3.png><./images//GQA/ProofNormalForm4.png>]
+<images//GQA/ProofNormalForm6.png, id=436, 134.00063pt x 85.06781pt>
 File: images//GQA/ProofNormalForm6.png Graphic file (type png)
 <use images//GQA/ProofNormalForm6.png>
 Package luatex.def Info: images//GQA/ProofNormalForm6.png  used on input line 2
-128.
+155.
 (luatex.def)             Requested size: 172.5pt x 109.50816pt.
  [39<./images//GQA/ProofNormalForm5.png>]
-<images//GQA/SoundnessGQA.png, id=432, 566.115pt x 304.13625pt>
+<images//GQA/SoundnessGQA.png, id=441, 566.115pt x 304.13625pt>
 File: images//GQA/SoundnessGQA.png Graphic file (type png)
 <use images//GQA/SoundnessGQA.png>
-Package luatex.def Info: images//GQA/SoundnessGQA.png  used on input line 2153.
+Package luatex.def Info: images//GQA/SoundnessGQA.png  used on input line 2180.
 
 (luatex.def)             Requested size: 345.0pt x 185.35112pt.
 
 [40<./images//GQA/ProofNormalForm6.png><./images//GQA/SoundnessGQA.png>]
-<images/GQA/PQFDiagram.png, id=440, 545.78906pt x 141.52875pt>
+<images/GQA/PQFDiagram.png, id=449, 545.78906pt x 141.52875pt>
 File: images/GQA/PQFDiagram.png Graphic file (type png)
 <use images/GQA/PQFDiagram.png>
-Package luatex.def Info: images/GQA/PQFDiagram.png  used on input line 2175.
+Package luatex.def Info: images/GQA/PQFDiagram.png  used on input line 2202.
 (luatex.def)             Requested size: 345.0pt x 89.4616pt.
-<images//GQA/ProofExpressivity.png, id=441, 497.60907pt x 163.3603pt>
+<images//GQA/ProofExpressivity.png, id=450, 497.60907pt x 163.3603pt>
 File: images//GQA/ProofExpressivity.png Graphic file (type png)
 <use images//GQA/ProofExpressivity.png>
 Package luatex.def Info: images//GQA/ProofExpressivity.png  used on input line 
-2181.
+2208.
 (luatex.def)             Requested size: 345.0pt x 113.26212pt.
-<images//GQA/ProofCompleteness1.png, id=443, 119.69719pt x 60.97781pt>
+<images//GQA/ProofCompleteness1.png, id=452, 119.69719pt x 60.97781pt>
 File: images//GQA/ProofCompleteness1.png Graphic file (type png)
 <use images//GQA/ProofCompleteness1.png>
 Package luatex.def Info: images//GQA/ProofCompleteness1.png  used on input line
- 2199.
+ 2226.
 (luatex.def)             Requested size: 86.25pt x 43.9384pt.
 
 [41<./images/GQA/PQFDiagram.png><./images//GQA/ProofExpressivity.png><./images//
 GQA/ProofCompleteness1.png>]
-Overfull \hbox (3.94202pt too wide) in paragraph at lines 2234--2244
+Overfull \hbox (3.94202pt too wide) in paragraph at lines 2261--2271
 \TU/LatinModernRoman(0)/m/n/10 Hav-ing es-tab-lished that $[]$ com-pletely ax-io
 ma-tises $[]$, we now demon-
  []
 
-<images/GQA/ExpansionRelation.png, id=454, 436.63126pt x 80.55093pt>
+<images/GQA/ExpansionRelation.png, id=463, 436.63126pt x 80.55093pt>
 File: images/GQA/ExpansionRelation.png Graphic file (type png)
 <use images/GQA/ExpansionRelation.png>
 Package luatex.def Info: images/GQA/ExpansionRelation.png  used on input line 2
-247.
+274.
 (luatex.def)             Requested size: 345.0pt x 63.64682pt.
-<images/GQA/ProofExpansion.png, id=455, 450.18187pt x 205.5178pt>
+<images/GQA/ProofExpansion.png, id=464, 450.18187pt x 205.5178pt>
 File: images/GQA/ProofExpansion.png Graphic file (type png)
 <use images/GQA/ProofExpansion.png>
-Package luatex.def Info: images/GQA/ProofExpansion.png  used on input line 2252
+Package luatex.def Info: images/GQA/ProofExpansion.png  used on input line 2279
 .
 (luatex.def)             Requested size: 345.0pt x 157.50598pt.
 [42<./images/GQA/ExpansionRelation.png>]
-<images/GQA/ContractionRelation.png, id=463, 423.08063pt x 83.5622pt>
+<images/GQA/ContractionRelation.png, id=472, 423.08063pt x 83.5622pt>
 File: images/GQA/ContractionRelation.png Graphic file (type png)
 <use images/GQA/ContractionRelation.png>
 Package luatex.def Info: images/GQA/ContractionRelation.png  used on input line
- 2257.
+ 2284.
 (luatex.def)             Requested size: 345.0pt x 68.14273pt.
-<images/GQA/OrthogonalProj.png, id=464, 386.94562pt x 91.84312pt>
+<images/GQA/OrthogonalProj.png, id=473, 386.94562pt x 91.84312pt>
 File: images/GQA/OrthogonalProj.png Graphic file (type png)
 <use images/GQA/OrthogonalProj.png>
-Package luatex.def Info: images/GQA/OrthogonalProj.png  used on input line 2275
+Package luatex.def Info: images/GQA/OrthogonalProj.png  used on input line 2302
 .
 (luatex.def)             Requested size: 345.0pt x 81.88866pt.
-<images/GQA/ProofMatrixProj.png, id=465, 344.03531pt x 538.26094pt>
+<images/GQA/ProofMatrixProj.png, id=474, 344.03531pt x 538.26094pt>
 File: images/GQA/ProofMatrixProj.png Graphic file (type png)
 <use images/GQA/ProofMatrixProj.png>
-Package luatex.def Info: images/GQA/ProofMatrixProj.png  used on input line 228
-0.
+Package luatex.def Info: images/GQA/ProofMatrixProj.png  used on input line 230
+7.
 (luatex.def)             Requested size: 345.0pt x 539.77084pt.
-<images/GQA/ProofMatrixProj2.png, id=466, 505.89pt x 124.21407pt>
+<images/GQA/ProofMatrixProj2.png, id=475, 505.89pt x 124.21407pt>
 File: images/GQA/ProofMatrixProj2.png Graphic file (type png)
 <use images/GQA/ProofMatrixProj2.png>
-Package luatex.def Info: images/GQA/ProofMatrixProj2.png  used on input line 22
-81.
+Package luatex.def Info: images/GQA/ProofMatrixProj2.png  used on input line 23
+08.
 (luatex.def)             Requested size: 345.0pt x 84.71083pt.
  [43<./images/GQA/ProofExpansion.png><./images/GQA/ContractionRelation.png><./im
 ages/GQA/OrthogonalProj.png>] [44<./images/GQA/ProofMatrixProj.png>]
-<images/GQA/GSVDOrth.png, id=477, 456.95718pt x 123.46124pt>
+<images/GQA/GSVDOrth.png, id=486, 456.95718pt x 123.46124pt>
 File: images/GQA/GSVDOrth.png Graphic file (type png)
 <use images/GQA/GSVDOrth.png>
-Package luatex.def Info: images/GQA/GSVDOrth.png  used on input line 2289.
+Package luatex.def Info: images/GQA/GSVDOrth.png  used on input line 2316.
 (luatex.def)             Requested size: 345.0pt x 93.21547pt.
-<images/GQA/ProofGSVDOrth.png, id=478, 497.60907pt x 415.5525pt>
+<images/GQA/ProofGSVDOrth.png, id=487, 497.60907pt x 415.5525pt>
 File: images/GQA/ProofGSVDOrth.png Graphic file (type png)
 <use images/GQA/ProofGSVDOrth.png>
-Package luatex.def Info: images/GQA/ProofGSVDOrth.png  used on input line 2294.
+Package luatex.def Info: images/GQA/ProofGSVDOrth.png  used on input line 2321.
 
 (luatex.def)             Requested size: 345.0pt x 288.11383pt.
  [45<./images/GQA/ProofMatrixProj2.png><./images/GQA/GSVDOrth.png><./images/GQA/
 ProofGSVDOrth.png>]
-<images/GQA/OrthogonalProjectionRelation.png, id=484, 507.39563pt x 73.02281pt>
+<images/GQA/OrthogonalProjectionRelation.png, id=493, 507.39563pt x 73.02281pt>
 
 File: images/GQA/OrthogonalProjectionRelation.png Graphic file (type png)
 <use images/GQA/OrthogonalProjectionRelation.png>
 Package luatex.def Info: images/GQA/OrthogonalProjectionRelation.png  used on i
-nput line 2303.
+nput line 2330.
 (luatex.def)             Requested size: 345.0pt x 49.6526pt.
-<images/GQA/OrthogonalProjRel2.png, id=485, 229.60782pt x 47.42719pt>
+<images/GQA/OrthogonalProjRel2.png, id=494, 229.60782pt x 47.42719pt>
 File: images/GQA/OrthogonalProjRel2.png Graphic file (type png)
 <use images/GQA/OrthogonalProjRel2.png>
 Package luatex.def Info: images/GQA/OrthogonalProjRel2.png  used on input line 
-2304.
+2331.
 (luatex.def)             Requested size: 345.0pt x 71.26578pt.
-<images/GQA/ProofOrthRel.png, id=486, 645.91313pt x 188.20313pt>
+<images/GQA/ProofOrthRel.png, id=495, 645.91313pt x 188.20313pt>
 File: images/GQA/ProofOrthRel.png Graphic file (type png)
 <use images/GQA/ProofOrthRel.png>
-Package luatex.def Info: images/GQA/ProofOrthRel.png  used on input line 2309.
+Package luatex.def Info: images/GQA/ProofOrthRel.png  used on input line 2336.
 (luatex.def)             Requested size: 345.0pt x 100.52254pt.
-<images/GQA/ProofOrthRel2.png, id=487, 651.18282pt x 349.305pt>
+<images/GQA/ProofOrthRel2.png, id=496, 651.18282pt x 349.305pt>
 File: images/GQA/ProofOrthRel2.png Graphic file (type png)
 <use images/GQA/ProofOrthRel2.png>
-Package luatex.def Info: images/GQA/ProofOrthRel2.png  used on input line 2310.
+Package luatex.def Info: images/GQA/ProofOrthRel2.png  used on input line 2337.
 
 (luatex.def)             Requested size: 345.0pt x 185.0668pt.
  [46<./images/GQA/OrthogonalProjectionRelation.png><./images/GQA/OrthogonalProjR
 el2.png><./images/GQA/ProofOrthRel.png><./images/GQA/ProofOrthRel2.png>]
-<images/GPA/PolyGen.png, id=496, 345.29pt x 46.1725pt>
+<images/GPA/PolyGen.png, id=505, 345.29pt x 46.1725pt>
 File: images/GPA/PolyGen.png Graphic file (type png)
 <use images/GPA/PolyGen.png>
-Package luatex.def Info: images/GPA/PolyGen.png  used on input line 2372.
+Package luatex.def Info: images/GPA/PolyGen.png  used on input line 2399.
 (luatex.def)             Requested size: 241.49895pt x 32.29373pt.
-<images//GPA/AffineAxiom.png, id=497, 92.59593pt x 47.42719pt>
+<images//GPA/AffineAxiom.png, id=506, 92.59593pt x 47.42719pt>
 File: images//GPA/AffineAxiom.png Graphic file (type png)
 <use images//GPA/AffineAxiom.png>
-Package luatex.def Info: images//GPA/AffineAxiom.png  used on input line 2377.
+Package luatex.def Info: images//GPA/AffineAxiom.png  used on input line 2404.
 (luatex.def)             Requested size: 68.99895pt x 35.34161pt.
-<images/GPA/PolyAxioms.png, id=498, 911.405pt x 275.0275pt>
+<images/GPA/PolyAxioms.png, id=507, 911.405pt x 275.0275pt>
 File: images/GPA/PolyAxioms.png Graphic file (type png)
 <use images/GPA/PolyAxioms.png>
-Package luatex.def Info: images/GPA/PolyAxioms.png  used on input line 2381.
+Package luatex.def Info: images/GPA/PolyAxioms.png  used on input line 2408.
 (luatex.def)             Requested size: 345.0pt x 104.10866pt.
  [47<./images/GPA/PolyGen.png>]
-Overfull \hbox (4.06404pt too wide) in paragraph at lines 2393--2396
+Overfull \hbox (4.06404pt too wide) in paragraph at lines 2420--2423
 []\TU/LatinModernRoman(0)/b/n/10 Def-i-ni-tion 26 \TU/LatinModernRoman(0)/m/n/1
 0 (The Free Cat-e-gories of Poly-he-dral Di-a-grams)\TU/LatinModernRoman(0)/b/n
 /10 . \TU/LatinModernRoman(0)/m/it/10 We call $[][]$
  []
 
 [48<./images//GPA/AffineAxiom.png><./images/GPA/PolyAxioms.png>]
-<images/GPA/transitivity.png, id=517, 535.2497pt x 169.38281pt>
+<images/GPA/transitivity.png, id=526, 535.2497pt x 169.38281pt>
 File: images/GPA/transitivity.png Graphic file (type png)
 <use images/GPA/transitivity.png>
-Package luatex.def Info: images/GPA/transitivity.png  used on input line 2457.
+Package luatex.def Info: images/GPA/transitivity.png  used on input line 2484.
 (luatex.def)             Requested size: 345.0pt x 109.18257pt.
-<images/GPA/reflexivity.png, id=518, 553.31718pt x 140.02313pt>
+<images/GPA/reflexivity.png, id=527, 553.31718pt x 140.02313pt>
 File: images/GPA/reflexivity.png Graphic file (type png)
 <use images/GPA/reflexivity.png>
-Package luatex.def Info: images/GPA/reflexivity.png  used on input line 2464.
+Package luatex.def Info: images/GPA/reflexivity.png  used on input line 2491.
 (luatex.def)             Requested size: 345.0pt x 87.30484pt.
-<images/GPA/antysim.png, id=519, 781.41937pt x 511.15968pt>
+<images/GPA/antysim.png, id=528, 781.41937pt x 511.15968pt>
 File: images/GPA/antysim.png Graphic file (type png)
 <use images/GPA/antysim.png>
-Package luatex.def Info: images/GPA/antysim.png  used on input line 2471.
+Package luatex.def Info: images/GPA/antysim.png  used on input line 2498.
 (luatex.def)             Requested size: 345.0pt x 225.67531pt.
  [49<./images/GPA/transitivity.png><./images/GPA/reflexivity.png>]
-<images//GPA/FMEDiag.png, id=525, 833.36343pt x 129.48375pt>
+<images//GPA/FMEDiag.png, id=534, 833.36343pt x 129.48375pt>
 File: images//GPA/FMEDiag.png Graphic file (type png)
 <use images//GPA/FMEDiag.png>
-Package luatex.def Info: images//GPA/FMEDiag.png  used on input line 2481.
+Package luatex.def Info: images//GPA/FMEDiag.png  used on input line 2508.
 (luatex.def)             Requested size: 345.0pt x 53.60434pt.
-<images//GPA/ProofFMEDiag.png, id=526, 417.81094pt x 673.01437pt>
+<images//GPA/ProofFMEDiag.png, id=535, 417.81094pt x 673.01437pt>
 File: images//GPA/ProofFMEDiag.png Graphic file (type png)
 <use images//GPA/ProofFMEDiag.png>
-Package luatex.def Info: images//GPA/ProofFMEDiag.png  used on input line 2489.
+Package luatex.def Info: images//GPA/ProofFMEDiag.png  used on input line 2516.
 
 (luatex.def)             Requested size: 345.0pt x 555.76744pt.
-<images//GPA/ProofFMEDiag2.png, id=527, 414.04688pt x 230.36063pt>
+<images//GPA/ProofFMEDiag2.png, id=536, 414.04688pt x 230.36063pt>
 File: images//GPA/ProofFMEDiag2.png Graphic file (type png)
 <use images//GPA/ProofFMEDiag2.png>
-Package luatex.def Info: images//GPA/ProofFMEDiag2.png  used on input line 2493
+Package luatex.def Info: images//GPA/ProofFMEDiag2.png  used on input line 2520
 .
 (luatex.def)             Requested size: 345.0pt x 191.95146pt.
  [50<./images/GPA/antysim.png><./images//GPA/FMEDiag.png>]
@@ -1529,179 +1529,179 @@ Overfull \vbox (5.76744pt too high) has occurred while \output is active []
 
 
 [51<./images//GPA/ProofFMEDiag.png>]
-<images/GPA/FirstNormalFormPCRel.png, id=538, 1083.04625pt x 376.40625pt>
+<images/GPA/FirstNormalFormPCRel.png, id=547, 1083.04625pt x 376.40625pt>
 File: images/GPA/FirstNormalFormPCRel.png Graphic file (type png)
 <use images/GPA/FirstNormalFormPCRel.png>
 Package luatex.def Info: images/GPA/FirstNormalFormPCRel.png  used on input lin
-e 2510.
+e 2537.
 (luatex.def)             Requested size: 258.75pt x 89.92581pt.
-<images//GPA/BaseCase1NormalFormProof.png, id=539, 982.67125pt x 152.57pt>
+<images//GPA/BaseCase1NormalFormProof.png, id=548, 982.67125pt x 152.57pt>
 File: images//GPA/BaseCase1NormalFormProof.png Graphic file (type png)
 <use images//GPA/BaseCase1NormalFormProof.png>
 Package luatex.def Info: images//GPA/BaseCase1NormalFormProof.png  used on inpu
-t line 2519.
+t line 2546.
 (luatex.def)             Requested size: 258.75pt x 40.17244pt.
-<images//GPA/BaseCase2NormalFormProof.png, id=540, 580.1675pt x 348.30125pt>
+<images//GPA/BaseCase2NormalFormProof.png, id=549, 580.1675pt x 348.30125pt>
 File: images//GPA/BaseCase2NormalFormProof.png Graphic file (type png)
 <use images//GPA/BaseCase2NormalFormProof.png>
 Package luatex.def Info: images//GPA/BaseCase2NormalFormProof.png  used on inpu
-t line 2524.
+t line 2551.
 (luatex.def)             Requested size: 345.0pt x 207.12224pt.
  [52<./images//GPA/ProofFMEDiag2.png><./images/GPA/FirstNormalFormPCRel.png><./i
 mages//GPA/BaseCase1NormalFormProof.png>]
-<images//GPA/InductiveCase1NormalFormProof.png, id=548, 661.72218pt x 580.41844
+<images//GPA/InductiveCase1NormalFormProof.png, id=557, 661.72218pt x 580.41844
 pt>
 File: images//GPA/InductiveCase1NormalFormProof.png Graphic file (type png)
 <use images//GPA/InductiveCase1NormalFormProof.png>
 Package luatex.def Info: images//GPA/InductiveCase1NormalFormProof.png  used on
- input line 2531.
+ input line 2558.
 (luatex.def)             Requested size: 258.75pt x 226.95566pt.
-<images//GPA/InductiveCase2NormalFormProof.png, id=549, 562.1pt x 187.70125pt>
+<images//GPA/InductiveCase2NormalFormProof.png, id=558, 562.1pt x 187.70125pt>
 File: images//GPA/InductiveCase2NormalFormProof.png Graphic file (type png)
 <use images//GPA/InductiveCase2NormalFormProof.png>
 Package luatex.def Info: images//GPA/InductiveCase2NormalFormProof.png  used on
- input line 2536.
+ input line 2563.
 (luatex.def)             Requested size: 345.0pt x 115.20502pt.
 
 [53<./images//GPA/BaseCase2NormalFormProof.png><./images//GPA/InductiveCase1Norm
 alFormProof.png>]
-<images/GPA/PolarOperator.png, id=558, 863.225pt x 147.55125pt>
+<images/GPA/PolarOperator.png, id=567, 863.225pt x 147.55125pt>
 File: images/GPA/PolarOperator.png Graphic file (type png)
 <use images/GPA/PolarOperator.png>
-Package luatex.def Info: images/GPA/PolarOperator.png  used on input line 2575.
+Package luatex.def Info: images/GPA/PolarOperator.png  used on input line 2602.
 
 (luatex.def)             Requested size: 345.0pt x 58.96991pt.
  [54<./images//GPA/InductiveCase2NormalFormProof.png><./images/GPA/PolarOperator
 .png>]
-<images//GPA/SecondNormalFormGPA.png, id=568, 409.53pt x 273.27094pt>
+<images//GPA/SecondNormalFormGPA.png, id=577, 409.53pt x 273.27094pt>
 File: images//GPA/SecondNormalFormGPA.png Graphic file (type png)
 <use images//GPA/SecondNormalFormGPA.png>
 Package luatex.def Info: images//GPA/SecondNormalFormGPA.png  used on input lin
-e 2585.
+e 2612.
 (luatex.def)             Requested size: 258.75pt x 172.67029pt.
-<images//GPA/SoundnessPCRel1.png, id=569, 661.47125pt x 918.43124pt>
+<images//GPA/SoundnessPCRel1.png, id=578, 661.47125pt x 918.43124pt>
 File: images//GPA/SoundnessPCRel1.png Graphic file (type png)
 <use images//GPA/SoundnessPCRel1.png>
 Package luatex.def Info: images//GPA/SoundnessPCRel1.png  used on input line 26
-16.
+43.
 (luatex.def)             Requested size: 345.0pt x 479.01643pt.
-<images//GPA/SoundnessPCRel2.png, id=570, 641.39626pt x 797.98125pt>
+<images//GPA/SoundnessPCRel2.png, id=579, 641.39626pt x 797.98125pt>
 File: images//GPA/SoundnessPCRel2.png Graphic file (type png)
 <use images//GPA/SoundnessPCRel2.png>
 Package luatex.def Info: images//GPA/SoundnessPCRel2.png  used on input line 26
-20.
+47.
 (luatex.def)             Requested size: 345.0pt x 429.23532pt.
  [55<./images//GPA/SecondNormalFormGPA.png>] [56<./images//GPA/SoundnessPCRel1.p
 ng>]
-<images//GPA/PCRelExpressivity.png, id=583, 310.91156pt x 152.82094pt>
+<images//GPA/PCRelExpressivity.png, id=592, 310.91156pt x 152.82094pt>
 File: images//GPA/PCRelExpressivity.png Graphic file (type png)
 <use images//GPA/PCRelExpressivity.png>
 Package luatex.def Info: images//GPA/PCRelExpressivity.png  used on input line 
-2637.
+2664.
 (luatex.def)             Requested size: 258.75pt x 127.18178pt.
  [57<./images//GPA/SoundnessPCRel2.png>]
-<images//GPA/ProofCompleteness1.png, id=591, 1306.8825pt x 255.95625pt>
+<images//GPA/ProofCompleteness1.png, id=600, 1306.8825pt x 255.95625pt>
 File: images//GPA/ProofCompleteness1.png Graphic file (type png)
 <use images//GPA/ProofCompleteness1.png>
 Package luatex.def Info: images//GPA/ProofCompleteness1.png  used on input line
- 2651.
+ 2678.
 (luatex.def)             Requested size: 345.0pt x 67.5664pt.
-<images//GPA/ProofCompleteness2.png, id=592, 913.16156pt x 482.55281pt>
+<images//GPA/ProofCompleteness2.png, id=601, 913.16156pt x 482.55281pt>
 File: images//GPA/ProofCompleteness2.png Graphic file (type png)
 <use images//GPA/ProofCompleteness2.png>
 Package luatex.def Info: images//GPA/ProofCompleteness2.png  used on input line
- 2660.
+ 2687.
 (luatex.def)             Requested size: 345.0pt x 182.31168pt.
  [58<./images//GPA/PCRelExpressivity.png><./images//GPA/ProofCompleteness1.png><
 ./images//GPA/ProofCompleteness2.png>]
-<images/GPA/NormalFormGPA.png, id=598, 451.6875pt x 171.64125pt>
+<images/GPA/NormalFormGPA.png, id=607, 451.6875pt x 171.64125pt>
 File: images/GPA/NormalFormGPA.png Graphic file (type png)
 <use images/GPA/NormalFormGPA.png>
-Package luatex.def Info: images/GPA/NormalFormGPA.png  used on input line 2692.
+Package luatex.def Info: images/GPA/NormalFormGPA.png  used on input line 2719.
 
 (luatex.def)             Requested size: 345.0pt x 131.10867pt.
-<images/GPA/affineGPAProof1.png, id=599, 751.30687pt x 178.41656pt>
+<images/GPA/affineGPAProof1.png, id=608, 751.30687pt x 178.41656pt>
 File: images/GPA/affineGPAProof1.png Graphic file (type png)
 <use images/GPA/affineGPAProof1.png>
-Package luatex.def Info: images/GPA/affineGPAProof1.png  used on input line 270
-2.
+Package luatex.def Info: images/GPA/affineGPAProof1.png  used on input line 272
+9.
 (luatex.def)             Requested size: 345.0pt x 81.93103pt.
-<images/GPA/affineGPAProof2.png, id=601, 782.17218pt x 344.78813pt>
+<images/GPA/affineGPAProof2.png, id=610, 782.17218pt x 344.78813pt>
 File: images/GPA/affineGPAProof2.png Graphic file (type png)
 <use images/GPA/affineGPAProof2.png>
-Package luatex.def Info: images/GPA/affineGPAProof2.png  used on input line 270
-9.
+Package luatex.def Info: images/GPA/affineGPAProof2.png  used on input line 273
+6.
 (luatex.def)             Requested size: 345.0pt x 152.08076pt.
  [59<./images/GPA/NormalFormGPA.png><./images/GPA/affineGPAProof1.png>]
-<images/GPA/ExpressivityPolyRel.png, id=610, 1081.03876pt x 256.70906pt>
+<images/GPA/ExpressivityPolyRel.png, id=619, 1081.03876pt x 256.70906pt>
 File: images/GPA/ExpressivityPolyRel.png Graphic file (type png)
 <use images/GPA/ExpressivityPolyRel.png>
 Package luatex.def Info: images/GPA/ExpressivityPolyRel.png  used on input line
- 2743.
+ 2770.
 (luatex.def)             Requested size: 345.0pt x 81.9253pt.
  [60<./images/GPA/affineGPAProof2.png><./images/GPA/ExpressivityPolyRel.png>]
-<images/GPA/CompletenessGPAProof.png, id=620, 1142.01656pt x 627.84563pt>
+<images/GPA/CompletenessGPAProof.png, id=629, 1142.01656pt x 627.84563pt>
 File: images/GPA/CompletenessGPAProof.png Graphic file (type png)
 <use images/GPA/CompletenessGPAProof.png>
 Package luatex.def Info: images/GPA/CompletenessGPAProof.png  used on input lin
-e 2769.
+e 2796.
 (luatex.def)             Requested size: 345.0pt x 189.66762pt.
  [61<./images/GPA/CompletenessGPAProof.png>] [62]
-<images//GLP/NewGenerator.png, id=636, 536.75531pt x 186.6975pt>
+<images//GLP/NewGenerator.png, id=645, 536.75531pt x 186.6975pt>
 File: images//GLP/NewGenerator.png Graphic file (type png)
 <use images//GLP/NewGenerator.png>
-Package luatex.def Info: images//GLP/NewGenerator.png  used on input line 2941.
+Package luatex.def Info: images//GLP/NewGenerator.png  used on input line 2968.
 
 (luatex.def)             Requested size: 258.75pt x 89.99835pt.
-<images//GLP/NewAxioms.png, id=637, 875.52094pt x 329.73187pt>
+<images//GLP/NewAxioms.png, id=646, 875.52094pt x 329.73187pt>
 File: images//GLP/NewAxioms.png Graphic file (type png)
 <use images//GLP/NewAxioms.png>
-Package luatex.def Info: images//GLP/NewAxioms.png  used on input line 2947.
+Package luatex.def Info: images//GLP/NewAxioms.png  used on input line 2974.
 (luatex.def)             Requested size: 258.75pt x 97.44614pt.
  [63<./images//GLP/NewGenerator.png>]
-Overfull \hbox (2.71002pt too wide) in paragraph at lines 2994--2995
+Overfull \hbox (2.71002pt too wide) in paragraph at lines 3021--3022
 []\TU/LatinModernRoman(0)/b/n/10 Def-i-ni-tion 36 \TU/LatinModernRoman(0)/m/n/1
 0 (The prop $[]$ of poly-he-dral func-tions)\TU/LatinModernRoman(0)/b/n/10 . \T
 U/LatinModernRoman(0)/m/it/10 The prop $[]$
  []
 
 [64<./images//GLP/NewAxioms.png>]
-<images//GLP/NormalForm.png, id=651, 444.15938pt x 148.30406pt>
+<images//GLP/NormalForm.png, id=660, 444.15938pt x 148.30406pt>
 File: images//GLP/NormalForm.png Graphic file (type png)
 <use images//GLP/NormalForm.png>
-Package luatex.def Info: images//GLP/NormalForm.png  used on input line 3027.
+Package luatex.def Info: images//GLP/NormalForm.png  used on input line 3054.
 (luatex.def)             Requested size: 258.75pt x 86.3943pt.
-<images/GLP/Affine transformation.png, id=652, 1063.72406pt x 256.70906pt>
+<images/GLP/Affine transformation.png, id=661, 1063.72406pt x 256.70906pt>
 File: images/GLP/Affine transformation.png Graphic file (type png)
 <use images/GLP/Affine transformation.png>
 Package luatex.def Info: images/GLP/Affine transformation.png  used on input li
-ne 3032.
+ne 3059.
 (luatex.def)             Requested size: 258.75pt x 62.44183pt.
-<images//GLP/ProofNormalFOrm1.png, id=653, 511.9125pt x 432.11438pt>
+<images//GLP/ProofNormalFOrm1.png, id=662, 511.9125pt x 432.11438pt>
 File: images//GLP/ProofNormalFOrm1.png Graphic file (type png)
 <use images//GLP/ProofNormalFOrm1.png>
 Package luatex.def Info: images//GLP/ProofNormalFOrm1.png  used on input line 3
-042.
+069.
 (luatex.def)             Requested size: 258.75pt x 218.41713pt.
  [65<./images//GLP/NormalForm.png><./images/GLP/Affine transformation.png>]
 Missing character: There is no ∈ (U+2208) in font "name:Latin Modern Roman:mod
 e=node;script=latn;language=dflt;+tlig;"!
 Missing character: There is no ∈ (U+2208) in font "name:Latin Modern Roman:mod
 e=node;script=latn;language=dflt;+tlig;"!
-<images//GLP/ProofNormalForm2.png, id=660, 587.94656pt x 632.3625pt>
+<images//GLP/ProofNormalForm2.png, id=669, 587.94656pt x 632.3625pt>
 File: images//GLP/ProofNormalForm2.png Graphic file (type png)
 <use images//GLP/ProofNormalForm2.png>
 Package luatex.def Info: images//GLP/ProofNormalForm2.png  used on input line 3
-048.
+075.
 (luatex.def)             Requested size: 258.75pt x 278.29825pt.
 [66
 Missing character: There is no ∈ (U+2208) in font "name:Latin Modern Roman:mod
 e=node;script=latn;language=dflt;+tlig;"!
 <./images//GLP/ProofNormalFOrm1.png><./images//GLP/ProofNormalForm2.png>]
-<images//GLP/epiForm1.png, id=666, 420.82219pt x 675.27281pt>
+<images//GLP/epiForm1.png, id=675, 420.82219pt x 675.27281pt>
 File: images//GLP/epiForm1.png Graphic file (type png)
 <use images//GLP/epiForm1.png>
-Package luatex.def Info: images//GLP/epiForm1.png  used on input line 3070.
+Package luatex.def Info: images//GLP/epiForm1.png  used on input line 3097.
 (luatex.def)             Requested size: 345.0pt x 553.61395pt.
 
 [67]
@@ -1709,97 +1709,97 @@ Overfull \vbox (3.61395pt too high) has occurred while \output is active []
 
 
 [68<./images//GLP/epiForm1.png>]
-<images//GLP/ExpressivityGLP.png, id=677, 1112.65688pt x 606.01407pt>
+<images//GLP/ExpressivityGLP.png, id=686, 1112.65688pt x 606.01407pt>
 File: images//GLP/ExpressivityGLP.png Graphic file (type png)
 <use images//GLP/ExpressivityGLP.png>
 Package luatex.def Info: images//GLP/ExpressivityGLP.png  used on input line 31
-03.
+30.
 (luatex.def)             Requested size: 258.75pt x 140.92455pt.
-<images//GLP/Soundness.png, id=678, 1193.20781pt x 415.5525pt>
+<images//GLP/Soundness.png, id=687, 1193.20781pt x 415.5525pt>
 File: images//GLP/Soundness.png Graphic file (type png)
 <use images//GLP/Soundness.png>
-Package luatex.def Info: images//GLP/Soundness.png  used on input line 3119.
+Package luatex.def Info: images//GLP/Soundness.png  used on input line 3146.
 (luatex.def)             Requested size: 258.75pt x 90.10928pt.
  [69<./images//GLP/ExpressivityGLP.png>]
-<images//GLP/proofCompleteness1.png, id=689, 1021.56656pt x 572.1375pt>
+<images//GLP/proofCompleteness1.png, id=698, 1021.56656pt x 572.1375pt>
 File: images//GLP/proofCompleteness1.png Graphic file (type png)
 <use images//GLP/proofCompleteness1.png>
 Package luatex.def Info: images//GLP/proofCompleteness1.png  used on input line
- 3148.
+ 3175.
 (luatex.def)             Requested size: 258.75pt x 144.911pt.
-<images//GLP/proofCompleteness4.png, id=690, 877.77937pt x 501.37312pt>
+<images//GLP/proofCompleteness4.png, id=699, 877.77937pt x 501.37312pt>
 File: images//GLP/proofCompleteness4.png Graphic file (type png)
 <use images//GLP/proofCompleteness4.png>
 Package luatex.def Info: images//GLP/proofCompleteness4.png  used on input line
- 3160.
+ 3187.
 (luatex.def)             Requested size: 258.75pt x 147.79668pt.
 
 [70<./images//GLP/Soundness.png><./images//GLP/proofCompleteness1.png>]
 [71<./images//GLP/proofCompleteness4.png>] [72]
 warning  (file images/Overview.pdf) (pdf inclusion): PDF inclusion: found PDF ve
 rsion '1.7', but at most version '1.5' allowed
-<images/Overview.pdf, id=710, 597.50787pt x 845.04684pt>
+<images/Overview.pdf, id=719, 597.50787pt x 845.04684pt>
 File: images/Overview.pdf Graphic file (type pdf)
 <use images/Overview.pdf>
-Package luatex.def Info: images/Overview.pdf  used on input line 3258.
+Package luatex.def Info: images/Overview.pdf  used on input line 3285.
 (luatex.def)             Requested size: 345.0pt x 487.92258pt.
 [73] [74<./images/Overview.pdf>]
-Overfull \hbox (2.49551pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (2.49551pt too wide) in paragraph at lines 3294--3294
 \TU/LatinModernRoman(0)/m/n/10 Hopf Al-ge-bras''. In: \TU/LatinModernRoman(0)/m
 /it/10 Jour-nal of Pure and Ap-plied Al-ge-bra \TU/LatinModernRoman(0)/m/n/10 22
 1.1 (2017).
  []
 
 
-Overfull \hbox (12.65553pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (12.65553pt too wide) in paragraph at lines 3294--3294
 \TU/LatinModernRoman(0)/m/n/10 Orig-i-nal com-plete ax-ioma-ti-sa-tion of Graph-
 i-cal Lin-ear Al-ge-bra, pp. 144–
  []
 
 
-Overfull \hbox (3.97993pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (3.97993pt too wide) in paragraph at lines 3294--3294
 []\TU/LatinModernRoman(0)/m/n/10 Stephen Boyd and Lieven Van-den-berghe. \TU/La
 tinModernRoman(0)/m/it/10 Con-vex Op-ti-miza-tion\TU/LatinModernRoman(0)/m/n/10
  . Cam-
  []
 
 
-Overfull \hbox (1.26216pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (1.26216pt too wide) in paragraph at lines 3294--3294
 \TU/LatinModernRoman(0)/m/n/10 Cat-e-gor-i-cal Al-ge-bra and Di-a-gram-mat-ics''
 . In: \TU/LatinModernRoman(0)/m/it/10 New Jour-nal of Physics
  []
 
 [75]
-Overfull \hbox (2.99553pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (2.99553pt too wide) in paragraph at lines 3294--3294
 \TU/LatinModernRoman(0)/m/n/10 MIZA-TION: A CAT-E-GOR-I-CAL CHAR-AC-TER-I-ZA-TIO
 N OF CON-
  []
 
 [76]
-Overfull \hbox (9.8966pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (9.8966pt too wide) in paragraph at lines 3294--3294
 []\TU/LatinModernRoman(0)/m/n/10 Dario Stein and Richard Samuel-son. ``To-wards a Com-po-si-tional Frame-
  []
 
 
-Overfull \hbox (10.4425pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (10.4425pt too wide) in paragraph at lines 3294--3294
 []\TU/LatinModernRoman(0)/m/n/10 Cé-dric Vil-lani. \TU/LatinModernRoman(0)/m/i
 t/10 Op-ti-mal Trans-port: Old and New\TU/LatinModernRoman(0)/m/n/10 . Vol. 338.
  Grundlehren
  []
 
 
-Overfull \hbox (17.06325pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (17.06325pt too wide) in paragraph at lines 3294--3294
 \TU/LatinModernRoman(0)/m/it/10 An In-tro-duc-tion\TU/LatinModernRoman(0)/m/n/1
 0 . Foun-da-tions of Com-put-ing. Cam-bridge, Mas-sachusetts:
  []
 
 
-Overfull \hbox (9.12762pt too wide) in paragraph at lines 3267--3267
+Overfull \hbox (9.12762pt too wide) in paragraph at lines 3294--3294
 \TU/LatinModernRoman(0)/m/n/10 MIT Press, 1993. ISBN: 978-0-262-23169-5. URL: [
 ]$\TU/lmtt/m/n/10 https : / / mitpress .
  []
 
-[77] (./main.aux)
+[77] [78] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
@@ -1812,14 +1812,14 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 24914 strings out of 476081
+ 24927 strings out of 476081
  125165,1648299 words of node,token memory allocated
- 1627 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 242 attribute, 69 glue_spe
-c, 242 attribute_list, 1 write, 14 pdf_action nodes
-   avail lists: 2:818,3:431,4:32,5:563,6:100,7:8329,8:71,9:517,10:24,11:808
- 46603 multiletter control sequences out of 65536+600000
- 133 fonts using 43853563 bytes
+ 1647 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 244 attribute, 69 glue_spe
+c, 244 attribute_list, 1 write, 16 pdf_action nodes
+   avail lists: 2:819,3:417,4:33,5:563,6:102,7:8331,8:71,9:517,10:24,11:808
+ 46612 multiletter control sequences out of 65536+600000
+ 133 fonts using 43853795 bytes
  90i,11n,93p,866b,1435s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/users/brunotrotti/appdata/local/programs/miktex/fonts/opentype/public/lm/lmm
 ono10-regular.otf><C:/Users/brunotrotti/AppData/Local/Programs/MiKTeX/fonts/open
@@ -1846,9 +1846,9 @@ ers/brunotrotti/appdata/local/programs/miktex/fonts/opentype/public/lm/lmroman10
 lic/lm/lmroman12-bold.otf><C:/Users/brunotrotti/AppData/Local/Programs/MiKTeX/fo
 nts/opentype/public/lm/lmroman12-regular.otf><C:/Users/brunotrotti/AppData/Local
 /Programs/MiKTeX/fonts/opentype/public/lm/lmroman17-regular.otf>
-Output written on main.pdf (77 pages, 2894767 bytes).
+Output written on main.pdf (78 pages, 2900285 bytes).
 
-PDF statistics: 926 PDF objects out of 1000 (max. 8388607)
- 216 named destinations out of 1000 (max. 1048576)
+PDF statistics: 944 PDF objects out of 1000 (max. 8388607)
+ 220 named destinations out of 1000 (max. 1048576)
  113 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -2423,14 +2423,20 @@
     <bcf:citekey order="37" intorder="1">stein2024gqa</bcf:citekey>
     <bcf:citekey order="38" intorder="1">boyd2004convex</bcf:citekey>
     <bcf:citekey order="39" intorder="1">stein2024gqa</bcf:citekey>
-    <bcf:citekey order="40" intorder="1">joyal1991geometry</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">bonchi2017interacting</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">bonchi2021polyhedral</bcf:citekey>
-    <bcf:citekey order="43" intorder="1">bonchi2021polyhedral</bcf:citekey>
-    <bcf:citekey order="44" intorder="1">bonchi2021polyhedral</bcf:citekey>
-    <bcf:citekey order="45" intorder="1">bonchi2021.9farkas</bcf:citekey>
-    <bcf:citekey order="46" intorder="1">bonchi2021.9farkas</bcf:citekey>
-    <bcf:citekey order="46" intorder="2">bonchi2021polyhedral</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">stein2023gaussian</bcf:citekey>
+    <bcf:citekey order="40" intorder="2">Cho_2019</bcf:citekey>
+    <bcf:citekey order="40" intorder="3">fritz2020synthetic</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">stein2024gqa</bcf:citekey>
+    <bcf:citekey order="41" intorder="2">stein2025compositional</bcf:citekey>
+    <bcf:citekey order="42" intorder="1">stein2024compositional</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">joyal1991geometry</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">bonchi2017interacting</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">bonchi2021polyhedral</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">bonchi2021polyhedral</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">bonchi2021polyhedral</bcf:citekey>
+    <bcf:citekey order="48" intorder="1">bonchi2021.9farkas</bcf:citekey>
+    <bcf:citekey order="49" intorder="1">bonchi2021.9farkas</bcf:citekey>
+    <bcf:citekey order="49" intorder="2">bonchi2021polyhedral</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="anyt">

@@ -1,18 +1,18 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
 [0] Config.pm:331> INFO - Logfile is 'main.blg'
-[144] biber-MSWIN64:342> INFO - === 
-[191] Biber.pm:421> INFO - Reading 'main.bcf'
-[306] Biber.pm:1002> INFO - Found 26 citekeys in bib section 0
-[319] Biber.pm:4487> INFO - Processing section 0
-[328] Biber.pm:4678> INFO - Looking for bibtex file 'bib.bib' for section 0
-[411] bibtex.pm:1713> INFO - LaTeX decoding ...
-[456] bibtex.pm:1519> INFO - Found BibTeX data source 'bib.bib'
-[622] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[623] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[623] Biber.pm:4307> INFO - Sorting list 'anyt/global//global/global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[623] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[648] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[660] bbl.pm:779> INFO - Output to main.bbl
-[661] Biber.pm:132> WARN - Duplicate entry key: 'villani2009optimal' in file 'bib.bib', skipping ...
-[661] Biber.pm:132> WARN - BibTeX subsystem: C:\Users\brunotrotti\AppData\Local\Temp\biber_tmp_vveb\283e1cb250985c2debc501124f55eeff_2424.utf8, line 82, warning: undefined macro "Sept"
-[661] Biber.pm:134> INFO - WARNINGS: 2
+[99] biber-MSWIN64:342> INFO - === 
+[135] Biber.pm:421> INFO - Reading 'main.bcf'
+[236] Biber.pm:1002> INFO - Found 29 citekeys in bib section 0
+[249] Biber.pm:4487> INFO - Processing section 0
+[258] Biber.pm:4678> INFO - Looking for bibtex file 'bib.bib' for section 0
+[313] bibtex.pm:1713> INFO - LaTeX decoding ...
+[360] bibtex.pm:1519> INFO - Found BibTeX data source 'bib.bib'
+[526] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[526] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[526] Biber.pm:4307> INFO - Sorting list 'anyt/global//global/global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[526] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
+[553] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[566] bbl.pm:779> INFO - Output to main.bbl
+[566] Biber.pm:132> WARN - Duplicate entry key: 'villani2009optimal' in file 'bib.bib', skipping ...
+[566] Biber.pm:132> WARN - BibTeX subsystem: C:\Users\brunotrotti\AppData\Local\Temp\biber_tmp_9JnZ\283e1cb250985c2debc501124f55eeff_12308.utf8, line 82, warning: undefined macro "Sept"
+[566] Biber.pm:134> INFO - WARNINGS: 2

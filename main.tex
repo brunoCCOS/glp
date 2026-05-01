@@ -1778,9 +1778,36 @@ The extension is done through the addition of a new generator, the gray arrow ge
 This is of particular interest, because is the interpretation of such generator
 that is lifting the category to the level of weighted relations instead of binary relations.
 
-To understand its role, recall that every generator of $\mathbf{GAA}$ is  interpreted as the indicator function of some affine subspace. In this  picture, one may think of numbers flowing along the wires, and each diagram  as encoding membership in some affine set. The gray arrow  generator behaves differently, rather than enforcing a constraint on the  values running through the wire, it \emph{measures} them and produces a  real-valued output. No number is transformed inside it; instead, a cost is  emitted.
+To understand its role, recall that every generator of $\mathbf{GAA}$ is  interpreted
+as the indicator function of some affine subspace. In this  picture, one may think of
+numbers flowing along the wires, and each diagram  as encoding membership in some affine set.
+The gray arrow  generator behaves differently, rather than enforcing a constraint on the
+values running through the wire, it \emph{measures} them and produces a  real-valued output.
+No number is transformed inside it; instead, a cost is  emitted.
 
-A useful analogy comes from Electronics. An electric circuit diagram is a formal diagram that allows you to represent an electric circuit with wires and devices attached to those wires. In general, what you see is current running in the wires and some components along it that alter the current. However, one may attach a measurement device, like an ammeter, in the circuit. That does not change the current, but it measures it, and outputs a number to outside the diagram.
+A useful analogy comes from Electronics.
+An electric circuit diagram is a formal diagram that allows you to represent an electric
+circuit with wires and devices attached to those wires. In general,
+what you see is current running in the wires and some components along it that alter the current. However,
+one may attach a measurement device, like an ammeter, in the circuit.
+That does not change the current, but it measures it, and outputs a number to outside the diagram.
+
+Distinctively, the syntax admits an alternative probabilistic interpretation.
+Under this reading, the gray arrow generator encodes the information of a Gaussian distribution
+with mean 0,
+its semmantics being that of the function $(\bullet, x)  \mapsto \mathcal{N}(0,x)$; categorically
+this encodes the notion of a state in Markov Categories \cite{stein2023gaussian,Cho_2019, fritz2020synthetic}. Hence, \textbf{GQA}
+expresses linear functions of random variables, more precisely of normally distributed random variables,
+algebraically, turning composition into the act of probabilistic conditioning.
+
+This interpretation of the syntax alludes to the understanding of the new added
+generator as the act of observing a particular random variable, thus getting a number out of it.
+Although such an extension is not explored in this work, we encourage the interested reader to pursue this
+direction \cite{stein2024gqa,stein2025compositional}. We believe there exists a very strong interconnection between
+the algebraic semmantics of optimization and that of probabilistic programming \cite{stein2024compositional}, the notion
+of measuring in the convex setting being equivalent to that of observing the value of a random variable
+in the stochastic one, and the composition playing the role of variable elimination in the first and
+of conditioning in the latter. This lacks formality however, and we leave it to future works.
 
 This provides a very meaningful intuition on how to interpret the new generator.
 Rather then transforming the values carrieds by wires, the grey arrow generator measures

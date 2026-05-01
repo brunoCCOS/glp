@@ -366,6 +366,54 @@
       \verb 0906.4725
       \endverb
     \endentry
+    \entry{Cho_2019}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=c025fc4e6812302db2a0c4bbbf3bcf89}{%
+           family={Cho},
+           familyi={C\bibinitperiod},
+           given={Kenta},
+           giveni={K\bibinitperiod}}}%
+        {{hash=bf424ec58729aa7d35e9d57ec1c7d40d}{%
+           family={Jacobs},
+           familyi={J\bibinitperiod},
+           given={Bart},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press (CUP)}%
+      }
+      \strng{namehash}{ebf4d6c62aa3099445b6e40485feb17c}
+      \strng{fullhash}{ebf4d6c62aa3099445b6e40485feb17c}
+      \strng{fullhashraw}{ebf4d6c62aa3099445b6e40485feb17c}
+      \strng{bibnamehash}{ebf4d6c62aa3099445b6e40485feb17c}
+      \strng{authorbibnamehash}{ebf4d6c62aa3099445b6e40485feb17c}
+      \strng{authornamehash}{ebf4d6c62aa3099445b6e40485feb17c}
+      \strng{authorfullhash}{ebf4d6c62aa3099445b6e40485feb17c}
+      \strng{authorfullhashraw}{ebf4d6c62aa3099445b6e40485feb17c}
+      \field{labelalpha}{CJ19}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1469-8072}
+      \field{journaltitle}{Mathematical Structures in Computer Science}
+      \field{month}{3}
+      \field{number}{7}
+      \field{title}{Disintegration and Bayesian inversion via string diagrams}
+      \field{volume}{29}
+      \field{year}{2019}
+      \field{pages}{938\bibrangedash 971}
+      \range{pages}{34}
+      \verb{doi}
+      \verb 10.1017/s0960129518000488
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1017/S0960129518000488
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1017/S0960129518000488
+      \endverb
+    \endentry
     \entry{coecke2018generalizedrelations}{article}{}{}
       \name{author}{5}{}{%
         {{hash=c8d0d6b0d8ca354b544208d9fa6abd9d}{%
@@ -512,6 +560,34 @@
       \verb{url}
       \verb https://arxiv.org/abs/2502.16783
       \endverb
+    \endentry
+    \entry{fritz2020synthetic}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=485f579f829f8629fec8c85c28a33f28}{%
+           family={Fritz},
+           familyi={F\bibinitperiod},
+           given={Tobias},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{485f579f829f8629fec8c85c28a33f28}
+      \strng{fullhash}{485f579f829f8629fec8c85c28a33f28}
+      \strng{fullhashraw}{485f579f829f8629fec8c85c28a33f28}
+      \strng{bibnamehash}{485f579f829f8629fec8c85c28a33f28}
+      \strng{authorbibnamehash}{485f579f829f8629fec8c85c28a33f28}
+      \strng{authornamehash}{485f579f829f8629fec8c85c28a33f28}
+      \strng{authorfullhash}{485f579f829f8629fec8c85c28a33f28}
+      \strng{authorfullhashraw}{485f579f829f8629fec8c85c28a33f28}
+      \field{labelalpha}{Fri20}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Advances in Mathematics}
+      \field{title}{A synthetic approach to {M}arkov kernels, conditional independence and theorems on sufficient statistics}
+      \field{volume}{370}
+      \field{year}{2020}
+      \field{pages}{107239}
+      \range{pages}{1}
     \endentry
     \entry{fong2019hypergraph}{article}{}{}
       \name{author}{2}{}{%
@@ -962,6 +1038,40 @@
       \endverb
       \keyw{Computer languages;Semantics;Programming;Probabilistic logic;Random variables}
     \endentry
+    \entry{stein2023gaussian}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=cc0577a2ce9f5b3866746fe882d62071}{%
+           family={Stein},
+           familyi={S\bibinitperiod},
+           given={Dario},
+           giveni={D\bibinitperiod}}}%
+        {{hash=3a50e4c1a3fb6340f7c7ad6b3a56a9f7}{%
+           family={Samuelson},
+           familyi={S\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Schloss Dagstuhl}%
+      }
+      \strng{namehash}{8ae8b11ae030399ca3523cf60bd9d243}
+      \strng{fullhash}{8ae8b11ae030399ca3523cf60bd9d243}
+      \strng{fullhashraw}{8ae8b11ae030399ca3523cf60bd9d243}
+      \strng{bibnamehash}{8ae8b11ae030399ca3523cf60bd9d243}
+      \strng{authorbibnamehash}{8ae8b11ae030399ca3523cf60bd9d243}
+      \strng{authornamehash}{8ae8b11ae030399ca3523cf60bd9d243}
+      \strng{authorfullhash}{8ae8b11ae030399ca3523cf60bd9d243}
+      \strng{authorfullhashraw}{8ae8b11ae030399ca3523cf60bd9d243}
+      \field{extraname}{1}
+      \field{labelalpha}{SS23}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{10th Conference on Algebra and Coalgebra in Computer Science (CALCO 2023)}
+      \field{title}{A Category for Unifying {G}aussian Probability and Nondeterminism}
+      \field{year}{2023}
+    \endentry
     \entry{stein2024compositional}{inproceedings}{}{}
       \name{author}{2}{}{%
         {{hash=cc0577a2ce9f5b3866746fe882d62071}{%
@@ -986,6 +1096,7 @@
       \strng{authornamehash}{8ae8b11ae030399ca3523cf60bd9d243}
       \strng{authorfullhash}{8ae8b11ae030399ca3523cf60bd9d243}
       \strng{authorfullhashraw}{8ae8b11ae030399ca3523cf60bd9d243}
+      \field{extraname}{2}
       \field{labelalpha}{SS24}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
