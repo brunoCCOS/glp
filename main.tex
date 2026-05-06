@@ -1,3 +1,4 @@
+% !TeX program = lualatex
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
@@ -8,6 +9,16 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{unicode-math}
+\usepackage{colortbl}     % for \rowcolor
+\usepackage{xcolor}       % for \definecolor
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+
+\definecolor{headerblue}{RGB}{30, 80, 140}
+\definecolor{rowlight}{RGB}{235, 242, 252}
+\definecolor{rowwhite}{RGB}{255, 255, 255}
 \setmainfont{Latin Modern Roman}
 \setmathfont{STIX Two Math} % <-- important
 
@@ -29,6 +40,7 @@
 \newcommand{\supcomp}{\overset{\rightharpoondown}{\circ}}
 \newcommand{\rtop}{\rotatebox{90}{$\top$}}
 \newcommand{\mushroom}{⫏-}
+\renewcommand{\arraystretch}{1.8}
 \usepackage[
 backend=biber,
 style=alphabetic,
@@ -916,7 +928,43 @@ Without those, our algebra would be empty since we would have no assurances that
 
 \end{definition}
 
-Those three properties capture the idea that everything we can prove in the syntax, is a holds in the semantics (soundness), everything that holds in the semantics is provable in the syntax (completeness) and that every morphism in the semantics has a syntactic representative (expressivity).
+Those three properties capture the idea that everything we can prove in the syntax, is a holds in the semantics (soundness), everything that holds in the semantics is provable in the syntax (completeness) and that every morphism in the semantics has a syntactic representative (expressivity). Moreover, these properties denote equivalent characteristics about the interpration map, both categorically and functionally. Below we depict a small table defining the equivalence between the desired properties and their equivalent statement:
+
+\begin{table}[h!]
+\centering
+\caption{Equivalence of properties for the interpretation map
+         $[\![{-}]\!] : P\Sigma_{/E} \to \mathbf{Sem}$}
+\label{tab:equivalences}
+\begin{tabular}{
+  m{3.2cm}
+  m{3.2cm}
+  m{4.5cm}
+}
+\toprule
+\textbf{Set theory} &
+\textbf{Category theory} &
+\textbf{Logic (SMT)} \\
+\midrule
+
+Total &
+Functor &
+Soundness: $c \overset{E}{=} d \;\Rightarrow\; [\![c]\!] = [\![d]\!]$ \\[6pt]
+
+Deterministic &
+Well-defined map &
+(Functionality of the interpretation) \\[6pt]
+
+Injective &
+Faithful &
+Completeness: $[\![c]\!] = [\![d]\!] \;\Rightarrow\; c \overset{E}{=} d$ \\[6pt]
+
+Surjective &
+Full &
+Expressivity: $\forall\, f \in \mathbf{Sem},\; \exists\, d \in P\Sigma_{/E} \text{ s.t. } [\![d]\!] = f$ \\
+
+\bottomrule
+\end{tabular}
+\end{table}
 
 Now we introduce two of the foundational theories for Graphical Algebra, that will serve as a foundation for the following sections, namely, Graphical Linear Algebra~\cite{paixao2022highlevel, bonchi2017interacting} and Graphical Affine Algebra~\cite{bonchi2019affine}, we omit their definitions and proofs and refer to the original sources.
 

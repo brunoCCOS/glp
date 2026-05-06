@@ -1,18 +1,18 @@
-[0] Config.pm:328> INFO - This is Biber 2.21
-[0] Config.pm:331> INFO - Logfile is 'main.blg'
-[99] biber-MSWIN64:342> INFO - === 
-[135] Biber.pm:421> INFO - Reading 'main.bcf'
-[236] Biber.pm:1002> INFO - Found 29 citekeys in bib section 0
-[249] Biber.pm:4487> INFO - Processing section 0
-[258] Biber.pm:4678> INFO - Looking for bibtex file 'bib.bib' for section 0
-[313] bibtex.pm:1713> INFO - LaTeX decoding ...
-[360] bibtex.pm:1519> INFO - Found BibTeX data source 'bib.bib'
-[526] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[526] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[526] Biber.pm:4307> INFO - Sorting list 'anyt/global//global/global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[526] Biber.pm:4313> INFO - No sort tailoring available for locale 'en-US'
-[553] bbl.pm:676> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[566] bbl.pm:779> INFO - Output to main.bbl
-[566] Biber.pm:132> WARN - Duplicate entry key: 'villani2009optimal' in file 'bib.bib', skipping ...
-[566] Biber.pm:132> WARN - BibTeX subsystem: C:\Users\brunotrotti\AppData\Local\Temp\biber_tmp_9JnZ\283e1cb250985c2debc501124f55eeff_12308.utf8, line 82, warning: undefined macro "Sept"
-[566] Biber.pm:134> INFO - WARNINGS: 2
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'main.blg'
+[43] biber:340> INFO - === Wed May  6, 2026, 12:39:44
+[56] Biber.pm:419> INFO - Reading 'main.bcf'
+[84] Biber.pm:979> INFO - Found 29 citekeys in bib section 0
+[89] Biber.pm:4419> INFO - Processing section 0
+[97] Biber.pm:4610> INFO - Looking for bibtex file 'bib.bib' for section 0
+[98] bibtex.pm:1713> INFO - LaTeX decoding ...
+[117] bibtex.pm:1519> INFO - Found BibTeX data source 'bib.bib'
+[229] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[229] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[229] Biber.pm:4239> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[229] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[245] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[250] bbl.pm:763> INFO - Output to main.bbl
+[250] Biber.pm:131> WARN - Duplicate entry key: 'villani2009optimal' in file 'bib.bib', skipping ...
+[250] Biber.pm:131> WARN - BibTeX subsystem: /tmp/biber_tmp_EL2t/283e1cb250985c2debc501124f55eeff_73294.utf8, line 82, warning: undefined macro "Sept"
+[250] Biber.pm:133> INFO - WARNINGS: 2
