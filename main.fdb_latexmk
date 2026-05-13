@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1778081983.92302 "main.bcf" "main.bbl" "main" 1778084818.19182 0
-  "bib.bib" 1777993895.96281 17916 80d2987cc109fa55574a2ec5b2ff645f ""
-  "main.bcf" 1778084817.86127 112605 7c212bb1b100b37eadd2cba98f58a789 "lualatex"
+["biber main"] 1778669986.67542 "main.bcf" "main.bbl" "main" 1778671951.88653 0
+  "bib.bib" 1778669984.87708 17530 f996d81180c5c0547a9854e978903444 ""
+  "main.bcf" 1778671951.57924 112614 7fc287376d28ad3edd7c9815589e7364 "lualatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["lualatex"] 1778084811.76888 "main.tex" "main.pdf" "main" 1778084818.19219 2
+["lualatex"] 1778671946.88749 "main.tex" "main.pdf" "main" 1778671951.88679 0
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmmono10-regular.luc" 1778082056.67238 81819 c1a1831503f38fe92f18da76596f7b9d ""
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bold.luc" 1778081760.43748 128392 cc9893d1631ce94f31c1896bb041be89 ""
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bolditalic.luc" 1778081760.53498 136473 5b9cae8284919413f715c1372f2710a1 ""
@@ -279,12 +279,12 @@
   "images/RightAlgebra.png" 1777993895.99275 1721 a6b10022376e3643a1f25377e15e42e7 ""
   "images/States.png" 1777993895.99275 10222 9e34892b5ea278466886065eea1cbe26 ""
   "images/froberniusDiagram.png" 1777993895.99275 16848 83071b9efb79d40b1617088d21f0b3c7 ""
-  "main.aux" 1778084817.85044 13231 1af7f7d602b79d5c7787225248f0d978 "lualatex"
-  "main.bbl" 1778081984.75697 46754 079d11260f4af0966bee83ae5afe1963 "biber main"
-  "main.out" 1778084817.85044 2799 6b476b245c9c4785cd29558b00d5fcd7 "lualatex"
-  "main.run.xml" 1778084817.86127 2339 bde9ab218ab5b3920ae6da884556625b "lualatex"
-  "main.tex" 1778084810.14794 129920 60749da63df23381fa80339245a3e7a0 ""
-  "main.toc" 1778084817.86127 1337 96a2365645e8904c91ce20ca1fb183fb "lualatex"
+  "main.aux" 1778671951.57924 13343 55eaff37edde8ba5480e0aa9e3f3ee72 "lualatex"
+  "main.bbl" 1778669984.85119 46754 079d11260f4af0966bee83ae5afe1963 "biber main"
+  "main.out" 1778671951.57924 2799 6b476b245c9c4785cd29558b00d5fcd7 "lualatex"
+  "main.run.xml" 1778671951.59003 2339 bde9ab218ab5b3920ae6da884556625b "lualatex"
+  "main.tex" 1778671943.31523 129314 db36379c609abdfd468069ca1caa6dbf ""
+  "main.toc" 1778671951.59003 1396 7d62aeb0a18783f3cdce138a21a77089 "lualatex"
   (generated)
   "main.aux"
   "main.bcf"

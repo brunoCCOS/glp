@@ -202,10 +202,10 @@ INPUT /home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lm
 INPUT /home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman5-bold.luc
 OUTPUT main.toc
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT ./images/Overview.png
+INPUT ./images/Overview.png
 INPUT /home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman7-regular.luc
 INPUT /home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman5-regular.luc
-INPUT ./images/Overview.png
-INPUT ./images/Overview.png
 INPUT /home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman7-italic.luc
 INPUT ./images/froberniusDiagram.png
 INPUT ./images/froberniusDiagram.png

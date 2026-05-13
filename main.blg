@@ -1,18 +1,17 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'main.blg'
-[43] biber:340> INFO - === Wed May  6, 2026, 12:39:44
-[56] Biber.pm:419> INFO - Reading 'main.bcf'
-[84] Biber.pm:979> INFO - Found 29 citekeys in bib section 0
-[89] Biber.pm:4419> INFO - Processing section 0
-[97] Biber.pm:4610> INFO - Looking for bibtex file 'bib.bib' for section 0
-[98] bibtex.pm:1713> INFO - LaTeX decoding ...
-[117] bibtex.pm:1519> INFO - Found BibTeX data source 'bib.bib'
-[229] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[229] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[229] Biber.pm:4239> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
-[229] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[245] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[250] bbl.pm:763> INFO - Output to main.bbl
-[250] Biber.pm:131> WARN - Duplicate entry key: 'villani2009optimal' in file 'bib.bib', skipping ...
-[250] Biber.pm:131> WARN - BibTeX subsystem: /tmp/biber_tmp_EL2t/283e1cb250985c2debc501124f55eeff_73294.utf8, line 82, warning: undefined macro "Sept"
-[250] Biber.pm:133> INFO - WARNINGS: 2
+[41] biber:340> INFO - === Wed May 13, 2026, 07:59:44
+[48] Biber.pm:419> INFO - Reading 'main.bcf'
+[75] Biber.pm:979> INFO - Found 29 citekeys in bib section 0
+[83] Biber.pm:4419> INFO - Processing section 0
+[91] Biber.pm:4610> INFO - Looking for bibtex file 'bib.bib' for section 0
+[94] bibtex.pm:1713> INFO - LaTeX decoding ...
+[118] bibtex.pm:1519> INFO - Found BibTeX data source 'bib.bib'
+[227] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[227] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[227] Biber.pm:4239> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'en-US'
+[227] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[242] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[246] bbl.pm:763> INFO - Output to main.bbl
+[246] Biber.pm:131> WARN - BibTeX subsystem: /tmp/biber_tmp_gwhA/283e1cb250985c2debc501124f55eeff_6321.utf8, line 82, warning: undefined macro "Sept"
+[246] Biber.pm:133> INFO - WARNINGS: 1
