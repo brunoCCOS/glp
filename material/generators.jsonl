@@ -1,0 +1,16 @@
+{ 
+    "generators": [
+        {
+            "Token": "ADD",
+            "Symbol": "add",
+            "Arity": 1,
+            "Coarity": 2,
+        },
+        {
+            "Token": "COPY",
+            "Symbol": "copy",
+            "Arity": 2,
+            "Coarity": 1,
+        },
+    ]
+}

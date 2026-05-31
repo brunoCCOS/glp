@@ -1,0 +1,105 @@
+% Every pic occupies the uniform frame x in [-0.5, 0.5], y in [-0.5, 0.5].
+% Tips live on the left/right edges as (-in-k) / (-out-k), top-first,
+% evenly spaced in [-0.5, 0.5]: for n tips, y_k = 0.5 - k/(n-1) (n >= 2),
+% or y_0 = 0 when n = 1. Codegen relies on this convention to align tips
+% across composition without needing tip data in JSON.
+%
+% Coloured node glyphs (whitedot / boxnode_*) are drawn *after* the wires so
+% the fill covers any wire segment passing through the node interior.
+\tikzset{
+  val/.store in = \argval,
+  multiplication/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0.5);
+    \coordinate (-in-1)  at (-0.5,-0.5);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to[bend left=30]  (0,0);
+    \draw (-in-1) to[bend right=30] (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[whitedot] (-node) at (0,0) {};
+  },
+  comultiplication/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0.5);
+    \coordinate (-out-1) at ( 0.5,-0.5);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to[bend left=30]  (-out-0);
+    \draw (0,0)   to[bend right=30] (-out-1);
+    \node[whitedot] (-node) at (0,0) {};
+  },
+  zero/.pic = {
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node[whitedot] (-node) at (0,0) {};
+  },
+  cozero/.pic = {
+    \coordinate (-in-0) at (-0.5, 0);
+    \draw (-in-0) to (0,0);
+    \node[whitedot] (-node) at (0,0) {};
+  },
+  copy/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0.5);
+    \coordinate (-out-1) at ( 0.5,-0.5);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to[bend left=30]  (-out-0);
+    \draw (0,0)   to[bend right=30] (-out-1);
+    \node[blackdot] (-node) at (0,0) {};
+  },
+  cocopy/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0.5);
+    \coordinate (-in-1)  at (-0.5,-0.5);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to[bend left=30]  (0,0);
+    \draw (-in-1) to[bend right=30] (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[blackdot] (-node) at (0,0) {};
+  },
+  discard/.pic = {
+    \coordinate (-in-0) at (-0.5, 0);
+    \draw (-in-0) to (0,0);
+    \node[blackdot] (-node) at (0,0) {};
+  },
+  codiscard/.pic = {
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node[blackdot] (-node) at (0,0) {};
+  },
+  scalar/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[boxnode_right] (-node) at (0,0) {$\argval$};
+  },
+  coscalar/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[boxnode_left] (-node) at (0,0) {$\argval$};
+  },
+  ge/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[boxnode_right] (-node) at (0,0) {$\ge$};
+  },
+  coge/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[boxnode_left] (-node) at (0,0) {$\le$};
+  },
+  affine/.pic = {
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node[boxnode] (-node) at (0,0) {};
+  },
+  identity/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (-out-0);
+  }
+}
