@@ -1,4 +1,5 @@
 bin/
+propr/
 *.aux
 *.bbl
 *.bbl-SAVE-ERROR

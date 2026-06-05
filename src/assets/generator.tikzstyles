@@ -1,4 +1,0 @@
-\tikzstyle{whitedot} = [circle, fill=white, draw=black, inner sep=3pt]
-\tikzstyle{blackdot} = [circle, fill=black, draw=black, inner sep=3pt]
-\tikzstyle{boxnode_right}  = [rounded rectangle,  rounded rectangle left arc=none, fill=white, draw=black, inner sep=4pt, anchor=center]
-\tikzstyle{boxnode_left}  = [rounded rectangle,  rounded rectangle right arc=none, fill=white, draw=black, inner sep=4pt, anchor=center]
