@@ -1,0 +1,109 @@
+[generators.mult]
+sig.arity = 2
+sig.coarity = 1
+visual_arity = 2
+visual_coarity = 1
+pic = "multiplication"
+symbol = "·"
+
+[generators.matrix]
+sig.arity = 1
+sig.coarity = 1
+visual_arity = 1
+visual_coarity = 1
+pic = "matrix"
+
+[generators.comatrix]
+sig.arity = 1
+sig.coarity = 1
+visual_arity = 1
+visual_coarity = 1
+pic = "comatrix"
+
+[generators.relation]
+sig.arity = 1
+sig.coarity = 1
+visual_arity = 1
+visual_coarity = 1
+pic = "matrix"
+
+[generators.corelation]
+sig.arity = 1
+sig.coarity = 1
+visual_arity = 1
+visual_coarity = 1
+pic = "comatrix"
+
+[generators.copy]
+sig.arity = 1
+sig.coarity = 2
+visual_arity = 1
+visual_coarity = 2
+pic = "copy"
+symbol = "Δ"
+
+[generators.cocopy]
+sig.arity = 2
+sig.coarity = 1
+pic = "cocopy"
+symbol = "∇"
+
+[generators.zero]
+sig.arity = 0
+sig.coarity = 1
+pic = "zero"
+symbol = "0"
+
+[generators.cozero]
+sig.arity = 1
+sig.coarity = 0
+pic = "cozero"
+symbol = "0*"
+
+[generators.discard]
+sig.arity = 1
+sig.coarity = 0
+pic = "discard"
+symbol = "!"
+
+[generators.codiscard]
+sig.arity = 0
+sig.coarity = 1
+pic = "codiscard"
+symbol = "!*"
+
+[generators.scalar]
+sig.arity = 1
+sig.coarity = 1
+pic = "scalar"
+symbol = "s"
+
+[generators.coscalar]
+sig.arity = 1
+sig.coarity = 1
+pic = "coscalar"
+symbol = "s*"
+
+[generators.affine]
+sig.arity = 0
+sig.coarity = 1
+pic = "affine"
+symbol = "a"
+
+[generators.nmult]
+params = ["n"]
+sig.arity = 2
+sig.coarity = 1
+visual_arity = 2
+visual_coarity = 1
+pic = "multiplication"
+symbol = "·_n"
+
+[generators.ncopy]
+params = ["n"]
+sig.arity = 1
+sig.coarity = 2
+visual_arity = 1
+visual_coarity = 2
+pic = "copy"
+symbol = "Δ_n"

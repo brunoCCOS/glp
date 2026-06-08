@@ -1,0 +1,38 @@
+\section{Discussion and Future Work}
+
+We have built, through the addition of one generator and three axioms,
+an elegant and complete diagrammatic theory for Parametric Linear Programming.
+We argue that such a result not only unlocks a new way to interact with LP problems in an algebraic
+and computational way, but also provides a new perspective on optimization through the lens of
+a compositional framework. This lifts optimization, and LP problems in particular, from a functional setting to a relational-theoretic framework within the Extended-Lawvere Quantale category.
+
+The development followed a strict linear discipline, adding exactly one new
+generator at a time and verifying at each step that the resulting algebra is
+sound, expressive, and complete with respect to a precisely defined semantic
+category. The fact that such a linear development is
+possible --- that each new class of optimization problems requires only a single
+additional generator and a finite set of axioms --- is evidence that the
+compositional structure is not imposed artificially but present in the
+underlying mathematics. Polyhedral relations and quadratic relations are not merely two
+classes of optimization problems that happen to admit graphical representations;
+they are parallel enrichments of the same underlying affine structure, each adding
+a different kind of expressive power, and their common base is a theorem rather than
+an accident of notation.
+
+The $\mathbf{GLP}$ theory has a natural extension to an even more expressive theory
+when enriched with the gray arrow generator from $\mathbf{GQA}$. We believe that the class
+of quadratic programs could be, just as was done in this work, fully axiomatized by such a
+broader SMT. Another direction is the exploration of the functoriality of the bifunction
+adjoint (the Legendre--Fenchel transform extended to morphisms)~\cite{willerton2015legendre, touchette2005legendre}: this suggests a duality theory
+analogous to LP duality should be expressible diagrammatically as well.
+
+A more applied direction concerns the computational implications of diagrammatic
+normal forms. If two optimization problems are equal as morphisms in
+$\mathbf{LPRel}$ if and only if their diagrams are related by the rewriting rules
+of $\mathbf{GLP}$, then diagram simplification is problem simplification: a
+rewriting system on string diagrams is simultaneously a symbolic preprocessor
+for optimization solvers. Such an application of graphical algebras to theorem
+proving was already pointed to in other works \cite{bonchi2021.9farkas,bonchi2021polyhedral}.
+This work is a step toward fully expressing optimization within
+its own algebraic setting.
+

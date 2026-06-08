@@ -1,0 +1,749 @@
+\section{Background}\label{sec:bg}
+
+In this section we present the background theory for formalizing diagrammatic
+algebras and the constructions needed to do so.
+We also give a brief introduction to previous works to provide
+the necessary notions and results that will be used later.
+
+This section is outlined as follows: firstly, we present the background theory of quantales and
+how they provide a suitable theory and algebraic form to express relations in a general sense.
+Secondly, we offer a brief introduction to the categorical field of formal semantics and
+monoidal theories and how they are used to build the syntax of diagrammatic calculi. Lastly, we
+present the existing theories on which our work is built, namely
+Graphical Linear Algebra~\cite{paixao2022highlevel, bonchi2017interacting}, Graphical Affine Algebra~\cite{bonchi2019affine} and Graphical Polyhedral Algebra~\cite{bonchi2021polyhedral,bonchi2021.9farkas}.
+
+\subsection{Ground definitions for relations}
+
+While much of mathematical theory is built on functional thinking,
+we argue that most of mathematics actually has a relational nature.
+Category theory is the natural language for this purpose. It is precisely built on top of this notion,
+in which everything one needs to know about an object is determined by its morphisms.
+
+To begin we define the most basic kind of relation:
+
+\begin{definition}[Binary Relations]
+	Let $X$ and $Y$ be sets. A \emph{binary relation} $R$ from $X$ to $Y$ is a subset
+	\[
+		R \subseteq X \times Y.
+	\]
+	Equivalently, it can be identified with its characteristic function
+	\[
+		\chi_R : X \times Y \to \{0,+\infty\},
+	\]
+	defined by
+	\[
+		\chi_R(x,y) =
+		\begin{cases}
+			0  \text{ if } (x,y) \in R, \\
+			+\infty \quad \text{otherwise}.
+		\end{cases}
+	\]
+\end{definition}
+
+A binary relation specifies whether $x$ is related to $y$.
+One can think of a relation in two different ways that will prove useful later:
+first, as a set of pairs, where every relation is just a pair $(x,y) \in R$,
+or as a map that has $x,y$ as inputs and outputs $0$ if they are related, and $+\infty$ if they are not
+(the choice of $\infty$ is arbitrary and will be justified later; normal choices here are actually $\{\text{true},\text{false}\}$ or $\{0,1\}$).
+
+This is a general construct, as the sets $X$ and $Y$ can be anything.
+We can, for instance, ask for further structures on such sets and obtain different kinds of relations.
+\begin{definition}[Linear/Affine Relations]
+	Let $X$ and $Y$ be vector spaces. A \emph{linear relation} from $X$ to $Y$ is a linear subspace
+	\[
+		R \subseteq X \times Y.
+	\]
+	An \emph{affine relation} is an affine subspace of $X \times Y$.
+	Equivalently, a linear relation can be described as the graph of a possibly multivalued linear operator, i.e.,
+	\[
+		R(x) := \{ y \in Y \mid (x,y) \in R \}.
+	\]
+\end{definition}
+
+Thus, a linear/affine relation is a binary relation where the set $R$ is a subspace.
+We have so far restricted relations between $x$ and $y$ to a binary ``related or not'' notion. In fact, we might be interested in adding degrees to such a relation, so that we could say that $x$ and $y$ are ``more'' or ``less'' related. This leads us to the well-known notion of weighted relations \cite{lawvere1973metric}.
+
+\begin{definition}[Weighted Relations]
+	Let $X$ and $Y$ be any two sets and let $\extendR^+:= [0, +\infty]$.
+	A \emph{weighted relation} from $X$ to $Y$ is a set
+	\[
+		R \subseteq X \times Y \times \extendR^+
+	\]
+	such that for every $(x,y) \in X \times Y$ there exists \emph{exactly one}
+	$r \in \extendR^+$ satisfying $(x,y,r) \in R$.
+	Equivalently, we may define the characteristic function
+	$\chi_R : X \times Y \to \extendR^+$
+	by $\chi_R(x,y) = r$ if and only if $(x,y,r) \in R$.
+\end{definition}
+
+In fact, one could choose any other set instead of $\extendR^+$ to be the codomain of the characteristic function, as long as it satisfies some properties. The whole structure of a relation is further generalized by the notion of a quantale~\cite{rosenthal1990quantales}.
+\begin{definition}[Quantale]
+	A \emph{quantale} is a structure $(Q,\leq,\otimes,e)$ such that:
+	\begin{itemize}
+		\item $(Q,\leq)$ is a complete lattice, i.e., every subset $A \subseteq Q$ admits a join $\bigvee A$ and a meet $\bigwedge A$;
+		\item $(Q,\otimes,e)$ is a monoid;
+		\item Multiplication distributes over arbitrary join in each variable:
+		      \[
+			      a \otimes \Big( \bigvee_{i \in I} b_i \Big)
+			      =
+			      \bigvee_{i \in I} (a \otimes b_i),
+			      \qquad
+			      \Big( \bigvee_{i \in I} a_i \Big) \otimes b
+			      =
+			      \bigvee_{i \in I} (a_i \otimes b)
+		      \]
+		      for all families $\{a_i\}_{i\in I}, \{b_i\}_{i\in I} \subseteq Q$.
+	\end{itemize}
+	If $\otimes$ is commutative, the quantale is called \emph{commutative}.
+	If $e = \top$ (the top element of the lattice), it is called \emph{integral}.
+\end{definition}
+
+Given a quantale $Q$, we can define the notion of $Q$-valued relation \cite{coecke2018generalizedrelations}.
+
+\begin{definition}[Generalized Relations]
+	A \emph{generalized relation} (or $Q$-valued relation) from $X$ to $Y$, where $Q$ is a quantale, is a set
+	$R \subseteq X \times Y \times Q$
+	such that for every $(x,y) \in X \times Y$ there exists \emph{exactly one}
+	$q \in Q$ satisfying $(x,y,q) \in R$.
+	Its characteristic function is $\chi_R: X \times Y \to Q$
+	defined by $\chi_R(x,y) = q$ if and only if $(x,y,q) \in R$.
+\end{definition}
+
+The notion of a $Q$-valued relation recovers familiar concepts for particular choices of quantale. For the (Boolean) truth quantale $Q = \{0,1\}$ with $\otimes = \land$ and $e = 1$, $Q$-valued relations coincide with classical binary relations. For the Lawvere quantale $Q = \extendR^+$ ordered by the reverse of the usual order, with $\otimes = +$ and $e = 0$, a $Q$-valued relation is precisely a weighted relation assigning a (possibly infinite) cost to each pair. Hence generalized relations unify ordinary binary relations and weighted relations as special cases corresponding to particular quantales.
+
+Within this framework, we propose an extension of the Lawvere Quantale and
+weighted relations called the Extended-Lawvere Quantale and
+the Cost/Reward Relations, respectively. To our knowledge, this definition does
+not appear elsewhere in the literature.
+
+\begin{definition}[Optimization/Extended Lawvere Quantale]
+	Let $\overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty,+\infty\}$.
+	The \emph{optimization quantale} is the structure $(\overline{\mathbb{R}},\geq,\otimes,e)$
+	defined as follows:
+	\begin{itemize}
+		\item The order $\geq$ is the usual order on the extended real line.
+		      With this order, arbitrary joins are given by the usual infima: $\bigvee A = \inf A$.
+		\item The monoidal product is addition $a \otimes b := a + b$,
+		      where addition is extended in the usual way
+		      (with $a + (+\infty) = +\infty$ and $a + (-\infty) = -\infty$ whenever defined).
+		\item The unit element is $e := 0$.
+	\end{itemize}
+	With these operations, $(\overline{\mathbb{R}},\geq,+,0)$
+	is a commutative quantale. Joins are ordinary infima,
+	and addition distributes over arbitrary joins.
+\end{definition}
+
+\begin{definition}[Optimization (Cost/Reward) Relations]
+	Let $X$ and $Y$ be sets.
+	An \emph{optimization relation} from $X$ to $Y$ is an
+	$\overline{\mathbb{R}}$-valued relation, i.e., a function
+	$R : X \times Y \to \overline{\mathbb{R}}$.
+	The value $R(x,y)$ is interpreted as the objective value
+	(cost or reward) associated to the pair $(x,y)$,
+	with $+\infty$ and $-\infty$ representing extremal infeasibility
+	or unboundedness.
+\end{definition}
+
+This extends weighted relations to include negative values. The importance of it is that we want
+to be able to express optimization problems that might be infeasible
+($+\infty$) or unbounded ($-\infty$), so we need to add both
+the top and bottom element.
+
+All of this yields a suitable and natural categorical construction.
+Specifically, from any quantale $Q$ one can not only define $Q$-relations,
+but also construct an entire category of them.
+This category is the natural setting for discussing the
+central concept of this framework: the composition of relations.
+The following proposition shows how to build such a category and establishes
+that it carries a very important monoidal structure;
+particularly, it is a compact closed
+symmetric monoidal category~\cite{maclane1998categories}.
+
+\begin{proposition}[Category $\mathbf{Rel}(Q)$]
+	For a quantale $Q$, the $Q$-relations form a category $\mathbf{Rel}(Q)$ with composition and identities
+	\[
+		(S\circ R) (a,c) = \bigvee_b R(a,b) \otimes S(b,c), \quad 1_A(a,b) = \bigvee \{e \mid a=b\}.
+	\]
+	If $Q$ is a commutative quantale, then $\mathbf{Rel}(Q)$ carries a symmetric monoidal structure, with the categorical monoidal product $\bigotimes_{\mathcal{C}}$ on objects given by the Cartesian product of sets and the action on relations given for $R:A \to C$ and $S:B\to D$ by
+	\[
+		(R\otimes_{\mathcal{C}} S)(a,b,c,d) = R(a,c) \otimes S(b,d).
+	\]
+	The singleton set is the monoidal unit, and the category is compact closed w.r.t.\ the monoidal structure.
+\end{proposition}
+
+\begin{proof}
+	We verify the categorical structure.
+
+	\medskip
+	\noindent
+	\textbf{(1) Well-defined composition.}
+	Let $R:A \to B$ and $S:B \to C$ be $Q$-relations.
+	For each $(a,c) \in A \times C$, the set
+	$\{ R(a,b)\otimes S(b,c) \mid b \in B \} \subseteq Q$
+	admits a supremum since $Q$ is a complete lattice.
+	Hence $(S\circ R)(a,c)$ is well-defined as an element of $Q$.
+
+	\medskip
+	\noindent
+	\textbf{(2) Associativity.}
+	Let $R:A\to B$, $S:B\to C$, and $T:C\to D$.
+	For $a\in A$, $d\in D$,
+	\[
+		((T\circ S)\circ R)(a,d)
+		=
+		\bigvee_{c}
+		\Big(
+		\bigvee_{b} R(a,b)\otimes S(b,c)
+		\Big)
+		\otimes T(c,d).
+	\]
+	Since $\otimes$ distributes over arbitrary suprema,
+	$= \bigvee_{b,c} R(a,b)\otimes S(b,c)\otimes T(c,d)$.
+	Similarly,
+	\[
+		(T\circ (S\circ R))(a,d)
+		=
+		\bigvee_{b}
+		R(a,b)\otimes
+		\Big(
+		\bigvee_{c} S(b,c)\otimes T(c,d)
+		\Big)
+		=
+		\bigvee_{b,c}
+		R(a,b)\otimes S(b,c)\otimes T(c,d).
+	\]
+	Thus composition is associative.
+
+	\medskip
+	\noindent
+	\textbf{(3) Identities.}
+	For each set $A$, define
+	\[
+		1_A(a,b)
+		=
+		\begin{cases}
+			e    & \text{if } a=b,   \\
+			\bot & \text{otherwise},
+		\end{cases}
+	\]
+	where $\bot = \bigvee \varnothing$ is the bottom element of $Q$.
+	Then for $R:A\to B$,
+	$(R\circ 1_A)(a,b) = \bigvee_{a'} 1_A(a,a')\otimes R(a',b)$.
+	All terms vanish except when $a'=a$, so this equals $e \otimes R(a,b) = R(a,b)$.
+	Similarly, $1_B\circ R = R$. Hence identities exist.
+
+	\medskip
+	\noindent
+	\textbf{(4) Monoidal structure (commutative case).}
+	Assume $Q$ is commutative.
+	Define the tensor on objects by Cartesian product $A\otimes_{\mathcal{C}} B := A\times B$.
+	For relations $R:A\to C$ and $S:B\to D$, define
+	$(R\otimes_{\mathcal{C}} S)((a,b),(c,d)) = R(a,c)\otimes S(b,d)$.
+	Functoriality follows from associativity and commutativity of $\otimes$:
+	$(S_1\otimes S_2)\circ (R_1\otimes R_2) = (S_1\circ R_1)\otimes (S_2\circ R_2)$.
+	The singleton set $1$ is a unit since $A\times 1 \cong A$.
+	Symmetry is induced by the swap map.
+
+	\medskip
+	\noindent
+	\textbf{(5) Compact closure.}
+	For each set $A$, define unit and counit relations
+	$\eta : 1 \to A\times A$ and $\epsilon : A\times A \to 1$
+	by $\eta(*,(a,a')) = e$ if $a=a'$ ($\bot$ otherwise) and
+	$\epsilon((a,a'),*) = e$ if $a=a'$ ($\bot$ otherwise).
+	A direct computation using the definition of composition shows that the
+	triangle identities hold:
+	\[
+		(1_A\otimes \epsilon)\circ (\eta\otimes 1_A) = 1_A,
+		\qquad
+		(\epsilon\otimes 1_A)\circ (1_A\otimes \eta) = 1_A.
+	\]
+	Thus every object is self-dual, and $\mathbf{Rel}(Q)$ is compact closed.
+\end{proof}
+
+Relations encode the notion of matrices and matrix multiplication. A $Q$-valued relation $R : X \times Y \to Q$ is nothing but a \emph{$Q$-valued matrix} indexed by $X \times Y$, and composition of $Q$-valued relations corresponds precisely to matrix multiplication in $Q$, where ordinary addition is replaced by the join $\bigvee$ and ordinary multiplication by the monoidal product $\otimes$. The two axioms of a quantale --- that $\otimes$ distributes over arbitrary joins --- are precisely what guarantees that this multiplication is associative and well-defined. This serves as motivation for what will later become the diagrammatic theory of linear algebra.
+
+The resulting categories are symmetric monoidal, and it is precisely this monoidal backbone that will support the algebraic structure we aim to build. A key piece of that structure is a \emph{Frobenius monoid} on each object: a monoid $(\mu, \eta)$ and a comonoid $(\delta, \varepsilon)$ on the same object, satisfying the Frobenius law
+\[
+	(\mathrm{id} \otimes \mu) \circ (\delta \otimes \mathrm{id})
+	\;=\;
+	\delta \circ \mu
+	\;=\;
+	(\mu \otimes \mathrm{id}) \circ (\mathrm{id} \otimes \delta).
+\]
+A symmetric monoidal category in which every object carries such a structure, compatibly with the tensor product, is called a \emph{hypergraph category} \cite{fong2019hypergraph}. Hypergraph categories are related to, but strictly more general than, compact closed categories \cite{selinger2010survey}, and it is the more general notion that we adopt as our ambient framework.
+
+\begin{remark}
+	If $Q$ is commutative, then $\mathbf{Rel}(Q)$ is a hypergraph category~\cite{fong2019hypergraph} and admits a commutative Frobenius structure on every object. Diagrammatically, we denote the additive and co-additive structure as
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{../images/froberniusDiagram.png}
+		\caption{Frobenius additive (black) and co-additive (white) structure.}
+	\end{figure}
+	subject to the Frobenius Law (both colors)
+	\begin{figure}[H]
+		\includegraphics[width=1\linewidth]{../images/FroberniusLaw.png}
+	\end{figure}
+\end{remark}
+
+\subsection{Syntax: Symmetric Monoidal Theories}
+
+These constructions provide exactly the semantic foundation for the algebra we aim to build. In the same way that semantics is understood in linguistics and programming language theory \cite{winskel1993formal}, the semantics of a formal system assigns meaning to its expressions. More precisely, while syntax consists of the tokens and rules for forming and combining expressions, semantics is the interpretation assigned to each such expression --- in our case, an optimization problem living in $\mathbf{Rel}(Q)$.
+
+As outlined in the introduction, the central goal of this work is to show that optimization emerges naturally from algebraic and categorical structure.
+The key mechanism enabling this is the infimal composition present in the definition of the Cost/Reward category: composing two relations automatically performs variable elimination, which is precisely the fundamental operation underlying optimization.
+
+To make this precise, we need both a semantics --- provided by the categorical framework developed above --- and a syntax: a rigorous, compositional language for expressing optimization problems symbolically.
+The map between those is a structure-preserving map, a functor, from the syntactic layer into the semantic one.
+The syntactic layer will be formalized as a Symmetric Monoidal Theory (SMT) \cite{bonchi2017interacting}, a presentation of a category by generators and equations, whose terms respect the compositional structure of a symmetric monoidal category.
+
+\begin{definition}[Symmetric Monoidal Theory]
+	An SMT is a pair $(\Sigma,E)$ such that $\Sigma$ is a signature of operators $o$ with arity $m$ and coarity $n$.
+	$\Sigma$-terms are defined inductively as the smallest collection of
+	typed expressions $t : m \to n$ closed under: generators $o \in \Sigma$;
+	identities $\mathrm{id}_n : n \to n$; composition $a;b : m\to k$ for $a:m\to n$, $b:n\to k$;
+	tensor product $a \otimes b : m_1+m_2 \to n_1+n_2$ for $a:m_1\to n_1$, $b:m_2\to n_2$;
+	and symmetries $\sigma_{m,n} : m+n \to n+m$.
+	And $E$ is a set of equations over the $\Sigma$-terms.
+\end{definition}
+
+Often, we will think of elements $o:m\to n \in \Sigma$ as generators and represent them as string diagrams, the $\Sigma$-terms being the results of composing those generators horizontally and vertically inductively, and the set $E$ as a collection of axiomatic equations over these string diagrams. The categorical counterpart of these terms is the free category generated by the SMT.
+
+\begin{definition}[The Free category of an SMT]
+	The $\text{FreeP}_{(\Sigma,E)}$ is the category freely generated by $(\Sigma,E)$ where the objects are natural numbers, morphisms are $\Sigma$-terms quotiented by $E$, with composition and tensor product inherited from the symmetric monoidal structure. $\text{FreeP}_{(\Sigma,E)}$ is in fact a PROP\footnote{For the definition of a PROP see~\cite{maclane1998categories}.}.
+\end{definition}
+
+The $\text{FreeP}_{(\Sigma,E)}$, also denoted $P\Sigma_{/E}$,\footnote{During the work we will use $\text{FreeP}_{S}$ and $S$, for whatever syntax $S$ may be, interchangeably.}
+will be our \textbf{syntax} responsible for expressing our underlying semantics.
+For it to be considered a ``useful'' syntax we expect that it satisfies some properties, particularly we want it to be complete, sound and expressive. Without those, our algebra would be empty, since we would have no assurance that it actually says anything meaningful about what we desire to say.
+
+\begin{definition}\label{def:definability}
+	We will say that an SMT axiomatizes or represents a specific category, usually called the semantic category, when the following diagram commutes:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.35\linewidth]{../images/Definibilty.png}
+	\end{figure}
+	where $P\Sigma$ is the category where objects are natural numbers and morphisms are $\Sigma$-terms from $n \to m$; $P\Sigma_{/E} = \text{FreeP}_{(\Sigma,E)}$ is the $P\Sigma$ category with the morphisms quotiented by $E$ and there is then a PROP morphism $q : P\Sigma \to P\Sigma_{/E}$ witnessing this quotient; $\textbf{Sem}$ is our semantic category (the Cost/Reward relations for example); and $s$ is a full and faithful PROP morphism. Another way to say the same is to demand two things out of the SMT:
+	\begin{itemize}
+		\item Soundness: $P\Sigma_{/E}$ is sound if $c \overset{E}= d$\footnote{$\overset{E}=$ means that this equality is provable by the equations in $E$.} implies $[c] = [d]$.
+		\item Completeness: $P\Sigma_{/E}$ is complete if $[c] = [d]$ implies $c \overset{E}= d$.
+		\item Expressivity: $P\Sigma_{/E}$ is expressive if for every morphism $c$ in \textbf{Sem} there exists $d \in P\Sigma_{/E}$ such that $[d] = c$.
+	\end{itemize}
+\end{definition}
+
+Those three properties capture the idea that everything we can prove in the syntax holds in the semantics (soundness), everything that holds in the semantics is provable in the syntax (completeness), and that every morphism in the semantics has a syntactic representative (expressivity). Moreover, these properties denote equivalent characteristics about the interpretation map, both categorically and functionally, as depicted in Table~\ref{tab:equivalences}.
+
+\begin{table}[h!]
+	\centering
+	\caption{Equivalence of properties for the interpretation map
+	$[\![{-}]\!] : P\Sigma_{/E} \to \mathbf{Sem}$}
+	\label{tab:equivalences}
+	\begin{tabular}{
+			m{3.2cm}
+			m{3.2cm}
+			m{4.5cm}
+		}
+		\toprule
+		\textbf{Set theory}      &
+		\textbf{Category theory} &
+		\textbf{Logic (SMT)}                                                                                     \\
+		\midrule
+		Total                    &
+		Functor                  &
+		Soundness: $c \overset{E}{=} d \;\Rightarrow\; [\![c]\!] = [\![d]\!]$                                    \\[6pt]
+		Deterministic            &
+		Well-defined map         &
+		(Functionality of the interpretation)                                                                    \\[6pt]
+		Injective                &
+		Faithful                 &
+		Completeness: $[\![c]\!] = [\![d]\!] \;\Rightarrow\; c \overset{E}{=} d$                                 \\[6pt]
+		Surjective               &
+		Full                     &
+		Expressivity: $\forall\, f \in \mathbf{Sem},\; \exists\, d \in P\Sigma_{/E} \text{ s.t. } [\![d]\!] = f$ \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsection{Previous algebras}
+
+We now introduce the foundational theories for Graphical Algebra that serve as a foundation for the following sections, namely Graphical Linear Algebra~\cite{paixao2022highlevel, bonchi2017interacting}, Graphical Affine Algebra~\cite{bonchi2019affine}, and Graphical Polyhedral Algebra~\cite{bonchi2021polyhedral}. Each is an extension of the previous one, meaning there is a structure-preserving inclusion functor $\mathbf{GLA} \hookrightarrow \mathbf{GAA} \hookrightarrow \mathbf{GLP}$.
+
+\begin{definition}
+	We will call $\textbf{GLA}$ the presentation of the Graphical Linear Algebra SMT, in the same manner, $\textbf{GAA}$ the SMT of Graphical Affine Algebra and \textbf{GPA} the SMT of Graphical Polyhedral Algebra. Below we show, separatedly, the set of generators(the signature $\Sigma$) of each one of them.
+
+	\begin{center}
+		\begin{tikzpicture}[
+				boxnode/.style={rounded rectangle, fill=white, draw=black, inner sep=4pt, anchor=center},
+				boxlabel/.style={anchor=south west, font=\bfseries}]
+
+			% ---- GLA: the linear-algebra generators ----
+			\pic (a1) at (0,0)    {copy};
+			\pic (a2) at (1.8,0)  {cocopy};
+			\pic (a3) at (3.6,0)  {discard};
+			\pic (a4) at (5.4,0)  {codiscard};
+			\pic (a5) at (0,-1.5)   {multiplication};
+			\pic (a6) at (1.8,-1.5) {comultiplication};
+			\pic (a7) at (3.6,-1.5) {zero};
+			\pic (a8) at (5.4,-1.5) {cozero};
+			\pic [val=k] (a9) at (3.2,-2.7) {scalar};
+			\draw[rounded corners, thick] (-0.9,-3.5) rectangle (6.3,0.9);
+			\node[boxlabel] at (-0.9,1.0) {$\mathbf{GLA}$};
+
+			% ---- GAA: adds the affine (constant) generator ----
+			\pic (b1) at (0,-4.5) {affine};
+			\draw[rounded corners, thick] (-0.9,-5.0) rectangle (1.3,-4.0);
+			\node[boxlabel] at (-0.9,-3.98) {$\mathbf{GAA} = \mathbf{GLA} \;+$};
+
+			% ---- GPA: adds the inequality generator ----
+			\pic (c1) at (0,-6.1) {ge};
+			\draw[rounded corners, thick] (-0.9,-6.6) rectangle (1.3,-5.6);
+			\node[boxlabel] at (-0.9,-5.58) {$\mathbf{GPA} = \mathbf{GAA} \;+$};
+		\end{tikzpicture}
+	\end{center}
+
+	and the axioms, previously called the set $E$ of equations for the SMT.
+
+	\tikzset{
+		axpic/.style={baseline=(current bounding box.center), x=0.6cm, y=0.52cm, line cap=round},
+		boxnode/.style={rounded rectangle, fill=white, draw=black, inner sep=2pt, anchor=center}
+	}
+
+	\medskip
+	\noindent\fbox{\begin{minipage}{0.97\linewidth}
+			\begin{center}\textbf{$\mathbf{GLA}$ axioms}\quad{\footnotesize\cite{paixao2022highlevel,bonchi2017interacting}}\end{center}
+
+			\textit{White commutative monoid (addition $\oplus$, unit $\circ$).}
+			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
+					(assoc) &
+					\begin{tikzpicture}[axpic]
+						\pic (m1) at (0,0.9) {multiplication};
+						\pic (m2) at (1.7,0) {multiplication};
+						\draw (m1-out-0) -- (m2-in-0);
+					\end{tikzpicture}
+					        &
+					\begin{tikzpicture}[axpic]
+						\pic (m1) at (0,-0.9) {multiplication};
+						\pic (m2) at (1.7,0) {multiplication};
+						\draw (m1-out-0) -- (m2-in-1);
+					\end{tikzpicture}
+					\\[3mm]
+					(comm)  &
+					\begin{tikzpicture}[axpic]
+						\pic (m) at (1,0) {multiplication};
+						\draw (-0.6,0.5) to (m-in-1);
+						\draw (-0.6,-0.5) to (m-in-0);
+					\end{tikzpicture}
+					        &
+					\begin{tikzpicture}[axpic]
+						\pic (m) at (0,0) {multiplication};
+					\end{tikzpicture}
+					\\[3mm]
+					(unit)  &
+					\begin{tikzpicture}[axpic]
+						\pic (z) at (-0.2,0.8) {zero};
+						\pic (m) at (1,0) {multiplication};
+						\draw (z-out-0) -- (m-in-0);
+					\end{tikzpicture}
+					        &
+					\begin{tikzpicture}[axpic]
+						\draw (0,0) -- (1.0,0);
+					\end{tikzpicture}
+				\end{tabular}\end{center}
+
+			\textit{Black cocommutative comonoid (copy, counit $\bullet$).}
+			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
+					(coassoc) &
+					\begin{tikzpicture}[axpic]
+						\pic (c1) at (0,0.9) {copy};
+						\pic (c2) at (1.7,0) {copy};
+						\draw (c1-out-1) -- (c2-in-0);
+					\end{tikzpicture}
+					          &
+					\begin{tikzpicture}[axpic]
+						\pic (c1) at (0,-0.9) {copy};
+						\pic (c2) at (1.7,0) {copy};
+						\draw (c1-out-0) -- (c2-in-0);
+					\end{tikzpicture}
+					\\[3mm]
+					(cocomm)  &
+					\begin{tikzpicture}[axpic]
+						\pic (c) at (0,0) {copy};
+						\draw (c-out-0) to (1.6,-0.5);
+						\draw (c-out-1) to (1.6,0.5);
+					\end{tikzpicture}
+					          &
+					\begin{tikzpicture}[axpic]
+						\pic (c) at (0,0) {copy};
+					\end{tikzpicture}
+					\\[3mm]
+					(counit)  &
+					\begin{tikzpicture}[axpic]
+						\pic (c) at (0,0) {copy};
+						\pic (d) at (1.4,0.5) {discard};
+						\draw (c-out-0) -- (d-in-0);
+					\end{tikzpicture}
+					          &
+					\begin{tikzpicture}[axpic]
+						\draw (0,0) -- (1.0,0);
+					\end{tikzpicture}
+				\end{tabular}\end{center}
+
+			\textit{Bialgebra / Hopf (white over black).}
+			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
+					(B1)       &
+					\begin{tikzpicture}[axpic]
+						\pic (a) at (0,0) {multiplication};
+						\pic (c) at (1.6,0) {copy};
+						\draw (a-out-0) -- (c-in-0);
+					\end{tikzpicture}
+					           &
+					\begin{tikzpicture}[axpic]
+						\pic (c1) at (0,1.7) {copy};
+						\pic (c2) at (0,-1.7) {copy};
+						\pic (a1) at (2.2,1.7) {multiplication};
+						\pic (a2) at (2.2,-1.7) {multiplication};
+						\draw (c1-out-0) -- (a1-in-0);
+						\draw (c2-out-1) -- (a2-in-1);
+						\draw (c1-out-1) to (a2-in-0);
+						\draw (c2-out-0) to (a1-in-1);
+					\end{tikzpicture}
+					\\[3mm]
+					(B2)       &
+					\begin{tikzpicture}[axpic]
+						\pic (a) at (0,0) {multiplication};
+						\pic (d) at (1.4,0) {discard};
+						\draw (a-out-0) -- (d-in-0);
+					\end{tikzpicture}
+					           &
+					\begin{tikzpicture}[axpic]
+						\pic (d1) at (0,0.7) {discard};
+						\pic (d2) at (0,-0.7) {discard};
+					\end{tikzpicture}
+					\\[3mm]
+					(B3)       &
+					\begin{tikzpicture}[axpic]
+						\pic (z) at (-0.6,0) {zero};
+						\pic (c) at (0.8,0) {copy};
+						\draw (z-out-0) -- (c-in-0);
+					\end{tikzpicture}
+					           &
+					\begin{tikzpicture}[axpic]
+						\pic (z1) at (0,0.7) {zero};
+						\pic (z2) at (0,-0.7) {zero};
+					\end{tikzpicture}
+					\\[3mm]
+					(B4, unit) &
+					\begin{tikzpicture}[axpic]
+						\pic (z) at (-0.6,0) {zero};
+						\pic (d) at (0.8,0) {discard};
+						\draw (z-out-0) -- (d-in-0);
+					\end{tikzpicture}
+					           &
+					\begin{tikzpicture}[axpic]\path(-0.6,-0.6) rectangle (0.6,0.6);\node{};\end{tikzpicture}
+				\end{tabular}\end{center}
+
+			\textit{Frobenius and special law (copy structure; the addition structure is dual).}
+			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
+					(Frob)    &
+					\begin{tikzpicture}[axpic]
+						\pic (c) at (0,0.7) {copy};
+						\pic (m) at (1.7,-0.6) {cocopy};
+						\draw (c-out-1) -- (m-in-0);
+					\end{tikzpicture}
+					          &
+					\begin{tikzpicture}[axpic]
+						\pic (m) at (0,0) {cocopy};
+						\pic (c) at (1.7,0) {copy};
+						\draw (m-out-0) -- (c-in-0);
+					\end{tikzpicture}
+					\\[3mm]
+					(special) &
+					\begin{tikzpicture}[axpic]
+						\pic (c) at (0,0) {copy};
+						\pic (m) at (1.5,0) {cocopy};
+						\draw (c-out-0) -- (m-in-0);
+						\draw (c-out-1) -- (m-in-1);
+					\end{tikzpicture}
+					          &
+					\begin{tikzpicture}[axpic]
+						\draw (0,0) to (1.0,0);
+					\end{tikzpicture}
+				\end{tabular}\end{center}
+
+			\textit{Scalars and antipode ($\text{-}1$).}
+			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
+					(s.\,add)  &
+					\begin{tikzpicture}[axpic]
+						\pic (c) at (0,0) {copy};
+						\pic [val=k] (sk) at (1.6,0.9) {scalar};
+						\pic [val=l] (sl) at (1.6,-0.9) {scalar};
+						\pic (a) at (3.2,0) {multiplication};
+						\draw (c-out-0) -- (sk-in-0);
+						\draw (c-out-1) -- (sl-in-0);
+						\draw (sk-out-0) -- (a-in-0);
+						\draw (sl-out-0) -- (a-in-1);
+					\end{tikzpicture}
+					           &
+					\begin{tikzpicture}[axpic]\pic [val={k+l}] (s) at (0,0) {scalar};\end{tikzpicture}
+					\\[3mm]
+					(s.\,mult) &
+					\begin{tikzpicture}[axpic]
+						\pic [val=k] (sk) at (0,0) {scalar};
+						\pic [val=l] (sl) at (1.6,0) {scalar};
+						\draw (sk-out-0) -- (sl-in-0);
+					\end{tikzpicture}
+					           &
+					\begin{tikzpicture}[axpic]\pic [val={kl}] (s) at (0,0) {scalar};\end{tikzpicture}
+					\\[3mm]
+					(antipode) &
+					\begin{tikzpicture}[axpic]
+						\pic (c) at (0,0) {copy};
+						\pic [val={\text{-}1}] (sm) at (1.6,-0.9) {scalar};
+						\pic (a) at (3.2,0) {multiplication};
+						\draw (c-out-0) to (a-in-0);
+						\draw (c-out-1) -- (sm-in-0);
+						\draw (sm-out-0) -- (a-in-1);
+					\end{tikzpicture}
+					           &
+					\begin{tikzpicture}[axpic]
+						\pic (d) at (-0.6,0) {discard};
+						\pic (z) at (0.8,0) {zero};
+					\end{tikzpicture}
+				\end{tabular}\end{center}
+		\end{minipage}}
+
+	\medskip
+	\noindent\fbox{\begin{minipage}{0.97\linewidth}
+			\begin{center}\textbf{$\mathbf{GAA}$ axioms (in addition to $\mathbf{GLA}$)}\quad{\footnotesize\cite{bonchi2019affine}}\end{center}
+			The affine generator $\rtop$ (a point $0\to 1$, drawn as the empty box) is a comonoid homomorphism:
+			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
+					(aff.\,copy) &
+					\begin{tikzpicture}[axpic]
+						\pic (t) at (-0.6,0) {affine};
+						\pic (c) at (0.8,0) {copy};
+						\draw (t-out-0) -- (c-in-0);
+					\end{tikzpicture}
+					             &
+					\begin{tikzpicture}[axpic]
+						\pic (t1) at (0,0.7) {affine};
+						\pic (t2) at (0,-0.7) {affine};
+					\end{tikzpicture}
+					\\[3mm]
+					(aff.\,del)  &
+					\begin{tikzpicture}[axpic]
+						\pic (t) at (-0.6,0) {affine};
+						\pic (d) at (0.8,0) {discard};
+						\draw (t-out-0) -- (d-in-0);
+					\end{tikzpicture}
+					             &
+					\begin{tikzpicture}[axpic]\path(-0.6,-0.6) rectangle (0.6,0.6);\node{};\end{tikzpicture}
+				\end{tabular}\end{center}
+		\end{minipage}}
+
+	\medskip
+	\noindent\fbox{\begin{minipage}{0.97\linewidth}
+			\begin{center}\textbf{$\mathbf{GPA}$ axioms (in addition to $\mathbf{GAA}$)}\quad{\footnotesize\cite{bonchi2021polyhedral}}\end{center}
+			The order primitive $\ge$ is a preorder compatible with the linear structure
+			(transitivity; monoid and comonoid morphism; $0\ge 0$):
+			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
+					(trans)           &
+					\begin{tikzpicture}[axpic]
+						\pic (g1) at (0,0) {ge};
+						\pic (g2) at (1.5,0) {ge};
+						\draw (g1-out-0) -- (g2-in-0);
+					\end{tikzpicture}
+					                  &
+					\begin{tikzpicture}[axpic]\pic (g) at (0,0) {ge};\end{tikzpicture}
+					\\[3mm]
+					(mono.\,$\oplus$) &
+					\begin{tikzpicture}[axpic]
+						\pic (a) at (0,0) {multiplication};
+						\pic (g) at (1.5,0) {ge};
+						\draw (a-out-0) -- (g-in-0);
+					\end{tikzpicture}
+					                  &
+					\begin{tikzpicture}[axpic]
+						\pic (g1) at (0,0.8) {ge};
+						\pic (g2) at (0,-0.8) {ge};
+						\pic (a) at (1.7,0) {multiplication};
+						\draw (g1-out-0) -- (a-in-0);
+						\draw (g2-out-0) -- (a-in-1);
+					\end{tikzpicture}
+					\\[3mm]
+					(mono.\,copy)     &
+					\begin{tikzpicture}[axpic]
+						\pic (c) at (0,0) {copy};
+						\pic (g1) at (1.5,0.8) {ge};
+						\pic (g2) at (1.5,-0.8) {ge};
+						\draw (c-out-0) -- (g1-in-0);
+						\draw (c-out-1) -- (g2-in-0);
+					\end{tikzpicture}
+					                  &
+					\begin{tikzpicture}[axpic]
+						\pic (g) at (0,0) {ge};
+						\pic (c) at (1.5,0) {copy};
+						\draw (g-out-0) -- (c-in-0);
+					\end{tikzpicture}
+					\\[3mm]
+					(zero)            &
+					\begin{tikzpicture}[axpic]
+						\pic (z) at (-0.6,0) {zero};
+						\pic (g) at (0.8,0) {ge};
+						\draw (z-out-0) -- (g-in-0);
+					\end{tikzpicture}
+					                  &
+					\begin{tikzpicture}[axpic]\pic (z) at (0,0) {zero};\end{tikzpicture}
+				\end{tabular}\end{center}
+			Together with reflexivity, antisymmetry and positivity of scalars; see \cite{bonchi2021polyhedral,bonchi2021.9farkas}.
+		\end{minipage}}
+
+\end{definition}
+
+\begin{definition}\label{def:arrows}
+	We also denote with $\overrightarrow{(\cdot)}/\overleftarrow{(\cdot)}$ when we want to talk about the algebra generated without the Frobenius structure. For example $\overrightarrow{\textbf{GLA}}$ is the algebra generated by
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=.5\linewidth]{../images/RightAlgebra.png}
+	\end{figure}
+	without their symmetric
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.5\linewidth]{../images/LeftAlgebra.png}
+	\end{figure}
+	and the exactly opposite we denote as $\overleftarrow{\textbf{GLA}}$.
+\end{definition}
+
+Our contribution builds directly on Graphical Polyhedral Algebra. Geometrically it goes beyond affine spaces, representing polyhedra as linear-inequality constraints. We begin by recalling the standard definitions.
+
+\begin{definition}\label{polyform}
+	A set $P \subseteq \mathbb{R}^n$ is called a \emph{polyhedron} if there
+	exist $A \in \mathbb{R}^{m \times n}$ and $b \in \mathbb{R}^m$ such that
+	$P = \{x \in \mathbb{R}^n \mid Ax \ge b\}$.
+\end{definition}
+
+The corresponding semantic categories capture polyhedra as morphisms, with relational composition playing the role of variable elimination.
+
+\begin{definition}[The prop $\mathbf{PolyRel}$ of polyhedra]
+	Let $k$ be an ordered field. The prop $\mathbf{PolyRel}_k$ has objects natural numbers $n$, morphisms $n\to m$ the polyhedra $R \subseteq k^n \times k^m$ of the form
+	$R = \{ (x,y) \mid A (x,y)^\top + b \ge 0 \}$,
+	composition relational composition, and monoidal product addition on objects, Cartesian product on morphisms.
+\end{definition}
+
+The central computational primitive of the polyhedral theory is Fourier--Motzkin Elimination (FME)~\cite{schrijver1986theory, ziegler1995polytopes}, which projects a polyhedron onto a lower-dimensional space by eliminating one variable at a time. In $\mathbf{GPA}$ this is realized diagrammatically, after first establishing that the $\ge$ generator is transitive, reflexive and antisymmetric.
+
+\begin{proposition}[Fourier--Motzkin Elimination]
+	The following diagrammatic procedure is equivalent to performing the FME algorithm:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{../images/GPA/FMEDiag.png}
+	\end{figure}
+\end{proposition}
+
+Using FME, $\mathbf{GPA}$ admits a normal form, and applying the polar operator (the polyhedral analogue of Farkas duality, exchanging the $H$- and $V$-representations \cite{bonchi2021.9farkas}) yields a second, conic-hull normal form. These drive the presentation theorems below, whose proofs we recall from \cite{bonchi2021polyhedral}.
+
+\begin{theorem}\label{thm:gpapresent}
+	$\mathbf{PolyRel}$ is presented by $\mathrm{FreeP}_{\mathbf{GPA}}$.
+\end{theorem}
+
+This is the structural foundation on which our final contribution, $\mathbf{GLP}$, is built: there, these constraints are combined with a linear objective to form full parametric linear programs.
+
