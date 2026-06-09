@@ -321,6 +321,79 @@ We now introduce the foundational theories for Graphical Algebra that serve as a
 	and the exactly opposite we denote as $\overleftarrow{\textbf{GLA}}$.
 \end{definition}
 
+Building one the above definition, we stablish the following notation to easy the
+burden of future proofs. We will denote a abstract diagram from $\overrightarrow{\textbf{GLA}}$ as
+
+\begin{figure}[H]
+    \centering
+    \diagdef{
+        \pic[val=A] {matrix};
+    }{
+                  \begin{scope}[shift={(0.000,1.000)}]
+                  \begin{scope}[shift={(0.000,1.000)}]
+                  \pic (g1) at (0.500,0.500) {copy};
+                  \end{scope}
+                  \pic (g2) at (0.500,0.500) {copy};
+                  \end{scope}
+                  \begin{scope}[shift={(1.250,0.000)}]
+                  \begin{scope}[shift={(0.000,1.000)}]
+                  \begin{scope}[shift={(0.000,1.000)}]
+                  \begin{scope}[shift={(0.000,1.000)}]
+                      \pic (g3)[val=a_{1,1}] at (0.500,0.500) {scalar};
+                  \end{scope}
+                  \pic (g4)[val=a_{2,1}] at (0.500,0.500) {scalar};
+                  \end{scope}
+                  \pic (g5)[val=a_{1,2}] at (0.500,0.500) {scalar};
+                  \end{scope}
+                  \pic (g6)[val=a_{2,2}] at (0.500,0.500) {scalar};
+                  \end{scope}
+                  \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
+                  \draw (g1-out-1) to[out=0,in=180] (g4-in-0);
+                  \draw (g2-out-0) to[out=0,in=180] (g5-in-0);
+                  \draw (g2-out-1) to[out=0,in=180] (g6-in-0);
+                  \begin{scope}[shift={(2.500,1.000)}]
+                  \begin{scope}[shift={(0.000,1.000)}]
+                  \pic (g7) at (0.500,0.500) {multiplication};
+                  \end{scope}
+                  \pic (g8) at (0.500,0.500) {multiplication};
+                  \end{scope}
+                  \draw (g3-out-0) to[out=0,in=180] (g7-in-0);
+                  \draw (g4-out-0) to[out=0,in=180] (g7-in-1);
+                  \draw (g5-out-0) to[out=0,in=180] (g8-in-0);
+                  \draw (g6-out-0) to[out=0,in=180] (g8-in-1);
+    }
+\end{figure}
+
+Which denotes any matrix A, or, more formally, denotes the relation $xAy \equiv Ax=y$. Analogously, we also depict any diagram from $\overrightarrow{\textbf{GAA}}$ as
+
+\begin{figure}[H]
+    \centering
+    \diagdef{
+        \pic[val=A] {relation};
+    }{
+          \begin{scope}[shift={(0.625,1.000)}]
+              \pic[val=A] (g1) at (0.500,0.500) {matrix};
+          \end{scope}
+          \pic (g2) at (0.500,0.500) {affine};
+          \begin{scope}[shift={(1.250,0.000)}]
+              \pic[val=b] (g3) at (0.500,0.500) {scalar};
+          \end{scope}
+          \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+          \coordinate (a4) at (0.000,0 |- g1-in-0);
+          \draw (g1-in-0) -- (a4);
+          \coordinate (a5) at (2.250,0 |- g1-out-0);
+          \draw (g1-out-0) -- (a5);
+          \begin{scope}[shift={(2.500,0.500)}]
+          \pic (g6) at (0.500,0.500) {multiplication};
+          \end{scope}
+          \draw (a5) to[out=0,in=180] (g6-in-0);
+          \draw (g3-out-0) to[out=0,in=180] (g6-in-1);
+    }
+\end{figure}
+
+which denotes an affine transformation, also known as the relation $xAy \equiv Ax + b = y$
+
+
 Our contribution builds directly on Graphical Polyhedral Algebra. Geometrically it goes beyond affine spaces, representing polyhedra as linear-inequality constraints. We begin by recalling the standard definitions.
 
 \begin{definition}\label{polyform}
