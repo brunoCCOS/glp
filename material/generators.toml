@@ -133,3 +133,9 @@ sig.arity = 0
 sig.coarity = 1
 pic = "linear"
 symbol = "<-"
+
+[generators.antipode]
+sig.arity = 1
+sig.coarity = 1
+pic = "antipode"
+symbol = "-1"

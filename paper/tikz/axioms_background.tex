@@ -4,13 +4,13 @@
 	}
 
 	\medskip
-	\noindent\fbox{\begin{minipage}{0.97\linewidth}
+	\noindent
+    \fbox{\begin{minipage}{0.97\linewidth}
 			\begin{center}\textbf{$\mathbf{GLA}$ axioms}\quad{\footnotesize\cite{paixao2022highlevel,bonchi2017interacting}}\end{center}
 
 			\textit{White commutative monoid (addition $\oplus$, unit $\circ$).}
-			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
-					(assoc) &
-                    \begin{tikzpicture}
+			\begin{center}\begin{tabular}{r c c c}
+                \diagrow{(assoc)}{
                       \begin{scope}[shift={(0.000,1.000)}]
                       \pic (g1) at (0.500,0.500) {multiplication};
                       \end{scope}
@@ -22,9 +22,8 @@
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
                       \draw (id_out_3) to[out=0,in=180] (g4-in-1);
-                    \end{tikzpicture}
-					        &
-                    \begin{tikzpicture}
+                  }
+                    {
                       \begin{scope}[shift={(0.000,1.000)}]
                       \coordinate (id_in_1) at (0,0.500);
                       \coordinate (id_out_2) at (1.000,0.500);
@@ -36,10 +35,9 @@
                       \end{scope}
                       \draw (id_out_2) to[out=0,in=180] (g4-in-0);
                       \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
-                    \end{tikzpicture}
-					\\[3mm]
-					(comm)  &
-                    \begin{tikzpicture}
+                  }
+                  \diagrow{(comm)}
+                  {
                       \coordinate (sw_in_top_1) at (0,1.000);
                       \coordinate (sw_in_bottom_2) at (0,0.000);
                       \coordinate (sw_out_top_3) at (1.000,1.000);
@@ -51,14 +49,11 @@
                       \end{scope}
                       \draw (sw_out_top_3) to[out=0,in=180] (g5-in-0);
                       \draw (sw_out_bottom_4) to[out=0,in=180] (g5-in-1);
-                    \end{tikzpicture}
-					        &
-                    \begin{tikzpicture}
+                  }
+                  {
                       \pic (g1) at (0.500,0.500) {multiplication};
-                    \end{tikzpicture}
-					\\[3mm]
-					(unit)  &
-                    \begin{tikzpicture}
+                  }
+                  \diagrow{(unit)}{
                       \begin{scope}[shift={(0.000,1.000)}]
                       \pic (g1) at (0.500,0.500) {zero};
                       \end{scope}
@@ -70,306 +65,304 @@
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
                       \draw (id_out_3) to[out=0,in=180] (g4-in-1);
-                    \end{tikzpicture}
-					        &
-                    \begin{tikzpicture}
+                  }
+                    {
                       \coordinate (id_in_1) at (0,0.500);
                       \coordinate (id_out_2) at (1.000,0.500);
                       \draw (id_in_1) -- (id_out_2);
-                    \end{tikzpicture}
+                  }
 				\end{tabular}\end{center}
 
 			\textit{Black cocommutative comonoid (copy, counit $\bullet$).}
-			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
-					(coassoc) &
-                    \begin{tikzpicture}
+			\begin{center}\begin{tabular}{r c c c}
+                \diagrow{(coassoc)}
+                {
+                      \begin{scope}[shift={(0.000,0.500)}]
                       \pic (g1) at (0.500,0.500) {copy};
+                      \end{scope}
                       \begin{scope}[shift={(1.250,0.000)}]
+                      \begin{scope}[shift={(0.000,1.000)}]
                       \pic (g2) at (0.500,0.500) {copy};
                       \end{scope}
-                      \coordinate (id_in_3) at (1.250,1.000);
-                      \coordinate (id_out_4) at (2.250,1.000);
+                      \coordinate (id_in_3) at (0,0.500);
+                      \coordinate (id_out_4) at (1.000,0.500);
                       \draw (id_in_3) -- (id_out_4);
+                      \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
                       \draw (g1-out-1) to[out=0,in=180] (id_in_3);
-                    \end{tikzpicture}
-					          &
-                    \begin{tikzpicture}
-                      \begin{scope}[shift={(0.000,1.000)}]
+                  }
+                  {
+                      \begin{scope}[shift={(0.000,0.500)}]
                       \pic (g1) at (0.500,0.500) {copy};
                       \end{scope}
                       \begin{scope}[shift={(1.250,0.000)}]
-                      \pic (g2) at (0.500,0.500) {copy};
+                      \begin{scope}[shift={(0.000,1.000)}]
+                      \coordinate (id_in_2) at (0,0.500);
+                      \coordinate (id_out_3) at (1.000,0.500);
+                      \draw (id_in_2) -- (id_out_3);
                       \end{scope}
-                      \coordinate (id_in_3) at (1.250,0.000);
-                      \coordinate (id_out_4) at (2.250,0.000);
-                      \draw (id_in_3) -- (id_out_4);
-                      \draw (g1-out-1) to[out=0,in=180] (g2-in-0);
-                      \draw (g1-out-0) to[out=0,in=180] (id_in_3);
-                    \end{tikzpicture}
-					\\[3mm]
-					(cocomm)  &
-                    \begin{tikzpicture}
+                      \pic (g4) at (0.500,0.500) {copy};
+                      \end{scope}
+                      \draw (g1-out-0) to[out=0,in=180] (id_in_2);
+                      \draw (g1-out-1) to[out=0,in=180] (g4-in-0);
+                }
+                \diagrow{(cocomm)}
+                {
+                     \pic (g1) at (0.500,0.500) {copy};
+                      \begin{scope}[shift={(1.250,0.000)}]
+                      \coordinate (sw_in_top_2) at (0,1.000);
+                      \coordinate (sw_in_bottom_3) at (0,0.000);
+                      \coordinate (sw_out_top_4) at (1.000,1.000);
+                      \coordinate (sw_out_bottom_5) at (1.000,0.000);
+                      \draw (sw_in_bottom_3) .. controls (0.500,0.000) and (0.500,1.000) .. (sw_out_top_4);
+                      \draw (sw_in_top_2) .. controls (0.500,1.000) and (0.500,0.000) .. (sw_out_bottom_5);
+                      \end{scope}
+                      \draw (g1-out-0) to[out=0,in=180] (sw_in_top_2);
+                      \draw (g1-out-1) to[out=0,in=180] (sw_in_bottom_3);
+                  }
+                  {
                       \pic (g1) at (0.500,0.500) {copy};
-                      \coordinate (sw_in_top_1) at (1.000,1.000);
-                      \coordinate (sw_in_bottom_2) at (1.000,0.000);
-                      \coordinate (sw_out_top_3) at (2.000,1.000);
-                      \coordinate (sw_out_bottom_4) at (2.000,0.000);
-                      \draw (g1-out-1) to[out=0,in=180] (sw_in_top_1);
-                      \draw (g1-out-0) to[out=0,in=180] (sw_in_bottom_2);
-                      \draw (sw_in_bottom_2) .. controls (1.500,0.000) and (1.500,1.000) .. (sw_out_top_3);
-                      \draw (sw_in_top_1) .. controls (1.500,1.000) and (1.500,0.000) .. (sw_out_bottom_4);
-                    \end{tikzpicture}
-					          &
-                    \begin{tikzpicture}
+                  }
+                  \diagrow{(counit)}
+                  {
+                      \begin{scope}[shift={(0.000,0.500)}]
                       \pic (g1) at (0.500,0.500) {copy};
-                    \end{tikzpicture}
-					\\[3mm]
-					(counit)  &
-                    \begin{tikzpicture}
-                      \pic (g1) at (0.500,0.500) {copy};
-                      \begin{scope}[shift={(1.250,0.500)}]
+                      \end{scope}
+                      \begin{scope}[shift={(1.250,0.000)}]
+                      \begin{scope}[shift={(0.000,1.000)}]
                       \pic (g2) at (0.500,0.500) {discard};
                       \end{scope}
-                      \coordinate (id_in_3) at (1.250,0.000);
-                      \coordinate (id_out_4) at (2.250,0.000);
+                      \coordinate (id_in_3) at (0,0.500);
+                      \coordinate (id_out_4) at (1.000,0.500);
                       \draw (id_in_3) -- (id_out_4);
-                      \draw (g1-out-1) to[out=0,in=180] (g2-in-0);
-                      \draw (g1-out-0) to[out=0,in=180] (id_in_3);
-                    \end{tikzpicture}
-					          &
-                    \begin{tikzpicture}
+                      \end{scope}
+                      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+                      \draw (g1-out-1) to[out=0,in=180] (id_in_3);
+                  }
+                  {
                       \coordinate (id_in_1) at (0,0.500);
                       \coordinate (id_out_2) at (1.000,0.500);
                       \draw (id_in_1) -- (id_out_2);
-                    \end{tikzpicture}
+                  }
 				\end{tabular}\end{center}
 
 			\textit{Bialgebra / Hopf (white over black).}
-			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
-					(B1)       &
-                    \begin{tikzpicture}
-                      \pic (g1) at (0.500,0.500) {multiplication};
-                      \begin{scope}[shift={(1.250,0.000)}]
-                      \pic (g2) at (0.500,0.500) {copy};
-                      \end{scope}
-                      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					           &
-                    \begin{tikzpicture}
-                      \begin{scope}[shift={(0.000,1.500)}]
-                      \pic (g1) at (0.500,0.500) {copy};
-                      \end{scope}
-                      \begin{scope}[shift={(0.000,0.000)}]
-                      \pic (g2) at (0.500,0.500) {copy};
-                      \end{scope}
-                      \begin{scope}[shift={(1.750,1.500)}]
-                      \pic (g3) at (0.500,0.500) {multiplication};
-                      \end{scope}
-                      \begin{scope}[shift={(1.750,0.000)}]
-                      \pic (g4) at (0.500,0.500) {multiplication};
-                      \end{scope}
-                      \draw (g1-out-1) to[out=0,in=180] (g3-in-0);
-                      \draw (g2-out-0) to[out=0,in=180] (g4-in-1);
-                      \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
-                      \draw (g2-out-1) to[out=0,in=180] (g3-in-1);
-                    \end{tikzpicture}
-					\\[3mm]
-					(B2)       &
-                    \begin{tikzpicture}
-                      \pic (g1) at (0.500,0.500) {multiplication};
-                      \begin{scope}[shift={(1.250,0.500)}]
-                      \pic (g2) at (0.500,0.500) {discard};
-                      \end{scope}
-                      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					           &
-                    \begin{tikzpicture}
-                      \begin{scope}[shift={(0.000,0.700)}]
-                      \pic (g1) at (0.500,0.500) {discard};
-                      \end{scope}
-                      \begin{scope}[shift={(0.000,-0.700)}]
-                      \pic (g2) at (0.500,0.500) {discard};
-                      \end{scope}
-                    \end{tikzpicture}
-					\\[3mm]
-					(B3)       &
-                    \begin{tikzpicture}
+			\begin{center}\begin{tabular}{r c c c}
+                \diagrow
+                    {(B1)}
+			        {
+                       \pic (g1) at (0.500,0.500) {multiplication};
+                       \begin{scope}[shift={(1.250,0.000)}]
+                       \pic (g2) at (0.500,0.500) {copy};
+                       \end{scope}
+                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+			        }
+			        {
+                       \begin{scope}[shift={(0.000,1.000)}]
+                       \pic (g1) at (0.500,0.500) {copy};
+                       \end{scope}
+                       \pic (g2) at (0.500,0.500) {copy};
+                       \begin{scope}[shift={(1.250,0.000)}]
+                       \begin{scope}[shift={(0.000,1.000)}]
+                       \pic (g3) at (0.500,0.500) {multiplication};
+                       \end{scope}
+                       \pic (g4) at (0.500,0.500) {multiplication};
+                       \end{scope}
+                       \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
+                       \draw (g1-out-1) to[out=0,in=180] (g3-in-1);
+                       \draw (g2-out-0) to[out=0,in=180] (g4-in-0);
+                       \draw (g2-out-1) to[out=0,in=180] (g4-in-1);
+			        }
+                  \diagrow{(B2)}
+                    {
+                        \pic (g1) at (0.500,0.500) {multiplication};
+                        \begin{scope}[shift={(1.250,0.000)}]
+                        \pic (g2) at (0.500,0.500) {discard};
+                        \end{scope}
+                        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+                    }
+                    {
+                        \begin{scope}[shift={(0.000,1.000)}]
+                        \pic (g1) at (0.500,0.500) {discard};
+                        \end{scope}
+                        \pic (g2) at (0.500,0.500) {discard};
+                    }
+                  \diagrow{(B3)}
+                    {
                       \pic (g1) at (0.500,0.500) {zero};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {copy};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					           &
-                    \begin{tikzpicture}
-                      \begin{scope}[shift={(0.000,0.700)}]
-                      \pic (g1) at (0.500,0.500) {zero};
-                      \end{scope}
-                      \begin{scope}[shift={(0.000,-0.700)}]
-                      \pic (g2) at (0.500,0.500) {zero};
-                      \end{scope}
-                    \end{tikzpicture}
-					\\[3mm]
-					(B4, unit) &
-                    \begin{tikzpicture}
+                    }
+                    {
+                       \begin{scope}[shift={(0.000,1.000)}]
+                       \pic (g1) at (0.500,0.500) {zero};
+                       \end{scope}
+                       \pic (g2) at (0.500,0.500) {zero};
+                    }
+                  \diagrow{(B4, unit)}
+                  {
                       \pic (g1) at (0.500,0.500) {zero};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {discard};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					           &
-                    \begin{tikzpicture}
-                      \path (0,0) rectangle (1.000,1.000);
-                    \end{tikzpicture}
-				\end{tabular}\end{center}
+                  }
+                  {
+                      \node[draw, dotted] at (0,0.5) {};
+                  }
+  		\end{tabular}\end{center}
+	\end{minipage}}
 
+    \noindent
+    \medskip
+    \fbox{
+        \begin{minipage}{0.97\linewidth}
 			\textit{Frobenius and special law (copy structure; the addition structure is dual).}
-			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
-					(Frob)    &
-                    \begin{tikzpicture}
+			\begin{center}\begin{tabular}{r c c c}
+                \diagrow{(Frob)}
+                {
                       \begin{scope}[shift={(0.000,1.000)}]
-                      \pic (g1) at (0.500,0.500) {copy};
+                      \coordinate (id_in_1) at (0,1.000);
+                      \coordinate (id_out_2) at (1.000,1.000);
+                      \draw (id_in_1) -- (id_out_2);
                       \end{scope}
+                      \pic (g3) at (0.500,0.500) {copy};
                       \begin{scope}[shift={(1.250,0.000)}]
-                      \pic (g2) at (0.500,0.500) {cocopy};
+                      \begin{scope}[shift={(0.000,1.000)}]
+                      \pic (g4) at (0.500,0.500) {cocopy};
                       \end{scope}
-                      \coordinate (id_in_3) at (1.000,1.500);
-                      \coordinate (id_out_4) at (2.750,1.500);
-                      \draw (id_in_3) -- (id_out_4);
-                      \coordinate (id_in_5) at (1.000,0.000);
-                      \coordinate (id_out_6) at (2.750,0.000);
+                      \coordinate (id_in_5) at (0,0.000);
+                      \coordinate (id_out_6) at (1.000,0.000);
                       \draw (id_in_5) -- (id_out_6);
-                      \draw (g1-out-1) to[out=0,in=180] (g2-in-0);
-                      \draw (g1-out-0) to[out=0,in=180] (id_in_3);
-                      \draw (id_out_6) to[out=0,in=0] (g2-in-1);
-                    \end{tikzpicture}
-					          &
-                    \begin{tikzpicture}
-                      \pic (g1) at (0.500,0.500) {cocopy};
-                      \begin{scope}[shift={(1.250,0.000)}]
-                      \pic (g2) at (0.500,0.500) {copy};
                       \end{scope}
-                      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					\\[3mm]
-					(special) &
-                    \begin{tikzpicture}
-                      \pic (g1) at (0.500,0.500) {copy};
-                      \begin{scope}[shift={(1.250,0.000)}]
-                      \pic (g2) at (0.500,0.500) {cocopy};
-                      \end{scope}
-                      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                      \draw (g1-out-1) to[out=0,in=180] (g2-in-1);
-                    \end{tikzpicture}
-					          &
-                    \begin{tikzpicture}
+                      \draw (id_out_2) to[out=0,in=180] (g4-in-0);
+                      \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
+                      \draw (g3-out-1) to[out=0,in=180] (id_in_5);
+                }
+                {
+                  \pic (g1) at (0.500,0.500) {cocopy};
+                  \begin{scope}[shift={(1.250,0.000)}]
+                  \pic (g2) at (0.500,0.500) {copy};
+                  \end{scope}
+                  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+                }
+                \diagrow{(special)}
+                {
+                 \pic (g1) at (0.500,0.500) {copy};
+                  \begin{scope}[shift={(1.250,0.000)}]
+                  \pic (g2) at (0.500,0.500) {cocopy};
+                  \end{scope}
+                  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+                  \draw (g1-out-1) to[out=0,in=180] (g2-in-1);
+                  }
+                  {
                       \coordinate (id_in_1) at (0,0.500);
                       \coordinate (id_out_2) at (1.000,0.500);
                       \draw (id_in_1) -- (id_out_2);
-                    \end{tikzpicture}
+                  }
 				\end{tabular}\end{center}
 
 			\textit{Scalars and antipode ($\text{-}1$).}
-			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
-					(s.\,add)  &
-                    \begin{tikzpicture}
+			\begin{center}\begin{tabular}{r c c c}
+                \diagrow{(s.add)}
+                    {
+                      \begin{scope}[shift={(0.000,0.500)}]
                       \pic (g1) at (0.500,0.500) {copy};
-                      \begin{scope}[shift={(1.250,0.700)}]
-                      \pic [val=k] (g2) at (0.500,0.500) {scalar};
                       \end{scope}
-                      \begin{scope}[shift={(1.250,-0.700)}]
-                      \pic [val=l] (g3) at (0.500,0.500) {scalar};
+                      \begin{scope}[shift={(1.250,0.000)}]
+                      \begin{scope}[shift={(0.000,1.000)}]
+                          \pic[val=k] (g2) at (0.500,0.500) {scalar};
                       \end{scope}
-                      \begin{scope}[shift={(2.750,0.000)}]
+                      \pic[val=l] (g3) at (0.500,0.500) {scalar};
+                      \end{scope}
+                      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+                      \draw (g1-out-1) to[out=0,in=180] (g3-in-0);
+                      \begin{scope}[shift={(2.500,0.500)}]
                       \pic (g4) at (0.500,0.500) {multiplication};
                       \end{scope}
-                      \draw (g1-out-1) to[out=0,in=180] (g2-in-0);
-                      \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
                       \draw (g2-out-0) to[out=0,in=180] (g4-in-0);
                       \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
-                    \end{tikzpicture}
-					           &
-                    \begin{tikzpicture}
+                    }
+                    {
                       \pic [val={k+l}] (g1) at (0.500,0.500) {scalar};
-                    \end{tikzpicture}
-					\\[3mm]
-					(s.\,mult) &
-                    \begin{tikzpicture}
+                    }
+                    \diagrow{(s.mult)}
+                    {
                       \pic [val=k] (g1) at (0.500,0.500) {scalar};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic [val=l] (g2) at (0.500,0.500) {scalar};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					           &
-                    \begin{tikzpicture}
+                  }
+                  {
                       \pic [val={kl}] (g1) at (0.500,0.500) {scalar};
-                    \end{tikzpicture}
-					\\[3mm]
-					(antipode) &
-                    \begin{tikzpicture}
+                  }
+                  \diagrow{(antipode)}
+                  {
+                      \begin{scope}[shift={(0.000,0.500)}]
                       \pic (g1) at (0.500,0.500) {copy};
-                      \begin{scope}[shift={(1.250,-0.700)}]
-                      \pic [val={\text{-}1}] (g2) at (0.500,0.500) {scalar};
                       \end{scope}
-                      \begin{scope}[shift={(2.750,0.000)}]
-                      \pic (g3) at (0.500,0.500) {multiplication};
+                      \begin{scope}[shift={(1.250,0.000)}]
+                      \begin{scope}[shift={(0.000,1.000)}]
+                      \coordinate (id_in_2) at (0,0.500);
+                      \coordinate (id_out_3) at (1.000,0.500);
+                      \draw (id_in_2) -- (id_out_3);
                       \end{scope}
-                      \coordinate (id_in_4) at (1.250,1.200);
-                      \coordinate (id_out_5) at (2.750,1.200);
-                      \draw (id_in_4) -- (id_out_5);
-                      \draw (g1-out-1) to[out=0,in=180] (id_in_4);
-                      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                      \draw (id_out_5) to[out=0,in=180] (g3-in-0);
-                      \draw (g2-out-0) to[out=0,in=180] (g3-in-1);
-                    \end{tikzpicture}
-					           &
-                    \begin{tikzpicture}
+                      \pic (g4) at (0.500,0.500) {antipode};
+                      \end{scope}
+                      \draw (g1-out-0) to[out=0,in=180] (id_in_2);
+                      \draw (g1-out-1) to[out=0,in=180] (g4-in-0);
+                      \begin{scope}[shift={(2.500,0.500)}]
+                      \pic (g5) at (0.500,0.500) {multiplication};
+                      \end{scope}
+                      \draw (id_out_3) to[out=0,in=180] (g5-in-0);
+                      \draw (g4-out-0) to[out=0,in=180] (g5-in-1);
+                  }
+                  {
                       \pic (g1) at (0.500,0.500) {discard};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {zero};
                       \end{scope}
-                    \end{tikzpicture}
+                  }
 				\end{tabular}\end{center}
 		\end{minipage}}
 
 	\medskip
-	\noindent\fbox{\begin{minipage}{0.97\linewidth}
+	\noindent
+    \fbox{
+        \begin{minipage}{0.97\linewidth}
 			\begin{center}\textbf{$\mathbf{GAA}$ axioms (in addition to $\mathbf{GLA}$)}\quad{\footnotesize\cite{bonchi2019affine}}\end{center}
 			The affine generator $\rtop$ (a point $0\to 1$, drawn as the empty box) is a comonoid homomorphism:
-			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
-					(aff.\,copy) &
-                    \begin{tikzpicture}
+			\begin{center}\begin{tabular}{r c c c}
+                \diagrow{(aff.\,copy)}
+                {
                       \pic (g1) at (0.500,0.500) {affine};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {copy};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					             &
-                    \begin{tikzpicture}
+                  }
+                  {
                       \begin{scope}[shift={(0.000,0.700)}]
                       \pic (g1) at (0.500,0.500) {affine};
                       \end{scope}
                       \begin{scope}[shift={(0.000,-0.700)}]
                       \pic (g2) at (0.500,0.500) {affine};
                       \end{scope}
-                    \end{tikzpicture}
-					\\[3mm]
-					(aff.\,del)  &
-                    \begin{tikzpicture}
+                  }
+                  \diagrow{(aff.\,del)}
+                  {
                       \pic (g1) at (0.500,0.500) {affine};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {discard};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					             &
-                    \begin{tikzpicture}
-                      \path (0,0) rectangle (1.000,1.000);
-                    \end{tikzpicture}
+                  }
+                  {
+                      \node[draw, dotted] at (0,0) {};
+                  }
 				\end{tabular}\end{center}
 		\end{minipage}}
 
@@ -379,76 +372,69 @@
 			\begin{center}\textbf{$\mathbf{GPA}$ axioms (in addition to $\mathbf{GAA}$)}\quad{\footnotesize\cite{bonchi2021polyhedral}}\end{center}
 			The order primitive $\ge$ is a preorder compatible with the linear structure
 			(transitivity; monoid and comonoid morphism; $0\ge 0$):
-			\begin{center}\begin{tabular}{r@{\quad}c@{\;$=$\;}c}
-					(trans)           &
-                    \begin{tikzpicture}
+			\begin{center}\begin{tabular}{r c c c}
+                \diagrow{(trans)}
+                {
                       \pic (g1) at (0.500,0.500) {ge};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {ge};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					                  &
-                    \begin{tikzpicture}
+                  }
+                  {
                       \pic (g1) at (0.500,0.500) {ge};
-                    \end{tikzpicture}
-					\\[3mm]
-					(mono.\,$\oplus$) &
-                    \begin{tikzpicture}
+                  }
+                  \diagrow{(mono.\,$\oplus$)}
+                  {
                       \pic (g1) at (0.500,0.500) {multiplication};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {ge};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					                  &
-                    \begin{tikzpicture}
-                      \begin{scope}[shift={(0.000,0.800)}]
+                  }
+                  {
+                      \begin{scope}[shift={(0.000,1.000)}]
                       \pic (g1) at (0.500,0.500) {ge};
                       \end{scope}
-                      \begin{scope}[shift={(0.000,-0.800)}]
                       \pic (g2) at (0.500,0.500) {ge};
-                      \end{scope}
-                      \begin{scope}[shift={(1.500,0.000)}]
+                      \begin{scope}[shift={(1.250,0.500)}]
                       \pic (g3) at (0.500,0.500) {multiplication};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
                       \draw (g2-out-0) to[out=0,in=180] (g3-in-1);
-                    \end{tikzpicture}
-					\\[3mm]
-					(mono.\,copy)     &
-                    \begin{tikzpicture}
+                  }
+                  \diagrowc{(mono.\,copy)}
+                  {
+                      \begin{scope}[shift={(0.000,0.500)}]
                       \pic (g1) at (0.500,0.500) {copy};
-                      \begin{scope}[shift={(1.250,0.800)}]
+                      \end{scope}
+                      \begin{scope}[shift={(1.250,0.000)}]
+                      \begin{scope}[shift={(0.000,1.000)}]
                       \pic (g2) at (0.500,0.500) {ge};
                       \end{scope}
-                      \begin{scope}[shift={(1.250,-0.800)}]
                       \pic (g3) at (0.500,0.500) {ge};
                       \end{scope}
-                      \draw (g1-out-1) to[out=0,in=180] (g2-in-0);
-                      \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
-                    \end{tikzpicture}
-					                  &
-                    \begin{tikzpicture}
+                      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+                      \draw (g1-out-1) to[out=0,in=180] (g3-in-0);
+                  }
+                  {
                       \pic (g1) at (0.500,0.500) {ge};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {copy};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					\\[3mm]
-					(zero)            &
-                    \begin{tikzpicture}
+                  }
+              \diagrow{(zero)}
+              {
                       \pic (g1) at (0.500,0.500) {zero};
                       \begin{scope}[shift={(1.250,0.000)}]
                       \pic (g2) at (0.500,0.500) {ge};
                       \end{scope}
                       \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-                    \end{tikzpicture}
-					                  &
-                    \begin{tikzpicture}
+                  }
+                  {
                       \pic (g1) at (0.500,0.500) {zero};
-                    \end{tikzpicture}
+                  }
 				\end{tabular}\end{center}
 			Together with reflexivity, antisymmetry and positivity of scalars; see \cite{bonchi2021polyhedral,bonchi2021.9farkas}.
 		\end{minipage}
