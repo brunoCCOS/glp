@@ -1,0 +1,200 @@
+\section{Semantics of Linear Programs}\label{sec:sem}
+
+Next, we introduce the categorical semantics of parametric linear
+programs (PLP). This section is self-contained. All results from the ordinary theory of linear programs, along with any categorical notions that are used here or later, are defined and proved within it.
+
+Results presented here, such as the existence of a standard form for PLP and certain
+equivalences between their epigraph and value function, will be of fundamental importance
+later when demonstrating the completeness of our algebra.
+
+\subsection{Preliminary Results in Linear Programming}
+
+We begin with several classical results that establish the tight
+relationship between piecewise affine convex functions, polyhedral
+functions, and parametric linear programs. These will serve as the
+semantic foundation for the graphical algebra introduced in the following
+section.
+
+\begin{definition}[Piecewise Affine Convex Function]
+	A function $f : \mathbb{R}^n \to \mathbb{R}$ is called
+	\emph{piecewise affine convex} if there exist finitely many affine
+	functions $a_i^\top x + b_i$, $i = 1,\dots,k$, such that
+	\[
+		f(x) = \max_{i=1,\dots,k} \{ a_i^\top x + b_i \}.
+	\]
+\end{definition}
+
+\begin{definition}[Polyhedral Function]
+	A function $f : \mathbb{R}^n \to \mathbb{R} \cup \{+\infty\}$ is
+	\emph{polyhedral} if its epigraph
+	$\mathrm{epi}(f) := \{ (x,t) \mid t \ge f(x) \}$
+	is a polyhedron.
+\end{definition}
+
+\begin{definition}[RHS Parametric Linear Program]
+	A \emph{right-hand side parametric linear program} has value function
+	$v(b) := \inf_{x} \{ c^\top x \mid Ax \ge b \}$.
+\end{definition}
+
+The following two propositions establish that all three notions above
+are equivalent descriptions of the same class of functions. This
+equivalence is the semantic cornerstone of the section: it is what
+allows us to treat polyhedral functions and parametric linear programs
+as morphisms in the same category.
+
+\begin{proposition}
+	A function is piecewise affine convex if and only if it is a polyhedral
+	function.
+\end{proposition}
+
+\begin{proof}
+	\textbf{($\Rightarrow$)} Let
+	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
+	Then
+	\[
+		\mathrm{epi}(f) = \bigcap_{i=1}^k \{ (x,t) \mid t \ge a_i^\top x + b_i \},
+	\]
+	which is an intersection of finitely many halfspaces, hence a polyhedron.
+
+	\medskip
+	\textbf{($\Leftarrow$)} If $f$ is polyhedral, its epigraph is a
+	polyhedron, so there exist finitely many affine inequalities
+	$t \ge a_i^\top x + b_i$ such that
+	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
+	Thus $f$ is piecewise affine and convex.
+\end{proof}
+
+\begin{proposition}
+	A function $v : \mathbb{R}^m \to \mathbb{R} \cup \{+\infty\}$ is
+	piecewise affine convex if and only if it is the value function of a
+	right-hand side parametric linear program.
+\end{proposition}
+
+\begin{proof}
+	\textbf{($\Rightarrow$)} Let
+	$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$
+	and define $Y := \mathrm{conv}\{y^1,\dots,y^k\}$.
+	Then $v(b) = \max_{y \in Y} b^\top y$.
+	Since $Y$ is a polyhedron admitting the representation
+	$Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$,
+	linear programming duality~\cite{schrijver1986theory, boyd2004convex} gives
+	$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
+
+	\medskip
+	\textbf{($\Leftarrow$)} Let
+	$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
+	Dualising,
+	$v(b) = \sup \{ b^\top y \mid A^\top y = c,\; y \ge 0 \}$.
+	Since the feasible set $Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$
+	is a polyhedron, the supremum is attained at its extreme points
+	$y^1,\dots,y^k$~\cite{ziegler1995polytopes}, yielding
+	$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$.
+	Thus $v$ is piecewise affine convex.
+\end{proof}
+
+The following proposition is the key technical lemma for the completeness
+proof of $\mathbf{GLP}$. It states that two parametric linear programs
+with the same value function must share the same epigraph polyhedron,
+providing the bridge between semantic equality and polyhedral equality
+that the completeness argument requires.
+
+\begin{proposition}\label{prop:equalepi}
+	Let
+	\[
+		v_i(y) := \inf\{\mathbf{1}^\top x \mid A_i x \ge B_i y\},
+		\qquad i=1,2,
+	\]
+	where $A_i \in \mathbb{R}^{m_i \times n_i}$ and
+	$B_i \in \mathbb{R}^{m_i \times k}$. If $v_1(y) = v_2(y)$ for all
+	$y \in \mathbb{R}^k$, then both programs admit a common representation
+	through the same epigraph polyhedron:
+	\[
+		v_i(y) = \inf\{t \mid (y,t) \in E\},
+		\qquad
+		E := \mathrm{epi}(v_1) = \mathrm{epi}(v_2).
+	\]
+\end{proposition}
+
+\begin{proof}
+	For each $i = 1,2$, the epigraph of $v_i$ satisfies
+	\[
+		(y,t) \in \mathrm{epi}(v_i)
+		\iff
+		\exists x : A_i x \ge B_i y,\ \mathbf{1}^\top x \le t,
+	\]
+	so $\mathrm{epi}(v_i)$ is the projection onto $(y,t)$ of the polyhedron
+	$P_i = \{(x,y,t) \mid A_i x \ge B_i y,\ \mathbf{1}^\top x \le t\}$.
+	Projections of polyhedra are polyhedra, so each $\mathrm{epi}(v_i)$ is
+	a polyhedron. Since $v_1 = v_2$ pointwise, we have
+	$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
+	Setting $E = \{(y,t) \mid Cy + dt \ge 0\}$, we obtain
+	$v_i(y) = \inf\{t \mid Cy + dt \ge 0\}$ for both $i = 1, 2$.
+\end{proof}
+
+\subsection{The semantic category \texorpdfstring{$\mathbf{LPRel}$}{LPRel} and \texorpdfstring{$\mathbf{PolyFun}$}{PolyFun}}
+
+With the semantic equivalences established, we now define the two equivalent semantic categories for this algebra. The first, $\mathbf{LPRel}$, describes morphisms as parametric linear programs; the second, $\mathbf{PolyFun}$, describes them as polyhedral functions. The equivalence between the two follows immediately from the propositions above. We refer only to $\mathbf{LPRel}$, but all results hold equally for $\mathbf{PolyFun}$.
+
+The broadest semantic setting is the category of bifunctions, which is exactly the Cost/Reward instance of $\mathbf{Rel}(Q)$ for the Extended-Lawvere quantale. Stein and collaborators \cite{stein2024compositional, stein2025compositional} construct this category as the home of compositional convex optimization, where infimal convolution, conjugation, and variable elimination arise as categorical constructions; we recall only the bare construction we need.
+
+\begin{definition}[Bifunction Category]
+	The category $\mathbf{BiFunc}$ has sets as objects, and a morphism $F : A \to B$ is a function
+	$F : A \times B \to \overline{\mathbb{R}}$.
+	Composition is infimal convolution
+	\[
+		(G \circ F)(a,c) := \inf_{b \in B} \big( F(a,b) + G(b,c) \big),
+	\]
+	with identity $1_A(a,a') = 0$ if $a=a'$ and $+\infty$ otherwise. The tensor product is the Cartesian product on objects and addition on morphisms, with the singleton as unit.
+\end{definition}
+
+\begin{remark}
+	The category $\mathbf{BiFunc}$ is exactly $\mathbf{Rel}(Q)$ for the Extended-Lawvere quantale
+	$(\overline{\mathbb{R}}, \ge, +, 0)$: a $Q$-valued relation $R : A \times B \to \overline{\mathbb{R}}$ is precisely a bifunction, and the composition law $\bigvee_b R(a,b)\otimes S(b,c) = \inf_b (R(a,b)+S(b,c))$ is exactly infimal convolution. The Boolean-relations category embeds into $\mathbf{BiFunc}$ as a full subcategory via the indicator (characteristic) functor, so constraints and objectives are not fundamentally different objects: they are relations valued in different quantales, unified by the same compositional structure.
+\end{remark}
+
+Composition is therefore precisely variable elimination: composing two relations marginalises over the intermediate variable by minimising the combined cost,
+\[
+	(S\circ R)(x,z)=\inf_y \{R(x,y)+S(y,z)\}.
+\]
+Optimization is not imposed on the categorical structure from outside --- it emerges from composition itself. Restricting to proper, convex, lower semicontinuous bifunctions yields the convex subcategory $\mathbf{CxBiFn} \subseteq \mathbf{BiFunc}$~\cite{rockafellar1970convex}, which is closed under infimal composition and is the natural home for the optimization problems we study. Linear programs are a finitely-presentable class of morphisms inside it.
+
+\begin{definition}[The prop $\mathbf{LPRel}$ of Linear Programs]
+	The prop $\mathbf{LPRel}$ is defined as follows:
+	\begin{itemize}
+		\item Objects are natural numbers $n \in \mathbb{N}$, interpreted
+		      as the space $\mathbb{R}^n$.
+		\item A morphism $n \to m$ is a right-hand side parametric linear
+		      program with value function
+		      \[
+			      (x,y) \mapsto \inf_z \{ c^\top z \mid Az \ge B[x\ y]^\top \},
+		      \]
+		      where $x \in \mathbb{R}^n$ and $y \in \mathbb{R}^m$.
+		\item Composition is given by minimisation over the shared variable.
+		\item The monoidal product on objects is addition $n \otimes m := n+m$,
+		      and on morphisms is direct sum.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[The prop $\mathbf{PolyFun}$ of polyhedral functions]
+	The prop $\mathbf{PolyFun}$ is defined as follows:
+	\begin{itemize}
+		\item Objects are natural numbers $n \in \mathbb{N}$, interpreted
+		      as the space $\mathbb{R}^n$.
+		\item A morphism $n \to m$ is a polyhedral function
+		      $f : \mathbb{R}^{n+m} \to \overline{\mathbb{R}}$.
+		\item Composition is given by infimal convolution over the shared
+		      variable.
+		\item The monoidal product on objects is addition $n \otimes m := n+m$,
+		      and on morphisms is $f \otimes g := f + g$.
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	The two categories are isomorphic as PROPs: $\mathbf{PolyFun} \cong
+		\mathbf{LPRel}$. This is a direct consequence of the equivalence
+	between polyhedral functions and right-hand side parametric linear
+	programs established in the propositions above. We will therefore
+	use the two names interchangeably, choosing whichever description is
+	more natural in a given context.
+\end{remark}
+

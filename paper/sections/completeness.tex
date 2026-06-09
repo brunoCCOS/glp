@@ -1,0 +1,101 @@
+\section{Syntax-Semantic Completeness}\label{sec:complete}
+
+Finally, we prove that our semantics, namely that of Parametric Linear Programs, is fully axiomatized by the constructed SMT \textbf{GLP}. This section is divided into three parts:
+
+\begin{itemize}
+	\item Proving Soundness: a check that every
+	      generator is correctly interpreted and all our axioms
+	      are sound with respect to the semantics.
+	\item Definability: that every semantic object, i.e.\ a
+	      \textit{Parametric Linear Program}, has a standard normal form, and
+	      that this normal form is always the interpretation of some diagram.
+	\item Completeness: through the epigraph form, any two identical PLPs
+	      can be reduced to the same polyhedron, which in turn makes their diagrams equal.
+\end{itemize}
+
+These are the necessary conditions for showing that the semantics is fully axiomatized.
+
+\begin{lemma}[Soundness]
+	If $s = t$ in $\mathrm{FreeP}_{\mathbf{GLP}}$, then $[s] = [t]$
+	in $\mathbf{PolyFun}$.
+\end{lemma}
+
+\begin{proof}
+	All axioms inherited from $\mathbf{GPA}$ are already sound by the
+	results of the previous section. It suffices to verify that the new
+	axioms involving the LP generator preserve the semantics, which
+	follows by direct computation:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{../images/GLP/Soundness.png}
+	\end{figure}
+\end{proof}
+
+\begin{lemma}[Definability / Expressivity]
+	For every $f : m \to n$ in $\mathbf{PolyFun}$ there exists a
+	$\Sigma$-term $s : m \to n$ in
+	$\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GLP}}}(m,n)$
+	such that $[s] = f$.
+\end{lemma}
+
+\begin{proof}
+	Since every polyhedral function is the maximum of a finite family of
+	affine functions, it suffices to show that every piecewise affine
+	convex function is expressible in $\mathbf{GLP}$. For an arbitrary
+	such function $f(y) = \max_i R_i(y)$, where $\{R_i\}_{i=1,\dots,n}$
+	is a family of affine functions, the following diagram provides the
+	required syntactic representative:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{../images/GLP/ExpressivityGLP.png}
+	\end{figure}
+\end{proof}
+
+The final result is the completeness theorem for
+$\mathbf{GLP}$. The proof brings together the main tools developed
+throughout: the epigraph form (Corollary~\ref{cor:epigraph form}), the
+shared epigraph property (Proposition~\ref{prop:equalepi}), the
+completeness of $\mathbf{GPA}$, and the FME-based normal form. It
+relies on the completeness of the $\mathbf{GPA}$
+polyhedra case (Theorem~\ref{thm:gpapresent}); given
+that result, the argument below goes through.
+
+\begin{lemma}[Completeness]
+	If $[c] = [d]$ in $\mathbf{PolyFun}$, then $c = d$ in
+	$\mathrm{FreeP}_{\mathbf{GLP}}$.
+\end{lemma}
+
+\begin{proof}
+	Let $v_1 = [c]$ and $v_2 = [d]$. By assumption $v_1 = v_2$, so
+	Proposition~\ref{prop:equalepi} gives
+	$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
+
+	By Corollary~\ref{cor:epigraph form}, both $c$ and $d$ admit
+	epigraph forms $c = \mushroom ; c^*$ and $d = \mushroom ; d^*$
+	with $[c^*] = [d^*] = E$ in $\mathbf{PolyRel}$:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{../images/GLP/proofCompleteness1.png}
+	\end{figure}
+	Since $[c^*] = [d^*]$ in $\mathbf{PolyRel}$, completeness of
+	$\mathbf{GPA}$ gives $c^* = d^*$ in
+	$\mathrm{FreeP}_{\mathbf{GPA}}$. Therefore,
+	\[
+		c = \mushroom ; c^* = \mushroom ; d^* = d,
+	\]
+	as witnessed diagrammatically by:
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\linewidth]{../images/GLP/proofCompleteness4.png}
+	\end{figure}
+\end{proof}
+
+As a consequence of the three lemmas above:
+
+\begin{theorem}
+	$\mathbf{LPRel}$ and $\mathbf{PolyFun}$ are both presented by $\mathrm{FreeP}_{\mathbf{GLP}}$.
+\end{theorem}
+\begin{proof}
+	By the preceding three lemmas.
+\end{proof}
+

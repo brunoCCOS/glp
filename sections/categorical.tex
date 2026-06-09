@@ -1,0 +1,564 @@
+\section{Composability of Convex Problems}
+
+Having established the necessary categorical and algebraic tools,
+we proceed to their application in convex analysis.
+In this section we introduce a initial categorical framework for convex optimization
+\cite{stein2024compositional}, showing how the fundamental operations of convex analysis —
+infimal convolution, conjugation, and variable elimination —
+arise naturally as categorical constructions. This gives the first concrete evidence that
+optimization is not merely a collection of isolated techniques, but a coherent algebraic theory
+with deep compositional structure.
+
+The progression of the section is as follows.
+We begin with the general category of bifunctions, which serves as the broadest setting,
+and progressively restrict to convex bifunctions, where the analytical structure is richest.
+We then introduce the Legendre--Fenchel transform and show that bifunction adjunction defines a contravariant functor between the convex and concave bifunction categories. These results lay the groundwork for the graphical theories developed in the following sections: Graphical Quadratic Algebra and Polyhedral Algebra will both arise as full subcategories of $\mathbf{CxBiFn}$, each corresponding to a class of bifunctions with additional algebraic structure.
+
+Later, we will see the particular applications of such definitions and results.
+For now, however, we begin by defining the broadest category in the hierarchy, which will
+generalize most of the later work: the category of bifunctions.
+
+\begin{definition}[Bifunction Category]
+The category $\mathbf{BiFunc}$ is defined as follows:
+
+\begin{itemize}
+    \item Objects are sets.
+
+    \item A morphism $F : A \to B$ is a function
+    \[
+    F : A \times B \to \overline{\mathbb{R}}.
+    \]
+
+    \item Given $F : A \to B$ and $G : B \to C$, their composition
+    $G \circ F : A \to C$ is defined pointwise by
+    \[
+    (G \circ F)(a,c)
+    :=
+    \inf_{b \in B}
+    \big(
+        F(a,b) + G(b,c)
+    \big).
+    \]
+
+    \item The identity morphism on an object $A$ is the function
+    \[
+    1_A : A \times A \to \overline{\mathbb{R}}
+    \]
+    given by
+    \[
+    1_A(a,a')
+    =
+    \begin{cases}
+    0 & \text{if } a=a',\\
+    +\infty & \text{otherwise}.
+    \end{cases}
+    \]
+\end{itemize}
+
+\medskip
+
+If we equip $\mathbf{BiFunc}$ with a monoidal structure:
+
+\begin{itemize}
+    \item The tensor product on objects is the Cartesian product
+    \[
+    A \otimes B := A \times B.
+    \]
+
+    \item For morphisms $F : A \to C$ and $G : B \to D$,
+    their tensor product
+    \[
+    F \otimes G : A \times B \to C \times D
+    \]
+    is defined by
+    \[
+    (F \otimes G)((a,b),(c,d))
+    :=
+    F(a,c) + G(b,d).
+    \]
+\end{itemize}
+
+The singleton set serves as the monoidal unit.
+\end{definition}
+
+\begin{remark}
+The category $\mathbf{BiFunc}$ is isomorphic to the category $\textbf{Rel}Q$ for
+a suitable choice of $Q$.
+
+Consider the quantale
+\[
+Q = (\overline{\mathbb{R}},\le_Q,\otimes,e)
+\]
+where:
+\begin{itemize}
+    \item $\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty,+\infty\}$;
+    \item the order is reversed with respect to the usual order,
+    \[
+    a \le_Q b \quad \Longleftrightarrow \quad a \ge b
+    \quad \text{(usual order)};
+    \]
+    \item the monoidal product is addition,
+    \[
+    a \otimes b := a + b;
+    \]
+    \item the unit is $e = 0$.
+\end{itemize}
+
+In this quantale, arbitrary joins are given by infima in the usual order:
+\[
+\bigvee\nolimits_Q A = \inf A.
+\]
+
+Now a $Q$-valued relation $R : A \to B$ is precisely a function
+\[
+R : A \times B \to \overline{\mathbb{R}},
+\]
+i.e.\ a bifunction. Moreover, the composition formula in
+$\mathbf{Rel}(Q)$ becomes
+\[
+(S \circ R)(a,c)
+=
+\bigvee_{b} R(a,b)\otimes S(b,c)
+=
+\inf_{b}
+\big(
+R(a,b) + S(b,c)
+\big),
+\]
+which is exactly the composition law in $\mathbf{BiFunc}$.
+
+Therefore, $\mathbf{BiFunc}$ is (strictly) the same category as
+$\mathbf{Rel}(Q)$ for the Lawvere-type quantale
+$(\overline{\mathbb{R}}, \ge, +, 0)$.
+\end{remark}
+
+Bifunctions are fundamental objects in convex analysis \cite{rockafellar1970convex}.
+They provide a unified language for expressing objective functions, feasibility constraints,
+and duality simultaneously. The following proposition confirms that the framework is conservative:
+classical set-theoretic relations embed faithfully into this richer setting.
+
+
+\begin{proposition}
+   The category of Binary Relations, i.e. the Boolean-relation is embed as a full subcategory of BiFunc.
+\end{proposition}
+
+\begin{proof}
+    Just consider the functor $F:\mathbf{Rel}(B) \to \mathbf{BiFunc}$ that takes every morphism $R: X\to Y$, which is a subset of $X \times Y$, and maps it into the characteristic function $\chi_R: X\times Y \to \{0, +\infty\}$, also known as the indicator function $1_R(x,y)$, or in bracket notation $\{| (x,y) \in R|\} $
+\end{proof}
+
+Having established the general framework, we now restrict our attention to the convex setting, which is the natural home for optimization. The key insight is that convexity is preserved under infimal composition, so the convex bifunctions form a subcategory of $\mathbf{BiFunc}$ that is closed under the categorical operations.
+
+\begin{definition}[Convex Bifunction Category $\mathbf{CxBiFn}$]
+Let
+\[
+Q := (\overline{\mathbb{R}}, \le_Q, \otimes, e)
+\]
+be the extended-Lawvere quantale where:
+\begin{itemize}
+    \item $\overline{\mathbb{R}} = \mathbb{R} \cup \{-\infty,+\infty\}$;
+    \item $a \le_Q b \iff a \ge b$ in the usual order;
+    \item $a \otimes b := a + b$;
+    \item $e := 0$.
+\end{itemize}
+
+The category $\mathbf{CxBiFn}$ is defined as follows:
+
+\begin{itemize}
+    \item \textbf{Objects:} finite-dimensional real vector spaces.
+
+    \item \textbf{Morphisms:}
+    A morphism $F : A \to B$ is a function
+    \[
+    F : A \times B \to \overline{\mathbb{R}}
+    \]
+    satisfying:
+    \begin{itemize}
+        \item $F$ is proper (not identically $+\infty$);
+        \item $F$ is convex as a function on the product space $A \times B$;
+        \item $F$ is lower semicontinuous.
+    \end{itemize}
+
+    \item \textbf{Composition:}
+    Given $F : A \to B$ and $G : B \to C$, their composite
+    \[
+    G \circ F : A \to C
+    \]
+    is defined by infimal convolution:
+    \[
+    (G \circ F)(a,c)
+    :=
+    \inf_{b \in B}
+    \big(
+        F(a,b) + G(b,c)
+    \big).
+    \]
+
+    \item \textbf{Identity:}
+    For each object $A$, the identity morphism
+    \[
+    1_A : A \to A
+    \]
+    is given by
+    \[
+    1_A(a,a')
+    =
+    \begin{cases}
+    0 & \text{if } a=a',\\
+    +\infty & \text{otherwise}.
+    \end{cases}
+    \]
+
+    \item Monoidal product
+    \begin{itemize}
+    \item On objects:
+    \[
+    A \otimes B := A \times B.
+    \]
+
+    \item On morphisms:
+    For $F : A \to C$ and $G : B \to D$,
+    \[
+    (F \otimes G)((a,b),(c,d))
+    :=
+    F(a,c) + G(b,d).
+    \]
+
+    \item The monoidal unit is the zero-dimensional vector space $\{0\}$.
+\end{itemize}
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+    One may define the analogous category $\mathbf{CvBiFn}$ which is the category of concave bi functions. For doing so, one should only change the composition from inf to sup, this is:
+
+    \[
+    (G \circ F)(a,c)
+    :=
+    \sup_{b \in B}
+    \big(
+        F(a,b) + G(b,c)
+    \big).
+    \]
+
+    Every result for $\mathbf{CxBiFn}$ will hold, in a equivalent way, to the category $\mathbf{CvBiFn}$
+\end{remark}
+
+\begin{remark}
+Every finite-dimensional real vector space $V$ is linearly isomorphic to
+$\mathbb{R}^n$, where $n = \dim V$.
+
+Hence, one may restrict the objects of $\mathbf{CxBiFn}$ to the family
+\[
+\mathrm{Ob}(\mathbf{CxBiFn})
+=
+\{ \mathbb{R}^n \mid n \in \mathbb{N} \}.
+\]
+With this choice, $\mathbf{CxBiFn}$ becomes a skeletal category,
+since $\mathbb{R}^n \cong \mathbb{R}^m$ implies $n=m$.
+
+Also, if one considers the isomorphism $n \leftrightarrow \mathbb{R}^n$, $\mathbf{CxBiFn}$ becomes a prop, this can be made strict by defining the monoidal product on objects as sum.
+
+\[
+m\otimes n = m+n
+\]
+
+which is isomorphic to
+
+\[
+\mathbb{R}^m \otimes \mathbb{R}^m  = \mathbb{R}^m \times \mathbb{R}^m = \mathbb{R}^{m+n}
+\]
+\end{remark}
+
+Observe that we have constructed a category whose morphisms
+are interpreted as convex optimization problems.
+Since every bifunction $F: \mathbb{R}^m \times \mathbb{R}^n
+\to \extendR$ can be written as
+
+\[
+F(x,y) = \inf_{z} z \quad s.t \;z=F(x,y)
+\]
+
+This observation is central to the thesis. It shows that there's some sort of duality between relations and optimization.
+For a single morphism, however, this remains imprecise.
+The compositional structure yields more substantive insights.
+
+\[
+(S\circ R)(x,z)=\inf_y \{R(x,y)+S(y,z)\}
+\]
+Which shows that relational composition is precisely variable elimination: composing two relations automatically marginalises over the intermediate variable $y$ by minimising the combined cost. In the binary case this reduces to the existential question of whether a mediating element exists; in the weighted case it asks for the *optimal* such element. Optimization is therefore not imposed on the categorical structure from outside — it emerges from composition itself.
+
+Convex theory also has a very nice duality theory which is of particular interest in algebraic constructs such as this one. We now introduce the central duality operation of convex analysis The Legendre--Fenchel transform.
+
+\begin{definition}[Legendre-Fenchel Transform]
+    For a convex function $f:\mathbb{R}^n \to \overline{\mathbb{R}}$, its convex
+    conjugate $f^*:\mathbb{R}^n \to \overline{\mathbb{R}}$ is defined as:
+    \[
+        f^*(x^*) = \sup_x \left\{ \langle x^*, x \rangle - f(x) \right\}.
+    \]
+\end{definition}
+
+Geometrically, $f^*$ encodes information about all affine functions majorised
+by $f$: each supporting hyperplane of the epigraph of $f$ corresponds to a
+point where $f^*$ is finite \cite{rockafellar1970convex}. This duality plays a
+central role across many fields in mathematics and physics such as convex
+optimization and duality \cite{boyd2004convex},
+probability theory and large deviations~\cite{dembo2010large},
+optimal transport~\cite{villani2009optimal} and Hamiltonian mechanics.
+
+The Legendre--Fenchel transform plays a role in convex optimization analogous to that of transposition in linear algebra: it exchanges the roles of primal and dual variables, and, as we shall see, it interacts functorially with categorical composition \cite{willerton2015legendre}.
+
+Such transformation can be extended to bifunctions providing the equivalent of the Legendre--Fenchel transform for morphisms in \textbf{CvBiFn}, providing a notion of duality that is compatible with categorical composition.
+
+\begin{definition}[Adjoint of convex bifunctions]
+    The adjoint of a convex bifunction $F$ is the concave bifunction $F^*$ defined by
+    \[
+    F^*(y^*,x^*) = \inf_{x,y} \{ F(x,y) + \langle x^*,x\rangle - \langle y^*,y\rangle \}
+    \]
+
+    Note that $F^*$ is a closed concave bifunction and $F^{**} = \text{cl}(F)$, also, if $F$ is closed, then:
+    \[
+    F^{**} = F
+    \]
+\end{definition}
+
+The following theorem is the central result of this section. It shows that bifunction adjunction is not merely an analytic operation, but a categorical one: it defines a contravariant functor between $\mathbf{CxBiFn}$ and $\mathbf{CvBiFn}$. This is the bifunction analogue of the fact that matrix transposition reverses composition, and it will be the algebraic basis for the duality diagrams appearing in the graphical theories of the next sections.
+
+
+\begin{theorem}[Functoriality of the bifunction adjoint]
+Let $F:\mathbb{R}^m \times \mathbb{R}^n \to \overline{\mathbb{R}}$
+and
+$G:\mathbb{R}^n \times \mathbb{R}^p \to \overline{\mathbb{R}}$
+be proper, convex, and lower semicontinuous functions.
+
+Define their infimal composition
+\[
+(G \infcomp F)(x,z)
+:=
+\inf_{y \in \mathbb{R}^n}
+\big\{
+F(x,y) + G(y,z)
+\big\}.
+\]
+
+Assume that a standard qualification condition holds, e.g.
+\[
+\operatorname{ri}(\operatorname{dom} F)
+\cap
+\operatorname{ri}(\operatorname{dom} G)
+\neq \varnothing
+\]
+in the $y$-variable.
+
+Then
+\[
+(G \infcomp F)^*
+=
+F^* \supcomp G^*,
+\]
+where the supremal composition is defined by
+\[
+(F^* \supcomp G^*)(z^*,x^*)
+:=
+\sup_{y^* \in \mathbb{R}^n}
+\big\{
+F^*(y^*,x^*)
++
+G^*(z^*,y^*)
+\big\}.
+\]
+
+ Hence it defines a contravariant functor between the category $\mathbf{CxBiFn}$ and the category $\mathbf{CvBiFn}$.
+\end{theorem}
+
+\begin{proof}
+Let $F:\mathbb{R}^m \times \mathbb{R}^n \to \overline{\mathbb{R}}$
+and
+$G:\mathbb{R}^n \times \mathbb{R}^p \to \overline{\mathbb{R}}$
+be proper, convex, and lower semicontinuous.
+Define
+\[
+H(x,z) := (G \infcomp F)(x,z)
+=
+\inf_{y \in \mathbb{R}^n}
+\{ F(x,y) + G(y,z) \}.
+\]
+
+\medskip
+
+
+By definition,
+\[
+H^*(z^*,x^*)
+=
+\inf_{x,z}
+\left\{
+H(x,z)
++ \langle x^*,x\rangle
+- \langle z^*,z\rangle
+\right\}.
+\]
+Substituting the definition of $H$,
+\[
+H^*(z^*,x^*)
+=
+\inf_{x,z}
+\inf_{y}
+\Big\{
+F(x,y) + G(y,z)
++ \langle x^*,x\rangle
+- \langle z^*,z\rangle
+\Big\}.
+\]
+Since the infimum is taken over independent variables,
+\[
+H^*(z^*,x^*)
+=
+\inf_{x,y,z}
+\Big\{
+F(x,y) + G(y,z)
++ \langle x^*,x\rangle
+- \langle z^*,z\rangle
+\Big\}.
+\]
+
+\medskip
+
+
+Insert the identity
+\[
+0
+=
+\sup_{y^*}
+\{
+\langle y^*,y\rangle
+-
+\langle y^*,y\rangle
+\}
+\]
+to prepare for dualization:
+\[
+H^*(z^*,x^*)
+=
+\inf_{x,y,z}
+\sup_{y^*}
+\Big\{
+F(x,y) + \langle x^*,x\rangle
+- \langle y^*,y\rangle
++
+G(y,z)
++ \langle y^*,y\rangle
+- \langle z^*,z\rangle
+\Big\}.
+\]
+
+\medskip
+
+
+Under the qualification condition
+\[
+\operatorname{ri}(\operatorname{dom}F)
+\cap
+\operatorname{ri}(\operatorname{dom}G)
+\neq \varnothing
+\quad \text{in the $y$-variable},
+\]
+Fenchel–Rockafellar duality (or a standard minimax theorem)
+allows the interchange of $\inf$ and $\sup$:
+\[
+H^*(z^*,x^*)
+=
+\sup_{y^*}
+\inf_{x,y,z}
+\Big\{
+F(x,y) + \langle x^*,x\rangle
+- \langle y^*,y\rangle
++
+G(y,z)
++ \langle y^*,y\rangle
+- \langle z^*,z\rangle
+\Big\}.
+\]
+
+\medskip
+
+
+The expression separates into two independent infima:
+\[
+=
+\sup_{y^*}
+\left\{
+\inf_{x,y}
+\big(
+F(x,y)
++ \langle x^*,x\rangle
+- \langle y^*,y\rangle
+\big)
++
+\inf_{y,z}
+\big(
+G(y,z)
++ \langle y^*,y\rangle
+- \langle z^*,z\rangle
+\big)
+\right\}.
+\]
+
+\medskip
+
+By definition of the bifunction adjoint,
+\[
+F^*(y^*,x^*)
+=
+\inf_{x,y}
+\big\{
+F(x,y)
++ \langle x^*,x\rangle
+- \langle y^*,y\rangle
+\big\},
+\]
+and
+\[
+G^*(z^*,y^*)
+=
+\inf_{y,z}
+\big\{
+G(y,z)
++ \langle y^*,y\rangle
+- \langle z^*,z\rangle
+\big\}.
+\]
+Hence
+\[
+H^*(z^*,x^*)
+=
+\sup_{y^*}
+\big\{
+F^*(y^*,x^*)
++
+G^*(z^*,y^*)
+\big\}.
+\]
+
+\medskip
+
+Therefore,
+\[
+(G \infcomp F)^*
+=
+F^* \supcomp G^*,
+\]
+where
+\[
+(F^* \supcomp G^*)(z^*,x^*)
+=
+\sup_{y^*}
+\{ F^*(y^*,x^*) + G^*(z^*,y^*) \}.
+\]
+
+Finally, since the Fenchel conjugation is involutive on proper,
+convex, lower semicontinuous functions, we also have $H^{**} = H$,
+and the adjoint reverses composition. This completes the proof.
+\end{proof}
+
+The results of this section establish $\mathbf{CxBiFn}$ as a well-behaved categorical setting for convex optimization. The two special classes of morphisms — quadratic bifunctions and polyhedral bifunctions — each inherit this structure while admitting a finite, explicit representation. It is precisely this finiteness that makes a graphical algebra possible: in both cases, morphisms can be encoded as diagrams composed from a finite set of generators, and the equational theory of the diagrams corresponds exactly to the equivalences between optimization problems.
+The following two sections make this precise.
