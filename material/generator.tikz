@@ -124,6 +124,10 @@
     \draw (-in-0) to (0,0);
     \draw (0,0)   to (-out-0);
     \node[boxnode_left] (-node) at (0,0) {$\le$};
+  },
+  linear/.pic = {
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node[leftseminode] (-node) at (0,0) {};
   }
-
 }
