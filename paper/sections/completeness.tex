@@ -32,23 +32,78 @@ Together, these three properties establish that the semantics is fully axiomatis
 \end{proof}
 
 \begin{lemma}[Definability / Expressivity]
-	For every $f : m \to n$ in $\mathbf{PolyFun}$ there exists a
+	For every $f : m \to n$ in $\mathbf{LPRel}$ there exists a
 	$\Sigma$-term $s : m \to n$ in
 	$\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GLP}}}(m,n)$
 	such that $[s] = f$.
 \end{lemma}
 
 \begin{proof}
-	Since every polyhedral function is the maximum of a finite family of
-	affine functions, it suffices to show that every piecewise affine
+	Since every RHS PLP admits a standard form,
+    it suffices to show that every piecewise affine
 	convex function is expressible in $\mathbf{GLP}$. For an arbitrary
-	such function $f(y) = \max_i R_i(y)$, where $\{R_i\}_{i=1,\dots,n}$
-	is a family of affine functions, the following diagram provides the
-	required syntactic representative:
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.75\linewidth]{../images/GLP/ExpressivityGLP.png}
-	\end{figure}
+	such function $f(y) = \inf_x c^\top x$, where $A x + b \ge B y$
+    the following diagram provides the required syntactic representative:
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[axpic]
+
+                  % Left bracket
+            \node[scale=1.5] at (0.25,1.0) {$\llbracket$};
+
+                  % Main diagram
+                  \begin{scope}[shift={(0.000,1.000)}]
+                    \pic (g1) at (0.500,0.500) {linear};
+
+                    \begin{scope}[shift={(1.250,0.000)}]
+                      \pic[val=c^\top] (g2) at (0.500,0.500) {coscalar};
+                    \end{scope}
+
+                    \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+
+                    \begin{scope}[shift={(2.500,0.000)}]
+                      \pic[val=A] (g3) at (0.500,0.500) {matrix};
+                    \end{scope}
+
+                    \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+                  \end{scope}
+
+                  \begin{scope}[shift={(1.250,0.000)}]
+                    \pic (g4) at (0.500,0.500) {affine};
+                  \end{scope}
+
+                  \coordinate (a5) at (3.500,0 |- g4-out-0);
+                  \draw (g4-out-0) -- (a5);
+
+                  \begin{scope}[shift={(3.750,0.500)}]
+                    \pic (g6) at (0.500,0.500) {multiplication};
+                  \end{scope}
+
+                  \draw (g3-out-0) to[out=0,in=180] (g6-in-0);
+                  \draw (a5)       to[out=0,in=180] (g6-in-1);
+
+                  \begin{scope}[shift={(5.000,0.500)}]
+                    \pic (g7) at (0.500,0.500) {ge};
+                  \end{scope}
+
+                  \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
+
+                  \begin{scope}[shift={(6.250,0.500)}]
+                    \pic[val=B] (g8) at (0.500,0.500) {comatrix};
+                  \end{scope}
+
+                  \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
+
+                  \node[scale=1.5, anchor=west] at ($(g8-out-0)-(0.06,0)$) {$\rrbracket$};
+                  % Right bracket and meaning, anchored relative to the diagram
+                  \node[anchor=west] at ($(g8-out-0)+(0.25,0)$)
+                    {$
+                      = y \mapsto \inf_x c^\top x
+                      \ \text{s.t.}\ 
+                      Ax + b \ge By$};
+
+        \end{tikzpicture}
+    \end{figure}
 \end{proof}
 
 The final result is the completeness theorem for
