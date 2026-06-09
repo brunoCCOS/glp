@@ -58,10 +58,11 @@ as morphisms in the same category.
 
 	\medskip
 	\textbf{($\Leftarrow$)} If $f$ is polyhedral, its epigraph is a
-	polyhedron, so there exist finitely many affine inequalities
-	$t \ge a_i^\top x + b_i$ such that
-	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
-	Thus $f$ is piecewise affine and convex.
+	polyhedron, so it can be written as an intersection of finitely many
+	halfspaces: $\mathrm{epi}(f) = \bigcap_{i=1}^k \{(x,t) \mid t \ge a_i^\top x + b_i\}$.
+	Since $f(x) = \inf\{t \mid (x,t) \in \mathrm{epi}(f)\}$, we obtain
+	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$,
+	so $f$ is piecewise affine and convex.
 \end{proof}
 
 \begin{proposition}
@@ -77,8 +78,10 @@ as morphisms in the same category.
 	Then $v(b) = \max_{y \in Y} b^\top y$.
 	Since $Y$ is a polyhedron admitting the representation
 	$Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$,
-	linear programming duality~\cite{schrijver1986theory, boyd2004convex} gives
-	$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
+	we have $v(b) = \max_{y \in Y} b^\top y = \sup\{b^\top y \mid A^\top y = c,\; y \ge 0\}$.
+	By LP strong duality~\cite{schrijver1986theory, boyd2004convex}, this dual program equals
+	the primal $\inf \{ c^\top x \mid Ax \ge b \}$ (strong duality holds since $Y$ is
+	nonempty by construction), giving $v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
 
 	\medskip
 	\textbf{($\Leftarrow$)} Let

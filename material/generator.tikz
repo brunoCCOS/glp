@@ -18,12 +18,12 @@
     \node[whitedot] (-node) at (0,0) {};
   },
   comultiplication/.pic = {
-    \coordinate (-in-0)  at (-0.5, 0);
-    \coordinate (-out-0) at ( 0.5, 0.5);
-    \coordinate (-out-1) at ( 0.5,-0.5);
-    \draw (-in-0) to (0,0);
-    \draw (0,0)   to[bend left=20]  (-out-0);
-    \draw (0,0)   to[bend right=20] (-out-1);
+    \coordinate (-out-0)  at (0.5, 0.5);
+    \coordinate (-out-1)  at (0.5,-0.5);
+    \coordinate (-in-0) at ( -0.5, 0);
+    \draw (-out-0) to[bend right=20]  (0,0);
+    \draw (-out-1) to[bend left=20] (0,0);
+    \draw (0,0)   to (-in-0);
     \node[whitedot] (-node) at (0,0) {};
   },
   zero/.pic = {
@@ -37,12 +37,12 @@
     \node[whitedot] (-node) at (0,0) {};
   },
   copy/.pic = {
-    \coordinate (-in-0)  at (-0.5, 0);
-    \coordinate (-out-0) at ( 0.5, 0.5);
-    \coordinate (-out-1) at ( 0.5,-0.5);
-    \draw (-in-0) to (0,0);
-    \draw (0,0)   to[bend left=20]  (-out-0);
-    \draw (0,0)   to[bend right=20] (-out-1);
+    \coordinate (-out-0)  at (0.5, 0.5);
+    \coordinate (-out-1)  at (0.5,-0.5);
+    \coordinate (-in-0) at (-0.5, 0);
+    \draw (-out-0) to[bend right=20]  (0,0);
+    \draw (-out-1) to[bend left=20] (0,0);
+    \draw (0,0)   to (-in-0);
     \node[blackdot] (-node) at (0,0) {};
   },
   cocopy/.pic = {
@@ -83,14 +83,14 @@
     \coordinate (-out-0) at ( 0.5, 0);
     \draw (-in-0) to (0,0);
     \draw (0,0)   to (-out-0);
-    \node[matrixnode_right] (-node) at (0,0) {$\argval$};
+    \node[matrixnode_left] (-node) at (0,0) {$\argval$};
   },
   comatrix/.pic = {
     \coordinate (-in-0)  at (-0.5, 0);
     \coordinate (-out-0) at ( 0.5, 0);
     \draw (-in-0) to (0,0);
     \draw (0,0)   to (-out-0);
-    \node[matrixnode_left] (-node) at (0,0) {$\argval$};
+    \node[matrixnode_right] (-node) at (0,0) {$\argval$};
   },
   relation/.pic = {
     \coordinate (-in-0)  at (-0.5, 0);

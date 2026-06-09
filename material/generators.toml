@@ -6,6 +6,14 @@ visual_coarity = 1
 pic = "multiplication"
 symbol = "·"
 
+[generators.comult]
+sig.arity = 1
+sig.coarity = 2
+visual_arity = 1
+visual_coarity = 2
+pic = "comultiplication"
+symbol = "·"
+
 [generators.matrix]
 sig.arity = 1
 sig.coarity = 1
@@ -84,6 +92,18 @@ sig.coarity = 1
 pic = "coscalar"
 symbol = "s*"
 
+[generators.ge]
+sig.arity = 1
+sig.coarity = 1
+pic = "ge"
+symbol = ">="
+
+[generators.coge]
+sig.arity = 1
+sig.coarity = 1
+pic = "coge"
+symbol = "<="
+
 [generators.affine]
 sig.arity = 0
 sig.coarity = 1
@@ -107,3 +127,9 @@ visual_arity = 1
 visual_coarity = 2
 pic = "copy"
 symbol = "Δ_n"
+
+[generators.linear]
+sig.arity = 0
+sig.coarity = 1
+pic = "linear"
+symbol = "<-"
