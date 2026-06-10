@@ -139,3 +139,9 @@ sig.arity = 1
 sig.coarity = 1
 pic = "antipode"
 symbol = "-1"
+
+[generators.relu]
+sig.arity = 1
+sig.coarity = 1
+pic = "relu"
+symbol = "relu"

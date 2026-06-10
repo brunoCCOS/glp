@@ -166,7 +166,31 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 
   \begin{center}
     \vspace{1.5em}
-    \textit{[Diagram: ReLU as a $\mathbf{GLP}$ diagram]}
+    \begin{tikzpicture}
+      \begin{scope}[shift={(0.000,0.500)}]
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {copy};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \end{scope}
+      \begin{scope}[shift={(2.500,0.000)}]
+      \begin{scope}[shift={(0.625,1.000)}]
+      \pic (g3) at (0.500,0.500) {ge};
+      \end{scope}
+      \pic (g4) at (0.500,0.500) {ge};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g5) at (0.500,0.500) {cozero};
+      \end{scope}
+      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+      \coordinate (a6) at (0.000,0 |- g3-in-0);
+      \draw (g3-in-0) -- (a6);
+      \coordinate (a7) at (2.250,0 |- g3-out-0);
+      \draw (g3-out-0) -- (a7);
+      \end{scope}
+      \draw (g2-out-0) to[out=0,in=180] (a6);
+      \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture}
     \vspace{1em}
   \end{center}
 \end{example}
@@ -184,8 +208,55 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 
   \begin{center}
     \vspace{1.5em}
-    \textit{[Diagram: one-hidden-layer ReLU network as a $\mathbf{GLP}$ diagram]}
+    \diagdef{
+        \node[draw, fill=white] at (0,0) {ReLU};
+        \draw (0.55,0.0) to (1.0,0);
+        \draw (-0.55,0.0) to (-1.0,0);
+  }{
+      \begin{scope}[shift={(0.000,0.500)}]
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {copy};
+      \end{scope}
+      \end{scope}
+      \begin{scope}[shift={(2.500,0.000)}]
+      \begin{scope}[shift={(0.625,1.000)}]
+      \pic (g3) at (0.500,0.500) {ge};
+      \end{scope}
+      \pic (g4) at (0.500,0.500) {ge};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g5) at (0.500,0.500) {cozero};
+      \end{scope}
+      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+      \coordinate (a6) at (0.000,0 |- g3-in-0);
+      \draw (g3-in-0) -- (a6);
+      \coordinate (a7) at (2.250,0 |- g3-out-0);
+      \draw (g3-out-0) -- (a7);
+      \end{scope}
+      \draw (g2-out-0) to[out=0,in=180] (a6);
+      \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
+  }
+\end{center}
+\begin{center}
     \vspace{1em}
+    \begin{tikzpicture}
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {relu};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \begin{scope}[shift={(2.500,0.000)}]
+          \pic[val=W_1] (g3) at (0.500,0.500) {corelation};
+      \end{scope}
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \begin{scope}[shift={(3.750,0.000)}]
+      \pic (g4) at (0.500,0.500) {relu};
+      \end{scope}
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+      \begin{scope}[shift={(5.000,0.000)}]
+          \pic[val=W_2] (g5) at (0.500,0.500) {corelation};
+      \end{scope}
+      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+    \end{tikzpicture}
   \end{center}
 \end{example}
 
@@ -202,7 +273,23 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 
   \begin{center}
     \vspace{1.5em}
-    \textit{[Diagram: max-pooling as a $\mathbf{GLP}$ diagram]}
+    \begin{tikzpicture}
+      \begin{scope}[shift={(0.000,0.500)}]
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {copy};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \end{scope}
+      \begin{scope}[shift={(2.500,0.000)}]
+      \begin{scope}[shift={(0.000,1.000)}]
+      \pic (g3) at (0.500,0.500) {ge};
+      \end{scope}
+      \pic (g4) at (0.500,0.500) {ge};
+      \end{scope}
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture}
     \vspace{1em}
   \end{center}
 \end{example}
@@ -216,7 +303,38 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 
   \begin{center}
     \vspace{1.5em}
-    \textit{[Diagram: $\ell_1$ norm as a $\mathbf{GLP}$ diagram]}
+    \begin{tikzpicture}
+      \begin{scope}[shift={(0.000,0.500)}]
+      \pic (g1) at (0.500,0.500) {linear};
+      \end{scope}
+      \begin{scope}[shift={(1.250,0.000)}]
+      \begin{scope}[shift={(0.000,0.500)}]
+      \pic (g2) at (0.500,0.500) {copy};
+      \end{scope}
+      \begin{scope}[shift={(1.250,0.000)}]
+      \begin{scope}[shift={(0.625,1.000)}]
+      \pic (g3) at (0.500,0.500) {ge};
+      \end{scope}
+      \pic (g4) at (0.500,0.500) {ge};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g5) at (0.500,0.500) {antipode};
+      \end{scope}
+      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+      \coordinate (a6) at (0.000,0 |- g3-in-0);
+      \draw (g3-in-0) -- (a6);
+      \coordinate (a7) at (2.250,0 |- g3-out-0);
+      \draw (g3-out-0) -- (a7);
+      \end{scope}
+      \draw (g2-out-0) to[out=0,in=180] (a6);
+      \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
+      \begin{scope}[shift={(3.750,0.500)}]
+      \pic (g8) at (0.500,0.500) {cocopy};
+      \end{scope}
+      \draw (a7) to[out=0,in=180] (g8-in-0);
+      \draw (g5-out-0) to[out=0,in=180] (g8-in-1);
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+    \end{tikzpicture}
     \vspace{1em}
   \end{center}
 \end{example}
