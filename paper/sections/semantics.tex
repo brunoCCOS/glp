@@ -155,7 +155,7 @@ The broadest semantic setting is the category of bifunctions, which is exactly t
 	$(\overline{\mathbb{R}}, \ge, +, 0)$: a $Q$-valued relation $R : A \times B \to \overline{\mathbb{R}}$ is precisely a bifunction, and the composition law $\bigvee_b R(a,b)\otimes S(b,c) = \inf_b (R(a,b)+S(b,c))$ is exactly infimal convolution. The Boolean-relations category embeds into $\mathbf{BiFunc}$ as a full subcategory via the indicator (characteristic) functor, so constraints and objectives are not fundamentally different objects: they are relations valued in different quantales, unified by the same compositional structure.
 \end{remark}
 
-Composition is therefore precisely variable elimination: composing two relations marginalises over the intermediate variable by minimising the combined cost,
+Composition is therefore precisely variable elimination: composing two relations marginalises over the intermediate variable by minimising the combined cost\footnote{this notion is related to the idea of conditioning and marginalization in PPL \cite{stein2024gqa}#add another citation refereing to PPDL}
 \[
 	(S\circ R)(x,z)=\inf_y \{R(x,y)+S(y,z)\}.
 \]

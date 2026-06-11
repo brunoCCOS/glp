@@ -18,11 +18,15 @@ complete monoidal theory for right-hand side parametric linear programming.
 
 The algebra $\mathbf{GLP}$ extends
 $\mathbf{GPA}$ with a single new generator whose semantics encodes the
-linear objective function $c^\top x$. Just as the gray arrow in
-$\mathbf{GQA}$ lifted the theory from binary relations to weighted
-relations by ``measuring'' the $\ell_2$ norm, this new generator lifts $\mathbf{GPA}$
-from polyhedral constraints to full linear programs by attaching a
+linear objective function $c^\top x$. As we will se more clearer later, this
+new generator plays a similar row to that of a ´´measurement´´ such that is simply exposing
+what is in the wire without modifying it.
+It lifts $\mathbf{GPA}$ from polyhedral constraints
+to full linear programs by attaching a
 linear cost to the feasible region.
+
+\footnote{Analogous notion was developed by
+\cite{stein2024gqa} with their gray arrow generator, introducing the $\mathcal{l}_2$ norm}
 
 \begin{definition}[$\mathbf{GLP}$]
 	We call $\mathbf{GLP}$ the symmetric monoidal theory obtained by
