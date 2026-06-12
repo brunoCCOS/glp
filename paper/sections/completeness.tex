@@ -2,11 +2,12 @@
 
 Finally, we prove that our semantics, namely that of Parametric Linear Programs, is fully axiomatized by the constructed SMT \textbf{GLP}. This section is divided into three parts:
 
+
 \begin{itemize}
 	\item Proving Soundness: a check that every
 	      generator is correctly interpreted and all our axioms
 	      are sound with respect to the semantics.
-	\item Definability: that every semantic object, i.e.\ a
+	\item Expressivity that every semantic object, i.e.\ a
 	      \textit{Parametric Linear Program}, has a standard normal form, and
 	      that this normal form is always the interpretation of some diagram.
 	\item Completeness: through the epigraph form, any two identical PLPs
@@ -14,6 +15,8 @@ Finally, we prove that our semantics, namely that of Parametric Linear Programs,
 \end{itemize}
 
 Together, these three properties establish that the semantics is fully axiomatised.
+
+Throughout this section, in order to facilitate the exposition of some ideas, we will often denote by $\llbracket = \rrbracket$ that two objects are equal under the functor $\llbracket - \rrbracket$, i.e., a diagram $c \in Ob(FreeP_{(\Sigma,E)})$ is, under the interpretation map, $c \; \llbracket = \rrbracket \; \llbracket c \rrbracket$.
 
 \begin{lemma}[Soundness]
 	If $s = t$ in $\mathrm{FreeP}_{\mathbf{GLP}}$, then $[s] = [t]$
@@ -27,11 +30,46 @@ Together, these three properties establish that the semantics is fully axiomatis
 	follows by direct computation:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.75\linewidth]{../images/GLP/Soundness.png}
+        \begin{tikzpicture}
+            \node at (-1.5,0) {\textit{(linear.ge)}};
+            \pic at (0,0) {linear};
+            \node at (1.0,0) {$\llbracket = \rrbracket$};
+            \node at (2.3,0) {$(\bullet, y) \mapsto y$};
+            \node at (3.3,0) {$ = $};
+            \node at (4.8,0) {$(\bullet, y) \mapsto \inf_{x \ge y} x$};
+            \node at (6.6,0) {$\llbracket = \rrbracket$};
+            \pic at (7.3,0) {linear};
+            \draw (7.5,0) to (8.3,0);
+            \pic at (8.5,0) {ge};
+        \end{tikzpicture}
+        \begin{tikzpicture}
+            \node at (-1.5,0) {(\textit{lin.sum})};
+            \pic (g1) at (0.000,0.25) {linear};
+            \pic (g2) at (0.000,-0.25) {linear};
+            \node at (1.0,0) {$\llbracket = \rrbracket$};
+            \node at (3.0,0) {$(\bullet,\left(\begin{smallmatrix} y_1 \\ y_2 \end{smallmatrix}\right)) \mapsto y_1 + y_2$};
+            \node at (4.8,0) {$\llbracket = \rrbracket$};
+            \pic at (5.4,0) {linear};
+            \draw (5.7,0) to (6.3,0);
+            \pic at (6.5,0) {comultiplication};
+        \end{tikzpicture}
+        \vspace{6mm}
+        \begin{tikzpicture}
+            \node at (-1.5,0) {(\textit{lin.zero})};
+            \pic at (0.0,0) {linear};
+            \draw (.2,0) to (0.5,0);
+            \pic at (1.0,0) {cozero};
+            \node at (1.5,0) {$\llbracket = \rrbracket$};
+            \node at (3.1,0) {$(\bullet, \bullet) \mapsto \inf_{x = 0} x$};
+            \node at (4.6,0) {$ = $};
+            \node at (5.0,0) {$0$};
+            \node at (5.7,0) {$\llbracket = \rrbracket$};
+            \node[draw, dotted] at (6.4,0) {};
+        \end{tikzpicture}
 	\end{figure}
 \end{proof}
 
-\begin{lemma}[Definability / Expressivity]
+\begin{lemma}[Expressivity]
 	For every $f : m \to n$ in $\mathbf{LPRel}$ there exists a
 	$\Sigma$-term $s : m \to n$ in
 	$\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GLP}}}(m,n)$
@@ -48,8 +86,6 @@ Together, these three properties establish that the semantics is fully axiomatis
         \centering
         \begin{tikzpicture}[axpic]
 
-                  % Left bracket
-            \node[scale=1.5] at (0.25,1.0) {$\llbracket$};
 
                   % Main diagram
                   \begin{scope}[shift={(0.000,1.000)}]
@@ -94,11 +130,10 @@ Together, these three properties establish that the semantics is fully axiomatis
 
                   \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
 
-                  \node[scale=1.5, anchor=west] at ($(g8-out-0)-(0.06,0)$) {$\rrbracket$};
                   % Right bracket and meaning, anchored relative to the diagram
-                  \node[anchor=west] at ($(g8-out-0)+(0.25,0)$)
+                  \node[anchor=west] at ($(g8-out-0)+(0.15,0)$)
                     {$
-                      = y \mapsto \inf_x c^\top x
+                      \llbracket = \rrbracket \; y \mapsto \inf_x c^\top x
                       \ \text{s.t.}\ 
                       Ax + b \ge By$};
 
