@@ -1,14 +1,12 @@
 # Fdb version 4
-["biber main"] 1780939694.66697 "main.bcf" "main.bbl" "main" 1780939753.03616 0
-  "bib.bib" 1780190248.30222 18511 e035fb1cd533209ab9020dd05a3c2712 ""
-  "main.bcf" 1780939752.5727 112601 43379c923dc37c0f57c1a6f4c0f24d3d "lualatex"
+["biber main"] 1781636703.46406 "main.bcf" "main.bbl" "main" 1781636752.43591 0
+  "bib.bib" 1781277612.17516 18873 4222f5b5e20b422ba797cf56438061ab ""
+  "main.bcf" 1781636770.96171 112601 43379c923dc37c0f57c1a6f4c0f24d3d "lualatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["lualatex"] 1780939745.44271 "main.tex" "main.pdf" "main" 1780939753.03661 0
-  "../material/generator.tikz" 1780923013.12556 2671 52ada9d38ddacfc03d176caf9f30a69b ""
-  "../material/generator.tikzstyles" 1780698445.59327 416 e76db68fb1a3febb2b059fd25cc92a88 ""
+["lualatex"] 1781636745.97127 "main.tex" "main.pdf" "main" 1781636752.43618 0
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmmono10-regular.luc" 1778082056.67238 81819 c1a1831503f38fe92f18da76596f7b9d ""
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bold.luc" 1778081760.43748 128392 cc9893d1631ce94f31c1896bb041be89 ""
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bolditalic.luc" 1778081760.53498 136473 5b9cae8284919413f715c1372f2710a1 ""
@@ -365,18 +363,20 @@
   "images/RightAlgebra.png" 1777993895.99275 1721 a6b10022376e3643a1f25377e15e42e7 ""
   "images/States.png" 1777993895.99275 10222 9e34892b5ea278466886065eea1cbe26 ""
   "images/froberniusDiagram.png" 1777993895.99275 16848 83071b9efb79d40b1617088d21f0b3c7 ""
-  "main.aux" 1780939752.56187 13343 55eaff37edde8ba5480e0aa9e3f3ee72 "lualatex"
-  "main.bbl" 1780939695.73225 46754 079d11260f4af0966bee83ae5afe1963 "biber main"
-  "main.out" 1780939752.5727 2799 6b476b245c9c4785cd29558b00d5fcd7 "lualatex"
-  "main.run.xml" 1780939752.5727 2339 bde9ab218ab5b3920ae6da884556625b "lualatex"
-  "main.tex" 1780939739.28302 1880 93632d787f951e04314c88c2666d31b1 ""
-  "main.toc" 1780939752.5727 1396 7d62aeb0a18783f3cdce138a21a77089 "lualatex"
+  "main.aux" 1781636770.95171 13343 55eaff37edde8ba5480e0aa9e3f3ee72 "lualatex"
+  "main.bbl" 1781636704.79209 46754 079d11260f4af0966bee83ae5afe1963 "biber main"
+  "main.out" 1781636770.95171 2799 6b476b245c9c4785cd29558b00d5fcd7 "lualatex"
+  "main.run.xml" 1781636770.96171 2339 bde9ab218ab5b3920ae6da884556625b "lualatex"
+  "main.tex" 1781636737.77808 1938 1916a219b724ee27ca68d1dac939f823 ""
+  "main.toc" 1781636770.96171 1396 7d62aeb0a18783f3cdce138a21a77089 "lualatex"
+  "material/generator.tikz" 1781100438.84593 4687 8eea95507bc8b1df09975d14281a6122 ""
+  "material/generator.tikzstyles" 1781032984.43169 1240 b39020fa5ab17f4270a04e51f9de7c58 ""
   "sections/categorical.tex" 1779973118.25411 15504 e131372e5bf94d3feb04af0c634acece ""
   "sections/conclusion.tex" 1778951211.82743 4801 c27df1439f1eb5209b23297534f98aab ""
   "sections/glp.tex" 1778951205.90439 16224 8f83f60d9f14b7a5704473b3ac42d9d3 ""
   "sections/gpa.tex" 1778951182.63005 19077 b8752f06ea6e4ac7d22f894665a192a5 ""
   "sections/gqa.tex" 1778951185.43547 34694 e2b3a2d9d99837e9f5706e4e6dde7a29 ""
-  "sections/introduction.tex" 1778951094.88504 8900 29b9c0dcbd6b584eb23cb59351505f79 ""
+  "sections/introduction.tex" 1780947797.50744 8900 29b9c0dcbd6b584eb23cb59351505f79 ""
   "sections/quantale.tex" 1778952918.22175 28386 1e74a15464566701c2bc393cd0088cb2 ""
   (generated)
   "main.aux"
