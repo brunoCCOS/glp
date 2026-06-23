@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1782219223.56832 "main.bcf" "main.bbl" "main" 1782219350.90032 0
+["biber main"] 1782219223.56832 "main.bcf" "main.bbl" "main" 1782219886.28716 0
   "bib.bib" 1781277612.17516 18873 4222f5b5e20b422ba797cf56438061ab ""
-  "main.bcf" 1782219350.43091 112613 b08769cdfef6646f3e85e4c7da14c09f "lualatex"
+  "main.bcf" 1782219885.84833 112613 b08769cdfef6646f3e85e4c7da14c09f "lualatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["lualatex"] 1782219345.97435 "main.tex" "main.pdf" "main" 1782219350.90062 0
+["lualatex"] 1782219879.32895 "main.tex" "main.pdf" "main" 1782219886.28748 0
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmmono12-regular.luc" 1782219223.01849 81754 23a65669d934f8866349133cf134a695 ""
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bold.luc" 1778081760.43748 128392 cc9893d1631ce94f31c1896bb041be89 ""
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bolditalic.luc" 1778081760.53498 136473 5b9cae8284919413f715c1372f2710a1 ""
@@ -376,19 +376,19 @@
   "images/RightAlgebra.png" 1777993895.99275 1721 a6b10022376e3643a1f25377e15e42e7 ""
   "images/States.png" 1777993895.99275 10222 9e34892b5ea278466886065eea1cbe26 ""
   "images/froberniusDiagram.png" 1777993895.99275 16848 83071b9efb79d40b1617088d21f0b3c7 ""
-  "main.aux" 1782219350.42006 14847 75ec0ce0d7b8292f94f0e2a48c695932 "lualatex"
+  "main.aux" 1782219885.83748 14847 75ec0ce0d7b8292f94f0e2a48c695932 "lualatex"
   "main.bbl" 1782219224.73329 46754 079d11260f4af0966bee83ae5afe1963 "biber main"
-  "main.out" 1782219350.43091 2778 220ec22dafaee9212576d129615ccaac "lualatex"
-  "main.run.xml" 1782219350.43091 2371 b71dae58782b355f14fe6e2adf3a6bd5 "lualatex"
+  "main.out" 1782219885.84833 2778 220ec22dafaee9212576d129615ccaac "lualatex"
+  "main.run.xml" 1782219885.84833 2371 b71dae58782b355f14fe6e2adf3a6bd5 "lualatex"
   "main.tex" 1782219150.3778 703 3b9fd8c56fba4f58ecc6ea8e6697839d ""
-  "main.toc" 1782219350.43091 2113 9c72069d44bbe58fde5aa98b1f6f3654 "lualatex"
+  "main.toc" 1782219885.84833 2113 9c72069d44bbe58fde5aa98b1f6f3654 "lualatex"
   "material/generator.tikz" 1781100438.84593 4687 8eea95507bc8b1df09975d14281a6122 ""
   "material/generator.tikzstyles" 1781032984.43169 1240 b39020fa5ab17f4270a04e51f9de7c58 ""
-  "pre-textuais/abstract.tex" 1782219098.77029 208 b53c592f7c4622e3e3b50c08f13efc18 ""
+  "pre-textuais/abstract.tex" 1782219874.73066 2312 9966db33fe5def35b37572dd0f5ddbe7 ""
   "pre-textuais/capa.tex" 1782219068.3232 422 6c465659a30bb027d3f9088ebfb86a55 ""
   "pre-textuais/folha_aprovacao.tex" 1782219089.2246 1044 e36105a6ffd9227a4222da890940df6e ""
   "pre-textuais/folha_rosto.tex" 1782219074.43939 504 c20b348a82d44b300cf2b33b40bdb997 ""
-  "pre-textuais/resumo.tex" 1782219093.47007 357 f3819ced75f7b6915d05688dca64a900 ""
+  "pre-textuais/resumo.tex" 1782219865.81318 2497 45748a0f8645dec07664beaf815a7b8a ""
   "pre-textuais/sumario.tex" 1782219126.70449 842 0799759baccfa389c3de4f265f9a8750 ""
   "sections/categorical.tex" 1782219161.12289 15504 fd6e21e23f15371fd6e6951c8244b7db ""
   "sections/conclusion.tex" 1782219161.12289 4801 44b67541521d7fba88e8bca0563d04bc ""
