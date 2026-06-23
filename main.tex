@@ -1,79 +1,34 @@
 % !TeX program = lualatex
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{float}
-\usepackage{hyperref}
-\usepackage{amssymb}
-\usepackage{unicode-math}
-\usepackage{colortbl}     % for \rowcolor
-\usepackage{xcolor}       % for \definecolor
-\usepackage{microtype}
-\usepackage{booktabs}
-\usepackage{array}
-\usepackage{caption}
-\usepackage{tikz}
-\usetikzlibrary{shapes, arrows, intersections, bending}
+\documentclass[12pt, a4paper]{report}
 
-\definecolor{headerblue}{RGB}{30, 80, 140}
-\definecolor{rowlight}{RGB}{235, 242, 252}
-\definecolor{rowwhite}{RGB}{255, 255, 255}
-\setmainfont{Latin Modern Roman}
-\setmathfont{STIX Two Math} % <-- important
-
-\title{A compositional and categorical system for Convex Optimization}
-\author{Bruno Llacer trotti}
-\author{João Paixão}
-\author{Iago Leal}
-\date{February 2026}
-
-\theoremstyle{plain}   % <-- this keeps headings left-aligned
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{remark}{Remark}
-\newtheorem{conjecture}{Conjecture}
-\newtheorem{corollary}{Corollary}
-\newtheorem{proposition}{Proposition}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
-\newcommand{\extendR}{\overline{\mathbb{R}}}
-\newcommand{\infcomp}{\overset{\rightharpoonup}{\circ}}
-\newcommand{\supcomp}{\overset{\rightharpoondown}{\circ}}
-\newcommand{\rtop}{\rotatebox{90}{$\top$}}
-\newcommand{\mushroom}{⫏-}
-\renewcommand{\arraystretch}{1.8}
-\usepackage[
-backend=biber,
-style=alphabetic,
-]{biblatex}
-\bibliography{bib.bib}
-
-\input{material/generator.tikzstyles}
-\input{material/generator.tikz}
-
-\makeatother
+\input{config/informacoes_gerais}
+\input{config/configuracoes}
 
 \begin{document}
 
-\maketitle
-\tableofcontents
+  %%% Pre-textuais %%%
+  \pagestyle{empty}
 
-\input{sections/introduction.tex}
+  \input{pre-textuais/capa}
+  \input{pre-textuais/folha_rosto}
+  \input{pre-textuais/folha_aprovacao}
+  \input{pre-textuais/resumo}
+  \input{pre-textuais/abstract}
+  \input{pre-textuais/sumario}
 
-\input{sections/quantale.tex}
+  %%% Textuais %%%
+  \pagenumbering{arabic}
+  \pagestyle{fancy}
 
-\input{sections/categorical.tex}
+  \input{sections/introduction}
+  \input{sections/quantale}
+  \input{sections/categorical}
+  \input{sections/gqa}
+  \input{sections/gpa}
+  \input{sections/glp}
+  \input{sections/conclusion}
 
-\input{sections/gqa.tex}
+  %%% Pos-textuais %%%
+  \printbibliography
 
-\input{sections/gpa.tex}
-
-\input{sections/glp.tex}
-
-\input{sections/conclusion.tex}
-
-\printbibliography
 \end{document}

@@ -1,9 +1,9 @@
-\section{Quadratic Relations}
+\chapter{Quadratic Relations}
 
 Among all convex bifunctions, quadratic ones are particularly well-structured:
 they are the simplest class rich enough to express least-squares problems, energy minimisation, and Gaussian inference, yet structured enough to admit a finite diagrammatic presentation. This section develops the Graphical Quadratic Algebra (GQA) \cite{stein2024gqa}, the first of the two graphical theories on which our linear programming algebra will be built.
 We begin with the necessary preliminaries on quadratic functions, then define the symmetric monoidal theory whose morphisms are non-negative quadratic optimization problems — the non-negativity condition ensuring that infimal composition is always well-posed. We then present the soundness and completeness results for this theory. The section closes by deriving several known results about quadratic problems purely through string diagram manipulation, demonstrating that the graphical syntax is not merely a notational convenience but a genuine calculus in which optimization arguments can be carried out.
-\subsection{Preliminary results about quadratic functions}
+\section{Preliminary results about quadratic functions}
 
 Our main interest are non-negative quadratic functions. The motivation for this
 unusual choice is that we want to avoid unbounded problems remain on convex settings, since negative quadratic functions
@@ -218,7 +218,7 @@ The above result is the closure property that makes graphical theory well-founde
 Categorically, it states  that non-negative partial quadratic functions form a subcategory of  $\mathbf{CxBiFn}$ that is closed under infimal composition, and it is  precisely this subcategory that the Graphical Quadratic Algebra axiomatises.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% GQA ALGEBRA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Graphical Algebra for quadratic problems}\label{sec:gqa}
+\section{Graphical Algebra for quadratic problems}\label{sec:gqa}
 
 We now introduce the first axiomatic algebra of the thesis: the Graphical  Quadratic Algebra (GQA) \cite{stein2024gqa}. The goal of this diagrammatic  calculus is to express and reason about optimization problems with non-negative  quadratic objective functions and equality constraints. The canonical example  of this class is the ordinary least-squares (OLS) estimator
 \[
@@ -742,7 +742,7 @@ immediately.
     PROPs.
 \end{proof}
 
-\subsection{Results in GQA}
+\section{Results in GQA}
 
 Having established that $\mathbf{GQA}$ completely axiomatises
 $\mathbf{QuadRel}$, we now demonstrate the expressive power of the

@@ -1,0 +1,31 @@
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\pagestyle{empty}
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\newcommand{\sumariotextmarginlenght}{23pt}
+
+\titlecontents{chapter}[\sumariotextmarginlenght]
+  {\normalfont\normalsize\bfseries}
+  {\contentslabel{\sumariotextmarginlenght}\uppercase}
+  {}
+  {\titlerule*[0.4pc]{.}\contentspage}
+
+\titlecontents{section}[\sumariotextmarginlenght]
+  {\normalfont\normalsize}
+  {\contentslabel{\sumariotextmarginlenght}\uppercase}
+  {}
+  {\titlerule*[0.4pc]{.}\contentspage}
+
+\titlecontents{subsection}[\sumariotextmarginlenght]
+  {\normalfont\normalsize\bfseries}
+  {\contentslabel{\sumariotextmarginlenght}}
+  {}
+  {\titlerule*[0.4pc]{.}\contentspage}
+
+\renewcommand{\contentsname}{\normalsize\centerline{\bfseries\uppercase{Sumário}}}
+
+\tableofcontents
+\clearpage
+\pagestyle{fancy}

@@ -1,0 +1,130 @@
+% --- Language ---
+\usepackage[brazil]{babel}
+
+% --- Page geometry (ABNT margins) ---
+\usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+
+% --- Line spacing (ABNT: 1.5) ---
+\usepackage{setspace}
+\onehalfspacing
+
+% --- Fonts (LuaLaTeX) ---
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{STIX Two Math}
+
+% --- Core formatting ---
+\usepackage{microtype}
+\usepackage[table]{xcolor}
+\usepackage{indentfirst}
+
+% --- Math ---
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+% --- Tables and figures ---
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{caption}
+\captionsetup[table]{labelsep=endash, skip=-5pt}
+\captionsetup[figure]{labelsep=endash}
+
+% --- TikZ ---
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, intersections, bending}
+
+% --- Misc layout ---
+\usepackage{hyphenat}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{pdfpages}
+
+% --- Page numbering (upper right) ---
+\setlength{\headheight}{15.3pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[R]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% --- Hyperref ---
+\usepackage{hyperref}
+\makeatletter
+\hypersetup{
+  pdftitle={\@title},
+  pdfauthor={\@author},
+  pdfpagemode=UseNone,
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black
+}
+\makeatother
+
+% --- Bibliography (biblatex/biber, alphabetic for CS theory) ---
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\addbibresource{bib.bib}
+
+% --- Equation numbering: continuous across chapters ---
+\usepackage{chngcntr}
+\counterwithout{equation}{chapter}
+
+% --- Chapter/section formatting (ABNT style) ---
+\usepackage{titlesec}
+\usepackage{titletoc}
+
+\titlespacing{\chapter}{0pt}{-17pt}{15pt}
+
+\titleformat{\chapter}[hang]
+  {\normalsize\bfseries\uppercase}
+  {\thechapter}{10pt}{}
+
+\titleformat{\section}[hang]
+  {\normalsize\normalfont\uppercase}
+  {\thesection}{10pt}{}
+
+\titleformat{\subsection}[hang]
+  {\normalsize\bfseries}
+  {\thesubsection}{10pt}{}
+
+\titleformat{\subsubsection}[hang]
+  {\normalfont\normalsize}
+  {\thesubsubsection}{10pt}{}
+
+% --- Colors ---
+\definecolor{headerblue}{RGB}{30, 80, 140}
+\definecolor{rowlight}{RGB}{235, 242, 252}
+\definecolor{rowwhite}{RGB}{255, 255, 255}
+
+% --- Theorem environments ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+
+% --- Custom math commands ---
+\newcommand{\extendR}{\overline{\mathbb{R}}}
+\newcommand{\infcomp}{\overset{\rightharpoonup}{\circ}}
+\newcommand{\supcomp}{\overset{\rightharpoondown}{\circ}}
+\newcommand{\rtop}{\rotatebox{90}{$\top$}}
+\newcommand{\mushroom}{⫏-}
+\renewcommand{\arraystretch}{1.8}
+
+% --- TikZ styles ---
+\input{material/generator.tikzstyles}
+\input{material/generator.tikz}

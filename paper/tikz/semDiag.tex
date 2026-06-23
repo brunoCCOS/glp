@@ -1,0 +1,17 @@
+\begin{tikzpicture}[
+  arrow/.style={-{Stealth}, thick},
+  hook/.style={right hook-{Stealth}, thick}
+]
+
+\node (PSE) at (0, 2.5)  {$\mathbf{P}\boldsymbol{\Sigma}_{/E} = FreeP_{(\Sigma,E)}$};
+\node (Im)  at (5, 2.5)  {$\mathrm{Im}(\llbracket\cdot\rrbracket)$};
+\node (Syn) at (0, 0)    {$\mathbf{Syn} = \mathbf{P}\boldsymbol{\Sigma}$};
+\node (Sem) at (5, 0)    {$\mathbf{Sem}$};
+
+\draw[arrow] (PSE) -- node[above]{$\cong$}              (Im);
+\draw[arrow] (Syn) -- node[left] {$q$}                  (PSE);
+\draw[arrow] (Syn) -- node[above right, pos=0.45]{$s$}  (Im);
+\draw[arrow] (Syn) -- node[below]{$\llbracket\cdot\rrbracket$} (Sem);
+\draw[hook]  (Im)  -- node[right]{$i$}                  (Sem);
+
+\end{tikzpicture}
