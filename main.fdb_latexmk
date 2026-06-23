@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1782219223.56832 "main.bcf" "main.bbl" "main" 1782219886.28716 0
+["biber main"] 1782231619.05744 "main.bcf" "main.bbl" "main" 1782231635.42007 0
   "bib.bib" 1781277612.17516 18873 4222f5b5e20b422ba797cf56438061ab ""
-  "main.bcf" 1782219885.84833 112613 b08769cdfef6646f3e85e4c7da14c09f "lualatex"
+  "main.bcf" 1782231634.71699 112614 7fc287376d28ad3edd7c9815589e7364 "lualatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["lualatex"] 1782219879.32895 "main.tex" "main.pdf" "main" 1782219886.28748 0
+["lualatex"] 1782231621.34044 "main.tex" "main.pdf" "main" 1782231635.42086 0
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmmono12-regular.luc" 1782219223.01849 81754 23a65669d934f8866349133cf134a695 ""
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bold.luc" 1778081760.43748 128392 cc9893d1631ce94f31c1896bb041be89 ""
   "/home/brunollacer/.texlive2023/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bolditalic.luc" 1778081760.53498 136473 5b9cae8284919413f715c1372f2710a1 ""
@@ -35,8 +35,11 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm" 1136768653 1528 e2423ae06dc7dee599cceb79d1c9dc32 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1136768653 1520 eccf95517727cb11801f4f1aee3a21b4 ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
+  "/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf" 1496785618 7008 9ff5fdcc865b01beca2b0fe4a46231d4 ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel-portuges/brazil.ldf" 1625860693 6591 308dec8ccec5a8d302be8a046d473dd3 ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty" 1704662920 150008 7a05b0fdc0167c04e192003e780ab195 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/babel/locale/en/babel-en.ini" 1661803479 3966 caeee5a9e5771d4446aa1ca9015ba1b2 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/babel/locale/en/babel-english.tex" 1498512262 336 ed676b5e7dfd862bc78d634f6a973f37 ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel/luababel.def" 1704662920 70056 a14ace75f96d0cafa52b0ba91e7e176b ""
   "/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty" 1576625341 40635 c40361e206be584d448876bba8a64a3b ""
   "/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty" 1576016050 33961 6b5c75130e435b2bfdb9f480a09a39f9 ""
@@ -163,6 +166,7 @@
   "/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/alphabetic.cbx" 1678141846 4312 24e682e8d56177ec752e5121836ce56e ""
   "/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/brazil.lbx" 1342308459 128 ce50470856090a2801a4487cd52e652b ""
   "/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/brazilian.lbx" 1643926307 29922 08c3e2a1b4d708e81ec5aee985c20cbf ""
+  "/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx" 1643926307 39965 48ce9ce3350aba9457f1020b1deba5cf ""
   "/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty" 1579038678 6078 f1cb470c9199e7110a27851508ed7a5c ""
   "/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty" 1696191071 56128 c2ccf1a29d78c33bc553880402e4fb9a ""
   "/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty" 1696191071 72619 ee90b6612147680fd73c3b1406a74245 ""
@@ -298,7 +302,7 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1778079009.81901 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/tex/generic/config/language.dat" 1778079011.63901 5334 85effe5d62bff6fe6c4acaf894c6d769 ""
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1778079036 12235290 44ab7f546135b22841e806f39e38b9bb ""
-  "config/configuracoes.tex" 1782219213.46127 3171 6d0d3a5b3abe4871d3ff48ca9424b67b ""
+  "config/configuracoes.tex" 1782231602.93146 3179 5675ea750547e8cb35fadfe6bc97139b ""
   "config/informacoes_gerais.tex" 1782219030.71451 1482 b96cde69f739bffee42438edfa27d653 ""
   "images//GLP/ExpressivityGLP.png" 1777993895.96281 70992 5ea2d18ceace8bdf19830349cd4e19d4 ""
   "images//GLP/NewAxioms.png" 1777993895.96281 21795 c0d70d79524aee8606394712d01011ad ""
@@ -376,12 +380,12 @@
   "images/RightAlgebra.png" 1777993895.99275 1721 a6b10022376e3643a1f25377e15e42e7 ""
   "images/States.png" 1777993895.99275 10222 9e34892b5ea278466886065eea1cbe26 ""
   "images/froberniusDiagram.png" 1777993895.99275 16848 83071b9efb79d40b1617088d21f0b3c7 ""
-  "main.aux" 1782219885.83748 14847 75ec0ce0d7b8292f94f0e2a48c695932 "lualatex"
-  "main.bbl" 1782219224.73329 46754 079d11260f4af0966bee83ae5afe1963 "biber main"
-  "main.out" 1782219885.84833 2778 220ec22dafaee9212576d129615ccaac "lualatex"
-  "main.run.xml" 1782219885.84833 2371 b71dae58782b355f14fe6e2adf3a6bd5 "lualatex"
+  "main.aux" 1782231634.69532 14848 f60b6aab3b231475ae5b38fc664b102d "lualatex"
+  "main.bbl" 1782231621.27282 46754 079d11260f4af0966bee83ae5afe1963 "biber main"
+  "main.out" 1782231634.71699 2778 220ec22dafaee9212576d129615ccaac "lualatex"
+  "main.run.xml" 1782231634.71699 2402 ce8deae21885575bbf726978632349d6 "lualatex"
   "main.tex" 1782219150.3778 703 3b9fd8c56fba4f58ecc6ea8e6697839d ""
-  "main.toc" 1782219885.84833 2113 9c72069d44bbe58fde5aa98b1f6f3654 "lualatex"
+  "main.toc" 1782231634.71699 2114 c6b48e519fad7665028ceeebf2da615f "lualatex"
   "material/generator.tikz" 1781100438.84593 4687 8eea95507bc8b1df09975d14281a6122 ""
   "material/generator.tikzstyles" 1781032984.43169 1240 b39020fa5ab17f4270a04e51f9de7c58 ""
   "pre-textuais/abstract.tex" 1782219874.73066 2312 9966db33fe5def35b37572dd0f5ddbe7 ""
