@@ -20,6 +20,7 @@ sig.coarity = 1
 visual_arity = 1
 visual_coarity = 1
 pic = "matrix"
+params = ["val"]
 
 [generators.comatrix]
 sig.arity = 1
@@ -27,20 +28,23 @@ sig.coarity = 1
 visual_arity = 1
 visual_coarity = 1
 pic = "comatrix"
+params = ["val"]
 
 [generators.relation]
 sig.arity = 1
 sig.coarity = 1
 visual_arity = 1
 visual_coarity = 1
-pic = "matrix"
+pic = "relation"
+params = ["val"]
 
 [generators.corelation]
 sig.arity = 1
 sig.coarity = 1
 visual_arity = 1
 visual_coarity = 1
-pic = "comatrix"
+pic = "corelation"
+params = ["val"]
 
 [generators.copy]
 sig.arity = 1
@@ -85,12 +89,14 @@ sig.arity = 1
 sig.coarity = 1
 pic = "scalar"
 symbol = "s"
+params = ["val"]
 
 [generators.coscalar]
 sig.arity = 1
 sig.coarity = 1
 pic = "coscalar"
 symbol = "s*"
+params = ["val"]
 
 [generators.ge]
 sig.arity = 1
@@ -133,6 +139,7 @@ sig.arity = 0
 sig.coarity = 1
 pic = "linear"
 symbol = "<-"
+params = ["val"]
 
 [generators.antipode]
 sig.arity = 1

@@ -1,6 +1,6 @@
 \chapter{The Linear Programming Category}\label{sec:glp}
 
-The two graphical theories developed so far have  each extended the categorical framework
+The theory developed so far has extended the categorical framework
 by adding a new class of  morphisms. We now introduce the
 final and most expressive theory of the thesis:
 a  graphical algebra for parametric linear programs.
@@ -9,13 +9,15 @@ and their value functions are precisely the polyhedral convex  functions.
 The central result of this section is the presentation of a
 complete monoidal theory for right-hand side parametric linear programming.
 
-\section{Preliminary Results in Linear Programming}
+\section{Semantics: the props \texorpdfstring{$\mathbf{LPRel}$}{LPRel}
+and \texorpdfstring{$\mathbf{PolyFun}$}{PolyFun}}
 
 We begin with several classical results that establish the tight
 relationship between piecewise affine convex functions, polyhedral
 functions, and parametric linear programs. These will serve as the
 semantic foundation for the graphical algebra introduced in the following
-subsection.
+section, and they are what allow us to present the semantic categories
+of this chapter in two equivalent ways.
 
 \begin{definition}[Piecewise Affine Convex Function]
 A function $f : \mathbb{R}^n \to \mathbb{R}$ is called
@@ -137,7 +139,54 @@ Setting $E = \{(y,t) \mid Cy + dt \ge 0\}$, we obtain
 $v_i(y) = \inf\{t \mid Cy + dt \ge 0\}$ for both $i = 1, 2$.
 \end{proof}
 
-\section{Graphical Algebra for Parametric Linear Programs}
+With the equivalences above in place, we now define the two semantic
+categories of this chapter. The first, $\mathbf{LPRel}$, describes
+morphisms as parametric linear programs; the second, $\mathbf{PolyFun}$,
+describes them as polyhedral functions. The equivalence between the two
+follows immediately from the propositions above, and we will use both
+descriptions interchangeably according to which is more convenient.
+
+\begin{definition}[The prop $\mathbf{LPRel}$ of Linear Programs]
+The prop $\mathbf{LPRel}$ is defined as follows:
+\begin{itemize}
+    \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
+    as the space $\mathbb{R}^n$.
+    \item A morphism $n \to m$ is a right-hand side parametric linear
+    program with value function
+    \[
+    (x,y) \mapsto \inf_z \{ c^\top z \mid Az \ge B[x\ y]^\top \},
+    \]
+    where $x \in \mathbb{R}^n$ and $y \in \mathbb{R}^m$.
+    \item Composition is given by minimisation over the shared variable.
+    \item The monoidal product on objects is addition $n \otimes m := n+m$,
+    and on morphisms is direct sum.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[The prop $\mathbf{PolyFun}$ of polyhedral functions]
+The prop $\mathbf{PolyFun}$ is defined as follows:
+\begin{itemize}
+    \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
+    as the space $\mathbb{R}^n$.
+    \item A morphism $n \to m$ is a polyhedral function
+    $f : \mathbb{R}^{n+m} \to \overline{\mathbb{R}}$.
+    \item Composition is given by infimal convolution over the shared
+    variable.
+    \item The monoidal product on objects is addition $n \otimes m := n+m$,
+    and on morphisms is $f \otimes g := f + g$.
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+    The two categories are isomorphic as PROPs: $\mathbf{PolyFun} \cong
+    \mathbf{LPRel}$. This is a direct consequence of the equivalence
+    between polyhedral functions and right-hand side parametric linear
+    programs established in the propositions above. We will therefore
+    use the two names interchangeably, choosing whichever description is
+    more natural in a given context.
+\end{remark}
+
+\section{Syntax: the algebra \texorpdfstring{$\mathbf{GLP}$}{GLP}}
 
 With the semantic equivalences established, we now introduce the final
 graphical algebra of the thesis. The algebra $\mathbf{GLP}$ extends
@@ -180,53 +229,6 @@ the tautological case. \[inf 0 = 0\]
     We call $\mathrm{FreeP}_{\mathbf{GLP}}$ the PROP freely generated
     by $\mathbf{GLP}$.
 \end{definition}
-
-We now define the two equivalent semantic categories for this algebra.
-The first, $\mathbf{LPRel}$, describes morphisms as parametric linear
-programs; the second, $\mathbf{PolyFun}$, describes them as polyhedral
-functions. The equivalence between the two follows immediately from the
-propositions above, and we will use both descriptions interchangeably
-according to which is more convenient.
-
-\begin{definition}[The prop $\mathbf{LPRel}$ of Linear Programs]
-The prop $\mathbf{LPRel}$ is defined as follows:
-\begin{itemize}
-    \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
-    as the space $\mathbb{R}^n$.
-    \item A morphism $n \to m$ is a right-hand side parametric linear
-    program with value function
-    \[
-    (x,y) \mapsto \inf_z \{ c^\top z \mid Az \ge B[x\ y]^\top \},
-    \]
-    where $x \in \mathbb{R}^n$ and $y \in \mathbb{R}^m$.
-    \item Composition is given by minimisation over the shared variable.
-    \item The monoidal product on objects is addition $n \otimes m := n+m$,
-    and on morphisms is direct sum.
-\end{itemize}
-\end{definition}
-
-\begin{definition}[The prop $\mathbf{PolyFun}$ of polyhedral functions]
-The prop $\mathbf{PolyFun}$ is defined as follows:
-\begin{itemize}
-    \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
-    as the space $\mathbb{R}^n$.
-    \item A morphism $n \to m$ is a polyhedral function
-    $f : \mathbb{R}^{n+m} \to \overline{\mathbb{R}}$.
-    \item Composition is given by infimal convolution over the shared
-    variable.
-    \item The monoidal product on objects is addition $n \otimes m := n+m$,
-    and on morphisms is $f \otimes g := f + g$.
-\end{itemize}
-\end{definition}
-
-\begin{remark}
-    The two categories are isomorphic as PROPs: $\mathbf{PolyFun} \cong
-    \mathbf{LPRel}$. This is a direct consequence of the equivalence
-    between polyhedral functions and right-hand side parametric linear
-    programs established in the propositions above. We will therefore
-    use the two names interchangeably, choosing whichever description is
-    more natural in a given context.
-\end{remark}
 
 The normal form theorem for $\mathbf{GLP}$ extends the one for
 $\mathbf{GPA}$: every diagram can be reduced to a $\mathbf{GPA}$ block
@@ -296,8 +298,11 @@ Proposition~\ref{prop:equalepi}.
     such that $A = [A' \;C]$. We call this the \emph{epigraph form} of a linear program.
 \end{corollary}
 
-We are now ready to prove the three presentation properties for
-$\mathbf{GLP}$.
+\section{Presentation results for \texorpdfstring{$\mathbf{LPRel}$}{LPRel}
+and \texorpdfstring{$\mathbf{PolyFun}$}{PolyFun}}
+
+With the syntax and its normal form in place, we are now ready to prove
+the three presentation properties for $\mathbf{GLP}$.
 
 \begin{lemma}[Expressivity]
     For every $f : m \to n$ in $\mathbf{PolyFun}$ there exists a

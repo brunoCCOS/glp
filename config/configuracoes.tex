@@ -35,7 +35,7 @@
 
 % --- TikZ ---
 \usepackage{tikz}
-\usetikzlibrary{shapes, arrows, intersections, bending}
+\usetikzlibrary{shapes, arrows, intersections, bending, calc, positioning, arrows.meta}
 
 % --- Misc layout ---
 \usepackage{hyphenat}
@@ -118,6 +118,8 @@
 \newtheorem{example}{Example}[chapter]
 
 % --- Custom math commands ---
+\newcommand{\llbracket}{[\![}
+\newcommand{\rrbracket}{]\!]}
 \newcommand{\extendR}{\overline{\mathbb{R}}}
 \newcommand{\infcomp}{\overset{\rightharpoonup}{\circ}}
 \newcommand{\supcomp}{\overset{\rightharpoondown}{\circ}}
