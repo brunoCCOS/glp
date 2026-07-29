@@ -1,4 +1,4 @@
-\section{Relations and Quantales}
+\section{Relations and Quantales}\label{sec:quantale-relations}
 
 In this section we explore the theory of relations.
 While much of mathematical theory is built on functional thinking,
@@ -9,22 +9,22 @@ in which everything one needs to know about an object is determined by its morph
 To begin we define the most basic kind of relation:
 
 \begin{definition}[Binary Relations]
-Let $X$ and $Y$ be sets. A \emph{binary relation} $R$ from $X$ to $Y$ is a subset
-\[
-R \subseteq X \times Y.
-\]
-Equivalently, it can be identified with its characteristic function
-\[
-\chi_R : X \times Y \to \{0,+\infty\},
-\]
-defined by
-\[
-\chi_R(x,y) =
-\begin{cases}
-0  \text{ if } (x,y) \in R,\\
-+\infty \quad \text{otherwise}.
-\end{cases}
-\]
+	Let $X$ and $Y$ be sets. A \emph{binary relation} $R$ from $X$ to $Y$ is a subset
+	\[
+		R \subseteq X \times Y.
+	\]
+	Equivalently, it can be identified with its characteristic function
+	\[
+		\chi_R : X \times Y \to \{0,+\infty\},
+	\]
+	defined by
+	\[
+		\chi_R(x,y) =
+		\begin{cases}
+			0  \text{ if } (x,y) \in R, \\
+			+\infty \quad \text{otherwise}.
+		\end{cases}
+	\]
 \end{definition}
 
 A binary relation specifies wheather $x$ is related to $y$.
@@ -36,29 +36,29 @@ the choice of $\infty$ is arbitrary and will be justified later. Normal choices 
 This is a general construct as the sets $X$ and $Y$ can be anything.
 We can, for instance, ask for further structures on such sets and obtain differents kinds of relations.
 \begin{definition}[Linear/Affine Relations]
-Let $X$ and $Y$ be vector spaces. A \emph{linear relation} from $X$ to $Y$ is a linear subspace
-\[
-R \subseteq X \times Y.
-\]
-An \emph{affine relation} is an affine subspace of $X \times Y$.
+	Let $X$ and $Y$ be vector spaces. A \emph{linear relation} from $X$ to $Y$ is a linear subspace
+	\[
+		R \subseteq X \times Y.
+	\]
+	An \emph{affine relation} is an affine subspace of $X \times Y$.
 
-Equivalently, a linear relation can be described as the graph of a possibly multivalued linear operator, i.e.,
-\[
-R(x) := \{ y \in Y \mid (x,y) \in R \}.
-\]
+	Equivalently, a linear relation can be described as the graph of a possibly multivalued linear operator, i.e.,
+	\[
+		R(x) := \{ y \in Y \mid (x,y) \in R \}.
+	\]
 
-or, its characteristic function defined by
-\[
-\chi_R : X \times Y \to \{0,+\infty\},
-\]
+	or, its characteristic function defined by
+	\[
+		\chi_R : X \times Y \to \{0,+\infty\},
+	\]
 
-\[
-\chi_R(x,y) =
-\begin{cases}
-0  \text{ if } (x,y) \in R,\\
-+\infty \quad \text{otherwise}.
-\end{cases}
-\]
+	\[
+		\chi_R(x,y) =
+		\begin{cases}
+			0  \text{ if } (x,y) \in R, \\
+			+\infty \quad \text{otherwise}.
+		\end{cases}
+	\]
 
 \end{definition}
 
@@ -67,126 +67,126 @@ Thus, a linear/affine relation is a binary relation where the set $R$ is a subsp
 Notice, however, that we have been restricting the relations between $x$ and $y$ to be a case of "they are, or they are not related". In fact, we might be interested in adding degrees to such a relation, so that we could say that $x$ and $y$ are "more" or "less" related. This leads us to the well-known notion of weighted relations \cite{lawvere1973metric}.
 
 \begin{definition}[Weighted Relations]
-Let $X$ and $Y$ be any two sets and let $\extendR^+:= [0, +\infty]$.
-A \emph{weighted relation} from $X$ to $Y$ is a set
-\[
-R \subseteq X \times Y \times \extendR^+
-\]
-such that for every $(x,y) \in X \times Y$ there exists \emph{exactly one}
-$r \in \extendR^+$ satisfying
-\[
-(x,y,r) \in R.
-\]
+	Let $X$ and $Y$ be any two sets and let $\extendR^+:= [0, +\infty]$.
+	A \emph{weighted relation} from $X$ to $Y$ is a set
+	\[
+		R \subseteq X \times Y \times \extendR^+
+	\]
+	such that for every $(x,y) \in X \times Y$ there exists \emph{exactly one}
+	$r \in \extendR^+$ satisfying
+	\[
+		(x,y,r) \in R.
+	\]
 
-Equivalently, we may define the characteristic function
-\[
-\chi_R : X \times Y \to \extendR^+
-\]
-by
-\[
-\chi_R(x,y) =
-r
-\quad \text{if and only if } (x,y,r) \in R.
-\]
+	Equivalently, we may define the characteristic function
+	\[
+		\chi_R : X \times Y \to \extendR^+
+	\]
+	by
+	\[
+		\chi_R(x,y) =
+		r
+		\quad \text{if and only if } (x,y,r) \in R.
+	\]
 \end{definition}
 
 and the codomain is not restricted to a binary set anymore.
 In fact, one could choose any other set instead of the $\extendR^+$ to be the codomain of the characteristic function as long as it satisfy some properties. In fact, the whole structure of a relation is further generalized by the notion of a quantale.
 \begin{definition}[Quantale]
-A \emph{quantale} is a structure $(Q,\leq,\otimes,e)$ such that:
+	A \emph{quantale} is a structure $(Q,\leq,\otimes,e)$ such that:
 
-\begin{itemize}
-    \item $(Q,\leq)$ is a complete lattice, i.e., every subset $A \subseteq Q$ admits a join $\bigvee A$ and a meet $\bigwedge A$;
-    \item $(Q,\otimes,e)$ is a monoid;
-    \item Multiplication distributes over arbitrary join in each variable:
-    \[
-    a \otimes \Big( \bigvee_{i \in I} b_i \Big)
-    =
-    \bigvee_{i \in I} (a \otimes b_i),
-    \qquad
-    \Big( \bigvee_{i \in I} a_i \Big) \otimes b
-    =
-    \bigvee_{i \in I} (a_i \otimes b)
-    \]
-    for all families $\{a_i\}_{i\in I}, \{b_i\}_{i\in I} \subseteq Q$.
-\end{itemize}
+	\begin{itemize}
+		\item $(Q,\leq)$ is a complete lattice, i.e., every subset $A \subseteq Q$ admits a join $\bigvee A$ and a meet $\bigwedge A$;
+		\item $(Q,\otimes,e)$ is a monoid;
+		\item Multiplication distributes over arbitrary join in each variable:
+		      \[
+			      a \otimes \Big( \bigvee_{i \in I} b_i \Big)
+			      =
+			      \bigvee_{i \in I} (a \otimes b_i),
+			      \qquad
+			      \Big( \bigvee_{i \in I} a_i \Big) \otimes b
+			      =
+			      \bigvee_{i \in I} (a_i \otimes b)
+		      \]
+		      for all families $\{a_i\}_{i\in I}, \{b_i\}_{i\in I} \subseteq Q$.
+	\end{itemize}
 
-If $\otimes$ is commutative, the quantale is called \emph{commutative}.
-If $e = \top$ (the top element of the lattice), it is called \emph{integral}.
+	If $\otimes$ is commutative, the quantale is called \emph{commutative}.
+	If $e = \top$ (the top element of the lattice), it is called \emph{integral}.
 \end{definition}
 
 Given a quantale $Q$, we can define the notion of $Q$-valued relation \cite{coecke2018generalizedrelations}.
 
 \begin{definition}[Generalized Relations]
-A \emph{generalized relation} (or $Q$-valued relation) from $X$ to $Y$, where $Q$ is a quantale, is a set
-\[
-R \subseteq X \times Y \times Q
-\]
-such that for every $(x,y) \in X \times Y$ there exists \emph{exactly one}
-$q \in Q$ satisfying
-\[
-(x,y,q) \in R.
-\]
+	A \emph{generalized relation} (or $Q$-valued relation) from $X$ to $Y$, where $Q$ is a quantale, is a set
+	\[
+		R \subseteq X \times Y \times Q
+	\]
+	such that for every $(x,y) \in X \times Y$ there exists \emph{exactly one}
+	$q \in Q$ satisfying
+	\[
+		(x,y,q) \in R.
+	\]
 
-Its characteristic function is
-\[
-\chi_R: X \times Y \to Q
-\]
-defined by
-\[
-\chi_R(x,y) = q
-\quad \text{if and only if } (x,y,q) \in R.
-\]
+	Its characteristic function is
+	\[
+		\chi_R: X \times Y \to Q
+	\]
+	defined by
+	\[
+		\chi_R(x,y) = q
+		\quad \text{if and only if } (x,y,q) \in R.
+	\]
 \end{definition}
 
 Now we are ready to build our previous relations as particular cases of this more general framework.
 
 \begin{example}
 
-The notion of a $Q$-valued relation recovers familiar concepts for particular choices of quantale.
+	The notion of a $Q$-valued relation recovers familiar concepts for particular choices of quantale.
 
-\medskip
+	\medskip
 
-\noindent
-\textbf{(1) Truth quantale.}
-Let $Q = \{0,1\}$ with the usual order $0 \leq 1$, join given by $\lor$,
-and monoidal product $\otimes = \land$ with unit $e = 1$.
-This is the (Boolean) truth quantale.
+	\noindent
+	\textbf{(1) Truth quantale.}
+	Let $Q = \{0,1\}$ with the usual order $0 \leq 1$, join given by $\lor$,
+	and monoidal product $\otimes = \land$ with unit $e = 1$.
+	This is the (Boolean) truth quantale.
 
-A $Q$-valued relation is then a function
-\[
-R : X \times Y \to \{0,1\}.
-\]
-Such a function is precisely the characteristic function of an ordinary
-binary relation
-\[
-\widetilde{R} \subseteq X \times Y,
-\qquad
-(x,y) \in \widetilde{R}
-\;\Longleftrightarrow\;
-R(x,y) = 1.
-\]
-Thus $Q$-valued relations coincide with classical binary relations.
+	A $Q$-valued relation is then a function
+	\[
+		R : X \times Y \to \{0,1\}.
+	\]
+	Such a function is precisely the characteristic function of an ordinary
+	binary relation
+	\[
+		\widetilde{R} \subseteq X \times Y,
+		\qquad
+		(x,y) \in \widetilde{R}
+		\;\Longleftrightarrow\;
+		R(x,y) = 1.
+	\]
+	Thus $Q$-valued relations coincide with classical binary relations.
 
-\medskip
+	\medskip
 
-\noindent
-\textbf{(2) Lawvere quantale.}
-Let $Q = \extendR^+ = [0, +\infty]$ ordered by the
-\emph{reverse} of the usual order (so that $a \leq b$ iff $a \geq b$
-in the usual order), with monoidal product given by addition
-\[
-a \otimes b := a + b,
-\]
-and unit $e = 0$. Joins are then given by infima in the usual order.
+	\noindent
+	\textbf{(2) Lawvere quantale.}
+	Let $Q = \extendR^+ = [0, +\infty]$ ordered by the
+	\emph{reverse} of the usual order (so that $a \leq b$ iff $a \geq b$
+	in the usual order), with monoidal product given by addition
+	\[
+		a \otimes b := a + b,
+	\]
+	and unit $e = 0$. Joins are then given by infima in the usual order.
 
-This structure is the Lawvere quantale.
-A $Q$-valued relation
-\[
-R : X \times Y \to \extendR^+
-\]
-is precisely a weighted relation assigning a (possibly infinite) cost
-to each pair $(x,y)$.
+	This structure is the Lawvere quantale.
+	A $Q$-valued relation
+	\[
+		R : X \times Y \to \extendR^+
+	\]
+	is precisely a weighted relation assigning a (possibly infinite) cost
+	to each pair $(x,y)$.
 
 
 \end{example}
@@ -205,66 +205,66 @@ the Cost/Reward Relations, respectively. To our knowledge, this definition does
 not appear elsewhere in the literature.
 
 \begin{definition}[Optimization/Extended Lawvere Quantale]
-Let
-\[
-\overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty,+\infty\}.
-\]
-The \emph{optimization quantale} is the structure
-\[
-(\overline{\mathbb{R}},\geq,\otimes,e)
-\]
-defined as follows:
+	Let
+	\[
+		\overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty,+\infty\}.
+	\]
+	The \emph{optimization quantale} is the structure
+	\[
+		(\overline{\mathbb{R}},\geq,\otimes,e)
+	\]
+	defined as follows:
 
-\begin{itemize}
-    \item The order $\geq$ is the usual order on the extended real line.
-    With this order, arbitrary joins are given by the usual infima:
-    \[
-    \bigvee A = \inf A.
-    \]
+	\begin{itemize}
+		\item The order $\geq$ is the usual order on the extended real line.
+		      With this order, arbitrary joins are given by the usual infima:
+		      \[
+			      \bigvee A = \inf A.
+		      \]
 
-    \item The monoidal product is addition:
-    \[
-    a \otimes b := a + b,
-    \]
-    where addition is extended in the usual way
-    (with $a + (+\infty) = +\infty$ and
-     $a + (-\infty) = -\infty$ whenever defined).
+		\item The monoidal product is addition:
+		      \[
+			      a \otimes b := a + b,
+		      \]
+		      where addition is extended in the usual way
+		      (with $a + (+\infty) = +\infty$ and
+		      $a + (-\infty) = -\infty$ whenever defined).
 
-    \item The unit element is
-    \[
-    e := 0.
-    \]
-\end{itemize}
+		\item The unit element is
+		      \[
+			      e := 0.
+		      \]
+	\end{itemize}
 
-With these operations,
-$(\overline{\mathbb{R}},\geq,+,0)$
-is a commutative quantale. Joins are ordinary infima,
-and addition distributes over arbitrary joins.
+	With these operations,
+	$(\overline{\mathbb{R}},\geq,+,0)$
+	is a commutative quantale. Joins are ordinary infima,
+	and addition distributes over arbitrary joins.
 \end{definition}
 
 
 \begin{definition}[Optimization (Cost/Reward) Relations]
-Let $X$ and $Y$ be sets.
-An \emph{optimization relation} from $X$ to $Y$ is an
-$\overline{\mathbb{R}}$-valued relation, i.e., a function
-\[
-R : X \times Y \to \overline{\mathbb{R}}.
-\]
+	Let $X$ and $Y$ be sets.
+	An \emph{optimization relation} from $X$ to $Y$ is an
+	$\overline{\mathbb{R}}$-valued relation, i.e., a function
+	\[
+		R : X \times Y \to \overline{\mathbb{R}}.
+	\]
 
-Equivalently, it is a subset
-\[
-R \subseteq X \times Y \times \overline{\mathbb{R}}
-\]
-such that for every $(x,y) \in X \times Y$ there exists exactly one
-$r \in \overline{\mathbb{R}}$ satisfying
-\[
-(x,y,r) \in R.
-\]
+	Equivalently, it is a subset
+	\[
+		R \subseteq X \times Y \times \overline{\mathbb{R}}
+	\]
+	such that for every $(x,y) \in X \times Y$ there exists exactly one
+	$r \in \overline{\mathbb{R}}$ satisfying
+	\[
+		(x,y,r) \in R.
+	\]
 
-The value $R(x,y)$ is interpreted as the objective value
-(cost or reward) associated to the pair $(x,y)$,
-with $+\infty$ and $-\infty$ representing extremal infeasibility
-or unboundedness.
+	The value $R(x,y)$ is interpreted as the objective value
+	(cost or reward) associated to the pair $(x,y)$,
+	with $+\infty$ and $-\infty$ representing extremal infeasibility
+	or unboundedness.
 \end{definition}
 
 Observe how this is essentially the weighted relations extended
@@ -285,340 +285,340 @@ behind it. Particularly, the category is a compact closed
 symmetric monoidal category~\cite{maclane1998categories}:
 
 \begin{proposition}[Category $\mathbf{Rel}(Q)$]
-For a quantale $Q$, the $Q$-relations form a category \textbf{Rel}(Q) with composition and identities
+	For a quantale $Q$, the $Q$-relations form a category \textbf{Rel}(Q) with composition and identities
 
-\[
-(S\circ R) (a,c) = \bigvee_b R(a,b) \otimes S(b,c) \quad 1_A(a,b) = \bigvee \{k | a=b\}
-\]
+	\[
+		(S\circ R) (a,c) = \bigvee_b R(a,b) \otimes S(b,c) \quad 1_A(a,b) = \bigvee \{k | a=b\}
+	\]
 
-If Q is a commutative quantale, then \textbf{Rel}(Q) carries a symmetric monoidal structure, with the categorical monoidal product $\bigotimes_{\mathcal{C}}$ on objects given by the Cartesian product of sets and the action on relations given for $R:A \to C$ and $S:B\to D$ by
+	If Q is a commutative quantale, then \textbf{Rel}(Q) carries a symmetric monoidal structure, with the categorical monoidal product $\bigotimes_{\mathcal{C}}$ on objects given by the Cartesian product of sets and the action on relations given for $R:A \to C$ and $S:B\to D$ by
 
-\[
-(R\otimes_{\mathcal{C}} S)(a,b,c,d) = R(a,c) \otimes S(b,d)
-\]
+	\[
+		(R\otimes_{\mathcal{C}} S)(a,b,c,d) = R(a,c) \otimes S(b,d)
+	\]
 
-The singleton set is the monoidal unit, and the category is compact closed w.r.t the monoidal structure
+	The singleton set is the monoidal unit, and the category is compact closed w.r.t the monoidal structure
 \end{proposition}
 
 \begin{proof}
-We verify the categorical structure.
+	We verify the categorical structure.
 
-\medskip
-\noindent
-\textbf{(1) Well-defined composition.}
-Let $R:A \to B$ and $S:B \to C$ be $Q$-relations.
-For each $(a,c) \in A \times C$, the set
-\[
-\{ R(a,b)\otimes S(b,c) \mid b \in B \}
-\subseteq Q
-\]
-admits a supremum since $Q$ is a complete lattice.
-Hence $(S\circ R)(a,c)$ is well-defined as an element of $Q$.
+	\medskip
+	\noindent
+	\textbf{(1) Well-defined composition.}
+	Let $R:A \to B$ and $S:B \to C$ be $Q$-relations.
+	For each $(a,c) \in A \times C$, the set
+	\[
+		\{ R(a,b)\otimes S(b,c) \mid b \in B \}
+		\subseteq Q
+	\]
+	admits a supremum since $Q$ is a complete lattice.
+	Hence $(S\circ R)(a,c)$ is well-defined as an element of $Q$.
 
-\medskip
-\noindent
-\textbf{(2) Associativity.}
-Let $R:A\to B$, $S:B\to C$, and $T:C\to D$.
-For $a\in A$, $d\in D$,
-\[
-((T\circ S)\circ R)(a,d)
-=
-\bigvee_{c}
-\Big(
-\bigvee_{b} R(a,b)\otimes S(b,c)
-\Big)
-\otimes T(c,d).
-\]
-Since $\otimes$ distributes over arbitrary suprema,
-\[
-=
-\bigvee_{b,c}
-R(a,b)\otimes S(b,c)\otimes T(c,d).
-\]
-Similarly,
-\[
-(T\circ (S\circ R))(a,d)
-=
-\bigvee_{b}
-R(a,b)\otimes
-\Big(
-\bigvee_{c} S(b,c)\otimes T(c,d)
-\Big)
-=
-\bigvee_{b,c}
-R(a,b)\otimes S(b,c)\otimes T(c,d).
-\]
-Thus composition is associative.
+	\medskip
+	\noindent
+	\textbf{(2) Associativity.}
+	Let $R:A\to B$, $S:B\to C$, and $T:C\to D$.
+	For $a\in A$, $d\in D$,
+	\[
+		((T\circ S)\circ R)(a,d)
+		=
+		\bigvee_{c}
+		\Big(
+		\bigvee_{b} R(a,b)\otimes S(b,c)
+		\Big)
+		\otimes T(c,d).
+	\]
+	Since $\otimes$ distributes over arbitrary suprema,
+	\[
+		=
+		\bigvee_{b,c}
+		R(a,b)\otimes S(b,c)\otimes T(c,d).
+	\]
+	Similarly,
+	\[
+		(T\circ (S\circ R))(a,d)
+		=
+		\bigvee_{b}
+		R(a,b)\otimes
+		\Big(
+		\bigvee_{c} S(b,c)\otimes T(c,d)
+		\Big)
+		=
+		\bigvee_{b,c}
+		R(a,b)\otimes S(b,c)\otimes T(c,d).
+	\]
+	Thus composition is associative.
 
-\medskip
-\noindent
-\textbf{(3) Identities.}
-For each set $A$, define
-\[
-1_A(a,b)
-=
-\begin{cases}
-e & \text{if } a=b,\\
-\bot & \text{otherwise},
-\end{cases}
-\]
-where $\bot = \bigvee \varnothing$ is the bottom element of $Q$.
+	\medskip
+	\noindent
+	\textbf{(3) Identities.}
+	For each set $A$, define
+	\[
+		1_A(a,b)
+		=
+		\begin{cases}
+			e    & \text{if } a=b,   \\
+			\bot & \text{otherwise},
+		\end{cases}
+	\]
+	where $\bot = \bigvee \varnothing$ is the bottom element of $Q$.
 
-Then for $R:A\to B$,
-\[
-(R\circ 1_A)(a,b)
-=
-\bigvee_{a'}
-1_A(a,a')\otimes R(a',b).
-\]
-All terms vanish except when $a'=a$, so
-\[
-=
-e \otimes R(a,b)
-=
-R(a,b).
-\]
-Similarly, $1_B\circ R = R$. Hence identities exist.
+	Then for $R:A\to B$,
+	\[
+		(R\circ 1_A)(a,b)
+		=
+		\bigvee_{a'}
+		1_A(a,a')\otimes R(a',b).
+	\]
+	All terms vanish except when $a'=a$, so
+	\[
+		=
+		e \otimes R(a,b)
+		=
+		R(a,b).
+	\]
+	Similarly, $1_B\circ R = R$. Hence identities exist.
 
-\medskip
-\noindent
-\textbf{(4) Monoidal structure (commutative case).}
-Assume $Q$ is commutative.
-Define the tensor on objects by Cartesian product:
-\[
-A\otimes_{\mathcal{C}} B := A\times B.
-\]
-For relations $R:A\to C$ and $S:B\to D$, define
-\[
-(R\otimes_{\mathcal{C}} S)((a,b),(c,d))
-=
-R(a,c)\otimes S(b,d).
-\]
-Functoriality follows from associativity and commutativity of $\otimes$:
-\[
-(S_1\otimes S_2)\circ (R_1\otimes R_2)
-=
-(S_1\circ R_1)\otimes (S_2\circ R_2).
-\]
-The singleton set $1$ is a unit since $A\times 1 \cong A$.
+	\medskip
+	\noindent
+	\textbf{(4) Monoidal structure (commutative case).}
+	Assume $Q$ is commutative.
+	Define the tensor on objects by Cartesian product:
+	\[
+		A\otimes_{\mathcal{C}} B := A\times B.
+	\]
+	For relations $R:A\to C$ and $S:B\to D$, define
+	\[
+		(R\otimes_{\mathcal{C}} S)((a,b),(c,d))
+		=
+		R(a,c)\otimes S(b,d).
+	\]
+	Functoriality follows from associativity and commutativity of $\otimes$:
+	\[
+		(S_1\otimes S_2)\circ (R_1\otimes R_2)
+		=
+		(S_1\circ R_1)\otimes (S_2\circ R_2).
+	\]
+	The singleton set $1$ is a unit since $A\times 1 \cong A$.
 
-Symmetry is induced by the swap map
-\[
-\sigma_{A,B}((a,b),(b',a'))=
-\begin{cases}
-e & \text{if } a=a',\, b=b',\\
-\bot & \text{otherwise}.
-\end{cases}
-\]
+	Symmetry is induced by the swap map
+	\[
+		\sigma_{A,B}((a,b),(b',a'))=
+		\begin{cases}
+			e    & \text{if } a=a',\, b=b', \\
+			\bot & \text{otherwise}.
+		\end{cases}
+	\]
 
-\medskip
-\noindent
-\textbf{(5) Compact closure.}
-For each set $A$, define unit and counit relations
-\[
-\eta : 1 \to A\times A,
-\qquad
-\epsilon : A\times A \to 1
-\]
-by
-\[
-\eta(*,(a,a')) =
-\begin{cases}
-e & a=a',\\
-\bot & \text{otherwise},
-\end{cases}
-\qquad
-\epsilon((a,a'),*) =
-\begin{cases}
-e & a=a',\\
-\bot & \text{otherwise}.
-\end{cases}
-\]
-A direct computation using the definition of composition shows that the
-triangle identities hold:
-\[
-(1_A\otimes \epsilon)\circ (\eta\otimes 1_A) = 1_A,
-\qquad
-(\epsilon\otimes 1_A)\circ (1_A\otimes \eta) = 1_A.
-\]
-Thus every object is self-dual, and $\mathbf{Rel}(Q)$ is compact closed.
+	\medskip
+	\noindent
+	\textbf{(5) Compact closure.}
+	For each set $A$, define unit and counit relations
+	\[
+		\eta : 1 \to A\times A,
+		\qquad
+		\epsilon : A\times A \to 1
+	\]
+	by
+	\[
+		\eta(*,(a,a')) =
+		\begin{cases}
+			e    & a=a',             \\
+			\bot & \text{otherwise},
+		\end{cases}
+		\qquad
+		\epsilon((a,a'),*) =
+		\begin{cases}
+			e    & a=a',             \\
+			\bot & \text{otherwise}.
+		\end{cases}
+	\]
+	A direct computation using the definition of composition shows that the
+	triangle identities hold:
+	\[
+		(1_A\otimes \epsilon)\circ (\eta\otimes 1_A) = 1_A,
+		\qquad
+		(\epsilon\otimes 1_A)\circ (1_A\otimes \eta) = 1_A.
+	\]
+	Thus every object is self-dual, and $\mathbf{Rel}(Q)$ is compact closed.
 \end{proof}
 
 A curious fact about relations is that they actually encode the notion of matrices and matrix multiplication. This serves as motivation for what will later become the diagrammatical theory of linear algebra. The following remark expands on it showing that every morphism in \textbf{Rel}$(Q)$ corresponds to a matrix with entries in $Q$, and that composition is exactly matrix multiplication.
 
 \begin{remark}
-A $Q$-valued relation $R : X \times Y \to Q$ is nothing but a
-\emph{$Q$-valued matrix} indexed by $X \times Y$: one simply reads
-off the entry at position $(x,y)$ as $\chi_R(x,y) \in Q$.
-That is, a generalized relation is precisely an element of $Q^{X \times Y}$.
+	A $Q$-valued relation $R : X \times Y \to Q$ is nothing but a
+	\emph{$Q$-valued matrix} indexed by $X \times Y$: one simply reads
+	off the entry at position $(x,y)$ as $\chi_R(x,y) \in Q$.
+	That is, a generalized relation is precisely an element of $Q^{X \times Y}$.
 
-\medskip
-\noindent
-When $X$ and $Y$ are finite sets, say $|X| = m$ and $|Y| = n$,
-this becomes completely explicit: a $Q$-valued relation is exactly
-an $m \times n$ matrix
-\[
-  M_R \;=\; \bigl[\chi_R(x_i,\, y_j)\bigr]_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}}
-  \;\in\; Q^{m \times n},
-\]
-whose $(i,j)$-entry records the $Q$-value assigned to the pair
-$(x_i, y_j)$.
+	\medskip
+	\noindent
+	When $X$ and $Y$ are finite sets, say $|X| = m$ and $|Y| = n$,
+	this becomes completely explicit: a $Q$-valued relation is exactly
+	an $m \times n$ matrix
+	\[
+		M_R \;=\; \bigl[\chi_R(x_i,\, y_j)\bigr]_{\substack{1 \leq i \leq m \\ 1 \leq j \leq n}}
+		\;\in\; Q^{m \times n},
+	\]
+	whose $(i,j)$-entry records the $Q$-value assigned to the pair
+	$(x_i, y_j)$.
 
-\medskip
-\noindent
-Moreover, composition of $Q$-valued relations corresponds precisely
-to \emph{matrix multiplication in $Q$}.
-Given a second $Q$-valued relation $S : Y \times Z \to Q$, their
-composite $S \circ R : X \times Z \to Q$ is defined by
-\[
-  \chi_{S \circ R}(x, z)
-  \;=\;
-  \bigvee_{y \in Y}\, \chi_R(x,y) \otimes \chi_S(y,z),
-\]
-which, in matrix notation, reads
-\[
-  M_{S \circ R} \;=\; M_R \otimes M_S,
-  \qquad
-  (M_R \otimes M_S)_{ij}
-  \;=\;
-  \bigvee_{k=1}^{n}\, (M_R)_{ik} \otimes (M_S)_{kj}.
-\]
+	\medskip
+	\noindent
+	Moreover, composition of $Q$-valued relations corresponds precisely
+	to \emph{matrix multiplication in $Q$}.
+	Given a second $Q$-valued relation $S : Y \times Z \to Q$, their
+	composite $S \circ R : X \times Z \to Q$ is defined by
+	\[
+		\chi_{S \circ R}(x, z)
+		\;=\;
+		\bigvee_{y \in Y}\, \chi_R(x,y) \otimes \chi_S(y,z),
+	\]
+	which, in matrix notation, reads
+	\[
+		M_{S \circ R} \;=\; M_R \otimes M_S,
+		\qquad
+		(M_R \otimes M_S)_{ij}
+		\;=\;
+		\bigvee_{k=1}^{n}\, (M_R)_{ik} \otimes (M_S)_{kj}.
+	\]
 
-This is exactly the usual row-times-column matrix product, but  with ordinary addition replaced by the join $\bigvee$ and ordinary  multiplication replaced by the monoidal product $\otimes$ of $Q$. The two axioms of a quantale — that $\otimes$ distributes over  arbitrary joins — are precisely what guarantees that this  multiplication is associative and well-defined, so that $Q$-valued  matrices form a category under this composition.
+	This is exactly the usual row-times-column matrix product, but  with ordinary addition replaced by the join $\bigvee$ and ordinary  multiplication replaced by the monoidal product $\otimes$ of $Q$. The two axioms of a quantale — that $\otimes$ distributes over  arbitrary joins — are precisely what guarantees that this  multiplication is associative and well-defined, so that $Q$-valued  matrices form a category under this composition.
 \end{remark}
 
 To illustrate these new concepts, we look at some of our previous relations now built as categories.
 
 \begin{example}[Category of Boolean relations]
-Let
-\[
-Q = (\{0,1\}, \leq, \otimes, e)
-\]
-be the Boolean quantale where:
-\begin{itemize}
-    \item $0 \le 1$;
-    \item $\otimes = \land$ (logical conjunction);
-    \item $e = 1$;
-    \item joins are given by $\lor$.
-\end{itemize}
+	Let
+	\[
+		Q = (\{0,1\}, \leq, \otimes, e)
+	\]
+	be the Boolean quantale where:
+	\begin{itemize}
+		\item $0 \le 1$;
+		\item $\otimes = \land$ (logical conjunction);
+		\item $e = 1$;
+		\item joins are given by $\lor$.
+	\end{itemize}
 
-A $Q$-valued relation $R : A \to B$ is a function
-\[
-R : A \times B \to \{0,1\},
-\]
-which is precisely the characteristic function of a subset
-\[
-\widetilde{R} \subseteq A \times B.
-\]
+	A $Q$-valued relation $R : A \to B$ is a function
+	\[
+		R : A \times B \to \{0,1\},
+	\]
+	which is precisely the characteristic function of a subset
+	\[
+		\widetilde{R} \subseteq A \times B.
+	\]
 
-The composition formula in $\mathbf{Rel}(Q)$ becomes
-\[
-(S \circ R)(a,c)
-=
-\bigvee_{b} R(a,b) \land S(b,c).
-\]
-Since joins are logical disjunction, this reduces to
-\[
-(S \circ R)(a,c) = 1
-\quad \Longleftrightarrow \quad
-\exists b \in B \text{ such that }
-R(a,b)=1 \text{ and } S(b,c)=1.
-\]
+	The composition formula in $\mathbf{Rel}(Q)$ becomes
+	\[
+		(S \circ R)(a,c)
+		=
+		\bigvee_{b} R(a,b) \land S(b,c).
+	\]
+	Since joins are logical disjunction, this reduces to
+	\[
+		(S \circ R)(a,c) = 1
+		\quad \Longleftrightarrow \quad
+		\exists b \in B \text{ such that }
+		R(a,b)=1 \text{ and } S(b,c)=1.
+	\]
 
-Thus composition coincides exactly with the usual composition of binary relations.
+	Thus composition coincides exactly with the usual composition of binary relations.
 
-Since the Boolean quantale is commutative,
-$\mathbf{Rel}(Q)$ carries a symmetric monoidal structure:
+	Since the Boolean quantale is commutative,
+	$\mathbf{Rel}(Q)$ carries a symmetric monoidal structure:
 
-\begin{itemize}
-    \item On objects:
-    \[
-    A \otimes B := A \times B.
-    \]
+	\begin{itemize}
+		\item On objects:
+		      \[
+			      A \otimes B := A \times B.
+		      \]
 
-    \item On morphisms:
-    \[
-    (R \otimes S)((a,b),(c,d))
-    =
-    R(a,c) \land S(b,d).
-    \]
-\end{itemize}
+		\item On morphisms:
+		      \[
+			      (R \otimes S)((a,b),(c,d))
+			      =
+			      R(a,c) \land S(b,d).
+		      \]
+	\end{itemize}
 
-The singleton set is the monoidal unit.
-With this structure, $\mathbf{Rel}(Q)$ is precisely the classical
-symmetric monoidal compact closed category $\mathbf{Rel}$.
+	The singleton set is the monoidal unit.
+	With this structure, $\mathbf{Rel}(Q)$ is precisely the classical
+	symmetric monoidal compact closed category $\mathbf{Rel}$.
 
 \end{example}
 \begin{example}[Category of weighted relations]\label{example:weighted-relations}
-Let
-\[
-Q = (\mathbb{R}\cup\{+\infty\}, \le_Q, \otimes, e)
-\]
-be the Lawvere quantale where:
-\begin{itemize}
-    \item $a \le_Q b \iff a \ge b$ in the usual order;
-    \item $\otimes = +$;
-    \item $e = 0$;
-    \item joins are given by infima in the usual order.
-\end{itemize}
+	Let
+	\[
+		Q = (\mathbb{R}\cup\{+\infty\}, \le_Q, \otimes, e)
+	\]
+	be the Lawvere quantale where:
+	\begin{itemize}
+		\item $a \le_Q b \iff a \ge b$ in the usual order;
+		\item $\otimes = +$;
+		\item $e = 0$;
+		\item joins are given by infima in the usual order.
+	\end{itemize}
 
-A $Q$-valued relation $R : A \to B$ is a function
-\[
-R : A \times B \to \mathbb{R} \cup \{+\infty\},
-\]
-assigning a cost (or weight) to each pair $(a,b)$.
+	A $Q$-valued relation $R : A \to B$ is a function
+	\[
+		R : A \times B \to \mathbb{R} \cup \{+\infty\},
+	\]
+	assigning a cost (or weight) to each pair $(a,b)$.
 
-The composition formula becomes
-\[
-(S \circ R)(a,c)
-=
-\inf_{b \in B}
-\big(
-R(a,b) + S(b,c)
-\big).
-\]
+	The composition formula becomes
+	\[
+		(S \circ R)(a,c)
+		=
+		\inf_{b \in B}
+		\big(
+		R(a,b) + S(b,c)
+		\big).
+	\]
 
-Thus composition is given by \emph{infimal convolution} (or shortest-path composition).
+	Thus composition is given by \emph{infimal convolution} (or shortest-path composition).
 
-Since addition is commutative, the Lawvere quantale is commutative,
-and $\mathbf{Rel}(Q)$ carries a symmetric monoidal structure:
+	Since addition is commutative, the Lawvere quantale is commutative,
+	and $\mathbf{Rel}(Q)$ carries a symmetric monoidal structure:
 
-\begin{itemize}
-    \item On objects:
-    \[
-    A \otimes B := A \times B.
-    \]
+	\begin{itemize}
+		\item On objects:
+		      \[
+			      A \otimes B := A \times B.
+		      \]
 
-    \item On morphisms:
-    \[
-    (R \otimes S)((a,b),(c,d))
-    =
-    R(a,c) + S(b,d).
-    \]
-\end{itemize}
+		\item On morphisms:
+		      \[
+			      (R \otimes S)((a,b),(c,d))
+			      =
+			      R(a,c) + S(b,d).
+		      \]
+	\end{itemize}
 
-The singleton set is the monoidal unit.
-With this tensor product, $\mathbf{Rel}(Q)$ is a symmetric monoidal
-compact closed category of weighted relations.
+	The singleton set is the monoidal unit.
+	With this tensor product, $\mathbf{Rel}(Q)$ is a symmetric monoidal
+	compact closed category of weighted relations.
 
-In particular:
-\begin{itemize}
-    \item If $A,B,C$ are finite sets, relations may be viewed as matrices with entries in $\mathbb{R}\cup\{+\infty\}$.
-    \item Composition is matrix multiplication in the $(\min,+)$-semiring.
-\end{itemize}
+	In particular:
+	\begin{itemize}
+		\item If $A,B,C$ are finite sets, relations may be viewed as matrices with entries in $\mathbb{R}\cup\{+\infty\}$.
+		\item Composition is matrix multiplication in the $(\min,+)$-semiring.
+	\end{itemize}
 
-Hence $\mathbf{Rel}(Q)$ is the category of weighted relations, which underlies dynamic programming, tropical algebra, and shortest-path problems.
+	Hence $\mathbf{Rel}(Q)$ is the category of weighted relations, which underlies dynamic programming, tropical algebra, and shortest-path problems.
 \end{example}
 
 Those examples illustrate how naturally the quantale structure supports  categorical constructions: composition of $Q$-valued relations corresponds  to matrix multiplication driven by $\otimes$, and the tensor product of  relations is governed by the join $\bigvee$, both operations coming  directly from the quantale axioms.
 
 The resulting categories are symmetric monoidal, and it is precisely this monoidal backbone that will support the algebraic structure we aim to build. A key piece of that structure is a \emph{Frobenius monoid} on each object:  a monoid $(\mu, \eta)$ and a comonoid $(\delta, \varepsilon)$ on the same  object, satisfying the Frobenius law
 \[
-  (\mathrm{id} \otimes \mu) \circ (\delta \otimes \mathrm{id})
-  \;=\;
-  \delta \circ \mu
-  \;=\;
-  (\mu \otimes \mathrm{id}) \circ (\mathrm{id} \otimes \delta).
+	(\mathrm{id} \otimes \mu) \circ (\delta \otimes \mathrm{id})
+	\;=\;
+	\delta \circ \mu
+	\;=\;
+	(\mu \otimes \mathrm{id}) \circ (\mathrm{id} \otimes \delta).
 \]
 A symmetric monoidal category in which every object carries such a  structure, compatibly with the tensor product, is called a  \emph{hypergraph category} \cite{fong2019hypergraph}.
 
@@ -627,22 +627,22 @@ compact closed categories \cite{selinger2010survey}.
 In a compact closed category every object $A$ has a dual $A^*$ with  unit $\eta_A : I \to A^* \otimes A$ and counit $\varepsilon_A : A \otimes A^* \to I$  satisfying the snake equations; a Frobenius structure does not require  the existence of such a dual. Conversely, if a compact closed category is such that every object is  self-dual ($A \cong A^*$) and the induced cups and caps satisfy the  Frobenius law, then it is a hypergraph category. Thus compact closed categories with self-dual
 objects form a special  class of hypergraph categories, and it is the later, more general,  notion that we shall adopt as our ambient framework.
 \begin{remark}
-    If Q is commutative, then $\mathbf{Rel}(Q)$ is a hypergraph category and admits a commutative Frobenius structure on every object. Diagrammatically, we denote the additive and co-additive structure as
+	If Q is commutative, then $\mathbf{Rel}(Q)$ is a hypergraph category and admits a commutative Frobenius structure on every object. Diagrammatically, we denote the additive and co-additive structure as
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\linewidth]{images/froberniusDiagram.png}
-        \caption{Frobernius additive(black) and co-additive(white) structure}
-    \end{figure}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{images/froberniusDiagram.png}
+		\caption{Frobernius additive(black) and co-additive(white) structure}
+	\end{figure}
 
-    Subject to the Frobernius Law (both colors)
-   \begin{figure}[H]
-        \includegraphics[width=1\linewidth]{images/FroberniusLaw.png}
-    \end{figure}
+	Subject to the Frobernius Law (both colors)
+	\begin{figure}[H]
+		\includegraphics[width=1\linewidth]{images/FroberniusLaw.png}
+	\end{figure}
 \end{remark}
 
 \begin{proof}
-    Just a check that all laws do hold for any $\mathbf{Rel}(Q)$ category
+	Just a check that all laws do hold for any $\mathbf{Rel}(Q)$ category
 \end{proof}
 
 These constructions provide exactly the semantic foundation for the algebra we aim to build. In the same way that semantics is understood in linguistics and programming language theory \cite{winskel1993formal}, the semantics of a formal system assigns meaning to its expressions. More precisely, while syntax consists of the tokens and rules for forming and combining expressions, semantics is the interpretation assigned to each such expression — in our case, an optimization problem living in $\mathbf{Rel}(Q)$.
@@ -657,57 +657,57 @@ The map between those is structure-preserving map, a functor, from the syntactic
 The syntactic layer will be formalized as a Symmetric Monoidal Theory (SMT) \cite{bonchi2017interacting}, which is a presentation of a category by generators and equations, whose terms respect the compositional structure of a symmetric monoidal category. This is the standard tool for building graphical languages in the style of Graphical Linear Algebra, and it is the framework within which our completeness results will be stated and proved.
 
 \begin{definition}[Symmetric Monoidal Theory]
-    A SMT is a pair $(\Sigma,E)$, such that,  $\Sigma$ is a signature of operators $o$ that has arity $m$ and coarity $n$
+	A SMT is a pair $(\Sigma,E)$, such that,  $\Sigma$ is a signature of operators $o$ that has arity $m$ and coarity $n$
 
-    \medskip
+	\medskip
 
-$\Sigma$-terms are defined inductively as the smallest collection of
-typed expressions $t : m \to n$ such that:
+	$\Sigma$-terms are defined inductively as the smallest collection of
+	typed expressions $t : m \to n$ such that:
 
-\begin{enumerate}
+	\begin{enumerate}
 
-    \item (Generators) If $o \in \Sigma$ with $o : m \to n$, then $o$ is a $\Sigma$-term of type $m \to n$.
-    \item (Identity)
-    For every $n \in \mathbb{N}$, there is a term
-    \[
-        \mathrm{id}_n : n \to n.
-    \]
+		\item (Generators) If $o \in \Sigma$ with $o : m \to n$, then $o$ is a $\Sigma$-term of type $m \to n$.
+		\item (Identity)
+		      For every $n \in \mathbb{N}$, there is a term
+		      \[
+			      \mathrm{id}_n : n \to n.
+		      \]
 
-    \item (Composition)
-    If
-    \[
-        a : m \to n
-        \quad \text{and} \quad
-        b : n \to k
-    \]
-    are $\Sigma$-terms, then
-    \[
-        a ; b : m \to k
-    \]
-    is a $\Sigma$-term.
+		\item (Composition)
+		      If
+		      \[
+			      a : m \to n
+			      \quad \text{and} \quad
+			      b : n \to k
+		      \]
+		      are $\Sigma$-terms, then
+		      \[
+			      a ; b : m \to k
+		      \]
+		      is a $\Sigma$-term.
 
-    \item (Tensor product)
-    If
-    \[
-        a : m_1 \to n_1
-        \quad \text{and} \quad
-        b : m_2 \to n_2
-    \]
-    are $\Sigma$-terms, then
-    \[
-        a \otimes b : m_1 + m_2 \to n_1 + n_2
-    \]
-    is a $\Sigma$-term.
+		\item (Tensor product)
+		      If
+		      \[
+			      a : m_1 \to n_1
+			      \quad \text{and} \quad
+			      b : m_2 \to n_2
+		      \]
+		      are $\Sigma$-terms, then
+		      \[
+			      a \otimes b : m_1 + m_2 \to n_1 + n_2
+		      \]
+		      is a $\Sigma$-term.
 
-    \item (Symmetry)   For all $m,n \in \mathbb{N}$, there is a term
-    \[
-        \sigma_{m,n} : m+n \to n+m.
-    \]
-\end{enumerate}
+		\item (Symmetry)   For all $m,n \in \mathbb{N}$, there is a term
+		      \[
+			      \sigma_{m,n} : m+n \to n+m.
+		      \]
+	\end{enumerate}
 
-\medskip
+	\medskip
 
-and $E$ be a set of equations over the $\Sigma-terms$.
+	and $E$ be a set of equations over the $\Sigma-terms$.
 \end{definition}
 
 Often, we will think of elements $o:m\to n \in \Sigma$ as generators and represent them as string diagrams. Being the $\Sigma-terms$ the results of composing those generators horizontally and vertically inductively. The set $E$ as a collection of axiomatic equations over these string diagrams.
@@ -715,29 +715,29 @@ Often, we will think of elements $o:m\to n \in \Sigma$ as generators and represe
 The categorical counterpart of these terms is the free category generated by the SMT.
 
 \begin{definition}[The Free category of SMT]
-    The $\text{FreeP}_{(\Sigma,E)}$ is the category freely generated by $(\Sigma,E)$ where the objects are natural numbers, morphisms are $\Sigma-terms$ quotiented by $E$, with composition and tensor product inherited from the symmetric monoidal structure. $\text{FreeP}_{(\Sigma,E)}$ is in fact a PROP\footnote{ For the definition of a prop see~\cite{maclane1998categories}}.
+	The $\text{FreeP}_{(\Sigma,E)}$ is the category freely generated by $(\Sigma,E)$ where the objects are natural numbers, morphisms are $\Sigma-terms$ quotiented by $E$, with composition and tensor product inherited from the symmetric monoidal structure. $\text{FreeP}_{(\Sigma,E)}$ is in fact a PROP\footnote{ For the definition of a prop see~\cite{maclane1998categories}}.
 \end{definition}
 
 The $\text{FreeP}_{(\Sigma,E)}$, also denoted as $P\Sigma_{/E}$,
 \footnote{During the work we will use $\text{FreeP}_{S}$ and $S$, for
-whatever syntax $S$ may be, interchangeably.}
+	whatever syntax $S$ may be, interchangeably.}
 will be our \textbf{syntax} responsible for expressing our underlying semantics.
 For it to be considered a "useful" syntax we expect that it satisfies some properties, particularly we want it to be complete, sound and expressive.
 
 Without those, our algebra would be empty since we would have no assurances that it actually says anything meaningful about we desire to say.
 
 \begin{definition}
-    We will say that a SMT axiomatizes or represents a specific category, usually called the semantic category, when the following diagram commutes:
-    \begin{figure}[H]
-        \centering
-        \input{paper/tikz/semDiag.tex}
-    \end{figure}
-    where: $P\Sigma$ is the category where objects are natural numbers and morphisms are $\Sigma-terms$ from $n \to m$; $P\Sigma_{/E} = \text{FreeP}_{(\Sigma,E)}$ is the  $P\Sigma$ category with the morphisms quotiented by $E$ and there is then a prop morphism $q : P\Sigma \to P\Sigma_{/E}$ witnessing this quotient; $\textbf{Sem}$ is our semantic category (the Cost/Reward relations for example); and s is a full and faithful prop morphism. Another way to say the same is to demand two things out of the SMT, namely:
-\begin{itemize}
-    \item Soundness: We say that $P\Sigma_{/E}$ is sound if $c \overset{E}= d$\footnote{$\overset{E}=$ means that this equality is provable by the equations in $E$} implies $ [c] = [d]$.
-    \item Completeness: We say that $P\Sigma_{/E}$ is complete if $[c] = [d]$ implies $c \overset{E}= d$
-    \item Expressivity: We say that $P\Sigma_{/E}$ is expressive if for every morphism $c$ in \textbf{Sem} there exists $d \in P\Sigma_{/E}$ such that $[d] = c$
-\end{itemize}
+	We will say that a SMT axiomatizes or represents a specific category, usually called the semantic category, when the following diagram commutes:
+	\begin{figure}[H]
+		\centering
+		\input{paper/tikz/semDiag.tex}
+	\end{figure}
+	where: $P\Sigma$ is the category where objects are natural numbers and morphisms are $\Sigma-terms$ from $n \to m$; $P\Sigma_{/E} = \text{FreeP}_{(\Sigma,E)}$ is the  $P\Sigma$ category with the morphisms quotiented by $E$ and there is then a prop morphism $q : P\Sigma \to P\Sigma_{/E}$ witnessing this quotient; $\textbf{Sem}$ is our semantic category (the Cost/Reward relations for example); and s is a full and faithful prop morphism. Another way to say the same is to demand two things out of the SMT, namely:
+	\begin{itemize}
+		\item Soundness: We say that $P\Sigma_{/E}$ is sound if $c \overset{E}= d$\footnote{$\overset{E}=$ means that this equality is provable by the equations in $E$} implies $ [c] = [d]$.
+		\item Completeness: We say that $P\Sigma_{/E}$ is complete if $[c] = [d]$ implies $c \overset{E}= d$
+		\item Expressivity: We say that $P\Sigma_{/E}$ is expressive if for every morphism $c$ in \textbf{Sem} there exists $d \in P\Sigma_{/E}$ such that $[d] = c$
+	\end{itemize}
 
 
 \end{definition}
@@ -745,39 +745,39 @@ Without those, our algebra would be empty since we would have no assurances that
 Those three properties capture the idea that everything we can prove in the syntax, is a holds in the semantics (soundness), everything that holds in the semantics is provable in the syntax (completeness) and that every morphism in the semantics has a syntactic representative (expressivity). Moreover, these properties denote equivalent characteristics about the interpration map, both categorically and functionally. Below we depict a small table defining the equivalence between the desired properties and their equivalent statement:
 
 \begin{table}[h!]
-\centering
-\caption{Equivalence of properties for the interpretation map
-         $[\![{-}]\!] : P\Sigma_{/E} \to \mathbf{Sem}$}
-\label{tab:equivalences}
-\begin{tabular}{
-  m{3.2cm}
-  m{3.2cm}
-  m{4.5cm}
-}
-\toprule
-\textbf{Set theory} &
-\textbf{Category theory} &
-\textbf{Logic (SMT)} \\
-\midrule
+	\centering
+	\caption{Equivalence of properties for the interpretation map
+	$[\![{-}]\!] : P\Sigma_{/E} \to \mathbf{Sem}$}
+	\label{tab:equivalences}
+	\begin{tabular}{
+			m{3.2cm}
+			m{3.2cm}
+			m{4.5cm}
+		}
+		\toprule
+		\textbf{Set theory}      &
+		\textbf{Category theory} &
+		\textbf{Logic (SMT)}                                                                                     \\
+		\midrule
 
-Total &
-Functor &
-Soundness: $c \overset{E}{=} d \;\Rightarrow\; [\![c]\!] = [\![d]\!]$ \\[6pt]
+		Total                    &
+		Functor                  &
+		Soundness: $c \overset{E}{=} d \;\Rightarrow\; [\![c]\!] = [\![d]\!]$                                    \\[6pt]
 
-Deterministic &
-Well-defined map &
-(Functionality of the interpretation) \\[6pt]
+		Deterministic            &
+		Well-defined map         &
+		(Functionality of the interpretation)                                                                    \\[6pt]
 
-Injective &
-Faithful &
-Completeness: $[\![c]\!] = [\![d]\!] \;\Rightarrow\; c \overset{E}{=} d$ \\[6pt]
+		Injective                &
+		Faithful                 &
+		Completeness: $[\![c]\!] = [\![d]\!] \;\Rightarrow\; c \overset{E}{=} d$                                 \\[6pt]
 
-Surjective &
-Full &
-Expressivity: $\forall\, f \in \mathbf{Sem},\; \exists\, d \in P\Sigma_{/E} \text{ s.t. } [\![d]\!] = f$ \\
+		Surjective               &
+		Full                     &
+		Expressivity: $\forall\, f \in \mathbf{Sem},\; \exists\, d \in P\Sigma_{/E} \text{ s.t. } [\![d]\!] = f$ \\
 
-\bottomrule
-\end{tabular}
+		\bottomrule
+	\end{tabular}
 \end{table}
 
 Now we introduce two of the foundational theories for Graphical Algebra, that will serve as a foundation for the following sections, namely, Graphical Linear Algebra~\cite{paixao2022highlevel, bonchi2017interacting} and Graphical Affine Algebra~\cite{bonchi2019affine}, we omit their definitions and proofs and refer to the original sources.
@@ -785,20 +785,20 @@ Now we introduce two of the foundational theories for Graphical Algebra, that wi
 However, we do provide some notation on how to talk about those during the course of the work. Notice that, their semantics was already introduced when we talked about Linear/Affine relations.
 
 \begin{definition}
-    We will call $\textbf{GLA}$ the presentation of the Graphical Linear Algebra SMT, and, in the same manner, $\textbf{GAA}$ the SMT of Graphical Affine Algebra.
+	We will call $\textbf{GLA}$ the presentation of the Graphical Linear Algebra SMT, and, in the same manner, $\textbf{GAA}$ the SMT of Graphical Affine Algebra.
 \end{definition}
 
 \begin{definition}\label{def:arrows}
 	We also denote with $\overrightarrow{(\cdot)}/\overleftarrow{(\cdot)}$ when we want to talk about the algebra generated without the Frobenius structure. For example $\overrightarrow{\textbf{GLA}}$ is the algebra generated by
 	\begin{figure}[H]
 		\centering
-        \input{paper/tikz/RightAlgebra.tex}
+		\input{paper/tikz/RightAlgebra.tex}
 	\end{figure}
 	without their symmetric
 	\begin{figure}[H]
 		\centering
-        \input{paper/tikz/LeftAlgebra.tex}
+		\input{paper/tikz/LeftAlgebra.tex}
 	\end{figure}
 	and the exactly opposite we denote as $\overleftarrow{\textbf{GLA}}$.
 \end{definition}
-  \input{sections/categorical}
+\input{sections/categorical}

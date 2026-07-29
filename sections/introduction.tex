@@ -1,6 +1,6 @@
 \chapter{Introduction}
 
-Mathematics is perpetrated by this notion of what one 
+Mathematics is permeated by this notion of what one
 would call an "ideal" object. This notion of "ideal" often refers to the
 simplest object that meets a specific criteria,
 such as being the smallest element in a set,
@@ -10,21 +10,21 @@ finding such an object is
 an unexplicit optimization problem to be solved.
 Prior works has already characterised the internal
 optimization structure within categorical constructs \cite{Khadh2026bridging},
-but such results are still isolated; a unified treatment is still to be formalized. This thesis is motivated by this observation. We believe that 
+but such results are still isolated; a unified treatment is still to be formalized. This thesis is motivated by this observation. We believe that
 a significant part of mathematics actually admits a surprisingly suitable optimization structure, and, hence,
 many important mathematical structures can actually be described as the solution of a particular optimization problem.
 
-In a analogous manner, we think that, just as mathematics 
-can be formalized through a relational view 
-\footnote{By relation, we mean any logical proposition of the
-form $xRy$. Notice that such notion is within the set-theoretic 
-foundation of mathematics under the interpretation of a subset $S \subset X \times Y$, which is, in turn, a generalization
+In an analogous manner, we think that, just as mathematics
+can be formalized through a relational view, optimization can be understood within the same framework.
+By relation, we mean any logical proposition of the
+form $xRy$. This notion sits within the set-theoretic
+foundation of mathematics, under the interpretation of a subset $S \subset X \times Y$, which is, in turn, a generalization
 of maps between spaces.
-This relational view of mathematics is attested by seminar works such as \cite{frege1879begriffsschrift, whitehead1910principia}
-and ever more chased by the Category theory,
+This relational view of mathematics is attested by seminal works such as \cite{frege1879begriffsschrift, whitehead1910principia}
+and is ever more embraced by Category theory,
 whose main claim is precisely that an object is fully grasped
-by the relation it has to others \cite{maclane1998categories} }
-optimization can be understood within the same framework. More specifically, optimization can be seen as a single
+by the relations it has to others \cite{maclane1998categories}.
+More specifically, optimization can be seen as a single
 compositional framework \cite{stein2024compositional, hanks2024compositionalopt}.
 We ought to show that under specific formulation, solving an optimization problem
 is equivalent of performing algebraic
@@ -49,16 +49,15 @@ of "measurement" generators lifts the category from the binary relations categor
 weighted relations (bifunctions/optimization problems).
 
 \begin{figure}
-    \centering
-    \includegraphics[width=1.0\linewidth]{images/Overview.png}
-    \caption{This image represent the category of subcategories of Rel; We circle two class of subcategories,
-    namely those that are contained in the Binary Relations categories and those embed in Weighted Relations category.
-    Observe how morphism between objects (class of relations) are the addition of a single generator (along with some axioms),
-    and that there are particular generators which are essential binary relations (those that are horizontal) that
-    keeps objects in the subclass of binary relations, but there are others(the vertical morphisms),
-    that resembles an output or measurement, that lift the relations to those on the Weighted Relations class
-    }
-    \label{img:general_view}
+	\centering
+	\includegraphics[width=1.0\linewidth]{images/Overview.png}
+	\caption{This image represents the category of subcategories of $\mathbf{Rel}$. We circle two classes of subcategories:
+		those contained in the Binary Relations category, and those embedded in the Weighted Relations category.
+		Morphisms between objects (classes of relations) correspond to the addition of a single generator, together with some axioms.
+		The horizontal morphisms add generators that are themselves binary relations, keeping the object in the subclass of binary relations.
+		The vertical morphisms, by contrast, add a generator that resembles an output or measurement, lifting the relation into the Weighted Relations class.
+	}
+	\label{img:general_view}
 \end{figure}
 
 This expressivity becomes especially apparent when analyzed through
@@ -74,9 +73,9 @@ equational diagram rewriting \cite{selinger2010survey, bonchi2017interacting}.
 These calculi have proved remarkably versatile, finding applications across a
 wide range of fields: in \emph{quantum computing} \cite{coecke2011interacting};
 \emph{electronics} \cite{baez2018compositional}; \emph{linear algebra} \cite{bonchi2017interacting,
-bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
+	bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
 and in \emph{optimisation and probability} \cite{stein2024gqa,stein2025compositional,
-bonchi2021polyhedral}.Throughout this work
+	bonchi2021polyhedral}. Throughout this work
 we explore how, step by step, one can enrich the already known theories for linear
 \cite{bonchi2017interacting} algebra by adding one new generator at a time, along with a particular
 set of axioms, and derive even richer structures for convex problems \cite{stein2024compositional}.
@@ -100,11 +99,11 @@ into the even more general theory of Symmetric Inequality Monoidal Theory.
 This is achieved by adding the inequality generator $-\ge -$. Geometrically,
 this allows our algebra to go beyond affine spaces and start representing polyhedral figures as linear inequality constraints in optimization.
 \[
- \{| x \in P\} =
- \begin{cases}
-     0 \quad if \;Ax +b\ge 0 \\
-     +\infty \quad \text{otherwise}
- \end{cases}
+	\{| x \in P\} =
+	\begin{cases}
+		0 \quad if \;Ax +b\ge 0 \\
+		+\infty \quad \text{otherwise}
+	\end{cases}
 \]
 Inspired by these observations, and parallel works on this \cite{stein2024gqa, lawvere1973metric} we make our central contribution
 in the final section. The introduction of graphical
@@ -123,7 +122,7 @@ In Section~\ref{sec:glp} we show the diagrammatical equivalence
 of this two classes of objects and how diagrammatically they are instances of the same normal form.
 Thus, our diagrammatical syntax blurs the distinction between expressing LP programs as optimization problems
 and piecewise convex functions.
-In other words, more poetic stated, \textit{our digrammatical theory unifies under the same view, the relational and optimization nature of linear programming}.
+In other words, more poetic stated, \textit{our diagrammatical theory unifies under the same view, the relational and optimization nature of linear programming}.
 
 More broadly, the thesis suggests that graphical methods
 can play for optimization the same role that graphical linear
@@ -135,16 +134,15 @@ but also for designing compositional optimization systems
 and formal symbolic calculi for convex programming.
 
 \paragraph{Thesis overview}
-In Section 2 we introduce the algebraic and categorical playground on which the rest
+In Section~\ref{sec:quantale-relations} we introduce the algebraic and categorical playground on which the rest
 of the work is built, present the initial notions of quantales and relations, and how they play an interchangeable
-role in a categorical view. Next, in Section 3, is introduced basic application of this theory to the
+role in a categorical view. Next, in Section~\ref{sec:composability}, we introduce a basic application of this theory to the
 vast field of convex optimization \cite{stein2024compositional, Khadh2026bridging},
 showing how many of its important constructs fall within such a categorical framework.
 
-In Sections 4 and 5 is presented two already-known graphical theories, namely Graphical Quadratic
-Algebra \cite{stein2024gqa} and Polyhedral Algebra \cite{bonchi2021polyhedral},
+Chapter~\ref{sec:gpa} presents the already-known graphical theory of Polyhedral Algebra \cite{bonchi2021polyhedral},
 where some of the known proofs are recalled and refined.
 
-Finally, we define and prove the completeness of an entirely new Graphical Algebra dedicated
+Finally, in Chapter~\ref{sec:glp}, we define and prove the completeness of an entirely new Graphical Algebra dedicated
 to expressing parametric Linear Programs. This work represents a first step toward a complete diagrammatic calculus for convex optimization.
 
