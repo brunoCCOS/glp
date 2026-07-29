@@ -8,6 +8,12 @@ or the one that factor out all others.
 Although it might not seem immediately,
 finding such an object is
 an unexplicit optimization problem to be solved.
+Consider, for instance, the greatest common divisor of two integers $a, b \in \mathbb{Z}$: it is precisely
+the solution of
+\[
+	\gcd(a,b) = \max\{d \in \mathbb{Z}_{>0} \mid d \text{ divides both } a \text{ and } b\},
+\]
+that is, the terminal object of the poset of common divisors of $a$ and $b$ ordered by divisibility.
 Prior works has already characterised the internal
 optimization structure within categorical constructs \cite{Khadh2026bridging},
 but such results are still isolated; a unified treatment is still to be formalized. This thesis is motivated by this observation. We believe that
