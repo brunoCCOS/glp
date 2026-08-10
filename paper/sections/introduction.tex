@@ -1,32 +1,16 @@
 \section{Introduction}
 
-Category theory has often been regarded as the mathematics of mathematics~\cite{maclane1998categories}.
-The capacity to lift particular concepts into a more general and abstract space
-has demonstrated, time and again, that
-much of mathematics is governed by universal constructions.
-The investigation of such universal concepts allows us to see what a particular view
-could not, and to realize the intrinsic connections and shared nature of what was once thought
-to be separate.
+Mathematical and physical theories have grown increasingly difficult to express through purely symbolic notation, prompting engineers and scientists to develop quasi-formal diagrammatic languages for recording their designs and ideas, from electrical circuit diagrams~\cite{baez2018compositional} to Feynman diagrams and control-system block diagrams. More recently, this diagrammatic spirit has reached mathematics and computer science through the notion of string diagrams from Category Theory, giving rise to diagrammatic algebras that axiomatise reasoning within specific domains, such as the ZX-calculus for quantum computing~\cite{coecke2011interacting}. One such development is the still-growing field of Graphical Algebras, and particularly its more expressive polyhedral variants~\cite{bonchi2021polyhedral}.
 
-One such field, that appears throughout mathematics
-yet stands apart, is optimization.
-The notion of optimality appears throughout mathematics wherever one seeks an
-``ideal'' object satisfying some criterion. This ``ideal'' often refers to the
-simplest or most economical object meeting certain constraints. Prior work has already characterised the internal
-optimization structure within categorical constructs \cite{Khadh2026bridging},
-but such results remain isolated; a unified treatment has yet to be formalized.
-
-This work is motivated by the observation that many important
-mathematical structures used in optimization can be understood within
+This work aims to lift such algebras to an even higher level of expressivity: turning the already complete theory of polyhedra into a more general language by extending it towards linear problems. We observe that
+many mathematical structures used in optimization can be understood within
 a single compositional framework \cite{stein2024compositional, hanks2024compositionalopt}.
-Instead of treating relations, convex functions, polyhedra,
-and linear programs as isolated objects, we show that they can all be
-interpreted as morphisms in categories whose composition is given by elimination or minimization.
+Instead of treating convex functions, polyhedra,
+and linear programs as distinct objects, we show that they can all be interpreted as morphisms (relations) in a suitable category whose composition is given by elimination or minimization.
 In this way, optimization itself becomes an algebraic process and a universal setting across mathematics.
 
-This expressivity becomes especially apparent when analyzed through
-the language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer}.
-Originating as a rigorous graphical language for
+Over that goal, the language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer} help us to make this expressivity even more aparent.
+Acting as rigorous framework for
 monoidal categories, string diagrams provide an intuitive yet mathematically
 precise syntax in which the sequential and parallel composition of morphisms
 correspond directly to vertical and horizontal juxtaposition of diagrams
@@ -100,4 +84,3 @@ $\mathbf{PolyFun}$. Section~\ref{sec:glp} defines the symmetric monoidal theory 
 its normal form, and the epigraph form. Section~\ref{sec:complete} proves soundness, expressivity
 and completeness, establishing that $\mathbf{GLP}$ axiomatises the semantics.
 This work is a step toward a complete diagrammatic calculus for convex optimization.
-

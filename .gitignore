@@ -1,6 +1,7 @@
 bin/
 propr/
 *.aux
+*.bak*
 *.bbl
 *.bbl-SAVE-ERROR
 *.bcf

@@ -1,0 +1,161 @@
+\begin{center}
+    \begin{tikzpicture}[axpic]
+      \node at (0.5,1.3) {$c$};
+      \pic (g1) at (0.500,0.800) {linear};
+      \coordinate (id_in_1) at (0,.2);
+      \coordinate (id_out_1) at (1.000,.2);
+      \draw (id_in_1) -- (id_out_1);
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=A_1] (g2) at (0.500,0.500) {2drelation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (g3) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=B_1] (g4) at (0.500,0.500) {corelation};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (id_out_1) to[out=0,in=180] (g2-in-1);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+
+      \begin{scope}[shift={(5.500,0.0)}]
+      \node at (0.5,1.3) {$d$};
+      \pic (h1) at (0.500,0.800) {linear};
+      \coordinate (id_in_2) at (0,.2);
+      \coordinate (id_out_2) at (1.000,.2);
+      \draw (id_in_2) -- (id_out_2);
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=A_2] (h2) at (0.500,0.500) {2drelation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (h3) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=B_2] (h4) at (0.500,0.500) {corelation};
+      \end{scope}
+      \draw (h1-out-0) to[out=0,in=180] (h2-in-0);
+      \draw (id_out_2) to[out=0,in=180] (h2-in-1);
+      \draw (h2-out-0) to[out=0,in=180] (h3-in-0);
+      \draw (h3-out-0) to[out=0,in=180] (h4-in-0);
+      \end{scope}
+    \end{tikzpicture} \\
+    \vspace{3mm}
+    {\footnotesize (epigraph form, Cor.~\ref{cor:epigraph form})} \\
+    \vspace{1mm}
+
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(2.500,0.000)}]
+      \pic (g3) at (0.500,0.500) {comultiplication};
+      \end{scope}
+      \begin{scope}[shift={(3.750,0.000)}]
+      \pic[val=A_1] (g4) at (0.500,0.500) {2dmatrix};
+      \end{scope}
+      \begin{scope}[shift={(5.000,0.000)}]
+      \pic (g5) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(6.250,0.000)}]
+      \pic[val=B_1] (g6) at (0.500,0.500) {corelation};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+      \draw (g3-out-1) to[out=0,in=180] (g4-in-1);
+      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+      \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
+      \draw[dotted] (1.15,0.10) rectangle (7.05,0.90);
+      \node at (4.1,-0.25) {\scriptsize $c^*$};
+    \end{tikzpicture} \\
+    \vspace{1mm}
+
+    \begin{tikzpicture}[axpic]
+      \pic (h1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (h2) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(2.500,0.000)}]
+      \pic (h3) at (0.500,0.500) {comultiplication};
+      \end{scope}
+      \begin{scope}[shift={(3.750,0.000)}]
+      \pic[val=A_2] (h4) at (0.500,0.500) {2dmatrix};
+      \end{scope}
+      \begin{scope}[shift={(5.000,0.000)}]
+      \pic (h5) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(6.250,0.000)}]
+      \pic[val=B_2] (h6) at (0.500,0.500) {corelation};
+      \end{scope}
+      \draw (h1-out-0) to[out=0,in=180] (h2-in-0);
+      \draw (h2-out-0) to[out=0,in=180] (h3-in-0);
+      \draw (h3-out-0) to[out=0,in=180] (h4-in-0);
+      \draw (h3-out-1) to[out=0,in=180] (h4-in-1);
+      \draw (h4-out-0) to[out=0,in=180] (h5-in-0);
+      \draw (h5-out-0) to[out=0,in=180] (h6-in-0);
+      \draw[dotted] (1.15,0.10) rectangle (7.05,0.90);
+      \node at (4.1,-0.25) {\scriptsize $d^*$};
+    \end{tikzpicture} \\
+    \vspace{3mm}
+    {\footnotesize (the dotted boxes $c^*, d^*$ are $\mathbf{GPA}$ diagrams with $[c^*]=[d^*]=E$;
+      by $\mathbf{GPA}$ completeness both reduce to the same normal form)} \\
+    \vspace{1mm}
+
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=A^*] (g2) at (0.500,0.500) {relation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (g3) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=B^*] (g4) at (0.500,0.500) {comatrix};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+      \draw[dotted] (1.15,0.15) rectangle (4.35,0.85);
+
+      \node at (5.35,0.5) {$=$};
+
+      \begin{scope}[shift={(6.000,0.0)}]
+      \pic (h1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=A^*] (h2) at (0.500,0.500) {relation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (h3) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=B^*] (h4) at (0.500,0.500) {comatrix};
+      \end{scope}
+      \draw (h1-out-0) to[out=0,in=180] (h2-in-0);
+      \draw (h2-out-0) to[out=0,in=180] (h3-in-0);
+      \draw (h3-out-0) to[out=0,in=180] (h4-in-0);
+      \draw[dotted] (1.15,0.15) rectangle (4.35,0.85);
+      \end{scope}
+    \end{tikzpicture} \\
+    \vspace{3mm}
+    {\footnotesize (composing the common $\mathbf{GPA}$ normal form with the leftover
+      \inlinegen{linear} yields the same $\mathbf{GLP}$ diagram)} \\
+    \vspace{1mm}
+
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=A^*] (g2) at (0.500,0.500) {relation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (g3) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=B^*] (g4) at (0.500,0.500) {comatrix};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture}
+\end{center}

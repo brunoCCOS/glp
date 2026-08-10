@@ -1,0 +1,430 @@
+\begin{center} \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.0) {linear};
+        \coordinate (id_in_1) at (0,.2);
+        \coordinate (id_out_1) at (1.000,.2);
+        \draw (id_in_1) -- (id_out_1);
+        \begin{scope}[shift={(1.250,0.0)}]
+            \pic[val=A_1] (g2) at (0.500,0.500) {2drelation};
+        \end{scope}
+        \begin{scope}[shift={(2.500,0.000)}]
+            \pic (g3) at (0.500,0.500) {ge};
+        \end{scope}
+        \begin{scope}[shift={(3.750,0.0)}]
+            \pic[val=B_1] (g4) at (0.500,0.500) {comatrix};
+        \end{scope}
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (id_out_1) to[out=0,in=180] (g2-in-1);
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+
+        \pic (h1) at (5.500,1.0) {linear};
+        \begin{scope}[shift={(6.250,0.0)}]
+            \pic[val=A_2] (h2) at (0.500,0.500) {2drelation};
+        \end{scope}
+        \begin{scope}[shift={(7.500,0.000)}]
+            \pic (h3) at (0.500,0.500) {ge};
+        \end{scope}
+        \begin{scope}[shift={(8.750,0.0)}]
+            \pic[val=B_2] (h4) at (0.500,0.500) {comatrix};
+        \end{scope}
+        \draw (h1-out-0) to[out=0,in=180] (h2-in-0);
+        \draw (g4-out-0) to[out=0,in=180] (h2-in-1);
+        \draw (h2-out-0) to[out=0,in=180] (h3-in-0);
+        \draw (h3-out-0) to[out=0,in=180] (h4-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.0) {linear};
+        \coordinate (id_in_1) at (0,.2);
+        \coordinate (id_out_1) at (1.000,.2);
+        \draw (id_in_1) -- (id_out_1);
+        \begin{scope}[shift={(1.250,0.0)}]
+            \pic[val=A_1] (g2) at (0.500,0.500) {2drelation};
+        \end{scope}
+        \begin{scope}[shift={(2.500,0.000)}]
+            \pic (g3) at (0.500,0.500) {ge};
+        \end{scope}
+        \begin{scope}[shift={(3.750,0.0)}]
+            \pic[val=B_1] (g4) at (0.500,0.500) {comatrix};
+        \end{scope}
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (id_out_1) to[out=0,in=180] (g2-in-1);
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+
+        \pic (h1) at (5.500,1.0) {linear};
+        \pic[val=A_{2,1}] (n1) at (7.000,1.0) {matrix};
+        \pic[val=A_{2,2}] (n2) at (7.000,0.0) {matrix};
+        \pic (mult1) at (8.000,0.5) {multiplication};
+        \pic (aff1) at (8.500,0.0) {affine};
+        \pic[val=s] (sc1) at (9.750,0.0) {scalar};
+        \pic (mult2) at (10.750,0.5) {multiplication};
+        \pic (h3) at (11.750,0.5) {ge};
+        \pic[val=B_2] (h4) at (13.000,0.5) {comatrix};
+        \draw (h1-out-0) to[out=0,in=180] (n1-in-0);
+        \draw (g4-out-0) to[out=0,in=180] (n2-in-0);
+        \draw (n1-out-0) to[out=0,in=180] (mult1-in-0);
+        \draw (n2-out-0) to[out=0,in=180] (mult1-in-1);
+        \draw (aff1-out-0) to[out=0,in=180] (sc1-in-0);
+        \draw (mult1-out-0) to[out=0,in=180] (mult2-in-0);
+        \draw (sc1-out-0) to[out=0,in=180] (mult2-in-1);
+        \draw (mult2-out-0) to[out=0,in=180] (h3-in-0);
+        \draw (h3-out-0) to[out=0,in=180] (h4-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.0) {linear};
+        \coordinate (id_in_1) at (0,.2);
+        \coordinate (id_out_1) at (1.000,.2);
+        \draw (id_in_1) -- (id_out_1);
+        \begin{scope}[shift={(1.250,0.0)}]
+            \pic[val=A_1] (g2) at (0.500,0.500) {2drelation};
+        \end{scope}
+        \begin{scope}[shift={(2.500,0.000)}]
+            \pic (g3) at (0.500,0.500) {ge};
+        \end{scope}
+        \begin{scope}[shift={(3.750,0.0)}]
+            \pic[val=B_1] (g4) at (0.500,0.500) {comatrix};
+        \end{scope}
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (id_out_1) to[out=0,in=180] (g2-in-1);
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+
+        \pic (h1) at (5.500,1.0) {linear};
+        \pic[val=A_{2,1}] (n1) at (7.000,1.0) {matrix};
+        \pic[val=A_{2,2}] (n2) at (7.000,0.0) {matrix};
+        \pic (h3) at (8.000,0.0) {ge};
+        \pic (mult1) at (9.000,0.5) {multiplication};
+        \pic (aff1) at (9.500,0.0) {affine};
+        \pic[val=s] (sc1) at (10.750,0.0) {scalar};
+        \pic (mult2) at (11.750,0.5) {multiplication};
+        \pic[val=B_2] (h4) at (13.000,0.5) {comatrix};
+        \draw (h1-out-0) to[out=0,in=180] (n1-in-0);
+        \draw (g4-out-0) to[out=0,in=180] (n2-in-0);
+        \draw (n2-out-0) to[out=0,in=180] (h3-in-0);
+        \draw (n1-out-0) to[out=0,in=180] (mult1-in-0);
+        \draw (h3-out-0) to[out=0,in=180] (mult1-in-1);
+        \draw (aff1-out-0) to[out=0,in=180] (sc1-in-0);
+        \draw (mult1-out-0) to[out=0,in=180] (mult2-in-0);
+        \draw (sc1-out-0) to[out=0,in=180] (mult2-in-1);
+        \draw (mult2-out-0) to[out=0,in=180] (h4-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(FME)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \begin{scope}[shift={(0.000,0.500)}]
+            \begin{scope}[shift={(0.000,1.000)}]
+                \pic (g1) at (0.500,0.500) {linear};
+            \end{scope}
+            \coordinate (id_in_2) at (0,0.500);
+            \coordinate (id_out_3) at (1.000,0.500);
+            \draw (id_in_2) -- (id_out_3);
+            \begin{scope}[shift={(1.250,0.500)}]
+                \pic[val=A_1] (g4) at (0.500,0.500) {2drelation};
+            \end{scope}
+            \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+            \draw (id_out_3) to[out=0,in=180] (g4-in-1);
+            \begin{scope}[shift={(2.500,0.500)}]
+                \pic[val=C] (g5) at (0.500,0.500) {matrix};
+            \end{scope}
+            \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+        \end{scope}
+        \begin{scope}[shift={(3.750,0.000)}]
+            \begin{scope}[shift={(0.000,1.000)}]
+                \begin{scope}[shift={(0.000,1.000)}]
+                    \pic (g6) at (0.500,0.500) {linear};
+                    \begin{scope}[shift={(1.250,0.000)}]
+                        \pic[val=A_{2,1}] (g7) at (0.500,0.500) {matrix};
+                    \end{scope}
+                    \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
+                \end{scope}
+                \pic (g8) at (0.500,0.500) {ge};
+                \begin{scope}[shift={(1.250,0.000)}]
+                    \pic[val=D] (g9) at (0.500,0.500) {comatrix};
+                \end{scope}
+                \draw (g8-out-0) to[out=0,in=180] (g9-in-0);
+                \begin{scope}[shift={(2.500,0.500)}]
+                    \pic (g10) at (0.500,0.500) {multiplication};
+                \end{scope}
+                \draw (g7-out-0) to[out=0,in=180] (g10-in-0);
+                \draw (g9-out-0) to[out=0,in=180] (g10-in-1);
+            \end{scope}
+            \begin{scope}[shift={(0.625,0.000)}]
+                \pic (g11) at (0.500,0.500) {affine};
+                \begin{scope}[shift={(1.250,0.000)}]
+                    \pic[val=s] (g12) at (0.500,0.500) {scalar};
+                \end{scope}
+                \draw (g11-out-0) to[out=0,in=180] (g12-in-0);
+            \end{scope}
+            \coordinate (a13) at (3.500,0 |- g12-out-0);
+            \draw (g12-out-0) -- (a13);
+        \end{scope}
+        \draw (g5-out-0) to[out=0,in=180] (g8-in-0);
+        \begin{scope}[shift={(7.500,1.000)}]
+            \pic (g14) at (0.500,0.500) {multiplication};
+        \end{scope}
+        \draw (g10-out-0) to[out=0,in=180] (g14-in-0);
+        \draw (a13) to[out=0,in=180] (g14-in-1);
+        \begin{scope}[shift={(8.750,1.000)}]
+            \pic[val=B_2] (g15) at (0.500,0.500) {comatrix};
+        \end{scope}
+        \draw (g14-out-0) to[out=0,in=180] (g15-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \begin{scope}[shift={(0.000,0.500)}]
+            \begin{scope}[shift={(0.000,1.000)}]
+                \pic (g1) at (0.500,0.500) {linear};
+            \end{scope}
+            \coordinate (id_in_2) at (0,0.500);
+            \coordinate (id_out_3) at (1.000,0.500);
+            \draw (id_in_2) -- (id_out_3);
+            \begin{scope}[shift={(1.250,0.500)}]
+                \pic[val=A_1] (g4) at (0.500,0.500) {2drelation};
+            \end{scope}
+            \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+            \draw (id_out_3) to[out=0,in=180] (g4-in-1);
+            \begin{scope}[shift={(2.500,0.500)}]
+                \pic[val=C] (g5) at (0.500,0.500) {matrix};
+            \end{scope}
+            \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+        \end{scope}
+        \begin{scope}[shift={(3.750,0.000)}]
+            \begin{scope}[shift={(0.000,1.000)}]
+                \begin{scope}[shift={(0.000,1.000)}]
+                    \pic (g6) at (0.500,0.500) {linear};
+                    \begin{scope}[shift={(1.250,0.000)}]
+                        \pic[val=A_{2,1}] (g7) at (0.500,0.500) {matrix};
+                    \end{scope}
+                    \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
+                    \begin{scope}[shift={(2.500,0.000)}]
+                        \pic[val=D] (g8) at (0.500,0.500) {matrix};
+                    \end{scope}
+                    \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
+                \end{scope}
+                \begin{scope}[shift={(1.250,0.000)}]
+                    \pic (g9) at (0.500,0.500) {ge};
+                \end{scope}
+                \coordinate (a10) at (0.000,0 |- g9-in-0);
+                \draw (g9-in-0) -- (a10);
+                \coordinate (a11) at (3.500,0 |- g9-out-0);
+                \draw (g9-out-0) -- (a11);
+                \begin{scope}[shift={(3.750,0.500)}]
+                    \pic (g12) at (0.500,0.500) {multiplication};
+                \end{scope}
+                \draw (g8-out-0) to[out=0,in=180] (g12-in-0);
+                \draw (a11) to[out=0,in=180] (g12-in-1);
+                \begin{scope}[shift={(5.000,0.500)}]
+                    \pic[val=D] (g13) at (0.500,0.500) {comatrix};
+                \end{scope}
+                \draw (g12-out-0) to[out=0,in=180] (g13-in-0);
+            \end{scope}
+            \begin{scope}[shift={(1.875,0.000)}]
+                \pic (g14) at (0.500,0.500) {affine};
+                \begin{scope}[shift={(1.250,0.000)}]
+                    \pic[val=s] (g15) at (0.500,0.500) {scalar};
+                \end{scope}
+                \draw (g14-out-0) to[out=0,in=180] (g15-in-0);
+            \end{scope}
+            \coordinate (a16) at (6.000,0 |- g15-out-0);
+            \draw (g15-out-0) -- (a16);
+        \end{scope}
+        \draw (g5-out-0) to[out=0,in=180] (a10);
+        \begin{scope}[shift={(10.000,1.000)}]
+            \pic (g17) at (0.500,0.500) {multiplication};
+        \end{scope}
+        \draw (g13-out-0) to[out=0,in=180] (g17-in-0);
+        \draw (a16) to[out=0,in=180] (g17-in-1);
+        \begin{scope}[shift={(11.250,1.000)}]
+            \pic[val=B_2] (g18) at (0.500,0.500) {comatrix};
+        \end{scope}
+        \draw (g17-out-0) to[out=0,in=180] (g18-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{antipode})}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \begin{scope}[shift={(0.000,1.000)}]
+            \pic (g1) at (0.500,0.500) {linear};
+        \end{scope}
+        \coordinate (id_in_2) at (0,0.500);
+        \coordinate (id_out_3) at (1.000,0.500);
+        \draw (id_in_2) -- (id_out_3);
+        \begin{scope}[shift={(1.250,0.500)}]
+            \pic[val=A_1] (g4) at (0.500,0.500) {2drelation};
+        \end{scope}
+        \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+        \draw (id_out_3) to[out=0,in=180] (g4-in-1);
+        \begin{scope}[shift={(2.500,0.500)}]
+            \pic[val=C] (g5) at (0.500,0.500) {matrix};
+        \end{scope}
+        \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+        \begin{scope}[shift={(3.750,0.000)}]
+            \begin{scope}[shift={(0.000,1.000)}]
+                \pic (g6) at (0.500,0.500) {linear};
+                \begin{scope}[shift={(1.250,0.000)}]
+                    \pic[val=A_{2,1}] (g7) at (0.500,0.500) {matrix};
+                \end{scope}
+                \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
+                \begin{scope}[shift={(2.500,0.000)}]
+                    \pic[val=D] (g8) at (0.500,0.500) {matrix};
+                \end{scope}
+                \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
+            \end{scope}
+            \begin{scope}[shift={(1.250,0.000)}]
+                \pic (g9) at (0.500,0.500) {ge};
+            \end{scope}
+            \coordinate (a10) at (0.000,0 |- g9-in-0);
+            \draw (g9-in-0) -- (a10);
+            \coordinate (a11) at (3.500,0 |- g9-out-0);
+            \draw (g9-out-0) -- (a11);
+            \begin{scope}[shift={(3.750,0.500)}]
+                \pic (g12) at (0.500,0.500) {multiplication};
+            \end{scope}
+            \draw (g8-out-0) to[out=0,in=180] (g12-in-0);
+            \draw (a11) to[out=0,in=180] (g12-in-1);
+            \begin{scope}[shift={(5.000,0.500)}]
+                \pic[val=D] (g13) at (0.500,0.500) {comatrix};
+            \end{scope}
+            \draw (g12-out-0) to[out=0,in=180] (g13-in-0);
+        \end{scope}
+        \draw (g5-out-0) to[out=0,in=180] (a10);
+        \begin{scope}[shift={(10.000,0.500)}]
+            \pic (g14) at (0.500,0.500) {comultiplication};
+        \end{scope}
+        \draw (g13-out-0) to[out=0,in=180] (g14-in-0);
+        \begin{scope}[shift={(11.250,0.000)}]
+            \begin{scope}[shift={(1.250,1.000)}]
+                \pic[val=B_2] (g15) at (0.500,0.500) {comatrix};
+            \end{scope}
+            \pic (g16) at (0.500,0.500) {antipode};
+            \begin{scope}[shift={(1.250,0.000)}]
+                \pic[val=s] (g17) at (0.0,0.500) {coscalar};
+            \end{scope}
+            \draw (g16-out-0) to[out=0,in=180] (g17-in-0);
+            \begin{scope}[shift={(2.,0.000)}]
+                \pic (g18) at (0.0,0.500) {coaffine};
+            \end{scope}
+            % \draw (g17-out-0) to[out=0,in=0] (g18-in-0);
+            \coordinate (a19) at (0.000,0 |- g15-in-0);
+            \draw (g15-in-0) -- (a19);
+            \coordinate (a20) at (3.500,0 |- g15-out-0);
+            \draw (g15-out-0) -- (a20);
+        \end{scope}
+        \draw (g14-out-0) to[out=0,in=180] (a19);
+        \draw (g14-out-1) to[out=0,in=180] (g16-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \begin{scope}[shift={(0.000,1.000)}]
+            \pic (g1) at (0.500,0.500) {linear};
+        \end{scope}
+        \coordinate (id_in_2) at (0,0.500);
+        \coordinate (id_out_3) at (1.000,0.500);
+        \draw (id_in_2) -- (id_out_3);
+        \begin{scope}[shift={(1.250,0.500)}]
+            \pic[val=A_1] (g4) at (0.500,0.500) {2drelation};
+        \end{scope}
+        \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+        \draw (id_out_3) to[out=0,in=180] (g4-in-1);
+        \begin{scope}[shift={(2.500,0.500)}]
+            \pic[val=C] (g5) at (0.500,0.500) {matrix};
+        \end{scope}
+        \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+        \begin{scope}[shift={(3.750,0.000)}]
+            \begin{scope}[shift={(0.000,1.000)}]
+                \pic (g6) at (0.500,0.500) {linear};
+                \begin{scope}[shift={(1.250,0.000)}]
+                    \pic[val=A_{2,1}] (g7) at (0.500,0.500) {matrix};
+                \end{scope}
+                \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
+                \begin{scope}[shift={(2.500,0.000)}]
+                    \pic[val=D] (g8) at (0.500,0.500) {matrix};
+                \end{scope}
+                \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
+            \end{scope}
+            \begin{scope}[shift={(1.250,0.000)}]
+                \coordinate (id_in_9) at (0,0.500);
+                \coordinate (id_out_10) at (1.000,0.500);
+                \draw (id_in_9) -- (id_out_10);
+            \end{scope}
+            \coordinate (a11) at (0.000,0 |- id_in_9);
+            \draw (id_in_9) -- (a11);
+            \coordinate (a12) at (3.500,0 |- id_out_10);
+            \draw (id_out_10) -- (a12);
+            \begin{scope}[shift={(3.750,0.500)}]
+                \pic (g13) at (0.500,0.500) {multiplication};
+            \end{scope}
+            \draw (g8-out-0) to[out=0,in=180] (g13-in-0);
+            \draw (a12) to[out=0,in=180] (g13-in-1);
+            \begin{scope}[shift={(5.000,0.500)}]
+                \pic (g14) at (0.500,0.500) {ge};
+            \end{scope}
+            \draw (g13-out-0) to[out=0,in=180] (g14-in-0);
+            \begin{scope}[shift={(6.250,0.500)}]
+                \pic[val=D] (g15) at (0.500,0.500) {comatrix};
+            \end{scope}
+            \draw (g14-out-0) to[out=0,in=180] (g15-in-0);
+        \end{scope}
+        \draw (g5-out-0) to[out=0,in=180] (a11);
+        \begin{scope}[shift={(11.250,0.500)}]
+            \pic (g16) at (0.500,0.500) {comultiplication};
+        \end{scope}
+        \draw (g15-out-0) to[out=0,in=180] (g16-in-0);
+        \begin{scope}[shift={(12.500,0.000)}]
+            \begin{scope}[shift={(1.250,1.000)}]
+                \pic[val=B_2] (g17) at (0.500,0.500) {comatrix};
+            \end{scope}
+            \pic (g18) at (0.500,0.500) {antipode};
+            \begin{scope}[shift={(1.250,0.000)}]
+                \pic[val=s] (g19) at (0.0,0.500) {coscalar};
+            \end{scope}
+            \draw (g18-out-0) to[out=0,in=180] (g19-in-0);
+            \begin{scope}[shift={(2.000,0.000)}]
+                \pic (g20) at (0.,0.500) {coaffine};
+            \end{scope}
+            % \draw (g19-out-0) to[out=0,in=180] (g20-in-0);
+            \coordinate (a21) at (0.000,0 |- g17-in-0);
+            \draw (g17-in-0) -- (a21);
+            \coordinate (a22) at (3.500,0 |- g17-out-0);
+            \draw (g17-out-0) -- (a22);
+        \end{scope}
+        \draw (g16-out-0) to[out=0,in=180] (a21);
+        \draw (g16-out-1) to[out=0,in=180] (g18-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{matrix comp.})}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \begin{scope}[shift={(0.000,1.000)}]
+            \pic (g1) at (0.500,0.500) {linear};
+        \end{scope}
+        \coordinate (id_in_2) at (0,0.500);
+        \coordinate (id_out_3) at (1.000,0.500);
+        \draw (id_in_2) -- (id_out_3);
+        \begin{scope}[shift={(1.250,0.500)}]
+            \pic[val=A''] (g4) at (0.500,0.500) {2drelation};
+        \end{scope}
+        \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+        \draw (id_out_3) to[out=0,in=180] (g4-in-1);
+        \begin{scope}[shift={(2.500,0.500)}]
+            \pic (g5) at (0.500,0.500) {ge};
+        \end{scope}
+        \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+        \begin{scope}[shift={(3.750,0.500)}]
+            \pic[val=B''] (g6) at (0.500,0.500) {corelation};
+        \end{scope}
+        \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
+    \end{tikzpicture}
+
+\end{center}

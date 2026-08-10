@@ -1,0 +1,93 @@
+\begin{center}
+    \;\begin{tikzpicture}[axpic]\node{$c$};\end{tikzpicture}\;
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic[val=A] (g1) at (0.500,0.500) {relation};
+        \begin{scope}[shift={(1.250,0.000)}]
+            \pic (g2) at (0.500,0.500) {ge};
+        \end{scope}
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \begin{scope}[shift={(2.500,0.000)}]
+            \pic[val=B] (g3) at (0.500,0.500) {comatrix};
+        \end{scope}
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(zeroeq)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.700) {linear};
+      \begin{scope}[shift={(3.5,0.000)}]
+      \pic (z1) at (0.500,0.700) {cozero};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (z1-in-0);
+      \coordinate (id_in_2) at (0.5,0.0);
+      \coordinate (id_out_3) at (1.4,0.0);
+      \draw (id_in_2) -- (id_out_3);
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=A] (g2) at (0.500,0.0) {relation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (g3) at (0.500,0.0) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=B] (g4) at (0.500,0.0) {comatrix};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=0] (z1-in-0);
+      \draw (id_out_3) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture}\\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(idemp)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.700) {linear};
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (z0) at (0.500,0.7) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.5,0.000)}]
+      \pic (z1) at (0.500,0.700) {cozero};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (z0-in-0);
+      \draw (z0-out-0) to[out=0,in=180] (z1-in-0);
+      \coordinate (id_in_2) at (0.5,0.0);
+      \coordinate (id_out_3) at (1.4,0.0);
+      \draw (id_in_2) -- (id_out_3);
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=A] (g2) at (0.500,0.0) {relation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (g3) at (0.500,0.0) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=B] (g4) at (0.500,0.0) {comatrix};
+      \end{scope}
+      \draw (id_out_3) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture}\\
+    \vspace{3mm}
+
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(matrix\; def.)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,.3) {linear};
+      \coordinate (id_in_2) at (0.5,-0.3);
+      \coordinate (id_out_3) at (1.35,-0.3);
+      \draw (id_in_2) -- (id_out_3);
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=A'] (g2) at (0.500,0.0) {2drelation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (g3) at (0.500,0.0) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=B'] (g4) at (0.500,0.0) {comatrix};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (id_out_3) to[out=0,in=180] (g2-in-1);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture}
+\end{center}

@@ -160,24 +160,24 @@ that result, the argument below goes through.
 	Proposition~\ref{prop:equalepi} gives
 	$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
 
-	By Corollary~\ref{cor:epigraph form}, both $c$ and $d$ admit
-	epigraph forms $c = \mushroom ; c^*$ and $d = \mushroom ; d^*$
-	with $[c^*] = [d^*] = E$ in $\mathbf{PolyRel}$:
+	Diagrammatically, $c$ and $d$ start out as two distinct diagrams in
+	normal form. By Corollary~\ref{cor:epigraph form}, each admits an
+	epigraph form $c = \inlinegen{linear} ; c^*$ and
+	$d = \inlinegen{linear} ; d^*$, leaving the source generator
+	\inlinegen{linear} untouched and isolating everything else inside a
+	dotted box: a pure $\mathbf{GPA}$ diagram $c^*$ (resp.\ $d^*$) whose
+	denotation is the epigraph, $[c^*] = [d^*] = E$ in
+	$\mathbf{PolyRel}$. Since $c^*$ and $d^*$ are $\mathbf{GPA}$
+	diagrams with the same denotation, completeness of $\mathbf{GPA}$
+	gives $c^* = d^*$ in $\mathrm{FreeP}_{\mathbf{GPA}}$; in particular
+	both reduce to the same $\mathbf{GPA}$ normal form. Composing this
+	common diagram with the leftover \inlinegen{linear} collapses $c$
+	and $d$ to the same $\mathbf{GLP}$ diagram:
 	\begin{figure}[H]
 		\centering
 		\input{tikz/ProofCompleteness1.tex}
 	\end{figure}
-	Since $[c^*] = [d^*]$ in $\mathbf{PolyRel}$, completeness of
-	$\mathbf{GPA}$ gives $c^* = d^*$ in
-	$\mathrm{FreeP}_{\mathbf{GPA}}$. Therefore,
-	\[
-		c = \mushroom ; c^* = \mushroom ; d^* = d,
-	\]
-	as witnessed diagrammatically by:
-	\begin{figure}[H]
-		\centering
-		\input{tikz/ProofCompleteness4.tex}
-	\end{figure}
+	Therefore $c = \inlinegen{linear} ; c^* = \inlinegen{linear} ; d^* = d$.
 \end{proof}
 
 As a consequence of the three lemmas above:
@@ -188,4 +188,3 @@ As a consequence of the three lemmas above:
 \begin{proof}
 	By the preceding three lemmas.
 \end{proof}
-

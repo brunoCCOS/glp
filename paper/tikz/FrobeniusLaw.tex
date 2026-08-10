@@ -1,0 +1,49 @@
+\begin{center}
+    \begin{tikzpicture}[axpic]
+      \begin{scope}[shift={(0.000,1.000)}]
+      \pic (g1) at (0.500,0.500) {copy};
+      \end{scope}
+      \coordinate (id_in_2) at (0,0.500);
+      \coordinate (id_out_3) at (1.000,0.500);
+      \draw (id_in_2) -- (id_out_3);
+      \begin{scope}[shift={(1.250,0.000)}]
+      \begin{scope}[shift={(0.000,1.000)}]
+      \coordinate (id_in_4) at (0,0.500);
+      \coordinate (id_out_5) at (1.000,0.500);
+      \draw (id_in_4) -- (id_out_5);
+      \end{scope}
+      \pic (g6) at (0.500,0.500) {cocopy};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (id_in_4);
+      \draw (g1-out-1) to[out=0,in=180] (g6-in-0);
+      \draw (id_out_3) to[out=0,in=180] (g6-in-1);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {cocopy};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {copy};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \begin{scope}[shift={(0.000,1.000)}]
+      \coordinate (id_in_1) at (0,0.500);
+      \coordinate (id_out_2) at (1.000,0.500);
+      \draw (id_in_1) -- (id_out_2);
+      \end{scope}
+      \pic (g3) at (0.500,0.500) {copy};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \begin{scope}[shift={(0.000,1.000)}]
+      \pic (g4) at (0.500,0.500) {cocopy};
+      \end{scope}
+      \coordinate (id_in_5) at (0,0.500);
+      \coordinate (id_out_6) at (1.000,0.500);
+      \draw (id_in_5) -- (id_out_6);
+      \end{scope}
+      \draw (id_out_2) to[out=0,in=180] (g4-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
+      \draw (g3-out-1) to[out=0,in=180] (id_in_5);
+    \end{tikzpicture}
+\end{center}

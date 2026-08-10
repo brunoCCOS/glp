@@ -1,0 +1,75 @@
+\begin{center}
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {linear};
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(idemp)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {ge};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+    \end{tikzpicture} \\
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(identity)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=I] (g2) at (0.500,0.500) {matrix};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (g3) at (0.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=I] (g4) at (0.500,0.500) {comatrix};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture} \\
+    \vspace{2mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(unity)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \begin{scope}[shift={(1.250,0.5)}]
+      \pic (g1) at (-0.500,0.500) {linear};
+      \pic[val=I] (g2) at (0.500,0.500) {matrix};
+      \end{scope}
+      \begin{scope}[shift={(2.250,-0.0)}]
+      \pic (z1) at (-0.500,0.0) {zero};
+      \pic (m3) at (0.500,0.500) {multiplication};
+      \pic (g3) at (1.500,0.500) {ge};
+      \end{scope}
+      \begin{scope}[shift={(4.250,0.0)}]
+      \pic[val=I] (g4) at (0.500,0.500) {comatrix};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (m3-in-0);
+      \draw (z1-out-0) to[out=0,in=180] (m3-in-1);
+      \draw (m3-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture} \\
+    \vspace{2mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,.3) {linear};
+      \coordinate (id_in_2) at (0.5,-0.3);
+      \coordinate (id_out_3) at (1.4,-0.3);
+      \draw (id_in_2) -- (id_out_3);
+      \node at (0.7,-.45) {$0$};
+      \begin{scope}[shift={(1.250,0.0)}]
+      \pic[val=I] (g2) at (0.500,0.0) {2drelation};
+      \end{scope}
+      \begin{scope}[shift={(2.250,0.000)}]
+      \pic (g3) at (0.500,0.0) {ge};
+      \end{scope}
+      \begin{scope}[shift={(3.250,0.0)}]
+      \pic[val=I] (g4) at (0.500,0.0) {comatrix};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (id_out_3) to[out=0,in=180] (g2-in-1);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+    \end{tikzpicture}
+\end{center}

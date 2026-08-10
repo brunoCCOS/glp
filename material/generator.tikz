@@ -12,8 +12,8 @@
     \coordinate (-in-0)  at (-0.5, 0.5);
     \coordinate (-in-1)  at (-0.5,-0.5);
     \coordinate (-out-0) at ( 0.5, 0);
-    \draw (-in-0) to[bend left=20]  (0,0);
-    \draw (-in-1) to[bend right=20] (0,0);
+    \draw (-in-0) to[bend left=30]  (0,0);
+    \draw (-in-1) to[bend right=30] (0,0);
     \draw (0,0)   to (-out-0);
     \node[whitedot] (-node) at (0,0) {};
   },
@@ -21,8 +21,8 @@
     \coordinate (-out-0)  at (0.5, 0.5);
     \coordinate (-out-1)  at (0.5,-0.5);
     \coordinate (-in-0) at ( -0.5, 0);
-    \draw (-out-0) to[bend right=20]  (0,0);
-    \draw (-out-1) to[bend left=20] (0,0);
+    \draw (-out-0) to[bend right=30]  (0,0);
+    \draw (-out-1) to[bend left=30] (0,0);
     \draw (0,0)   to (-in-0);
     \node[whitedot] (-node) at (0,0) {};
   },
@@ -92,6 +92,23 @@
     \draw (0,0)   to (-out-0);
     \node[matrixnode_right] (-node) at (0,0) {$\argval$};
   },
+  2dmatrix/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0.3);
+    \coordinate (-in-1)  at (-0.5, -0.3);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0.3);
+    \draw (-in-1) to (0,-0.3);
+    \draw (0,0)   to (-out-0);
+    \node[matrixnode_left] (-node) at (0,0) {$\argval$};
+  },
+  2dcomatrix/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, -0.5);
+    \coordinate (-out-1) at ( 0.5, 0.5);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[matrixnode_right] (-node) at (0,0) {$\argval$};
+  },
   relation/.pic = {
     \coordinate (-in-0)  at (-0.5, 0);
     \coordinate (-out-0) at ( 0.5, 0);
@@ -106,8 +123,30 @@
     \draw (0,0)   to (-out-0);
     \node[relationnode_left] (-node) at (0,0) {$\argval$};
   },
+  2drelation/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0.3);
+    \coordinate (-in-1)  at (-0.5, -0.3);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0.3);
+    \draw (-in-1) to (0,-0.3);
+    \draw (0,0)   to (-out-0);
+    \node[relationnode_right] (-node) at (0,0) {$\argval$};
+  },
+  2dcorelation/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, -0.5);
+    \coordinate (-out-1) at ( 0.5, 0.5);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[relationnode_left] (-node) at (0,0) {$\argval$};
+  },
   affine/.pic = {
     \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node (-node) at (0,0) {$|$};
+  },
+  coaffine/.pic = {
+    \coordinate (-out-0) at (-0.5, 0);
     \draw (0,0) to (-out-0);
     \node (-node) at (0,0) {$|$};
   },

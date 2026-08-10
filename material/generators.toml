@@ -30,6 +30,22 @@ visual_coarity = 1
 pic = "comatrix"
 params = ["val"]
 
+[generators.twodmatrix]
+sig.arity = 2
+sig.coarity = 1
+visual_arity = 1
+visual_coarity = 1
+pic = "2dmatrix"
+params = ["val"]
+
+[generators.twodcomatrix]
+sig.arity = 1
+sig.coarity = 2
+visual_arity = 1
+visual_coarity = 1
+pic = "2dcomatrix"
+params = ["val"]
+
 [generators.relation]
 sig.arity = 1
 sig.coarity = 1
@@ -44,6 +60,22 @@ sig.coarity = 1
 visual_arity = 1
 visual_coarity = 1
 pic = "corelation"
+params = ["val"]
+
+[generators.twodrelation]
+sig.arity = 2
+sig.coarity = 1
+visual_arity = 1
+visual_coarity = 1
+pic = "2drelation"
+params = ["val"]
+
+[generators.twodcorelation]
+sig.arity = 1
+sig.coarity = 2
+visual_arity = 1
+visual_coarity = 1
+pic = "2dcorelation"
 params = ["val"]
 
 [generators.copy]
@@ -114,6 +146,12 @@ symbol = "<="
 sig.arity = 0
 sig.coarity = 1
 pic = "affine"
+symbol = "a"
+
+[generators.coaffine]
+sig.arity = 1
+sig.coarity = 0
+pic = "coaffine"
 symbol = "a"
 
 [generators.nmult]

@@ -44,7 +44,7 @@ A binary relation specifies whether $x$ is related to $y$.
 One can think of a relation in two different ways that will prove useful later:
 first, as a set of pairs, where every relation is just a pair $(x,y) \in R$,
 or as a map that has $x,y$ as inputs and outputs $0$ if they are related, and $+\infty$ if they are not
-(the choice of $\infty$ is arbitrary and will be justified later; normal choices here are actually $\{\text{true},\text{false}\}$ or $\{0,1\}$).
+(the choice of $\infty$ will be justified later; normal choices here are actually $\{\text{true},\text{false}\}$ or $\{0,1\}$, the latter being isomorphic to our choice).
 
 This is a general construct, as the sets $X$ and $Y$ can be anything.
 We can, for instance, ask for further structures on such sets and obtain different kinds of relations.
@@ -124,7 +124,7 @@ the Cost/Reward Relations, respectively.
 		      With this order, arbitrary joins are given by the usual infima: $\bigvee A = \inf A$.
 		\item The monoidal product is addition $a \otimes b := a + b$,
 		      where addition is extended in the usual way
-		      (with $a + (+\infty) = +\infty$ and $a + (-\infty) = -\infty$ whenever defined).
+		      (with $a + (+\infty) = +\infty$, $a + (-\infty) = -\infty$ and $(+\infty) + (-\infty) = + \infty$).
 		\item The unit element is $e := 0$.
 	\end{itemize}
 	With these operations, $(\overline{\mathbb{R}},\geq,+,0)$
@@ -132,13 +132,13 @@ the Cost/Reward Relations, respectively.
 	and addition distributes over arbitrary joins.
 \end{definition}
 
-\begin{definition}[Optimization (Cost/Reward) Relations]
+\begin{definition}[Optimization Cost Relations]
 	Let $X$ and $Y$ be sets.
 	An \emph{optimization relation} from $X$ to $Y$ is an
 	$\overline{\mathbb{R}}$-valued relation, i.e., a function
 	$R : X \times Y \to \overline{\mathbb{R}}$.
 	The value $R(x,y)$ is interpreted as the objective value
-	(cost or reward) associated to the pair $(x,y)$,
+    (cost) associated to the pair $(x,y)$,
 	with $+\infty$ and $-\infty$ representing extremal infeasibility
 	or unboundedness.
 \end{definition}
@@ -189,7 +189,8 @@ symmetric monoidal category~\cite{maclane1998categories}.
 	We refer to~\cite{rosenthal1990quantales} for full details.
 \end{proof}
 
-Relations encode the notion of matrices and matrix multiplication. A $Q$-valued relation $R : X \times Y \to Q$ is nothing but a \emph{$Q$-valued matrix} indexed by $X \times Y$, and composition of $Q$-valued relations corresponds precisely to matrix multiplication in $Q$, where ordinary addition is replaced by the join $\bigvee$ and ordinary multiplication by the monoidal product $\otimes$. The two axioms of a quantale --- that $\otimes$ distributes over arbitrary joins --- are precisely what guarantees that this multiplication is associative and well-defined. This serves as motivation for what will later become the diagrammatic theory of linear algebra.
+Relations encode the notion of matrices and matrix multiplication. A $Q$-valued relation $R : X \times Y \to Q$ is nothing but a \emph{$Q$-valued matrix} indexed by $X \times Y$, and composition of $Q$-valued relations corresponds precisely to matrix multiplication in $Q$, where ordinary addition is replaced by the join $\bigvee$ and ordinary multiplication by the monoidal product $\otimes$. Worth noticing, however, that in this case, matrices can indeed be infinite (countable), different from the usual finite case.
+The two axioms of a quantale --- that $\otimes$ distributes over arbitrary joins --- are precisely what guarantees that this multiplication is associative and well-defined. This serves as motivation for what will later become the diagrammatic theory of linear algebra.
 
 The resulting categories are symmetric monoidal, and it is precisely this monoidal backbone that will support the algebraic structure we aim to build. A key piece of that structure is a \emph{Frobenius monoid} on each object: a monoid $(\mu, \eta)$ and a comonoid $(\delta, \varepsilon)$ on the same object, satisfying the Frobenius law
 \[
@@ -219,7 +220,7 @@ A symmetric monoidal category in which every object carries such a structure, co
 These constructions provide exactly the semantic foundation for the algebra we aim to build. In the same way that semantics is understood in linguistics and programming language theory \cite{winskel1993formal}, the semantics of a formal system assigns meaning to its expressions. More precisely, while syntax consists of the tokens and rules for forming and combining expressions, semantics is the interpretation assigned to each such expression --- in our case, an optimization problem living in $\mathbf{Rel}(Q)$.
 
 As outlined in the introduction, the central goal of this work is to show that optimization emerges naturally from algebraic and categorical structure.
-The key mechanism enabling this is the infimal composition present in the definition of the Cost/Reward category: composing two relations automatically performs variable elimination, which is precisely the fundamental operation underlying optimization.
+The key mechanism enabling this is the infimal composition present in the definition of the Cost category: composing two relations automatically performs variable elimination, which is precisely the operation underlying optimization.
 
 To make this precise, we need both a semantics --- provided by the categorical framework developed above --- and a syntax: a rigorous, compositional language for expressing optimization problems symbolically.
 The map between those is a structure-preserving map, a functor, from the syntactic layer into the semantic one.
@@ -322,7 +323,7 @@ We now introduce the foundational theories for Graphical Algebra that serve as a
 \end{definition}
 
 
-Building one the above definition, we stablish the following notation to easy the
+Building on the above definition, we stablish the following notation to easy the
 burden of future proofs. We will denote a abstract diagram from $\overrightarrow{\textbf{GLA}}$ as
 
 \begin{figure}[H]
@@ -397,7 +398,7 @@ The equivalent hold for their dual form in
 $\overleftarrow{\textbf{GLA}}$ and $\overleftarrow{\textbf{GAA}}$.
 
 
-Our contribution builds directly on Graphical Polyhedral Algebra. Geometrically it goes beyond affine spaces, representing polyhedra as linear-inequality constraints. We begin by recalling the standard definitions.
+Our contribution is built on top of Graphical Polyhedral Algebra \cite{bonchi2021polyhedral, bonchi2021.9farkas}. Geometrically it goes beyond affine spaces, representing polyhedra as linear-inequality constraints. We begin by recalling the standard definitions.
 
 \begin{definition}\label{polyform}
 	A set $P \subseteq \mathbb{R}^n$ is called a \emph{polyhedron} if there
