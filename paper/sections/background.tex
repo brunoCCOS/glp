@@ -21,7 +21,7 @@ in which everything one needs to know about an object is determined by its morph
 
 To begin we define the most basic kind of relation:
 
-\begin{definition}[Binary Relations]
+\begin{definition}[Binary Relations]\label{def:binaryrel}
 	Let $X$ and $Y$ be sets. A \emph{binary relation} $R$ from $X$ to $Y$ is a subset
 	\[
 		R \subseteq X \times Y.
@@ -44,7 +44,7 @@ A binary relation specifies whether $x$ is related to $y$.
 One can think of a relation in two different ways that will prove useful later:
 first, as a set of pairs, where every relation is just a pair $(x,y) \in R$,
 or as a map that has $x,y$ as inputs and outputs $0$ if they are related, and $+\infty$ if they are not
-(the choice of $\infty$ will be justified later; normal choices here are actually $\{\text{true},\text{false}\}$ or $\{0,1\}$, the latter being isomorphic to our choice).
+(the choice of $\{0,+\infty\}$ reflects that we are after a framework of minimization rather than a purely logical one; the usual choices here are $\{\text{true},\text{false}\}$ or $\{0,1\}$, the latter being isomorphic to ours under the appropriate operations).
 
 This is a general construct, as the sets $X$ and $Y$ can be anything.
 We can, for instance, ask for further structures on such sets and obtain different kinds of relations.
@@ -158,7 +158,7 @@ that it carries a very important monoidal structure;
 particularly, it is a compact closed
 symmetric monoidal category~\cite{maclane1998categories}.
 
-\begin{proposition}[Category $\mathbf{Rel}(Q)$]
+\begin{proposition}[Category $\mathbf{Rel}(Q)$]\label{prop:relq}
 	For a quantale $Q$, the $Q$-relations form a category $\mathbf{Rel}(Q)$ with composition and identities
 	\[
 		(S\circ R) (a,c) = \bigvee_b R(a,b) \otimes S(b,c), \quad 1_A(a,b) = \bigvee \{e \mid a=b\}.
@@ -169,25 +169,6 @@ symmetric monoidal category~\cite{maclane1998categories}.
 	\]
 	The singleton set is the monoidal unit, and the category is compact closed w.r.t.\ the monoidal structure.
 \end{proposition}
-
-\begin{proof}
-	Associativity follows from the distributivity of $\otimes$ over $\bigvee$:
-	for $R:A\to B$, $S:B\to C$, $T:C\to D$,
-	\[
-		((T\circ S)\circ R)(a,d)
-		= \bigvee_{b,c} R(a,b)\otimes S(b,c)\otimes T(c,d)
-		= (T\circ (S\circ R))(a,d).
-	\]
-	The identity $1_A(a,b) = e$ if $a=b$ and $\bot$ otherwise satisfies $R\circ 1_A = R$
-	since $e\otimes R(a,b) = R(a,b)$ and all remaining terms vanish.
-	When $Q$ is commutative, the symmetric monoidal structure is given by Cartesian
-    product on objects and $(R\otimes_{\mathcal{C}}S)((a,b),(c,d)) = R(a,c)\otimes S(b,d)$
-	on morphisms; functoriality follows from commutativity and distributivity.
-	Compact closure is witnessed by the unit and counit
-	$\eta(*,(a,a')) = \varepsilon((a,a'),*) = e$ if $a=a'$ and $\bot$ otherwise,
-	for which the triangle identities hold by direct computation.
-	We refer to~\cite{rosenthal1990quantales} for full details.
-\end{proof}
 
 Relations encode the notion of matrices and matrix multiplication. A $Q$-valued relation $R : X \times Y \to Q$ is nothing but a \emph{$Q$-valued matrix} indexed by $X \times Y$, and composition of $Q$-valued relations corresponds precisely to matrix multiplication in $Q$, where ordinary addition is replaced by the join $\bigvee$ and ordinary multiplication by the monoidal product $\otimes$. Worth noticing, however, that in this case, matrices can indeed be infinite (countable), different from the usual finite case.
 The two axioms of a quantale --- that $\otimes$ distributes over arbitrary joins --- are precisely what guarantees that this multiplication is associative and well-defined. This serves as motivation for what will later become the diagrammatic theory of linear algebra.
@@ -220,7 +201,7 @@ A symmetric monoidal category in which every object carries such a structure, co
 These constructions provide exactly the semantic foundation for the algebra we aim to build. In the same way that semantics is understood in linguistics and programming language theory \cite{winskel1993formal}, the semantics of a formal system assigns meaning to its expressions. More precisely, while syntax consists of the tokens and rules for forming and combining expressions, semantics is the interpretation assigned to each such expression --- in our case, an optimization problem living in $\mathbf{Rel}(Q)$.
 
 As outlined in the introduction, the central goal of this work is to show that optimization emerges naturally from algebraic and categorical structure.
-The key mechanism enabling this is the infimal composition present in the definition of the Cost category: composing two relations automatically performs variable elimination, which is precisely the operation underlying optimization.
+The key mechanism enabling this is the infimal composition present in the definition of the Cost category: composing two relations automatically performs variable elimination, which is one way of capturing the operation underlying optimization.
 
 To make this precise, we need both a semantics --- provided by the categorical framework developed above --- and a syntax: a rigorous, compositional language for expressing optimization problems symbolically.
 The map between those is a structure-preserving map, a functor, from the syntactic layer into the semantic one.
@@ -302,10 +283,8 @@ We now introduce the foundational theories for Graphical Algebra that serve as a
 
     \input{tikz/generators_background.tex}
 
-	and the axioms, previously called the set $E$ of equations for the SMT.
-    
-    \input{tikz/axioms_background.tex}
-
+	and the axioms, previously called the set $E$ of equations for the SMT,
+	are shown in Appendix~\ref{app:background}.
 \end{definition}
 
 \begin{definition}\label{def:arrows}
@@ -323,82 +302,14 @@ We now introduce the foundational theories for Graphical Algebra that serve as a
 \end{definition}
 
 
-Building on the above definition, we stablish the following notation to easy the
-burden of future proofs. We will denote a abstract diagram from $\overrightarrow{\textbf{GLA}}$ as
-
-\begin{figure}[H]
-    \centering
-    \diagdef{
-        \pic[val=A] {matrix};
-    }{
-                  \begin{scope}[shift={(0.000,1.000)}]
-                  \begin{scope}[shift={(0.000,1.000)}]
-                  \pic (g1) at (0.500,0.500) {copy};
-                  \end{scope}
-                  \pic (g2) at (0.500,0.500) {copy};
-                  \end{scope}
-                  \begin{scope}[shift={(1.250,0.000)}]
-                  \begin{scope}[shift={(0.000,1.000)}]
-                  \begin{scope}[shift={(0.000,1.000)}]
-                  \begin{scope}[shift={(0.000,1.000)}]
-                      \pic (g3)[val=a_{1,1}] at (0.500,0.500) {scalar};
-                  \end{scope}
-                  \pic (g4)[val=a_{2,1}] at (0.500,0.500) {scalar};
-                  \end{scope}
-                  \pic (g5)[val=a_{1,2}] at (0.500,0.500) {scalar};
-                  \end{scope}
-                  \pic (g6)[val=a_{2,2}] at (0.500,0.500) {scalar};
-                  \end{scope}
-                  \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
-                  \draw (g1-out-1) to[out=0,in=180] (g4-in-0);
-                  \draw (g2-out-0) to[out=0,in=180] (g5-in-0);
-                  \draw (g2-out-1) to[out=0,in=180] (g6-in-0);
-                  \begin{scope}[shift={(2.500,1.000)}]
-                  \begin{scope}[shift={(0.000,1.000)}]
-                  \pic (g7) at (0.500,0.500) {multiplication};
-                  \end{scope}
-                  \pic (g8) at (0.500,0.500) {multiplication};
-                  \end{scope}
-                  \draw (g3-out-0) to[out=0,in=180] (g7-in-0);
-                  \draw (g4-out-0) to[out=0,in=180] (g7-in-1);
-                  \draw (g5-out-0) to[out=0,in=180] (g8-in-0);
-                  \draw (g6-out-0) to[out=0,in=180] (g8-in-1);
-    }
-\end{figure}
-
-Which denotes any matrix A, or, more formally, denotes the relation $xAy \equiv Ax=y$. Analogously, we also depict any diagram from $\overrightarrow{\textbf{GAA}}$ as
-
-\begin{figure}[H]
-    \centering
-    \diagdef{
-        \pic[val=A] {relation};
-    }{
-          \begin{scope}[shift={(0.625,1.000)}]
-              \pic[val=A] (g1) at (0.500,0.500) {matrix};
-          \end{scope}
-          \pic (g2) at (0.500,0.500) {affine};
-          \begin{scope}[shift={(1.250,0.000)}]
-              \pic[val=b] (g3) at (0.500,0.500) {scalar};
-          \end{scope}
-          \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-          \coordinate (a4) at (0.000,0 |- g1-in-0);
-          \draw (g1-in-0) -- (a4);
-          \coordinate (a5) at (2.250,0 |- g1-out-0);
-          \draw (g1-out-0) -- (a5);
-          \begin{scope}[shift={(2.500,0.500)}]
-          \pic (g6) at (0.500,0.500) {multiplication};
-          \end{scope}
-          \draw (a5) to[out=0,in=180] (g6-in-0);
-          \draw (g3-out-0) to[out=0,in=180] (g6-in-1);
-    }
-\end{figure}
-
-which denotes an affine transformation, also known as the relation $xAy \equiv Ax + b = y$.
-The equivalent hold for their dual form in
-$\overleftarrow{\textbf{GLA}}$ and $\overleftarrow{\textbf{GAA}}$.
+Building on Definition~\ref{def:arrows}, we establish notation to ease the
+burden of future proofs, denoting abstract diagrams from
+$\overrightarrow{\textbf{GLA}}$ and $\overrightarrow{\textbf{GAA}}$ by a
+single matrix (resp.\ relation) box; the notation is set up in
+Appendix~\ref{app:background}.
 
 
-Our contribution is built on top of Graphical Polyhedral Algebra \cite{bonchi2021polyhedral, bonchi2021.9farkas}. Geometrically it goes beyond affine spaces, representing polyhedra as linear-inequality constraints. We begin by recalling the standard definitions.
+Graphical Polyhedral Algebra \cite{bonchi2021polyhedral, bonchi2021.9farkas}, the established theory on which our contribution builds, geometrically goes beyond affine spaces, representing polyhedra as linear-inequality constraints. We begin by recalling its standard definitions.
 
 \begin{definition}\label{polyform}
 	A set $P \subseteq \mathbb{R}^n$ is called a \emph{polyhedron} if there
@@ -420,35 +331,25 @@ The central computational primitive of the polyhedral theory is Fourier--Motzkin
 	The following diagrammatic procedure is equivalent to performing the FME algorithm:
 	\begin{figure}[H]
         \centering
-        \diageq{
-          \pic (g1) at (0.500,0.500) {coge};
-          \begin{scope}[shift={(1.250,0.000)}]
-          \pic[val=A] (g2) at (0.500,0.500) {comatrix};
-          \end{scope}
-          \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-          \begin{scope}[shift={(2.500,0.000)}]
-          \pic[val=B] (g3) at (0.500,0.500) {matrix};
-          \end{scope}
-          \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-          \begin{scope}[shift={(3.750,0.000)}]
-          \pic (g4) at (0.500,0.500) {ge};
-          \end{scope}
-          \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
-      }{
-            \pic [val=A'] (g1) at (0.500,0.500) {matrix};
-            \begin{scope}[shift={(1.250,0.000)}]
-            \pic (g2) at (0.500,0.500) {ge};
-            \end{scope}
-            \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-            \begin{scope}[shift={(2.500,0.000)}]
-            \pic [val=B'](g3) at (0.500,0.500) {comatrix};
-            \end{scope}
-            \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-        }
+        \input{tikz/FMEDiagram.tex}
 	\end{figure}
 \end{proposition}
 
-Using FME, $\mathbf{GPA}$ admits a normal form, and applying the polar operator (the polyhedral analogue of Farkas duality, exchanging the $H$- and $V$-representations \cite{bonchi2021.9farkas}) yields a second, conic-hull normal form. These drive the presentation theorems below, whose proofs we recall from \cite{bonchi2021polyhedral}.
+Using FME, $\mathbf{GPA}$ admits a normal form, which we will rely on repeatedly.
+
+\begin{definition}[$\mathbf{GPA}$ normal form]\label{def:gpanormalform}
+	A diagram $c \in \mathbf{GPA}$ is in \emph{normal form} when it is
+	written as a relation--\inlinegen{ge}--comatrix triple
+	\begin{figure}[H]
+		\centering
+		\input{tikz/NormalFormGPA.tex}
+	\end{figure}
+	denoting the polyhedron $\{(x,y) \mid Ax + a \ge By\}$. Every
+	$\mathbf{GPA}$ diagram is equal to one in normal
+	form~\cite{bonchi2021polyhedral}.
+\end{definition}
+
+Applying the polar operator (the polyhedral analogue of Farkas duality, exchanging the $H$- and $V$-representations \cite{bonchi2021.9farkas}) yields a second, conic-hull normal form. These drive the presentation theorems below, whose proofs we recall from \cite{bonchi2021polyhedral}.
 
 \begin{theorem}\label{thm:gpapresent}
 	$\mathbf{PolyRel}$ is presented by $\mathrm{FreeP}_{\mathbf{GPA}}$.

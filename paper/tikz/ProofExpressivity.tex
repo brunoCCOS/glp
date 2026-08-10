@@ -1,0 +1,36 @@
+\begin{tikzpicture}[axpic]
+    \begin{scope}[shift={(0.000,1.000)}]
+        \pic (g1) at (0.500,0.500) {linear};
+        \begin{scope}[shift={(1.250,0.000)}]
+            \pic[val=c^\top] (g2) at (0.500,0.500) {coscalar};
+        \end{scope}
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \begin{scope}[shift={(2.500,0.000)}]
+            \pic[val=A] (g3) at (0.500,0.500) {matrix};
+        \end{scope}
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+    \end{scope}
+    \begin{scope}[shift={(1.250,0.000)}]
+        \pic (g4) at (0.500,0.500) {affine};
+    \end{scope}
+    \coordinate (a5) at (3.500,0 |- g4-out-0);
+    \draw (g4-out-0) -- (a5);
+    \begin{scope}[shift={(3.750,0.500)}]
+        \pic (g6) at (0.500,0.500) {multiplication};
+    \end{scope}
+    \draw (g3-out-0) to[out=0,in=180] (g6-in-0);
+    \draw (a5)       to[out=0,in=180] (g6-in-1);
+    \begin{scope}[shift={(5.000,0.500)}]
+        \pic (g7) at (0.500,0.500) {ge};
+    \end{scope}
+    \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
+    \begin{scope}[shift={(6.250,0.500)}]
+        \pic[val=B] (g8) at (0.500,0.500) {comatrix};
+    \end{scope}
+    \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
+    \node[anchor=west] at ($(g8-out-0)+(0.15,0)$)
+        {$
+            \llbracket = \rrbracket \; y \mapsto \inf_x c^\top x
+            \ \text{s.t.}\
+            Ax + b \ge By$};
+\end{tikzpicture}

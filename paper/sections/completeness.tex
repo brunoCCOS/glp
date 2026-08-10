@@ -18,128 +18,17 @@ Together, these three properties establish that the semantics is fully axiomatis
 
 Throughout this section, in order to facilitate the exposition of some ideas, we will often denote by $\llbracket = \rrbracket$ that two objects are equal under the functor $\llbracket - \rrbracket$, i.e., a diagram $c \in Ob(FreeP_{(\Sigma,E)})$ is, under the interpretation map, $c \; \llbracket = \rrbracket \; \llbracket c \rrbracket$.
 
-\begin{lemma}[Soundness]
+\begin{lemma}[Soundness]\label{lem:soundness}
 	If $s = t$ in $\mathrm{FreeP}_{\mathbf{GLP}}$, then $[s] = [t]$
 	in $\mathbf{PolyFun}$.
 \end{lemma}
 
-\begin{proof}
-	All axioms inherited from $\mathbf{GPA}$ are already sound by the
-	results of the previous section. It suffices to verify that the new
-	axioms involving the LP generator preserve the semantics, which
-	follows by direct computation:
-	\begin{figure}[H]
-		\centering
-        \begin{tikzpicture}
-            \node at (-1.5,0) {\textit{(linear.ge)}};
-            \pic at (0,0) {linear};
-            \node at (1.0,0) {$\llbracket = \rrbracket$};
-            \node at (2.3,0) {$(\bullet, y) \mapsto y$};
-            \node at (3.3,0) {$ = $};
-            \node at (4.8,0) {$(\bullet, y) \mapsto \inf_{x \ge y} x$};
-            \node at (6.6,0) {$\llbracket = \rrbracket$};
-            \pic at (7.3,0) {linear};
-            \draw (7.5,0) to (8.3,0);
-            \pic at (8.5,0) {ge};
-        \end{tikzpicture}
-        \begin{tikzpicture}
-            \node at (-1.5,0) {(\textit{lin.sum})};
-            \pic (g1) at (0.000,0.25) {linear};
-            \pic (g2) at (0.000,-0.25) {linear};
-            \node at (1.0,0) {$\llbracket = \rrbracket$};
-            \node at (3.0,0) {$(\bullet,\left(\begin{smallmatrix} y_1 \\ y_2 \end{smallmatrix}\right)) \mapsto y_1 + y_2$};
-            \node at (4.8,0) {$\llbracket = \rrbracket$};
-            \pic at (5.4,0) {linear};
-            \draw (5.7,0) to (6.3,0);
-            \pic at (6.5,0) {comultiplication};
-        \end{tikzpicture}
-        \vspace{6mm}
-        \begin{tikzpicture}
-            \node at (-1.5,0) {(\textit{lin.zero})};
-            \pic at (0.0,0) {linear};
-            \draw (.2,0) to (0.5,0);
-            \pic at (1.0,0) {cozero};
-            \node at (1.5,0) {$\llbracket = \rrbracket$};
-            \node at (3.1,0) {$(\bullet, \bullet) \mapsto \inf_{x = 0} x$};
-            \node at (4.6,0) {$ = $};
-            \node at (5.0,0) {$0$};
-            \node at (5.7,0) {$\llbracket = \rrbracket$};
-            \node[draw, dotted] at (6.4,0) {};
-        \end{tikzpicture}
-	\end{figure}
-\end{proof}
-
-\begin{lemma}[Expressivity]
+\begin{lemma}[Expressivity]\label{lem:expressivity}
 	For every $f : m \to n$ in $\mathbf{LPRel}$ there exists a
 	$\Sigma$-term $s : m \to n$ in
 	$\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GLP}}}(m,n)$
 	such that $[s] = f$.
 \end{lemma}
-
-\begin{proof}
-	Since every RHS PLP admits a standard form,
-    it suffices to show that every piecewise affine
-	convex function is expressible in $\mathbf{GLP}$. For an arbitrary
-	such function $f(y) = \inf_x c^\top x$, where $A x + b \ge B y$
-    the following diagram provides the required syntactic representative:
-    \begin{figure}[H]
-        \centering
-        \begin{tikzpicture}[axpic]
-
-
-                  % Main diagram
-                  \begin{scope}[shift={(0.000,1.000)}]
-                    \pic (g1) at (0.500,0.500) {linear};
-
-                    \begin{scope}[shift={(1.250,0.000)}]
-                      \pic[val=c^\top] (g2) at (0.500,0.500) {coscalar};
-                    \end{scope}
-
-                    \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-
-                    \begin{scope}[shift={(2.500,0.000)}]
-                      \pic[val=A] (g3) at (0.500,0.500) {matrix};
-                    \end{scope}
-
-                    \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-                  \end{scope}
-
-                  \begin{scope}[shift={(1.250,0.000)}]
-                    \pic (g4) at (0.500,0.500) {affine};
-                  \end{scope}
-
-                  \coordinate (a5) at (3.500,0 |- g4-out-0);
-                  \draw (g4-out-0) -- (a5);
-
-                  \begin{scope}[shift={(3.750,0.500)}]
-                    \pic (g6) at (0.500,0.500) {multiplication};
-                  \end{scope}
-
-                  \draw (g3-out-0) to[out=0,in=180] (g6-in-0);
-                  \draw (a5)       to[out=0,in=180] (g6-in-1);
-
-                  \begin{scope}[shift={(5.000,0.500)}]
-                    \pic (g7) at (0.500,0.500) {ge};
-                  \end{scope}
-
-                  \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
-
-                  \begin{scope}[shift={(6.250,0.500)}]
-                    \pic[val=B] (g8) at (0.500,0.500) {comatrix};
-                  \end{scope}
-
-                  \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
-
-                  % Right bracket and meaning, anchored relative to the diagram
-                  \node[anchor=west] at ($(g8-out-0)+(0.15,0)$)
-                    {$
-                      \llbracket = \rrbracket \; y \mapsto \inf_x c^\top x
-                      \ \text{s.t.}\ 
-                      Ax + b \ge By$};
-
-        \end{tikzpicture}
-    \end{figure}
-\end{proof}
 
 The final result is the completeness theorem for
 $\mathbf{GLP}$. The proof brings together the main tools developed
@@ -148,41 +37,16 @@ shared epigraph property (Proposition~\ref{prop:equalepi}), the
 completeness of $\mathbf{GPA}$, and the FME-based normal form. It
 relies on the completeness of the $\mathbf{GPA}$
 polyhedra case (Theorem~\ref{thm:gpapresent}); given
-that result, the argument below goes through.
+that result, the argument, given in Appendix~\ref{app:proofs}, goes through.
 
-\begin{lemma}[Completeness]
+\begin{lemma}[Completeness]\label{lem:completeness}
 	If $[c] = [d]$ in $\mathbf{PolyFun}$, then $c = d$ in
 	$\mathrm{FreeP}_{\mathbf{GLP}}$.
 \end{lemma}
 
-\begin{proof}
-	Let $v_1 = [c]$ and $v_2 = [d]$. By assumption $v_1 = v_2$, so
-	Proposition~\ref{prop:equalepi} gives
-	$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
-
-	Diagrammatically, $c$ and $d$ start out as two distinct diagrams in
-	normal form. By Corollary~\ref{cor:epigraph form}, each admits an
-	epigraph form $c = \inlinegen{linear} ; c^*$ and
-	$d = \inlinegen{linear} ; d^*$, leaving the source generator
-	\inlinegen{linear} untouched and isolating everything else inside a
-	dotted box: a pure $\mathbf{GPA}$ diagram $c^*$ (resp.\ $d^*$) whose
-	denotation is the epigraph, $[c^*] = [d^*] = E$ in
-	$\mathbf{PolyRel}$. Since $c^*$ and $d^*$ are $\mathbf{GPA}$
-	diagrams with the same denotation, completeness of $\mathbf{GPA}$
-	gives $c^* = d^*$ in $\mathrm{FreeP}_{\mathbf{GPA}}$; in particular
-	both reduce to the same $\mathbf{GPA}$ normal form. Composing this
-	common diagram with the leftover \inlinegen{linear} collapses $c$
-	and $d$ to the same $\mathbf{GLP}$ diagram:
-	\begin{figure}[H]
-		\centering
-		\input{tikz/ProofCompleteness1.tex}
-	\end{figure}
-	Therefore $c = \inlinegen{linear} ; c^* = \inlinegen{linear} ; d^* = d$.
-\end{proof}
-
 As a consequence of the three lemmas above:
 
-\begin{theorem}
+\begin{theorem}\label{thm:main}
 	$\mathbf{LPRel}$ and $\mathbf{PolyFun}$ are both presented by $\mathrm{FreeP}_{\mathbf{GLP}}$.
 \end{theorem}
 \begin{proof}

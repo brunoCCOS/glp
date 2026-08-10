@@ -1,0 +1,21 @@
+\diagdef{
+    \pic[val=A] {relation};
+}{
+      \begin{scope}[shift={(0.625,1.000)}]
+          \pic[val=A] (g1) at (0.500,0.500) {matrix};
+      \end{scope}
+      \pic (g2) at (0.500,0.500) {affine};
+      \begin{scope}[shift={(1.250,0.000)}]
+          \pic[val=b] (g3) at (0.500,0.500) {scalar};
+      \end{scope}
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+      \coordinate (a4) at (0.000,0 |- g1-in-0);
+      \draw (g1-in-0) -- (a4);
+      \coordinate (a5) at (2.250,0 |- g1-out-0);
+      \draw (g1-out-0) -- (a5);
+      \begin{scope}[shift={(2.500,0.500)}]
+      \pic (g6) at (0.500,0.500) {multiplication};
+      \end{scope}
+      \draw (a5) to[out=0,in=180] (g6-in-0);
+      \draw (g3-out-0) to[out=0,in=180] (g6-in-1);
+}

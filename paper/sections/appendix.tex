@@ -1,0 +1,190 @@
+\section{Additional Background Material}\label{app:background}
+
+The axioms, previously called the set $E$ of equations, of the SMTs
+$\textbf{GLA}$, $\textbf{GAA}$ and $\textbf{GPA}$ introduced in
+Section~\ref{sec:bg} are:
+
+\begingroup
+\input{tikz/axioms_background.tex}
+\endgroup
+
+Building on Definition~\ref{def:arrows}, we establish the following notation to ease the
+burden of future proofs. We will denote an abstract diagram from $\overrightarrow{\textbf{GLA}}$ as
+
+\begin{figure}[H]
+    \centering
+    \input{tikz/MatrixNotationGLA.tex}
+\end{figure}
+
+Which denotes any matrix A, or, more formally, denotes the relation $xAy \equiv Ax=y$. Analogously, we also depict any diagram from $\overrightarrow{\textbf{GAA}}$ as
+
+\begin{figure}[H]
+    \centering
+    \input{tikz/MatrixNotationGAA.tex}
+\end{figure}
+
+which denotes an affine transformation, also known as the relation $xAy \equiv Ax + b = y$.
+The equivalent hold for their dual form in
+$\overleftarrow{\textbf{GLA}}$ and $\overleftarrow{\textbf{GAA}}$.
+
+\section{Omitted Proofs}\label{app:proofs}
+
+\begin{proof}[Proof of Proposition~\ref{prop:relq}]
+	Associativity follows from the distributivity of $\otimes$ over $\bigvee$:
+	for $R:A\to B$, $S:B\to C$, $T:C\to D$,
+	\[
+		((T\circ S)\circ R)(a,d)
+		= \bigvee_{b,c} R(a,b)\otimes S(b,c)\otimes T(c,d)
+		= (T\circ (S\circ R))(a,d).
+	\]
+	The identity $1_A(a,b) = e$ if $a=b$ and $\bot$ otherwise satisfies $R\circ 1_A = R$
+	since $e\otimes R(a,b) = R(a,b)$ and all remaining terms vanish.
+	When $Q$ is commutative, the symmetric monoidal structure is given by Cartesian
+	product on objects and $(R\otimes_{\mathcal{C}}S)((a,b),(c,d)) = R(a,c)\otimes S(b,d)$
+	on morphisms; functoriality follows from commutativity and distributivity.
+	Compact closure is witnessed by the unit and counit
+	$\eta(*,(a,a')) = \varepsilon((a,a'),*) = e$ if $a=a'$ and $\bot$ otherwise,
+	for which the triangle identities hold by direct computation.
+	We refer to~\cite{rosenthal1990quantales} for full details.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:pwa-polyhedral}]
+	\textbf{($\Rightarrow$)} Let
+	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
+	Then
+	\[
+		\mathrm{epi}(f) = \bigcap_{i=1}^k \{ (x,t) \mid t \ge a_i^\top x + b_i \},
+	\]
+	which is an intersection of finitely many halfspaces, hence a polyhedron.
+
+	\medskip
+	\textbf{($\Leftarrow$)} If $f$ is polyhedral, its epigraph is a
+	polyhedron, so it can be written as an intersection of finitely many
+	halfspaces: $\mathrm{epi}(f) = \bigcap_{i=1}^k \{(x,t) \mid t \ge a_i^\top x + b_i\}$.
+	Since $f(x) = \inf\{t \mid (x,t) \in \mathrm{epi}(f)\}$, we obtain
+	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$,
+	so $f$ is piecewise affine and convex.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:pwa-value}]
+	\textbf{($\Rightarrow$)} Let
+	$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$
+	and define $Y := \mathrm{conv}\{y^1,\dots,y^k\}$.
+	Then $v(b) = \max_{y \in Y} b^\top y$.
+	Since $Y$ is a polyhedron admitting the representation
+	$Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$,
+	we have $v(b) = \max_{y \in Y} b^\top y = \sup\{b^\top y \mid A^\top y = c,\; y \ge 0\}$.
+	By LP strong duality~\cite{schrijver1986theory, boyd2004convex}, this dual program equals
+	the primal $\inf \{ c^\top x \mid Ax \ge b \}$ (strong duality holds since $Y$ is
+	nonempty by construction), giving $v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
+
+	\medskip
+	\textbf{($\Leftarrow$)} Let
+	$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
+	Dualising,
+	$v(b) = \sup \{ b^\top y \mid A^\top y = c,\; y \ge 0 \}$.
+	Since the feasible set $Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$
+	is a polyhedron, the supremum is attained at its extreme points
+	$y^1,\dots,y^k$~\cite{ziegler1995polytopes}, yielding
+	$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$.
+	Thus $v$ is piecewise affine convex.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:equalepi}]
+	For each $i = 1,2$, the epigraph of $v_i$ satisfies
+	\[
+		(y,t) \in \mathrm{epi}(v_i)
+		\iff
+		\exists x : A_i x \ge B_i y,\ \mathbf{1}^\top x \le t,
+	\]
+	so $\mathrm{epi}(v_i)$ is the projection onto $(y,t)$ of the polyhedron
+	$P_i = \{(x,y,t) \mid A_i x \ge B_i y,\ \mathbf{1}^\top x \le t\}$.
+	Projections of polyhedra are polyhedra, so each $\mathrm{epi}(v_i)$ is
+	a polyhedron. Since $v_1 = v_2$ pointwise, we have
+	$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
+	Setting $E = \{(y,t) \mid Cy + dt \ge 0\}$, we obtain
+	$v_i(y) = \inf\{t \mid Cy + dt \ge 0\}$ for both $i = 1, 2$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:NormalFormGLP}]
+	The proof is by structural induction. First we show the two base cases:
+	\begin{itemize}
+		\item The generator \inlinegen{linear}
+		      \begin{figure}[H]
+			      \centering
+			      \input{tikz/ProofNormalFormBaseLinear.tex}
+		      \end{figure}
+		\item A diagram $c \in \textbf{GPA}$ is a polyhedral, which by normal form \cite{bonchi2021polyhedral} is just $\{|Ax + a \ge By |\}$, thus:
+		      \begin{figure}[H]
+			      \centering
+			      \input{tikz/ProofNormalFormBaseGPA.tex}
+		      \end{figure}
+	\end{itemize}
+	For the inductive step, we verify that for any two diagrams
+	$c, d \in \mathbf{GLP}$ satisfying the inductive hypothesis,
+	both horizontal and vertical composition preserve the normal form.
+	Closure under vertical composition follows by stacking the two normal forms and
+	collapsing the two independent $A_i, \inlinegen{ge}, B_i$ blocks into a single
+	block-diagonal matrix pair, as shown below:
+	\begin{figure}[H]
+		\centering
+		\input{tikz/ProofNormalFormVerticalComp.tex}
+	\end{figure}
+	For horizontal composition, the two normal forms are joined along the wire connecting
+	$B_1$ to $A_2$; applying Fourier-Motzkin Elimination to this pair recovers a fresh
+	matrix-\inlinegen{ge}-comatrix triple, after which the two resulting runs of matrices,
+	one in each direction, compose into a single matrix and a single comatrix, recovering
+	the normal form:
+	\begin{figure}[H]
+		\centering
+		\input{tikz/ProofNormalFormHorizontalComp.tex}
+	\end{figure}
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:soundness}]
+	All axioms inherited from $\mathbf{GPA}$ are already sound by the
+	results of Section~\ref{sec:glp}. It suffices to verify that the new
+	axioms involving the LP generator preserve the semantics, which
+	follows by direct computation:
+	\begin{figure}[H]
+		\centering
+		\input{tikz/ProofSoundness.tex}
+	\end{figure}
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:expressivity}]
+	Since every RHS PLP admits a standard form,
+	it suffices to show that every piecewise affine
+	convex function is expressible in $\mathbf{GLP}$. For an arbitrary
+	such function $f(y) = \inf_x c^\top x$, where $A x + b \ge B y$
+	the following diagram provides the required syntactic representative:
+	\begin{figure}[H]
+		\centering
+		\input{tikz/ProofExpressivity.tex}
+	\end{figure}
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:completeness}]
+	Let $v_1 = [c]$ and $v_2 = [d]$. By assumption $v_1 = v_2$, so
+	Proposition~\ref{prop:equalepi} gives
+	$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
+
+	Diagrammatically, $c$ and $d$ start out as two distinct diagrams in
+	normal form. By Corollary~\ref{cor:epigraph form}, each admits an
+	epigraph form $c = \inlinegen{linear} ; c^*$ and
+	$d = \inlinegen{linear} ; d^*$, leaving the source generator
+	\inlinegen{linear} untouched and isolating everything else inside a
+	dotted box: a pure $\mathbf{GPA}$ diagram $c^*$ (resp.\ $d^*$) whose
+	denotation is the epigraph, $[c^*] = [d^*] = E$ in
+	$\mathbf{PolyRel}$. Since $c^*$ and $d^*$ are $\mathbf{GPA}$
+	diagrams with the same denotation, completeness of $\mathbf{GPA}$
+	gives $c^* = d^*$ in $\mathrm{FreeP}_{\mathbf{GPA}}$; in particular
+	both reduce to the same $\mathbf{GPA}$ normal form. Composing this
+	common diagram with the leftover \inlinegen{linear} collapses $c$
+	and $d$ to the same $\mathbf{GLP}$ diagram:
+	\begin{figure}[H]
+		\centering
+		\input{tikz/ProofCompletenessLemma.tex}
+	\end{figure}
+	Therefore $c = \inlinegen{linear} ; c^* = \inlinegen{linear} ; d^* = d$.
+\end{proof}

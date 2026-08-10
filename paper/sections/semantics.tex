@@ -42,60 +42,20 @@ The following two propositions establish that all three notions above
 are equivalent descriptions of the same class of functions. This
 equivalence is the semantic cornerstone of the section: it is what
 allows us to treat polyhedral functions and parametric linear programs
-as morphisms in the same category.
+as morphisms in the same category. These results are classical (see
+\cite{boyd2004convex, schrijver1986theory}); we include their proofs in
+Appendix~\ref{app:proofs} for completeness.
 
-\begin{proposition}
+\begin{proposition}\label{prop:pwa-polyhedral}
 	A function is piecewise affine convex if and only if it is a polyhedral
 	function.
 \end{proposition}
 
-\begin{proof}
-	\textbf{($\Rightarrow$)} Let
-	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
-	Then
-	\[
-		\mathrm{epi}(f) = \bigcap_{i=1}^k \{ (x,t) \mid t \ge a_i^\top x + b_i \},
-	\]
-	which is an intersection of finitely many halfspaces, hence a polyhedron.
-
-	\medskip
-	\textbf{($\Leftarrow$)} If $f$ is polyhedral, its epigraph is a
-	polyhedron, so it can be written as an intersection of finitely many
-	halfspaces: $\mathrm{epi}(f) = \bigcap_{i=1}^k \{(x,t) \mid t \ge a_i^\top x + b_i\}$.
-	Since $f(x) = \inf\{t \mid (x,t) \in \mathrm{epi}(f)\}$, we obtain
-	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$,
-	so $f$ is piecewise affine and convex.
-\end{proof}
-
-\begin{proposition}
+\begin{proposition}\label{prop:pwa-value}
 	A function $v : \mathbb{R}^m \to \mathbb{R} \cup \{+\infty\}$ is
 	piecewise affine convex if and only if it is the value function of a
 	right-hand side parametric linear program.
 \end{proposition}
-
-\begin{proof}
-	\textbf{($\Rightarrow$)} Let
-	$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$
-	and define $Y := \mathrm{conv}\{y^1,\dots,y^k\}$.
-	Then $v(b) = \max_{y \in Y} b^\top y$.
-	Since $Y$ is a polyhedron admitting the representation
-	$Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$,
-	we have $v(b) = \max_{y \in Y} b^\top y = \sup\{b^\top y \mid A^\top y = c,\; y \ge 0\}$.
-	By LP strong duality~\cite{schrijver1986theory, boyd2004convex}, this dual program equals
-	the primal $\inf \{ c^\top x \mid Ax \ge b \}$ (strong duality holds since $Y$ is
-	nonempty by construction), giving $v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
-
-	\medskip
-	\textbf{($\Leftarrow$)} Let
-	$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
-	Dualising,
-	$v(b) = \sup \{ b^\top y \mid A^\top y = c,\; y \ge 0 \}$.
-	Since the feasible set $Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$
-	is a polyhedron, the supremum is attained at its extreme points
-	$y^1,\dots,y^k$~\cite{ziegler1995polytopes}, yielding
-	$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$.
-	Thus $v$ is piecewise affine convex.
-\end{proof}
 
 The following proposition is the key technical lemma for the completeness
 proof of $\mathbf{GLP}$. It states that two parametric linear programs
@@ -120,22 +80,6 @@ that the completeness argument requires.
 	\]
 \end{proposition}
 
-\begin{proof}
-	For each $i = 1,2$, the epigraph of $v_i$ satisfies
-	\[
-		(y,t) \in \mathrm{epi}(v_i)
-		\iff
-		\exists x : A_i x \ge B_i y,\ \mathbf{1}^\top x \le t,
-	\]
-	so $\mathrm{epi}(v_i)$ is the projection onto $(y,t)$ of the polyhedron
-	$P_i = \{(x,y,t) \mid A_i x \ge B_i y,\ \mathbf{1}^\top x \le t\}$.
-	Projections of polyhedra are polyhedra, so each $\mathrm{epi}(v_i)$ is
-	a polyhedron. Since $v_1 = v_2$ pointwise, we have
-	$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
-	Setting $E = \{(y,t) \mid Cy + dt \ge 0\}$, we obtain
-	$v_i(y) = \inf\{t \mid Cy + dt \ge 0\}$ for both $i = 1, 2$.
-\end{proof}
-
 \subsection{The semantic category \texorpdfstring{$\mathbf{LPRel}$}{LPRel} and \texorpdfstring{$\mathbf{PolyFun}$}{PolyFun}}
 
 With the semantic equivalences established, we now define the two equivalent semantic categories for this algebra. The first, $\mathbf{LPRel}$, describes morphisms as parametric linear programs; the second, $\mathbf{PolyFun}$, describes them as polyhedral functions. The equivalence between the two follows immediately from the propositions above. We refer only to $\mathbf{LPRel}$, but all results hold equally for $\mathbf{PolyFun}$.
@@ -149,7 +93,9 @@ The broadest semantic setting is the category of bifunctions, which is exactly t
 	\[
 		(G \circ F)(a,c) := \inf_{b \in B} \big( F(a,b) + G(b,c) \big),
 	\]
-	with identity $1_A(a,a') = 0$ if $a=a'$ and $+\infty$ otherwise. The tensor product is the Cartesian product on objects and addition on morphisms, with the singleton as unit.
+	with identity $1_A(a,a') = 0$ if $a=a'$ and $+\infty$ otherwise ---
+	precisely the characteristic function of the diagonal binary relation
+	of Definition~\ref{def:binaryrel}. The tensor product is the Cartesian product on objects and addition on morphisms, with the singleton as unit.
 \end{definition}
 
 \begin{remark}

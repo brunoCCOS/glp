@@ -18,8 +18,8 @@ complete monoidal theory for right-hand side parametric linear programming.
 
 The algebra $\mathbf{GLP}$ extends
 $\mathbf{GPA}$ with a single new generator whose semantics encodes the
-linear objective function $c^\top x$. As we will se more clearer later, this
-new generator plays a similar row to that of a ´´measurement´´ such that is simply exposing
+linear objective function $c^\top x$. As will become clearer later, this
+new generator plays a role similar to that of a ``measurement'': it simply exposes
 what is in the wire without modifying it.
 It lifts $\mathbf{GPA}$ from polyhedral constraints
 to full linear programs by attaching a
@@ -33,13 +33,7 @@ linear cost to the feasible region.
 	extending $\mathbf{GPA}$ with the following generator:
 	\begin{figure}[H]
 		\centering
-            \begin{tikzpicture}
-              \node at (0.2,0.5) {$\llbracket$};
-              \pic (g1) at (0.500,0.500) {linear};
-              \node at (1.1,0.5) {$\rrbracket$};
-              \node at (1.4,0.5) {$=$};
-              \node at (2.4,0.5) {$(\bullet,x) \mapsto x$};
-            \end{tikzpicture}
+            \input{tikz/LinearGeneratorSemantics.tex}
 	\end{figure}
 	together with the following axioms governing its interaction with
 	the existing generators:
@@ -66,7 +60,7 @@ linear cost to the feasible region.
       }{ 
           \node[draw, dotted] {};
       }
-      \diagrow{(idemp)}{
+      \diagrow{(inf)}{
           \pic (g1) at (0.500,0.500) {linear};
           \begin{scope}[shift={(1.250,0.000)}]
           \pic (g2) at (0.500,0.500) {ge};
@@ -80,9 +74,9 @@ linear cost to the feasible region.
 
 The axioms represent expected properties of the linear cost function.
 The \textit{linearity} axiom expresses $f(x) + f(y) = f(x+y)$, where $f$ denotes the interpretation of $\inlinegen{linear}$ and the sum denotes vertical composition; composing two copies of $\inlinegen{linear}$ vertically is the same as applying a single $\inlinegen{linear}$ to the combined wires.
-The \textit{idemp} axiom expresses the fundamental property of minimization: the infimum of a quantity over all values satisfying a lower bound is that lower bound itself,
-\[\inf_x \{ x \mid x \ge y \} =  y.\]
-The name refers to the idempotency of the map $\sigma \mapsto \sigma;\inlinegen{ge}$ on $\Sigma$-terms: applying $\inlinegen{ge}$ after $\inlinegen{linear}$ has no effect, so $\inlinegen{linear}$ is a fixed point of this map.
+The \textit{inf} axiom expresses the defining property of minimization: the infimum of a quantity over all values satisfying a lower bound is that lower bound itself,
+\[\inf_x \{ x \mid x \ge y \} =  y,\]
+so applying $\inlinegen{ge}$ after $\inlinegen{linear}$ has no effect.
 Finally, the \textit{zeroeq} axiom captures the tautological case $\inf\{x \mid x = 0\} = 0$: the minimum of a linear cost subject to the equality $x = 0$ is zero.
 
 \begin{definition}
@@ -94,34 +88,15 @@ The normal form theorem for $\mathbf{GLP}$ extends the one for
 $\mathbf{GPA}$: every diagram can be reduced to a $\mathbf{GPA}$ block
 encoding the constraints, composed with the new generator encoding the
 objective. The proof proceeds by structural induction, using the existing
-normal form for $\mathbf{GPA}$ as the inductive base.
+normal form for $\mathbf{GPA}$ as the inductive base; it is given in
+Appendix~\ref{app:proofs}.
 
 \begin{theorem}[Normal Form]\label{thm:NormalFormGLP}
 	For every diagram $c \in \mathbf{GLP}$, there exists a diagram $c'$
 	in normal form such that $c = c'$:
 	\begin{figure}[H]
 		\centering
-        \begin{tikzpicture}
-          \begin{scope}[shift={(0.000,0.800)}]
-          \pic (g1) at (0.500,0.500) {linear};
-          \end{scope}
-          \coordinate (id_in_2) at (0,0.700);
-          \coordinate (id_out_3) at (1.000,0.700);
-          \draw (id_in_2) -- (id_out_3);
-          \begin{scope}[shift={(.7,0.500)}]
-          \pic[val=A] (g4) at (0.500,0.500) {2drelation};
-          \end{scope}
-          \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
-          \draw (id_out_3) to[out=0,in=180] (g4-in-1);
-          \begin{scope}[shift={(2.000,0.500)}]
-          \pic (g5) at (0.500,0.500) {ge};
-          \end{scope}
-          \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-          \begin{scope}[shift={(3.050,0.500)}]
-          \pic[val=B] (g6) at (0.500,0.500) {corelation};
-          \end{scope}
-          \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
-        \end{tikzpicture}
+        \input{tikz/NormalFormGLP.tex}
 	\end{figure}
 	With $A$ and $b$ being an affine transformation, namely:
 	\begin{figure}[H]
@@ -129,41 +104,6 @@ normal form for $\mathbf{GPA}$ as the inductive base.
 		\input{tikz/AffineTransformation.tex}
 	\end{figure}
 \end{theorem}
-
-\begin{proof}
-	The proof is by structural induction. First we show the two base cases:
-	\begin{itemize}
-        \item The generator $\begin{tikzpicture} \pic (g1) at (0.500,0.500) {linear}; \end{tikzpicture}$
-		      \begin{figure}[H]
-			      \centering
-			      \input{tikz/ProofNormalForm1.tex}
-		      \end{figure}
-          \item A diagram $c \in \textbf{GPA}$ is a polyhedral, which by normal form \cite{bonchi2021polyhedral} is just $\{|Ax + a \ge By |\}$, thus:
-		      \begin{figure}[H]
-			      \centering
-			      \input{tikz/ProofNormalForm2.tex}
-		      \end{figure}
-	\end{itemize}
-	For the inductive step, we verify that for any two diagrams
-	$c, d \in \mathbf{GLP}$ satisfying the inductive hypothesis,
-	both horizontal and vertical composition preserve the normal form.
-	Closure under vertical composition follows by stacking the two normal forms and
-	collapsing the two independent $A_i, \inlinegen{ge}, B_i$ blocks into a single
-	block-diagonal matrix pair, as shown below:
-	\begin{figure}[H]
-		\centering
-		\input{tikz/ProofNormalForm3.tex}
-	\end{figure}
-	For horizontal composition, the two normal forms are joined along the wire connecting
-	$B_1$ to $A_2$; applying Fourier-Motzkin Elimination to this pair recovers a fresh
-	matrix-\inlinegen{ge}-comatrix triple, after which the two resulting runs of matrices,
-	one in each direction, compose into a single matrix and a single comatrix, recovering
-	the normal form:
-	\begin{figure}[H]
-		\centering
-		\input{tikz/ProofNormalForm4.tex}
-	\end{figure}
-\end{proof}
 
 The following corollary reveals the geometric meaning of the normal form:
 the $\mathbf{GPA}$ part of every $\mathbf{GLP}$ diagram encodes the
@@ -202,31 +142,7 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 
   \begin{center}
     \vspace{1.5em}
-    \begin{tikzpicture}
-      \begin{scope}[shift={(0.000,0.500)}]
-      \pic (g1) at (0.500,0.500) {linear};
-      \begin{scope}[shift={(1.250,0.000)}]
-      \pic (g2) at (0.500,0.500) {copy};
-      \end{scope}
-      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-      \end{scope}
-      \begin{scope}[shift={(2.500,0.000)}]
-      \begin{scope}[shift={(0.625,1.000)}]
-      \pic (g3) at (0.500,0.500) {ge};
-      \end{scope}
-      \pic (g4) at (0.500,0.500) {ge};
-      \begin{scope}[shift={(1.250,0.000)}]
-      \pic (g5) at (0.500,0.500) {cozero};
-      \end{scope}
-      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-      \coordinate (a6) at (0.000,0 |- g3-in-0);
-      \draw (g3-in-0) -- (a6);
-      \coordinate (a7) at (2.250,0 |- g3-out-0);
-      \draw (g3-out-0) -- (a7);
-      \end{scope}
-      \draw (g2-out-0) to[out=0,in=180] (a6);
-      \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
-    \end{tikzpicture}
+    \input{tikz/ExampleReLU.tex}
     \vspace{1em}
   \end{center}
 \end{example}
@@ -244,55 +160,11 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 
   \begin{center}
     \vspace{1.5em}
-    \diagdef{
-        \node[draw, fill=white] at (0,0) {ReLU};
-        \draw (0.55,0.0) to (1.0,0);
-        \draw (-0.55,0.0) to (-1.0,0);
-  }{
-      \begin{scope}[shift={(0.000,0.500)}]
-      \begin{scope}[shift={(1.250,0.000)}]
-      \pic (g2) at (0.500,0.500) {copy};
-      \end{scope}
-      \end{scope}
-      \begin{scope}[shift={(2.500,0.000)}]
-      \begin{scope}[shift={(0.625,1.000)}]
-      \pic (g3) at (0.500,0.500) {ge};
-      \end{scope}
-      \pic (g4) at (0.500,0.500) {ge};
-      \begin{scope}[shift={(1.250,0.000)}]
-      \pic (g5) at (0.500,0.500) {cozero};
-      \end{scope}
-      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-      \coordinate (a6) at (0.000,0 |- g3-in-0);
-      \draw (g3-in-0) -- (a6);
-      \coordinate (a7) at (2.250,0 |- g3-out-0);
-      \draw (g3-out-0) -- (a7);
-      \end{scope}
-      \draw (g2-out-0) to[out=0,in=180] (a6);
-      \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
-  }
+    \input{tikz/ExampleReLUDef.tex}
 \end{center}
 \begin{center}
     \vspace{1em}
-    \begin{tikzpicture}
-      \pic (g1) at (0.500,0.500) {linear};
-      \begin{scope}[shift={(1.250,0.000)}]
-      \pic (g2) at (0.500,0.500) {relu};
-      \end{scope}
-      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-      \begin{scope}[shift={(2.500,0.000)}]
-          \pic[val=W_1] (g3) at (0.500,0.500) {corelation};
-      \end{scope}
-      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-      \begin{scope}[shift={(3.750,0.000)}]
-      \pic (g4) at (0.500,0.500) {relu};
-      \end{scope}
-      \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
-      \begin{scope}[shift={(5.000,0.000)}]
-          \pic[val=W_2] (g5) at (0.500,0.500) {corelation};
-      \end{scope}
-      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-    \end{tikzpicture}
+    \input{tikz/ExampleFeedforward.tex}
   \end{center}
 \end{example}
 
@@ -309,23 +181,7 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 
   \begin{center}
     \vspace{1.5em}
-    \begin{tikzpicture}
-      \begin{scope}[shift={(0.000,0.500)}]
-      \pic (g1) at (0.500,0.500) {linear};
-      \begin{scope}[shift={(1.250,0.000)}]
-      \pic (g2) at (0.500,0.500) {copy};
-      \end{scope}
-      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-      \end{scope}
-      \begin{scope}[shift={(2.500,0.000)}]
-      \begin{scope}[shift={(0.000,1.000)}]
-      \pic (g3) at (0.500,0.500) {ge};
-      \end{scope}
-      \pic (g4) at (0.500,0.500) {ge};
-      \end{scope}
-      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-      \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
-    \end{tikzpicture}
+    \input{tikz/ExampleMaxPooling.tex}
     \vspace{1em}
   \end{center}
 \end{example}
@@ -339,38 +195,7 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 
   \begin{center}
     \vspace{1.5em}
-    \begin{tikzpicture}
-      \begin{scope}[shift={(0.000,0.500)}]
-      \pic (g1) at (0.500,0.500) {linear};
-      \end{scope}
-      \begin{scope}[shift={(1.250,0.000)}]
-      \begin{scope}[shift={(0.000,0.500)}]
-      \pic (g2) at (0.500,0.500) {copy};
-      \end{scope}
-      \begin{scope}[shift={(1.250,0.000)}]
-      \begin{scope}[shift={(0.625,1.000)}]
-      \pic (g3) at (0.500,0.500) {ge};
-      \end{scope}
-      \pic (g4) at (0.500,0.500) {ge};
-      \begin{scope}[shift={(1.250,0.000)}]
-      \pic (g5) at (0.500,0.500) {antipode};
-      \end{scope}
-      \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-      \coordinate (a6) at (0.000,0 |- g3-in-0);
-      \draw (g3-in-0) -- (a6);
-      \coordinate (a7) at (2.250,0 |- g3-out-0);
-      \draw (g3-out-0) -- (a7);
-      \end{scope}
-      \draw (g2-out-0) to[out=0,in=180] (a6);
-      \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
-      \begin{scope}[shift={(3.750,0.500)}]
-      \pic (g8) at (0.500,0.500) {cocopy};
-      \end{scope}
-      \draw (a7) to[out=0,in=180] (g8-in-0);
-      \draw (g5-out-0) to[out=0,in=180] (g8-in-1);
-      \end{scope}
-      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-    \end{tikzpicture}
+    \input{tikz/ExampleL1.tex}
     \vspace{1em}
   \end{center}
 \end{example}

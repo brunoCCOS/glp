@@ -1,0 +1,36 @@
+\diagdef{
+    \pic[val=A] {matrix};
+}{
+              \begin{scope}[shift={(0.000,1.000)}]
+              \begin{scope}[shift={(0.000,1.000)}]
+              \pic (g1) at (0.500,0.500) {copy};
+              \end{scope}
+              \pic (g2) at (0.500,0.500) {copy};
+              \end{scope}
+              \begin{scope}[shift={(1.250,0.000)}]
+              \begin{scope}[shift={(0.000,1.000)}]
+              \begin{scope}[shift={(0.000,1.000)}]
+              \begin{scope}[shift={(0.000,1.000)}]
+                  \pic (g3)[val=a_{1,1}] at (0.500,0.500) {scalar};
+              \end{scope}
+              \pic (g4)[val=a_{2,1}] at (0.500,0.500) {scalar};
+              \end{scope}
+              \pic (g5)[val=a_{1,2}] at (0.500,0.500) {scalar};
+              \end{scope}
+              \pic (g6)[val=a_{2,2}] at (0.500,0.500) {scalar};
+              \end{scope}
+              \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
+              \draw (g1-out-1) to[out=0,in=180] (g4-in-0);
+              \draw (g2-out-0) to[out=0,in=180] (g5-in-0);
+              \draw (g2-out-1) to[out=0,in=180] (g6-in-0);
+              \begin{scope}[shift={(2.500,1.000)}]
+              \begin{scope}[shift={(0.000,1.000)}]
+              \pic (g7) at (0.500,0.500) {multiplication};
+              \end{scope}
+              \pic (g8) at (0.500,0.500) {multiplication};
+              \end{scope}
+              \draw (g3-out-0) to[out=0,in=180] (g7-in-0);
+              \draw (g4-out-0) to[out=0,in=180] (g7-in-1);
+              \draw (g5-out-0) to[out=0,in=180] (g8-in-0);
+              \draw (g6-out-0) to[out=0,in=180] (g8-in-1);
+}
