@@ -154,15 +154,10 @@ For it to be considered a ``useful'' syntax we expect that it satisfies some pro
 		\centering
         \input{tikz/semDiag.tex}
 	\end{figure}
-	where $P\Sigma$ is the category where objects are natural numbers and morphisms are $\Sigma$-terms from $n \to m$; $P\Sigma_{/E}$ is the $P\Sigma$ category with the morphisms quotiented by $E$ and there is then a PROP morphism $q$ witnessing this quotient; $\textbf{Sem}$ is our semantic category; and $s$ is a full and faithful PROP morphism. This is equivalent to demanding the following:
-	\begin{itemize}
-		\item Soundness: $P\Sigma_{/E}$ is sound if $c \overset{E}= d$\footnote{$\overset{E}=$ means that this equality is provable by the equations in $E$.} implies $[c] = [d]$.
-		\item Completeness: $P\Sigma_{/E}$ is complete if $[c] = [d]$ implies $c \overset{E}= d$.
-		\item Expressivity: $P\Sigma_{/E}$ is expressive if for every morphism $c$ in \textbf{Sem} there exists $d \in P\Sigma_{/E}$ such that $[d] = c$.
-	\end{itemize}
+	where $P\Sigma$ is the category where objects are natural numbers and morphisms are $\Sigma$-terms from $n \to m$; $P\Sigma_{/E}$ is the $P\Sigma$ category with the morphisms quotiented by $E$ and there is then a PROP morphism $q$ witnessing this quotient; $\textbf{Sem}$ is our semantic category; and $s$ is a full and faithful PROP morphism.
 \end{definition}
 
-Those three properties capture the idea that everything we can prove in the syntax holds in the semantics (soundness), everything that holds in the semantics is provable in the syntax (completeness), and that every morphism in the semantics has a syntactic representative (expressivity). Moreover, these properties denote equivalent characteristics about the interpretation map, both categorically and functionally, as depicted in Table~\ref{tab:equivalences}.
+This is equivalent to demanding that our theory is sound, complete and expressable. Those three properties capture the idea that everything we can prove in the syntax holds in the semantics (soundness), everything that holds in the semantics is provable in the syntax (completeness), and that every morphism in the semantics has a syntactic representative (expressivity). Moreover, these properties denote equivalent characteristics about the interpretation map, both categorically and functionally, as depicted in Table~\ref{tab:equivalences}.
 
 \begin{table}[h!]
 	\centering
