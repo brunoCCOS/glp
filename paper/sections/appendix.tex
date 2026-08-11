@@ -247,3 +247,29 @@ interpretation map, $c \; \llbracket = \rrbracket \; \llbracket c \rrbracket$.
 	\end{figure}
 	Therefore $c = \inlinegen{linear} ; c^* = \inlinegen{linear} ; d^* = d$.
 \end{proof}
+
+\begin{remark}[Invariance under column-stochastic matrices]\label{rmk:stochastic}
+	The \textit{linearity} axiom encodes the fundamental invariance of linear
+	programs under column-stochastic reweightings of the objective: for any
+	$n \times m$ matrix $S$ whose columns each sum to one,
+	\[
+		\inlinegen{linear}^{\otimes n} ; \; S^{op} \;=\; \inlinegen{linear}^{\otimes m},
+	\]
+	where $S^{op}$ denotes the comatrix of $S$. Note that only the column sums are
+	used; non-negativity of the entries plays no role. The proof is diagrammatic:
+	the comatrix is opened into its definition (one comultiplication per input,
+	one coscalar per entry, one cocopy per output); \textit{linearity} merges all
+	\inlinegen{linear} generators into a single one feeding a comultiplication
+	tree; \textit{coassoc} and \textit{cocomm} regroup the branches so that the
+	entries of each column become adjacent; the mirrored \textit{s.add} axiom then
+	sums the coefficients of each column, which equal $1$ by assumption, leaving
+	bare wires; a final application of \textit{linearity} splits the diagram back
+	into one \inlinegen{linear} generator per output. We display the proof for a
+	$2 \times 2$ matrix $S$ with $s_{1,1} + s_{2,1} = s_{1,2} + s_{2,2} = 1$;
+	every step is an instance of an axiom scheme that applies wire-by-wire, so
+	the same chain of rewrites goes through verbatim for arbitrary $n \times m$.
+	\begin{figure}[H]
+		\centering
+		\input{tikz/RemarkStochastic.tex}
+	\end{figure}
+\end{remark}

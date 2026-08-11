@@ -3,15 +3,12 @@
 
 With the semantics in place, we define the Symmetric Monoidal Theory (SMT)
 that expresses it. In this section we present the base generators and
-the new equational setting of the algebra. Further results, such as syntactic
-derivations, normal form, and what we call "diagram solving", are demonstrated
+the new equational setting of the algebra. Further results, such as normal form,
+completeness and and interesting examples, are demonstrated
 at the end of the section, providing some insightful applications of our theory.
 
-The two graphical theories developed so far have each extended the categorical framework
-by adding a new class of morphisms. We now introduce the
-final and most expressive theory:
-a graphical algebra for parametric linear programs.
-Linear programs combine both the inequality structure of polyhedra and the notion of an objective function,
+Linear programs combine both the inequality structure
+of polyhedra and the notion of an objective function,
 and their value functions are precisely the polyhedral convex functions.
 The central result of this section is the presentation of a
 complete monoidal theory for right-hand side parametric linear programming.
@@ -71,7 +68,8 @@ linear cost to the feasible region.\footnote{An analogous notion was developed b
 \end{definition}
 
 The axioms represent expected properties of the linear cost function.
-The \textit{linearity} axiom expresses $f(x) + f(y) = f(x+y)$, where $f$ denotes the interpretation of $\inlinegen{linear}$ and the sum denotes vertical composition; composing two copies of $\inlinegen{linear}$ vertically is the same as applying a single $\inlinegen{linear}$ to the combined wires.
+The \textit{linearity} axiom expresses $f(x) + f(y) = f(x+y)$, where $f$ denotes the interpretation of $\inlinegen{linear}$ and the sum denotes vertical composition; composing two copies of $\inlinegen{linear}$ vertically is the same as applying a single $\inlinegen{linear}$ to the combined wires. Furthermore, this axiom is also the fundamental property of LPs, which is the fact that they are invariant to column stochastic matrices (see~\ref{rmk:stochastic}).
+
 The \textit{inf} axiom expresses the defining property of minimization: the infimum of a quantity over all values satisfying a lower bound is that lower bound itself,
 \[\inf_x \{ x \mid x \ge y \} =  y,\]
 so applying $\inlinegen{ge}$ after $\inlinegen{linear}$ has no effect.
@@ -95,11 +93,6 @@ Appendix~\ref{app:proofs}.
 	\begin{figure}[H]
 		\centering
         \input{tikz/NormalFormGLP.tex}
-	\end{figure}
-	With $A$ and $b$ being an affine transformation, namely:
-	\begin{figure}[H]
-		\centering
-		\input{tikz/AffineTransformation.tex}
 	\end{figure}
 \end{theorem}
 

@@ -1,0 +1,107 @@
+\begin{center}
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,0.500) {linear};
+      \pic[val=S] (m1) at (1.750,0.500) {comatrix};
+      \draw (l1-out-0) to[out=0,in=180] (m1-in-0);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(def)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,2.500) {linear};
+      \pic (l2) at (0.500,0.500) {linear};
+      \pic (c1) at (1.750,2.500) {comultiplication};
+      \pic (c2) at (1.750,0.500) {comultiplication};
+      \pic[val=s_{1,1}] (s11) at (3.000,3.000) {coscalar};
+      \pic[val=s_{1,2}] (s12) at (3.000,2.000) {coscalar};
+      \pic[val=s_{2,1}] (s21) at (3.000,1.000) {coscalar};
+      \pic[val=s_{2,2}] (s22) at (3.000,0.000) {coscalar};
+      \pic (k1) at (5.000,2.500) {cocopy};
+      \pic (k2) at (5.000,0.500) {cocopy};
+      \draw (l1-out-0) to[out=0,in=180] (c1-in-0);
+      \draw (l2-out-0) to[out=0,in=180] (c2-in-0);
+      \draw (c1-out-0) to[out=0,in=180] (s11-in-0);
+      \draw (c1-out-1) to[out=0,in=180] (s12-in-0);
+      \draw (c2-out-0) to[out=0,in=180] (s21-in-0);
+      \draw (c2-out-1) to[out=0,in=180] (s22-in-0);
+      \draw (s11-out-0) to[out=0,in=180] (k1-in-0);
+      \draw (s21-out-0) to[out=0,in=180] (k1-in-1);
+      \draw (s12-out-0) to[out=0,in=180] (k2-in-0);
+      \draw (s22-out-0) to[out=0,in=180] (k2-in-1);
+    \end{tikzpicture} \\
+    \vspace{2mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(linearity)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,1.500) {linear};
+      \pic (c0) at (1.750,1.500) {comultiplication};
+      \pic (c1) at (3.000,2.500) {comultiplication};
+      \pic (c2) at (3.000,0.500) {comultiplication};
+      \pic[val=s_{1,1}] (s11) at (4.250,3.000) {coscalar};
+      \pic[val=s_{1,2}] (s12) at (4.250,2.000) {coscalar};
+      \pic[val=s_{2,1}] (s21) at (4.250,1.000) {coscalar};
+      \pic[val=s_{2,2}] (s22) at (4.250,0.000) {coscalar};
+      \pic (k1) at (6.250,2.500) {cocopy};
+      \pic (k2) at (6.250,0.500) {cocopy};
+      \draw (l1-out-0) to[out=0,in=180] (c0-in-0);
+      \draw (c0-out-0) to[out=0,in=180] (c1-in-0);
+      \draw (c0-out-1) to[out=0,in=180] (c2-in-0);
+      \draw (c1-out-0) to[out=0,in=180] (s11-in-0);
+      \draw (c1-out-1) to[out=0,in=180] (s12-in-0);
+      \draw (c2-out-0) to[out=0,in=180] (s21-in-0);
+      \draw (c2-out-1) to[out=0,in=180] (s22-in-0);
+      \draw (s11-out-0) to[out=0,in=180] (k1-in-0);
+      \draw (s21-out-0) to[out=0,in=180] (k1-in-1);
+      \draw (s12-out-0) to[out=0,in=180] (k2-in-0);
+      \draw (s22-out-0) to[out=0,in=180] (k2-in-1);
+    \end{tikzpicture} \\
+    \vspace{2mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(coassoc,\,cocomm)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,1.500) {linear};
+      \pic (c0) at (1.750,1.500) {comultiplication};
+      \pic (c1) at (3.000,2.500) {comultiplication};
+      \pic (c2) at (3.000,0.500) {comultiplication};
+      \pic[val=s_{1,1}] (s11) at (4.250,3.000) {coscalar};
+      \pic[val=s_{2,1}] (s21) at (4.250,2.000) {coscalar};
+      \pic[val=s_{1,2}] (s12) at (4.250,1.000) {coscalar};
+      \pic[val=s_{2,2}] (s22) at (4.250,0.000) {coscalar};
+      \pic (k1) at (5.500,2.500) {cocopy};
+      \pic (k2) at (5.500,0.500) {cocopy};
+      \draw (l1-out-0) to[out=0,in=180] (c0-in-0);
+      \draw (c0-out-0) to[out=0,in=180] (c1-in-0);
+      \draw (c0-out-1) to[out=0,in=180] (c2-in-0);
+      \draw (c1-out-0) to[out=0,in=180] (s11-in-0);
+      \draw (c1-out-1) to[out=0,in=180] (s21-in-0);
+      \draw (c2-out-0) to[out=0,in=180] (s12-in-0);
+      \draw (c2-out-1) to[out=0,in=180] (s22-in-0);
+      \draw (s11-out-0) to[out=0,in=180] (k1-in-0);
+      \draw (s21-out-0) to[out=0,in=180] (k1-in-1);
+      \draw (s12-out-0) to[out=0,in=180] (k2-in-0);
+      \draw (s22-out-0) to[out=0,in=180] (k2-in-1);
+    \end{tikzpicture} \\
+    \vspace{2mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(s.add)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,1.000) {linear};
+      \pic (c0) at (1.750,1.000) {comultiplication};
+      \node[boxnode_left] (s1) at (3.750,1.500) {$s_{1,1}{+}s_{2,1}$};
+      \node[boxnode_left] (s2) at (3.750,0.500) {$s_{1,2}{+}s_{2,2}$};
+      \draw (l1-out-0) to[out=0,in=180] (c0-in-0);
+      \draw (c0-out-0) to[out=0,in=180] (s1.west);
+      \draw (c0-out-1) to[out=0,in=180] (s2.west);
+      \draw (s1.east) -- +(0.400,0);
+      \draw (s2.east) -- +(0.400,0);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(stoch.)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,1.000) {linear};
+      \pic (c0) at (1.750,1.000) {comultiplication};
+      \draw (l1-out-0) to[out=0,in=180] (c0-in-0);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(linearity)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,1.500) {linear};
+      \pic (l2) at (0.500,0.500) {linear};
+    \end{tikzpicture}
+\end{center}
