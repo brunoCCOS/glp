@@ -14,90 +14,20 @@ Graphical Linear Algebra~\cite{paixao2022highlevel, bonchi2017interacting}, Grap
 
 \subsection{Preliminaries on relations}
 
-While much of mathematical theory is built on functional thinking,
-we argue that most of mathematics actually has a relational nature.
-Category theory is the natural language for this purpose. It is precisely built on top of this notion,
-in which everything one needs to know about an object is determined by its morphisms.
+The relational view of mathematics is attested by seminal works such as \cite{frege1879begriffsschrift, whitehead1910principia}
+and is ever more embraced by Category theory,
+whose main claim is precisely that an object is fully grasped
+by the relations it has to others \cite{maclane1998categories}.
 
-To begin we define the most basic kind of relation:
+The elementary development of this idea proceeds by asking for progressively
+more structure on the relating sets and on the values a relation may take;
+we recall some of the theory in Appendix~\ref{app:background}.
 
-\begin{definition}[Binary Relations]\label{def:binaryrel}
-	Let $X$ and $Y$ be sets. A \emph{binary relation} $R$ from $X$ to $Y$ is a subset
-	\[
-		R \subseteq X \times Y.
-	\]
-	Equivalently, it can be identified with its characteristic function
-	\[
-		\chi_R : X \times Y \to \{0,+\infty\},
-	\]
-	defined by
-	\[
-		\chi_R(x,y) =
-		\begin{cases}
-			0  \text{ if } (x,y) \in R, \\
-			+\infty \quad \text{otherwise}.
-		\end{cases}
-	\]
-\end{definition}
-
-A binary relation specifies whether $x$ is related to $y$.
-One can think of a relation in two different ways that will prove useful later:
-first, as a set of pairs, where every relation is just a pair $(x,y) \in R$,
-or as a map that has $x,y$ as inputs and outputs $0$ if they are related, and $+\infty$ if they are not
-(the choice of $\{0,+\infty\}$ reflects that we are after a framework of minimization rather than a purely logical one; the usual choices here are $\{\text{true},\text{false}\}$ or $\{0,1\}$, the latter being isomorphic to ours under the appropriate operations).
-
-This is a general construct, as the sets $X$ and $Y$ can be anything.
-We can, for instance, ask for further structures on such sets and obtain different kinds of relations.
-\begin{definition}[Linear/Affine Relations]
-	Let $X$ and $Y$ be vector spaces. A \emph{linear relation} from $X$ to $Y$ is a linear subspace
-	\[
-		R \subseteq X \times Y.
-	\]
-	An \emph{affine relation} is an affine subspace of $X \times Y$.
-	Equivalently, a linear relation can be described as the graph of a possibly multivalued linear operator, i.e.,
-	\[
-		R(x) := \{ y \in Y \mid (x,y) \in R \}.
-	\]
-\end{definition}
-
-Thus, a linear/affine relation is a binary relation where the set $R$ is a subspace.
-We have so far restricted relations between $x$ and $y$ to a binary ``related or not'' notion. In fact, we might be interested in adding degrees to such a relation, so that we could say that $x$ and $y$ are ``more'' or ``less'' related. This leads us to the well-known notion of weighted relations \cite{lawvere1973metric}.
-
-\begin{definition}[Weighted Relations]
-	Let $X$ and $Y$ be any two sets and let $\extendR^+:= [0, +\infty]$.
-	A \emph{weighted relation} from $X$ to $Y$ is a set
-	\[
-		R \subseteq X \times Y \times \extendR^+
-	\]
-	such that for every $(x,y) \in X \times Y$ there exists \emph{exactly one}
-	$r \in \extendR^+$ satisfying $(x,y,r) \in R$.
-	Equivalently, we may define the characteristic function
-	$\chi_R : X \times Y \to \extendR^+$
-	by $\chi_R(x,y) = r$ if and only if $(x,y,r) \in R$.
-\end{definition}
-
-In fact, one could choose any other set instead of $\extendR^+$ to be the codomain of the characteristic function, as long as it satisfies some properties. The whole structure of a relation is further generalized by the notion of a quantale~\cite{rosenthal1990quantales}.
-\begin{definition}[Quantale]
-	A \emph{quantale} is a structure $(Q,\leq,\otimes,e)$ such that:
-	\begin{itemize}
-		\item $(Q,\leq)$ is a complete lattice, i.e., every subset $A \subseteq Q$ admits a join $\bigvee A$ and a meet $\bigwedge A$;
-		\item $(Q,\otimes,e)$ is a monoid;
-		\item Multiplication distributes over arbitrary join in each variable:
-		      \[
-			      a \otimes \Big( \bigvee_{i \in I} b_i \Big)
-			      =
-			      \bigvee_{i \in I} (a \otimes b_i),
-			      \qquad
-			      \Big( \bigvee_{i \in I} a_i \Big) \otimes b
-			      =
-			      \bigvee_{i \in I} (a_i \otimes b)
-		      \]
-		      for all families $\{a_i\}_{i\in I}, \{b_i\}_{i\in I} \subseteq Q$.
-	\end{itemize}
-	If $\otimes$ is commutative, the quantale is called \emph{commutative}.
-	If $e = \top$ (the top element of the lattice), it is called \emph{integral}.
-\end{definition}
-
+The structure that unifies all of these notions is that of a
+\emph{quantale}~\cite{rosenthal1990quantales}: a structure
+$(Q,\leq,\otimes,e)$ where $(Q,\leq)$ is a complete lattice, $(Q,\otimes,e)$
+is a monoid, and $\otimes$ distributes over arbitrary joins in each variable
+(see Appendix~\ref{app:background}).
 Given a quantale $Q$, we can define the notion of $Q$-valued relation \cite{coecke2018generalizedrelations}.
 
 \begin{definition}[Generalized Relations]
@@ -170,7 +100,7 @@ symmetric monoidal category~\cite{maclane1998categories}.
 	The singleton set is the monoidal unit, and the category is compact closed w.r.t.\ the monoidal structure.
 \end{proposition}
 
-Relations encode the notion of matrices and matrix multiplication. A $Q$-valued relation $R : X \times Y \to Q$ is nothing but a \emph{$Q$-valued matrix} indexed by $X \times Y$, and composition of $Q$-valued relations corresponds precisely to matrix multiplication in $Q$, where ordinary addition is replaced by the join $\bigvee$ and ordinary multiplication by the monoidal product $\otimes$. Worth noticing, however, that in this case, matrices can indeed be infinite (countable), different from the usual finite case.
+Relations encode the notion of matrices and matrix multiplication. A $Q$-valued relation $R : X \times Y \to Q$ is nothing but a \emph{$Q$-valued matrix} indexed by $X \times Y$, and composition of $Q$-valued relations corresponds precisely to matrix multiplication in $Q$, where ordinary addition is replaced by the join $\bigvee$ and ordinary multiplication by the monoidal product $\otimes$. Note, however, that in this case matrices can be infinite (countable), unlike the usual finite case.
 The two axioms of a quantale --- that $\otimes$ distributes over arbitrary joins --- are precisely what guarantees that this multiplication is associative and well-defined. This serves as motivation for what will later become the diagrammatic theory of linear algebra.
 
 The resulting categories are symmetric monoidal, and it is precisely this monoidal backbone that will support the algebraic structure we aim to build. A key piece of that structure is a \emph{Frobenius monoid} on each object: a monoid $(\mu, \eta)$ and a comonoid $(\delta, \varepsilon)$ on the same object, satisfying the Frobenius law
@@ -184,16 +114,7 @@ The resulting categories are symmetric monoidal, and it is precisely this monoid
 A symmetric monoidal category in which every object carries such a structure, compatibly with the tensor product, is called a \emph{hypergraph category} \cite{fong2019hypergraph}. Hypergraph categories are related to, but strictly more general than, compact closed categories \cite{selinger2010survey}, and it is the more general notion that we adopt as our ambient framework.
 
 \begin{remark}
-	If $Q$ is commutative, then $\mathbf{Rel}(Q)$ is a hypergraph category~\cite{fong2019hypergraph} and admits a commutative Frobenius structure on every object. Diagrammatically, we denote the additive and co-additive structure as
-	\begin{figure}[H]
-		\centering
-		\input{tikz/FrobeniusGeneratorLegend.tex}
-		\caption{Frobenius additive (black) and co-additive (white) structure.}
-	\end{figure}
-	subject to the Frobenius Law (both colors)
-	\begin{figure}[H]
-		\input{tikz/FrobeniusLaw.tex}
-	\end{figure}
+	If $Q$ is commutative, then $\mathbf{Rel}(Q)$ is a hypergraph category~\cite{fong2019hypergraph} and admits a commutative Frobenius structure on every object.
 \end{remark}
 
 \subsection{Syntax: Symmetric Monoidal Theories}
@@ -233,7 +154,7 @@ For it to be considered a ``useful'' syntax we expect that it satisfies some pro
 		\centering
         \input{tikz/semDiag.tex}
 	\end{figure}
-	where $P\Sigma$ is the category where objects are natural numbers and morphisms are $\Sigma$-terms from $n \to m$; $P\Sigma_{/E} = \text{FreeP}_{(\Sigma,E)}$ is the $P\Sigma$ category with the morphisms quotiented by $E$ and there is then a PROP morphism $q : P\Sigma \to P\Sigma_{/E}$ witnessing this quotient; $\textbf{Sem}$ is our semantic category (the Cost/Reward relations for example); and $s$ is a full and faithful PROP morphism. Another way to say the same is to demand two things out of the SMT:
+	where $P\Sigma$ is the category where objects are natural numbers and morphisms are $\Sigma$-terms from $n \to m$; $P\Sigma_{/E}$ is the $P\Sigma$ category with the morphisms quotiented by $E$ and there is then a PROP morphism $q$ witnessing this quotient; $\textbf{Sem}$ is our semantic category; and $s$ is a full and faithful PROP morphism. This is equivalent to demanding the following:
 	\begin{itemize}
 		\item Soundness: $P\Sigma_{/E}$ is sound if $c \overset{E}= d$\footnote{$\overset{E}=$ means that this equality is provable by the equations in $E$.} implies $[c] = [d]$.
 		\item Completeness: $P\Sigma_{/E}$ is complete if $[c] = [d]$ implies $c \overset{E}= d$.
@@ -279,7 +200,7 @@ Those three properties capture the idea that everything we can prove in the synt
 We now introduce the foundational theories for Graphical Algebra that serve as a foundation for the following sections, namely Graphical Linear Algebra~\cite{paixao2022highlevel, bonchi2017interacting}, Graphical Affine Algebra~\cite{bonchi2019affine}, and Graphical Polyhedral Algebra~\cite{bonchi2021polyhedral}. Each is an extension of the previous one, meaning there is a structure-preserving inclusion functor $\mathbf{GLA} \hookrightarrow \mathbf{GAA} \hookrightarrow \mathbf{GPA}$.
 
 \begin{definition}
-	We will call $\textbf{GLA}$ the presentation of the Graphical Linear Algebra SMT, in the same manner, $\textbf{GAA}$ the SMT of Graphical Affine Algebra and \textbf{GPA} the SMT of Graphical Polyhedral Algebra. Below we show, separatedly, the set of generators(the signature $\Sigma$) of each one of them.
+	We will call $\textbf{GLA}$ the presentation of the Graphical Linear Algebra SMT, in the same manner, $\textbf{GAA}$ the SMT of Graphical Affine Algebra and \textbf{GPA} the SMT of Graphical Polyhedral Algebra. Below we show, separately, the set of generators (the signature $\Sigma$) of each one of them.
 
     \input{tikz/generators_background.tex}
 
@@ -309,15 +230,7 @@ single matrix (resp.\ relation) box; the notation is set up in
 Appendix~\ref{app:background}.
 
 
-Graphical Polyhedral Algebra \cite{bonchi2021polyhedral, bonchi2021.9farkas}, the established theory on which our contribution builds, geometrically goes beyond affine spaces, representing polyhedra as linear-inequality constraints. We begin by recalling its standard definitions.
-
-\begin{definition}\label{polyform}
-	A set $P \subseteq \mathbb{R}^n$ is called a \emph{polyhedron} if there
-	exist $A \in \mathbb{R}^{m \times n}$ and $b \in \mathbb{R}^m$ such that
-	$P = \{x \in \mathbb{R}^n \mid Ax \ge b\}$.
-\end{definition}
-
-The corresponding semantic categories capture polyhedra as morphisms, with relational composition playing the role of variable elimination.
+Graphical Polyhedral Algebra \cite{bonchi2021polyhedral, bonchi2021.9farkas}, the established theory on which our contribution builds, geometrically goes beyond affine spaces, representing polyhedra as linear-inequality constraints. The corresponding semantic categories capture polyhedra as morphisms, with relational composition playing the role of variable elimination.
 
 \begin{definition}[The prop $\mathbf{PolyRel}$ of polyhedra]
 	Let $k$ be an ordered field. The prop $\mathbf{PolyRel}_k$ has objects natural numbers $n$, morphisms $n\to m$ the polyhedra $R \subseteq k^n \times k^m$ of the form
@@ -325,7 +238,7 @@ The corresponding semantic categories capture polyhedra as morphisms, with relat
 	composition relational composition, and monoidal product addition on objects, Cartesian product on morphisms.
 \end{definition}
 
-The central computational primitive of the polyhedral theory is Fourier--Motzkin Elimination (FME)~\cite{schrijver1986theory, ziegler1995polytopes}, which projects a polyhedron onto a lower-dimensional space by eliminating one variable at a time. In $\mathbf{GPA}$ this is realized diagrammatically, after first establishing that the $\ge$ generator is transitive, reflexive and antisymmetric.
+The central computational primitive of the polyhedral theory is Fourier--Motzkin Elimination (FME)~\cite{schrijver1986theory, ziegler1995polytopes}, which projects a polyhedron onto a lower-dimensional space by eliminating one variable at a time. In $\mathbf{GPA}$ this is realized diagrammatically, after first establishing that the $\inlinegen{ge}$ generator is transitive, reflexive and antisymmetric.
 
 \begin{proposition}[Fourier--Motzkin Elimination]
 	The following diagrammatic procedure is equivalent to performing the FME algorithm:
@@ -339,7 +252,7 @@ Using FME, $\mathbf{GPA}$ admits a normal form, which we will rely on repeatedly
 
 \begin{definition}[$\mathbf{GPA}$ normal form]\label{def:gpanormalform}
 	A diagram $c \in \mathbf{GPA}$ is in \emph{normal form} when it is
-	written as a relation--\inlinegen{ge}--comatrix triple
+	written as a polyhedral relation
 	\begin{figure}[H]
 		\centering
 		\input{tikz/NormalFormGPA.tex}
@@ -348,11 +261,5 @@ Using FME, $\mathbf{GPA}$ admits a normal form, which we will rely on repeatedly
 	$\mathbf{GPA}$ diagram is equal to one in normal
 	form~\cite{bonchi2021polyhedral}.
 \end{definition}
-
-Applying the polar operator (the polyhedral analogue of Farkas duality, exchanging the $H$- and $V$-representations \cite{bonchi2021.9farkas}) yields a second, conic-hull normal form. These drive the presentation theorems below, whose proofs we recall from \cite{bonchi2021polyhedral}.
-
-\begin{theorem}\label{thm:gpapresent}
-	$\mathbf{PolyRel}$ is presented by $\mathrm{FreeP}_{\mathbf{GPA}}$.
-\end{theorem}
 
 This is the structural foundation on which our final contribution, $\mathbf{GLP}$, is built: there, these constraints are combined with a linear objective to form full parametric linear programs.

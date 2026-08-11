@@ -4,38 +4,22 @@ Mathematical and physical theories have grown increasingly difficult to express 
 
 This work aims to lift such algebras to an even higher level of expressivity: turning the already complete theory of polyhedra into a more general language by extending it towards linear problems. We observe that
 many mathematical structures used in optimization can be understood within
-a single compositional framework \cite{stein2024compositional, hanks2024compositionalopt}.
-Instead of treating convex functions, polyhedra,
-and linear programs as distinct objects, we show that they can all be interpreted as morphisms (relations) in a suitable category whose composition is given by elimination or minimization.
-In this way, optimization itself becomes an algebraic process and a universal setting across mathematics.
-
-Over that goal, the language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer} help us to make this expressivity even more aparent.
+a single compositional framework \cite{stein2024compositional, hanks2024compositionalopt} drawing from 
+lawvere quantales \cite{lawvere1973metric},
+this way, optimization itself becomes an algebraic process and is expressed through composition.
+The language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer} helps us to make this expressivity even more apparent.
 Acting as rigorous framework for
 monoidal categories, string diagrams provide an intuitive yet mathematically
 precise syntax in which the sequential and parallel composition of morphisms
 correspond directly to vertical and horizontal juxtaposition of diagrams
-\cite{joyal1991geometry, maclane1998categories}.
-
-Building on this foundation,
-a rich family of \emph{diagrammatic} or \emph{graphical calculi} has emerged,
-offering complete axiomatisations of various algebraic structures purely through
-equational diagram rewriting \cite{selinger2010survey, bonchi2017interacting}.
-These calculi have proved remarkably versatile, finding applications across a
+\cite{joyal1991geometry, maclane1998categories}. These calculi have proved remarkably versatile, finding applications across a
 wide range of fields: in \emph{quantum computing} \cite{coecke2011interacting};
 \emph{electronics} \cite{baez2018compositional}; \emph{linear algebra} \cite{bonchi2017interacting,
 	bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
 and in \emph{optimisation and probability} \cite{stein2024gqa,stein2025compositional,
 	bonchi2021polyhedral}. Throughout this work
-we explore how, step by step, one can enrich the already known theories for linear
-\cite{bonchi2017interacting} algebra by adding one new generator at a time, along with a particular
-set of axioms, and derive even richer structures for convex problems \cite{stein2024compositional}.
-
-A first instance of this mechanism is the Graphical Quadratic Algebra (\textbf{GQA}) \cite{stein2024gqa},
-where the addition of a single ``measurement'' generator expands the expressivity of the previous theories
-by acting as a sort of measurement device along the diagram, lifting diagrams from the class of binary relations
-to the broader class of weighted relations. From the optimization perspective, this is what plays the role of
-the objective function in an optimization problem. We do not develop the quadratic branch here, but it serves
-as the conceptual template for the cost generator at the heart of our contribution.
+we explore how one can enrich the already known theories for linear
+\cite{bonchi2017interacting} algebra and derive even richer structures for convex problems \cite{stein2024compositional}.
 
 The polyhedral branch is the one our work builds on directly. Extending the Symmetric Monoidal Theory of
 Graphical Affine Algebra (\textbf{GAA}) \cite{bonchi2019affine} with an inequality generator $\tikz[baseline=-0.5ex]\pic{ge};$ yields
@@ -48,29 +32,16 @@ this allows the algebra to go beyond affine spaces and start representing polyhe
 		+\infty \quad \text{otherwise.}
 	\end{cases}
 \]
-Inspired by these observations, we make our central contribution: the design of a graphical
+Following the same design, we make our contribution, the proposal of a graphical
 algebra for parametric linear programming through the introduction of 
 a new generator $\tikz \pic{linear};$ and three axioms. In this
-setting, a linear program is no longer viewed only as
-a numerical problem to be solved, but as a morphism that
+setting, a linear program becomes a morphism that
 can be composed with other optimization blocks.
 This gives a symbolic language in which the elimination of internal variables
 corresponds directly to categorical composition, allowing optimization problems
 to be manipulated diagrammatically before computation.
 
-In particular, every piecewise affine convex function can be represented as the value function of a linear program~\cite{rockafellar1970convex}. This means that $\mathbf{GLP}$ provides a syntax for a broad class of nonsmooth convex models arising in optimization, control, economics, and machine learning~\cite{boyd2004convex} --- including feedforward network architectures, electrical circuits, and control-feedback systems. In Section~\ref{sec:sem} we show that these two classes of objects are not only denotationally equivalent but instances of the same normal form. Thus, our diagrammatic syntax blurs the distinction between expressing a linear program as an optimization problem and as a piecewise affine convex function, deriving a canonical normal form.
-
-
-More broadly, this work suggests that graphical methods
-can play for convex optimization the same role that graphical
-linear algebra plays for matrices:
-providing normal forms, symbolic rewriting rules,
-and completeness results within a
-rigorous categorical setting.
-This opens the possibility of using diagrammatic reasoning not
-only for proofs, but also for designing compositional 
-optimization systems and formal symbolic calculi for
-convex programming.
+In particular, every piecewise affine convex function can be represented as the value function of a linear program~\cite{rockafellar1970convex}. This means that $\mathbf{GLP}$ provides a syntax for a broad class of nonsmooth convex models arising in optimization, control, economics, and machine learning~\cite{boyd2004convex} --- including feedforward network architectures, electrical circuits, and control-feedback systems. Thus, our diagrammatic syntax blurs the distinction between system design diagrams and formal structures for LP programs.
 
 \paragraph{Overview}
 Section~\ref{sec:bg} introduces the algebraic and categorical setting on which the
@@ -78,9 +49,7 @@ rest of the work is built: the initial notions of quantales and relations, the E
 quantale of costs, the language of symmetric monoidal theories, and the prior graphical theories
 $\mathbf{GLA}$, $\mathbf{GAA}$ and $\mathbf{GPA}$ on which our contribution rests.
 Section~\ref{sec:sem} introduces, for the first time, the categorical semantics of parametric linear
-programs, establishing the equivalence between piecewise affine convex functions, polyhedral
-functions and parametric linear programs, and packaging them as the categories $\mathbf{LPRel}$ and
-$\mathbf{PolyFun}$. Section~\ref{sec:glp} defines the symmetric monoidal theory $\mathbf{GLP}$,
-its normal form, and the epigraph form. Section~\ref{sec:complete} proves soundness, expressivity
+programs, packaging them as the category $\mathbf{LPRel}$. Section~\ref{sec:glp} defines the symmetric monoidal theory $\mathbf{GLP}$,
+its normal form, and the epigraph form, and proves soundness, expressivity
 and completeness, establishing that $\mathbf{GLP}$ axiomatises the semantics.
 This work is a step toward a complete diagrammatic calculus for convex optimization.

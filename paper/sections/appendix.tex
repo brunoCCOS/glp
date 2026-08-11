@@ -1,5 +1,87 @@
 \section{Additional Background Material}\label{app:background}
 
+We recall here the elementary development of relations that culminates in
+the quantale-valued relations of Section~\ref{sec:bg}, proceeding by asking
+for progressively more structure. We begin with the most basic kind of
+relation:
+
+\begin{definition}[Binary Relations]\label{def:binaryrel}
+	Let $X$ and $Y$ be sets. A \emph{binary relation} $R$ from $X$ to $Y$ is a subset
+	\[
+		R \subseteq X \times Y.
+	\]
+	Equivalently, it can be identified with its characteristic function
+	\[
+		\chi_R : X \times Y \to \{0,+\infty\},
+	\]
+	defined by
+	\[
+		\chi_R(x,y) =
+		\begin{cases}
+			0  \text{ if } (x,y) \in R, \\
+			+\infty \quad \text{otherwise}.
+		\end{cases}
+	\]
+\end{definition}
+
+A binary relation specifies whether $x$ is related to $y$.
+One can think of a relation in two different ways:
+first, as a set of pairs, where every relation is just a pair $(x,y) \in R$,
+or as a map that has $x,y$ as inputs and outputs $0$ if they are related, and $+\infty$ if they are not
+(the choice of $\{0,+\infty\}$ reflects that we are after a framework of minimization rather than a purely logical one; the usual choices here are $\{\text{true},\text{false}\}$ or $\{0,1\}$, the latter being isomorphic to ours under the appropriate operations).
+
+This is a general construct, as the sets $X$ and $Y$ can be anything.
+We can, for instance, ask for further structures on such sets and obtain different kinds of relations.
+\begin{definition}[Linear/Affine Relations]
+	Let $X$ and $Y$ be vector spaces. A \emph{linear relation} from $X$ to $Y$ is a linear subspace
+	\[
+		R \subseteq X \times Y.
+	\]
+	An \emph{affine relation} is an affine subspace of $X \times Y$.
+	Equivalently, a linear relation can be described as the graph of a possibly multivalued linear operator, i.e.,
+	\[
+		R(x) := \{ y \in Y \mid (x,y) \in R \}.
+	\]
+\end{definition}
+
+Thus, a linear/affine relation is a binary relation where the set $R$ is a subspace.
+So far, relations between $x$ and $y$ carry a binary ``related or not'' notion. In fact, we might be interested in adding degrees to such a relation, so that we could say that $x$ and $y$ are ``more'' or ``less'' related. This leads us to the well-known notion of weighted relations \cite{lawvere1973metric}.
+
+\begin{definition}[Weighted Relations]
+	Let $X$ and $Y$ be any two sets and let $\extendR^+:= [0, +\infty]$.
+	A \emph{weighted relation} from $X$ to $Y$ is a set
+	\[
+		R \subseteq X \times Y \times \extendR^+
+	\]
+	such that for every $(x,y) \in X \times Y$ there exists \emph{exactly one}
+	$r \in \extendR^+$ satisfying $(x,y,r) \in R$.
+	Equivalently, we may define the characteristic function
+	$\chi_R : X \times Y \to \extendR^+$
+	by $\chi_R(x,y) = r$ if and only if $(x,y,r) \in R$.
+\end{definition}
+
+In fact, one could choose any other set instead of $\extendR^+$ to be the codomain of the characteristic function, as long as it satisfies some properties. The whole structure of a relation is further generalized by the notion of a quantale~\cite{rosenthal1990quantales}, from which the generalized relations of Section~\ref{sec:bg} are obtained.
+\begin{definition}[Quantale]
+	A \emph{quantale} is a structure $(Q,\leq,\otimes,e)$ such that:
+	\begin{itemize}
+		\item $(Q,\leq)$ is a complete lattice, i.e., every subset $A \subseteq Q$ admits a join $\bigvee A$ and a meet $\bigwedge A$;
+		\item $(Q,\otimes,e)$ is a monoid;
+		\item Multiplication distributes over arbitrary join in each variable:
+		      \[
+			      a \otimes \Big( \bigvee_{i \in I} b_i \Big)
+			      =
+			      \bigvee_{i \in I} (a \otimes b_i),
+			      \qquad
+			      \Big( \bigvee_{i \in I} a_i \Big) \otimes b
+			      =
+			      \bigvee_{i \in I} (a_i \otimes b)
+		      \]
+		      for all families $\{a_i\}_{i\in I}, \{b_i\}_{i\in I} \subseteq Q$.
+	\end{itemize}
+	If $\otimes$ is commutative, the quantale is called \emph{commutative}.
+	If $e = \top$ (the top element of the lattice), it is called \emph{integral}.
+\end{definition}
+
 The axioms, previously called the set $E$ of equations, of the SMTs
 $\textbf{GLA}$, $\textbf{GAA}$ and $\textbf{GPA}$ introduced in
 Section~\ref{sec:bg} are:
@@ -27,7 +109,24 @@ which denotes an affine transformation, also known as the relation $xAy \equiv A
 The equivalent hold for their dual form in
 $\overleftarrow{\textbf{GLA}}$ and $\overleftarrow{\textbf{GAA}}$.
 
+Recall from Definition~\ref{def:bifunc} that a $Q$-valued relation
+$R : A \times B \to \overline{\mathbb{R}}$ is precisely a bifunction, and
+that the composition law
+$\bigvee_b R(a,b)\otimes S(b,c) = \inf_b (R(a,b)+S(b,c))$ is exactly
+infimal convolution; this is what identifies $\mathbf{BiFunc}$ with
+$\mathbf{Rel}(Q)$ for the Extended-Lawvere quantale. The
+Boolean-relations category embeds into $\mathbf{BiFunc}$ as a full
+subcategory via the indicator (characteristic) functor, so constraints
+and objectives are not fundamentally different objects: they are
+relations valued in different quantales, unified by the same
+compositional structure.
+
 \section{Omitted Proofs}\label{app:proofs}
+
+Throughout this section, we will often denote by $\llbracket = \rrbracket$
+that two objects are equal under the functor $\llbracket - \rrbracket$,
+i.e., a diagram $c \in Ob(FreeP_{(\Sigma,E)})$ is, under the
+interpretation map, $c \; \llbracket = \rrbracket \; \llbracket c \rrbracket$.
 
 \begin{proof}[Proof of Proposition~\ref{prop:relq}]
 	Associativity follows from the distributivity of $\otimes$ over $\bigvee$:
@@ -46,48 +145,6 @@ $\overleftarrow{\textbf{GLA}}$ and $\overleftarrow{\textbf{GAA}}$.
 	$\eta(*,(a,a')) = \varepsilon((a,a'),*) = e$ if $a=a'$ and $\bot$ otherwise,
 	for which the triangle identities hold by direct computation.
 	We refer to~\cite{rosenthal1990quantales} for full details.
-\end{proof}
-
-\begin{proof}[Proof of Proposition~\ref{prop:pwa-polyhedral}]
-	\textbf{($\Rightarrow$)} Let
-	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
-	Then
-	\[
-		\mathrm{epi}(f) = \bigcap_{i=1}^k \{ (x,t) \mid t \ge a_i^\top x + b_i \},
-	\]
-	which is an intersection of finitely many halfspaces, hence a polyhedron.
-
-	\medskip
-	\textbf{($\Leftarrow$)} If $f$ is polyhedral, its epigraph is a
-	polyhedron, so it can be written as an intersection of finitely many
-	halfspaces: $\mathrm{epi}(f) = \bigcap_{i=1}^k \{(x,t) \mid t \ge a_i^\top x + b_i\}$.
-	Since $f(x) = \inf\{t \mid (x,t) \in \mathrm{epi}(f)\}$, we obtain
-	$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$,
-	so $f$ is piecewise affine and convex.
-\end{proof}
-
-\begin{proof}[Proof of Proposition~\ref{prop:pwa-value}]
-	\textbf{($\Rightarrow$)} Let
-	$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$
-	and define $Y := \mathrm{conv}\{y^1,\dots,y^k\}$.
-	Then $v(b) = \max_{y \in Y} b^\top y$.
-	Since $Y$ is a polyhedron admitting the representation
-	$Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$,
-	we have $v(b) = \max_{y \in Y} b^\top y = \sup\{b^\top y \mid A^\top y = c,\; y \ge 0\}$.
-	By LP strong duality~\cite{schrijver1986theory, boyd2004convex}, this dual program equals
-	the primal $\inf \{ c^\top x \mid Ax \ge b \}$ (strong duality holds since $Y$ is
-	nonempty by construction), giving $v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
-
-	\medskip
-	\textbf{($\Leftarrow$)} Let
-	$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
-	Dualising,
-	$v(b) = \sup \{ b^\top y \mid A^\top y = c,\; y \ge 0 \}$.
-	Since the feasible set $Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$
-	is a polyhedron, the supremum is attained at its extreme points
-	$y^1,\dots,y^k$~\cite{ziegler1995polytopes}, yielding
-	$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$.
-	Thus $v$ is piecewise affine convex.
 \end{proof}
 
 \begin{proof}[Proof of Proposition~\ref{prop:equalepi}]
@@ -153,7 +210,9 @@ $\overleftarrow{\textbf{GLA}}$ and $\overleftarrow{\textbf{GAA}}$.
 \end{proof}
 
 \begin{proof}[Proof of Lemma~\ref{lem:expressivity}]
-	Since every RHS PLP admits a standard form,
+	Since every RHS PLP admits a standard form, and the value functions of
+	RHS PLPs are exactly the piecewise affine convex
+	functions~\cite{boyd2004convex, schrijver1986theory},
 	it suffices to show that every piecewise affine
 	convex function is expressible in $\mathbf{GLP}$. For an arbitrary
 	such function $f(y) = \inf_x c^\top x$, where $A x + b \ge B y$

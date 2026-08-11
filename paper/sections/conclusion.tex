@@ -4,7 +4,7 @@ We have built, through the addition of one generator and three axioms,
 an elegant and complete diagrammatic theory for Parametric Linear Programming.
 We argue that such a result not only unlocks a new way to interact with LP problems in an algebraic
 and computational way, but also provides a new perspective on optimization through the lens of
-a compositional framework. This lifts optimization, and LP problems in particular, from a functional setting to a relational-theoretic framework within the Extended-Lawvere Quantale category.
+a compositional framework. This lifts optimization, and LP problems in particular, from a functional setting to a relational-theoretic framework within the Extended-Lawvere Quantale category: LP problems become composable relations with clear algebraic rules, which can replace the sometimes heavy set-theoretic notation.
 
 The development followed a strict linear discipline, adding exactly one new
 generator at a time and verifying at each step that the resulting algebra is
@@ -13,7 +13,7 @@ category. The fact that such a linear development is
 possible --- that each new class of optimization problems requires only a single
 additional generator and a finite set of axioms --- is evidence that the
 compositional structure is not imposed artificially but present in the
-underlying mathematics. Polyhedral relations and quadratic relations are not merely two
+underlying mathematics. Polyhedral relations and quadratic relations~\cite{stein2024gqa} are not merely two
 classes of optimization problems that happen to admit graphical representations;
 they are parallel enrichments of the same underlying affine structure, each adding
 a different kind of expressive power, and their common base is a theorem rather than
@@ -23,9 +23,7 @@ The $\mathbf{GLP}$ theory has a natural extension to an even more expressive the
 when enriched with more powerful generators. We believe that the class
 of quadratic programs could be, just as was done in this work, fully axiomatized by such a
 broader SMT; Graphical Quadratic Algebra~\cite{stein2024gqa} already takes a
-step in this direction. Another direction is the exploration of the functoriality of the bifunction
-adjoint (the Legendre--Fenchel transform extended to morphisms)~\cite{willerton2015legendre, touchette2005legendre}: this suggests a duality theory
-analogous to LP duality should be expressible diagrammatically as well.
+step in this direction.
 
 A more applied direction concerns the computational implications of diagrammatic
 normal forms. If two optimization problems are equal as morphisms in
@@ -37,3 +35,7 @@ was already pointed to in other works \cite{bonchi2021.9farkas,bonchi2021polyhed
 This work is a step toward fully expressing optimization within
 its own algebraic setting.
 
+This opens the possibility of using diagrammatic reasoning not
+only for proofs, but also for designing compositional 
+optimization systems and formal symbolic calculi for
+convex programming.

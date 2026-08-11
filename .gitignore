@@ -15,3 +15,4 @@ propr/
 *.synctex.gz
 *.synctex.gz.sum.synctex
 *.toc
+graphify-out/

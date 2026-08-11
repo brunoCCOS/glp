@@ -23,10 +23,8 @@ new generator plays a role similar to that of a ``measurement'': it simply expos
 what is in the wire without modifying it.
 It lifts $\mathbf{GPA}$ from polyhedral constraints
 to full linear programs by attaching a
-linear cost to the feasible region.
-
-\footnote{Analogous notion was developed by
-\cite{stein2024gqa} with their gray arrow generator, introducing the $\mathcal{l}_2$ norm}
+linear cost to the feasible region.\footnote{An analogous notion was developed by
+\cite{stein2024gqa} with their gray arrow generator, introducing the $\ell_2$ norm.}
 
 \begin{definition}[$\mathbf{GLP}$]
 	We call $\mathbf{GLP}$ the symmetric monoidal theory obtained by
@@ -129,6 +127,45 @@ Proposition~\ref{prop:equalepi}.
 	We call this the \emph{epigraph form} of a linear program.
 \end{corollary}
 
+\subsection{Soundness and Completeness}\label{sec:complete}
+
+We now show that $\mathbf{GLP}$ is sound, expressive, and complete with
+respect to $\mathbf{LPRel}$, establishing that the semantics of parametric
+linear programs is fully axiomatised. All proofs are given in
+Appendix~\ref{app:proofs}.
+
+\begin{lemma}[Soundness]\label{lem:soundness}
+	If $s = t$ in $\mathrm{FreeP}_{\mathbf{GLP}}$, then $[s] = [t]$
+	in $\mathbf{LPRel}$.
+\end{lemma}
+
+\begin{lemma}[Expressivity]\label{lem:expressivity}
+	For every $f : m \to n$ in $\mathbf{LPRel}$ there exists a
+	$\Sigma$-term $s : m \to n$ in
+	$\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GLP}}}(m,n)$
+	such that $[s] = f$.
+\end{lemma}
+
+The final lemma is completeness. Its proof brings together the main
+tools developed throughout: the epigraph form
+(Corollary~\ref{cor:epigraph form}), the shared epigraph property
+(Proposition~\ref{prop:equalepi}), the completeness of $\mathbf{GPA}$,
+and the FME-based normal form.
+
+\begin{lemma}[Completeness]\label{lem:completeness}
+	If $[c] = [d]$ in $\mathbf{LPRel}$, then $c = d$ in
+	$\mathrm{FreeP}_{\mathbf{GLP}}$.
+\end{lemma}
+
+As a consequence of the three lemmas above:
+
+\begin{theorem}\label{thm:main}
+	$\mathbf{LPRel}$ is presented by $\mathrm{FreeP}_{\mathbf{GLP}}$.
+\end{theorem}
+\begin{proof}
+	By the preceding three lemmas.
+\end{proof}
+
 \subsection{Examples}\label{sec:examples}
 
 The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific classes of piecewise affine convex functions that arise naturally across mathematics and engineering. Each example below is a morphism in $\mathbf{LPRel}$ and can therefore be represented as a $\mathbf{GLP}$ diagram in normal form.
@@ -165,24 +202,6 @@ The expressivity of $\mathbf{GLP}$ becomes concrete when one considers specific 
 \begin{center}
     \vspace{1em}
     \input{tikz/ExampleFeedforward.tex}
-  \end{center}
-\end{example}
-
-\begin{example}[Max-pooling]
-  Global max-pooling over a feature map $(y_1,\ldots,y_k)$,
-  \[
-    f(y_1,\ldots,y_k) = \max_{i=1,\ldots,k} y_i,
-  \]
-  is a piecewise affine convex function of the inputs. It is encoded as the linear program
-  \[
-    f(y) = \min_{t} \{ t \mid t \geq y_i,\; i = 1,\ldots,k \},
-  \]
-  which is a $\mathbf{GLP}$ diagram of type $k \to 0$ in which $k$ inequality constraints feed into a single $\inlinegen{linear}$ generator.
-
-  \begin{center}
-    \vspace{1.5em}
-    \input{tikz/ExampleMaxPooling.tex}
-    \vspace{1em}
   \end{center}
 \end{example}
 
