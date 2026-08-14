@@ -8,20 +8,20 @@ a single compositional framework \cite{stein2024compositional, hanks2024composit
 lawvere quantales \cite{lawvere1973metric},
 this way, optimization itself becomes an algebraic process and is expressed through composition.
 The language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer} helps us to make this expressivity even more apparent.
-Acting as rigorous framework for
+Acting as a rigorous framework for
 monoidal categories, string diagrams provide an intuitive yet mathematically
 precise syntax in which the sequential and parallel composition of morphisms
 correspond directly to vertical and horizontal juxtaposition of diagrams
 \cite{joyal1991geometry, maclane1998categories}. These calculi have proved remarkably versatile, finding applications across a
 wide range of fields: in \emph{quantum computing} \cite{coecke2011interacting};
 \emph{electronics} \cite{baez2018compositional}; \emph{linear algebra} \cite{bonchi2017interacting,
-	bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
+	bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem, Paixao2020CalculationalPI};
 and in \emph{optimisation and probability} \cite{stein2024gqa,stein2025compositional,
 	bonchi2021polyhedral}. Throughout this work
 we explore how one can enrich the already known theories for linear
-\cite{bonchi2017interacting} algebra and derive even richer structures for convex problems \cite{stein2024compositional}.
+algebra \cite{bonchi2017interacting} and derive even richer structures for convex problems \cite{stein2024compositional}.
 
-The polyhedral branch is the one our work builds on directly. Extending the Symmetric Monoidal Theory of
+This works builds directly on the graphical algebra for polyhedra, extending the Symmetric Monoidal Theory of
 Graphical Affine Algebra (\textbf{GAA}) \cite{bonchi2019affine} with an inequality generator $\tikz[baseline=-0.5ex]\pic{ge};$ yields
 Graphical Polyhedral Algebra (\textbf{GPA}) \cite{bonchi2021polyhedral}. Geometrically,
 this allows the algebra to go beyond affine spaces and start representing polyhedral figures as linear inequality constraints in optimization,
@@ -41,7 +41,7 @@ This gives a symbolic language in which the elimination of internal variables
 corresponds directly to categorical composition, allowing optimization problems
 to be manipulated diagrammatically before computation.
 
-In particular, every piecewise affine convex function can be represented as the value function of a linear program~\cite{rockafellar1970convex}. This means that $\mathbf{GLP}$ provides a syntax for a broad class of nonsmooth convex models arising in optimization, control, economics, and machine learning~\cite{boyd2004convex} --- including feedforward network architectures, electrical circuits, and control-feedback systems. Thus, our diagrammatic syntax blurs the distinction between system design diagrams and formal structures for LP programs.
+In particular, every piecewise affine convex function can be represented as the value function of a linear program~\cite{rockafellar1970convex}. This means that $\mathbf{GLP}$ provides a syntax for a broad class of nonsmooth convex models arising in optimization, control, economics, and machine learning~\cite{boyd2004convex} --- including feedforward network architectures, electrical circuits, and control-feedback systems. Thus, our diagrammatic syntax blurs the distinction between system design diagrams and formal structures for LP.
 
 \paragraph{Overview}
 Section~\ref{sec:bg} introduces the algebraic and categorical setting on which the

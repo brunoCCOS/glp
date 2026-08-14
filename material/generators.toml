@@ -33,7 +33,7 @@ params = ["val"]
 [generators.twodmatrix]
 sig.arity = 2
 sig.coarity = 1
-visual_arity = 1
+visual_arity = 2
 visual_coarity = 1
 pic = "2dmatrix"
 params = ["val"]
@@ -42,7 +42,7 @@ params = ["val"]
 sig.arity = 1
 sig.coarity = 2
 visual_arity = 1
-visual_coarity = 1
+visual_coarity = 2
 pic = "2dcomatrix"
 params = ["val"]
 
@@ -65,7 +65,7 @@ params = ["val"]
 [generators.twodrelation]
 sig.arity = 2
 sig.coarity = 1
-visual_arity = 1
+visual_arity = 2
 visual_coarity = 1
 pic = "2drelation"
 params = ["val"]
@@ -74,7 +74,7 @@ params = ["val"]
 sig.arity = 1
 sig.coarity = 2
 visual_arity = 1
-visual_coarity = 1
+visual_coarity = 2
 pic = "2dcorelation"
 params = ["val"]
 

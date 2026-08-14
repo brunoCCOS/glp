@@ -119,10 +119,7 @@ A symmetric monoidal category in which every object carries such a structure, co
 
 \subsection{Syntax: Symmetric Monoidal Theories}
 
-These constructions provide exactly the semantic foundation for the algebra we aim to build. In the same way that semantics is understood in linguistics and programming language theory \cite{winskel1993formal}, the semantics of a formal system assigns meaning to its expressions. More precisely, while syntax consists of the tokens and rules for forming and combining expressions, semantics is the interpretation assigned to each such expression --- in our case, an optimization problem living in $\mathbf{Rel}(Q)$.
-
-As outlined in the introduction, the central goal of this work is to show that optimization emerges naturally from algebraic and categorical structure.
-The key mechanism enabling this is the infimal composition present in the definition of the Cost category: composing two relations automatically performs variable elimination, which is one way of capturing the operation underlying optimization.
+These constructions provide exactly the semantic foundation for the algebra we aim to build. In the same way that semantics is understood in linguistics and programming language theory \cite{winskel1993formal}, the semantics of a formal system assigns meaning to its expressions. More precisely, while syntax consists of the tokens and rules for forming and combining expressions, semantics is the interpretation assigned to each such expression --- in our case, an optimization problem living in $\mathbf{Rel}(Q)$. The key mechanism enabling this is the infimal composition present in the definition of the Cost category.
 
 To make this precise, we need both a semantics --- provided by the categorical framework developed above --- and a syntax: a rigorous, compositional language for expressing optimization problems symbolically.
 The map between those is a structure-preserving map, a functor, from the syntactic layer into the semantic one.
@@ -157,7 +154,7 @@ For it to be considered a ``useful'' syntax we expect that it satisfies some pro
 	where $P\Sigma$ is the category where objects are natural numbers and morphisms are $\Sigma$-terms from $n \to m$; $P\Sigma_{/E}$ is the $P\Sigma$ category with the morphisms quotiented by $E$ and there is then a PROP morphism $q$ witnessing this quotient; $\textbf{Sem}$ is our semantic category; and $s$ is a full and faithful PROP morphism.
 \end{definition}
 
-This is equivalent to demanding that our theory is sound, complete and expressable. Those three properties capture the idea that everything we can prove in the syntax holds in the semantics (soundness), everything that holds in the semantics is provable in the syntax (completeness), and that every morphism in the semantics has a syntactic representative (expressivity). Moreover, these properties denote equivalent characteristics about the interpretation map, both categorically and functionally, as depicted in Table~\ref{tab:equivalences}.
+This is equivalent to demanding that our theory is sound, complete and expressable. Those three properties capture the idea that the semmantics is fully capable of express and prove the same facts that the semmantics is. Moreover, these properties denote equivalent characteristics about the interpretation map, both categorically and functionally, as depicted in Table~\ref{tab:equivalences}.
 
 \begin{table}[h!]
 	\centering
