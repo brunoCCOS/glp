@@ -60,7 +60,7 @@ that the completeness argument requires.
 
 With the semantic equivalences established, we now define the semantic category of this algebra, $\mathbf{LPRel}$, whose morphisms are parametric linear programs.
 
-The broadest semantic setting is the category of bifunctions, which is exactly the Cost/Reward instance of $\mathbf{Rel}(Q)$ for the Extended-Lawvere quantale. Stein and collaborators \cite{stein2024compositional, stein2025compositional} construct this category as the home of compositional convex optimization, where infimal convolution, conjugation, and variable elimination arise as categorical constructions; we recall only the bare construction we need.
+The broadest semantic setting is the category of bifunctions, which is exactly the Cost/Reward instance of $\mathbf{Rel}(Q)$ for the Extended-Lawvere quantale. Stein and collaborators \cite{stein2024compositional,stein2025compositional} construct this category as the home of compositional convex optimization, where infimal convolution, conjugation, and variable elimination arise as categorical constructions; we recall only the bare construction we need.
 
 \begin{definition}[Bifunction Category]\label{def:bifunc}
 	The category $\mathbf{BiFunc}$ has sets as objects, and a morphism $F : A \to B$ is a convex bifunction
@@ -81,7 +81,7 @@ The broadest semantic setting is the category of bifunctions, which is exactly t
 	and its consequences.
 \end{remark}
 
-Composition is therefore precisely variable elimination: composing two relations marginalises over the intermediate variable by minimising the combined cost\footnote{this notion is related to the idea of conditioning and marginalization in PPL~\cite{stein2024gqa, vandemeent2021introductionprobabilisticprogramming}}
+Composition is therefore precisely variable elimination: composing two relations marginalises over the intermediate variable by minimising the combined cost\footnote{this notion is related to the idea of conditioning and marginalization in PPL~\cite{stein2024gqa,vandemeent2021introductionprobabilisticprogramming}}
 \[
 	(S\circ R)(x,z)=\inf_y \{R(x,y)+S(y,z)\}.
 \]

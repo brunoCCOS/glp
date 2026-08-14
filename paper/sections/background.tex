@@ -10,11 +10,11 @@ how they provide a suitable theory and algebraic form to express relations in a 
 Secondly, we offer a brief introduction to the categorical field of formal semantics and
 monoidal theories and how they are used to build the syntax of diagrammatic calculi. Lastly, we
 present the existing theories on which our work is built, namely
-Graphical Linear Algebra~\cite{paixao2022highlevel, bonchi2017interacting}, Graphical Affine Algebra~\cite{bonchi2019affine} and Graphical Polyhedral Algebra~\cite{bonchi2021polyhedral,bonchi2021.9farkas}.
+Graphical Linear Algebra~\cite{paixao2022highlevel,bonchi2017interacting}, Graphical Affine Algebra~\cite{bonchi2019affine} and Graphical Polyhedral Algebra~\cite{bonchi2021polyhedral,bonchi2021.9farkas}.
 
 \subsection{Preliminaries on relations}
 
-The relational view of mathematics is attested by seminal works such as \cite{frege1879begriffsschrift, whitehead1910principia}
+The relational view of mathematics is attested by seminal works such as \cite{frege1879begriffsschrift,whitehead1910principia}
 and is ever more embraced by Category theory,
 whose main claim is precisely that an object is fully grasped
 by the relations it has to others \cite{maclane1998categories}.
@@ -189,7 +189,7 @@ This is equivalent to demanding that our theory is sound, complete and expressab
 
 \subsection{Previous algebras}
 
-We now introduce the foundational theories for Graphical Algebra that serve as a foundation for the following sections, namely Graphical Linear Algebra~\cite{paixao2022highlevel, bonchi2017interacting}, Graphical Affine Algebra~\cite{bonchi2019affine}, and Graphical Polyhedral Algebra~\cite{bonchi2021polyhedral}. Each is an extension of the previous one, meaning there is a structure-preserving inclusion functor $\mathbf{GLA} \hookrightarrow \mathbf{GAA} \hookrightarrow \mathbf{GPA}$.
+We now introduce the foundational theories for Graphical Algebra that serve as a foundation for the following sections, namely Graphical Linear Algebra~\cite{paixao2022highlevel,bonchi2017interacting}, Graphical Affine Algebra~\cite{bonchi2019affine}, and Graphical Polyhedral Algebra~\cite{bonchi2021polyhedral}. Each is an extension of the previous one, meaning there is a structure-preserving inclusion functor $\mathbf{GLA} \hookrightarrow \mathbf{GAA} \hookrightarrow \mathbf{GPA}$.
 
 \begin{definition}
 	We will call $\textbf{GLA}$ the presentation of the Graphical Linear Algebra SMT, in the same manner, $\textbf{GAA}$ the SMT of Graphical Affine Algebra and \textbf{GPA} the SMT of Graphical Polyhedral Algebra. Below we show, separately, the set of generators (the signature $\Sigma$) of each one of them.
@@ -222,7 +222,7 @@ single matrix (resp.\ relation) box; the notation is set up in
 Appendix~\ref{app:background}.
 
 
-Graphical Polyhedral Algebra \cite{bonchi2021polyhedral, bonchi2021.9farkas}, the established theory on which our contribution builds, geometrically goes beyond affine spaces, representing polyhedra as linear-inequality constraints. The corresponding semantic categories capture polyhedra as morphisms, with relational composition playing the role of variable elimination.
+Graphical Polyhedral Algebra \cite{bonchi2021polyhedral,bonchi2021.9farkas}, the established theory on which our contribution builds, geometrically goes beyond affine spaces, representing polyhedra as linear-inequality constraints. The corresponding semantic categories capture polyhedra as morphisms, with relational composition playing the role of variable elimination.
 
 \begin{definition}[The prop $\mathbf{PolyRel}$ of polyhedra]
 	Let $k$ be an ordered field. The prop $\mathbf{PolyRel}_k$ has objects natural numbers $n$, morphisms $n\to m$ the polyhedra $R \subseteq k^n \times k^m$ of the form
@@ -230,7 +230,7 @@ Graphical Polyhedral Algebra \cite{bonchi2021polyhedral, bonchi2021.9farkas}, th
 	composition relational composition, and monoidal product addition on objects, Cartesian product on morphisms.
 \end{definition}
 
-The central computational primitive of the polyhedral theory is Fourier--Motzkin Elimination (FME)~\cite{schrijver1986theory, ziegler1995polytopes}, which projects a polyhedron onto a lower-dimensional space by eliminating one variable at a time. In $\mathbf{GPA}$ this is realized diagrammatically, after first establishing that the $\inlinegen{ge}$ generator is transitive, reflexive and antisymmetric.
+The central computational primitive of the polyhedral theory is Fourier--Motzkin Elimination (FME)~\cite{schrijver1986theory,ziegler1995polytopes}, which projects a polyhedron onto a lower-dimensional space by eliminating one variable at a time. In $\mathbf{GPA}$ this is realized diagrammatically, after first establishing that the $\inlinegen{ge}$ generator is transitive, reflexive and antisymmetric.
 
 \begin{proposition}[Fourier--Motzkin Elimination]
 	The following diagrammatic procedure is equivalent to performing the FME algorithm:

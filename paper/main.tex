@@ -1,43 +1,32 @@
-% !TeX program = lualatex
-\documentclass{article}
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{amsmath}
+\usepackage{mathtools} % provides \coloneq, previously from unicode-math
 \usepackage{amsfonts}
-\usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{float}
-\usepackage{hyperref}
-\usepackage{amssymb}
-\usepackage{unicode-math}
 \usepackage{colortbl}     % for \rowcolor
 \usepackage{xcolor}       % for \definecolor
 \usepackage{microtype}
 \usepackage{booktabs}
 \usepackage{array}
-\usepackage{caption}
 \usepackage{tikz}
 \usepackage{gladiagrams}
 \usetikzlibrary{shapes, arrows, intersections, bending, calc, positioning, arrows.meta}
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
 
 \title{Compositional Semantics for Parametric Linear Programming, a Categorical Approach}
+\titlerunning{Compositional Semantics for Parametric Linear Programming}
 \author{Bruno Llacer Trotti \and João Paixão \and Iago Leal de Freitas}
-\date{February 2026}
+\authorrunning{B. Llacer Trotti et al.}
+\institute{Universidade Federal do Rio de Janeiro, Rio de Janeiro, Brazil}
 
 \definecolor{headerblue}{RGB}{30, 80, 140}
 \definecolor{rowlight}{RGB}{235, 242, 252}
 \definecolor{rowwhite}{RGB}{255, 255, 255}
-\setmainfont{Latin Modern Roman}
-\setmathfont{STIX Two Math} % <-- important
-
-\theoremstyle{plain}   % <-- this keeps headings left-aligned
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{remark}{Remark}
-\newtheorem{conjecture}{Conjecture}
-\newtheorem{corollary}{Corollary}
-\newtheorem{proposition}{Proposition}
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
 
 \newcommand{\extendR}{\overline{\mathbb{R}}}
 \newcommand{\infcomp}{\overset{\rightharpoonup}{\circ}}
@@ -45,14 +34,7 @@
 \newcommand{\rtop}{\rotatebox{90}{$\top$}}
 \newcommand{\llbracket}{[\![}
 \newcommand{\rrbracket}{]\!]}
-\newcommand{\mushroom}{⫏-}
-\renewcommand{\arraystretch}{1.8}
-
-\usepackage[
-backend=biber,
-style=alphabetic,
-]{biblatex}
-\bibliography{../bib.bib}
+\renewcommand{\arraystretch}{1.3}
 
 
 \input{../material/generator.tikzstyles}
@@ -74,7 +56,8 @@ style=alphabetic,
 
 \input{sections/conclusion.tex}
 
-\printbibliography
+\bibliographystyle{splncs04}
+\bibliography{../bib}
 
 \appendix
 \input{sections/appendix.tex}
