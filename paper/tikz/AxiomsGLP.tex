@@ -1,0 +1,32 @@
+\begin{tabular}{r c c c}
+  \diagrow{(linearity)}{
+      \begin{scope}[shift={(0.000,0.500)}]
+      \pic (g1) at (0.500,0.500) {linear};
+      \end{scope}
+      \pic (g2) at (0.500,0.500) {linear};
+  }{
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {comultiplication};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }
+  \diagrow{(zeroeq)}{
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {cozero};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \node[draw, dotted] {};
+  }
+  \diagrow{(inf)}{
+      \pic (g1) at (0.500,0.500) {linear};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {ge};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {linear};
+  }
+\end{tabular}

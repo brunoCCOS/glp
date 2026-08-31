@@ -9,15 +9,15 @@ and their value functions are precisely the polyhedral convex  functions.
 The central result of this section is the presentation of a
 complete monoidal theory for right-hand side parametric linear programming.
 
-\section{Semantics: the props \texorpdfstring{$\mathbf{LPRel}$}{LPRel}
-and \texorpdfstring{$\mathbf{PolyFun}$}{PolyFun}}
+\section{Semantics: the prop \texorpdfstring{$\mathbf{LPRel}$}{LPRel}}
 
 We begin with several classical results that establish the tight
 relationship between piecewise affine convex functions, polyhedral
 functions, and parametric linear programs. These will serve as the
 semantic foundation for the graphical algebra introduced in the following
-section, and they are what allow us to present the semantic categories
-of this chapter in two equivalent ways.
+section, and they justify describing the morphisms of this chapter's
+semantic category, $\mathbf{LPRel}$, interchangeably as parametric linear
+programs or as polyhedral functions.
 
 \begin{definition}[Piecewise Affine Convex Function]
 A function $f : \mathbb{R}^n \to \mathbb{R}$ is called
@@ -139,12 +139,11 @@ Setting $E = \{(y,t) \mid Cy + dt \ge 0\}$, we obtain
 $v_i(y) = \inf\{t \mid Cy + dt \ge 0\}$ for both $i = 1, 2$.
 \end{proof}
 
-With the equivalences above in place, we now define the two semantic
-categories of this chapter. The first, $\mathbf{LPRel}$, describes
-morphisms as parametric linear programs; the second, $\mathbf{PolyFun}$,
-describes them as polyhedral functions. The equivalence between the two
-follows immediately from the propositions above, and we will use both
-descriptions interchangeably according to which is more convenient.
+With the equivalences above in place, we now define the semantic
+category of this chapter. $\mathbf{LPRel}$ describes morphisms as
+parametric linear programs; by the propositions above, these coincide
+with polyhedral functions, and we will use both descriptions
+interchangeably according to which is more convenient.
 
 \begin{definition}[The prop $\mathbf{LPRel}$ of Linear Programs]
 The prop $\mathbf{LPRel}$ is defined as follows:
@@ -163,29 +162,6 @@ The prop $\mathbf{LPRel}$ is defined as follows:
 \end{itemize}
 \end{definition}
 
-\begin{definition}[The prop $\mathbf{PolyFun}$ of polyhedral functions]
-The prop $\mathbf{PolyFun}$ is defined as follows:
-\begin{itemize}
-    \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
-    as the space $\mathbb{R}^n$.
-    \item A morphism $n \to m$ is a polyhedral function
-    $f : \mathbb{R}^{n+m} \to \overline{\mathbb{R}}$.
-    \item Composition is given by infimal convolution over the shared
-    variable.
-    \item The monoidal product on objects is addition $n \otimes m := n+m$,
-    and on morphisms is $f \otimes g := f + g$.
-\end{itemize}
-\end{definition}
-
-\begin{remark}
-    The two categories are isomorphic as PROPs: $\mathbf{PolyFun} \cong
-    \mathbf{LPRel}$. This is a direct consequence of the equivalence
-    between polyhedral functions and right-hand side parametric linear
-    programs established in the propositions above. We will therefore
-    use the two names interchangeably, choosing whichever description is
-    more natural in a given context.
-\end{remark}
-
 \section{Syntax: the algebra \texorpdfstring{$\mathbf{GLP}$}{GLP}}
 
 With the semantic equivalences established, we now introduce the final
@@ -202,13 +178,13 @@ linear cost to the feasible region.
     extending $\mathbf{GPA}$ with the following generator:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{images//GLP/NewGenerator.png}
+        \input{paper/tikz/LinearGeneratorSemantics.tex}
     \end{figure}
     together with the following axioms governing its interaction with
     the existing generators:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{images//GLP/NewAxioms.png}
+        \input{paper/tikz/AxiomsGLP.tex}
     \end{figure}
 \end{definition}
 
@@ -216,14 +192,35 @@ The axioms represent expected properties of the linear cost function.
 The one on the left express the linear property $f(x) + f(y) = f(x+y)$.
 Observe that $f$ is the interpretation of the $\mushroom$ and the
 sum denotes the vertical composition; composing two $\mushroom$ vertically
-(adding) is the same as adding the wires in a single $\mushroom$. In turn, the
-equation on the left express the fundamental property of
+(adding) is the same as adding the wires in a single $\mushroom$. This
+axiom is also the fundamental property of LPs, which is the fact that
+they are invariant to column stochastic matrices
+(see~\ref{rmk:stochastic}). In turn, the
+equation on the right express the fundamental property of
 minimization, the infimum of any quantity lies in its lower bound.
 \[\inf_x \{ x | x \ge y \} =  y\]
 
 Finally, the axiom at the middle is
 the tautological case. \[inf 0 = 0\]
 
+\begin{remark}[Invariance under column-stochastic matrices]\label{rmk:stochastic}
+    The \textit{linearity} axiom encodes the fundamental invariance of linear
+    programs under column-stochastic reweightings of the objective: for any
+    $n \times m$ matrix $S$ whose columns each sum to one,
+    \[
+        \inlinegen{linear}^{\otimes n} ; \; S^{op} \;=\; \inlinegen{linear}^{\otimes m},
+    \]
+    where $S^{op}$ denotes the comatrix of $S$. Note that only the column sums are
+    used; non-negativity of the entries plays no role. The proof is diagrammatic,
+    we display the proof for a
+    $2 \times 2$ matrix $S$ with $s_{1,1} + s_{2,1} = s_{1,2} + s_{2,2} = 1$;
+    every step is an instance of an axiom scheme that applies wire-by-wire, so
+    the same chain of rewrites goes through verbatim for arbitrary $n \times m$.
+    \begin{figure}[H]
+        \centering
+        \input{paper/tikz/RemarkStochastic.tex}
+    \end{figure}
+\end{remark}
 
 \begin{definition}
     We call $\mathrm{FreeP}_{\mathbf{GLP}}$ the PROP freely generated
@@ -241,12 +238,12 @@ normal form for $\mathbf{GPA}$ as the inductive base.
     in normal form such that $c = c'$:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{images//GLP/NormalForm.png}
+        \input{paper/tikz/NormalFormGLP.tex}
     \end{figure}
-    With $A$ and be being an affine transformation. Namely:
+    With $A$ and $b$ being an affine transformation. Namely:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{images/GLP/Affine transformation.png}
+        \input{paper/tikz/AffineTransformation.tex}
     \end{figure}
 \end{theorem}
 
@@ -256,21 +253,34 @@ normal form for $\mathbf{GPA}$ as the inductive base.
         \item The generator $\mushroom$
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.75\linewidth]{images//GLP/ProofNormalFOrm1.png}
+            \input{paper/tikz/ProofNormalFormBaseLinear.tex}
         \end{figure}
-        \item A diagram c \in \textbf{GPA}
+        \item A diagram $c \in \mathbf{GPA}$
 
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.75\linewidth]{images//GLP/ProofNormalForm2.png}
+            \input{paper/tikz/ProofNormalFormBaseGPA.tex}
         \end{figure}
     \end{itemize}
     For the inductive step, we verify that for any two diagrams
     $c, d \in \mathbf{GLP}$ satisfying the inductive hypothesis,
     both horizontal and vertical composition preserve the normal form.
-    Closure under vertical composition follows immediately from the normal form.
-    For horizontal composition, we apply Fourier-Motzkin Elimination in the \textbf{GLP}
-    part of the diagram to recover the normal form.
+    Closure under vertical composition follows by stacking the two normal forms and
+    collapsing the two independent $A_i, \mathrm{ge}, B_i$ blocks into a single
+    block-diagonal matrix pair, as shown below:
+    \begin{figure}[H]
+        \centering
+        \input{paper/tikz/ProofNormalFormVerticalComp.tex}
+    \end{figure}
+    For horizontal composition, the two normal forms are joined along the wire connecting
+    $B_1$ to $A_2$; applying Fourier-Motzkin Elimination to this pair recovers a fresh
+    matrix-$\mathrm{ge}$-comatrix triple, after which the two resulting runs of matrices,
+    one in each direction, compose into a single matrix and a single comatrix, recovering
+    the normal form:
+    \begin{figure}[H]
+        \centering
+        \input{paper/tikz/ProofNormalFormHorizontalComp.tex}
+    \end{figure}
 \end{proof}
 
 The following corollary reveals the geometric meaning of the normal form:
@@ -298,14 +308,13 @@ Proposition~\ref{prop:equalepi}.
     such that $A = [A' \;C]$. We call this the \emph{epigraph form} of a linear program.
 \end{corollary}
 
-\section{Presentation results for \texorpdfstring{$\mathbf{LPRel}$}{LPRel}
-and \texorpdfstring{$\mathbf{PolyFun}$}{PolyFun}}
+\section{Presentation results for \texorpdfstring{$\mathbf{LPRel}$}{LPRel}}
 
 With the syntax and its normal form in place, we are now ready to prove
 the three presentation properties for $\mathbf{GLP}$.
 
 \begin{lemma}[Expressivity]
-    For every $f : m \to n$ in $\mathbf{PolyFun}$ there exists a
+    For every $f : m \to n$ in $\mathbf{LPRel}$ there exists a
     $\Sigma$-term $s : m \to n$ in
     $\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GLP}}}(m,n)$
     such that $[s] = f$.
@@ -320,13 +329,13 @@ the three presentation properties for $\mathbf{GLP}$.
     required syntactic representative:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{images//GLP/ExpressivityGLP.png}
+        \input{paper/tikz/ProofExpressivity.tex}
     \end{figure}
 \end{proof}
 
 \begin{lemma}[Soundness]
    If $s = t$ in $\mathrm{FreeP}_{\mathbf{GLP}}$, then $[s] = [t]$
-   in $\mathbf{PolyFun}$.
+   in $\mathbf{LPRel}$.
 \end{lemma}
 
 \begin{proof}
@@ -336,7 +345,7 @@ the three presentation properties for $\mathbf{GLP}$.
     follows by direct computation:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{images//GLP/Soundness.png}
+        \input{paper/tikz/ProofSoundness.tex}
     \end{figure}
 \end{proof}
 
@@ -344,14 +353,10 @@ The final result of the thesis is the completeness theorem for
 $\mathbf{GLP}$. The proof brings together all the main tools developed
 throughout: the epigraph form of Corollary~\ref{cor:epigraph form}, the
 shared epigraph property of Proposition~\ref{prop:equalepi}, the
-completeness of $\mathbf{GPA}$, and the FME-based normal form. We state
-it as a conjecture because the completeness of the $\mathbf{GPA}$
-polyhedra case, which the argument appeals to, still has a gap in the
-proof of Completeness for $\mathbf{PolyRel}$; subject to that result,
-the argument below goes through.
+completeness of $\mathbf{GPA}$, and the FME-based normal form.
 
 \begin{lemma}[Completeness]
-   If $[c] = [d]$ in $\mathbf{PolyFun}$, then $c = d$ in
+   If $[c] = [d]$ in $\mathbf{LPRel}$, then $c = d$ in
    $\mathrm{FreeP}_{\mathbf{GLP}}$.
 \end{lemma}
 
@@ -362,29 +367,23 @@ the argument below goes through.
 
     By Corollary~\ref{cor:epigraph form}, both $c$ and $d$ admit
     epigraph forms $c = \mushroom ; c^*$ and $d = \mushroom ; d^*$
-    with $[c^*] = [d^*] = E$ in $\mathbf{PolyRel}$:
+    with $[c^*] = [d^*] = E$ in $\mathbf{PolyRel}$. Since $c^*$ and $d^*$
+    are $\mathbf{GPA}$ diagrams with the same denotation, completeness of
+    $\mathbf{GPA}$ gives $c^* = d^*$ in $\mathrm{FreeP}_{\mathbf{GPA}}$;
+    in particular both reduce to the same $\mathbf{GPA}$ normal form.
+    Composing this common diagram with the leftover $\mushroom$ collapses
+    $c$ and $d$ to the same $\mathbf{GLP}$ diagram:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\linewidth]{images//GLP/proofCompleteness1.png}
+        \input{paper/tikz/ProofCompletenessLemma.tex}
     \end{figure}
-    Since $[c^*] = [d^*]$ in $\mathbf{PolyRel}$, completeness of
-    $\mathbf{GPA}$ gives $c^* = d^* = n$ in
-    $\mathrm{FreeP}_{\mathbf{GPA}}$:
-    Therefore,
-    \[
-    c = \mushroom ; c^* = \mushroom ; n = \mushroom ; d^* = d,
-    \]
-    as witnessed diagrammatically by:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.75\linewidth]{images//GLP/proofCompleteness4.png}
-    \end{figure}
+    Therefore $c = \mushroom ; c^* = \mushroom ; d^* = d$.
 \end{proof}
 
-As consequence of the three lemmas above
+As a consequence of the three lemmas above:
 
 \begin{theorem}
-    $\mathbf{LPRel}$ and $\mathbf{PolyFun}$ are both presented by $\mathrm{FreeP}_{\mathbf{GLP}}$.
+    $\mathbf{LPRel}$ is presented by $\mathrm{FreeP}_{\mathbf{GLP}}$.
 \end{theorem}
 \begin{proof}
     By the preceding three lemmas.
@@ -398,9 +397,8 @@ a compositional framework. Whereas optimization, namely LP problems, are lifted 
 the settings of functional thinking and achieves a new status as a relational-theoretic
 field embeded into the Extended-Lawvere Quantale category.
 
-The \textbf{GLP} theory, in turn, has a natural extension to a even more expressive theory
+The \textbf{GLP} theory, in turn, has a natural extension to an even more expressive theory
 when enriched with the gray arrow generator from \textbf{GQA}. We believe that the class
 of quadratic programs could be, just as was done in this work, fully axiomatized by such
 broader SMIT. However, such studies are left for future works, along with other possible applications
 of current results.
-

@@ -7,71 +7,51 @@ such as being the smallest element in a set,
 or the one that factor out all others.
 Although it might not seem immediately,
 finding such an object is
-an unexplicit optimization problem to be solved.
-Consider, for instance, the greatest common divisor of two integers $a, b \in \mathbb{Z}$: it is precisely
-the solution of
-\[
-	\gcd(a,b) = \max\{d \in \mathbb{Z}_{>0} \mid d \text{ divides both } a \text{ and } b\},
-\]
-that is, the terminal object of the poset of common divisors of $a$ and $b$ ordered by divisibility.
-Prior works has already characterised the internal
+an implicit optimization problem to be solved.
+Consider, for instance, the greatest common divisor of two integers
+$a, b \in \mathbb{Z}$. This is, from an optimization perspective,
+to meet the max object from the set of common divisor of $a,b$,
+categorically, this is precisely the terminal object of
+the poset of common divisors of $a$ and $b$ ordered by divisibility.
+Prior works have already characterised the internal
 optimization structure within categorical constructs \cite{Khadh2026bridging},
-but such results are still isolated; a unified treatment is still to be formalized. This thesis is motivated by this observation. We believe that
-a significant part of mathematics actually admits a surprisingly suitable optimization structure, and, hence,
-many important mathematical structures can actually be described as the solution of a particular optimization problem.
+but such results are still isolated.
 
-In an analogous manner, we think that, just as mathematics
-can be formalized through a relational view, optimization can be understood within the same framework.
+This thesis is motivated by this observation: We believe that
+there's a very expressive and surprisingly suitable optimization view
+to mathematics, and that many important  structures
+can actually be described
+as the solution of a particular optimization problem.
+In an analogous manner, we think that, just as some seminal works have
+tried to argue \cite{frege1879begriffsschrift, whitehead1910principia},
+mathematics, and therefore optimization, can be understood within a
+relational framework.
 By relation, we mean any logical proposition of the
 form $xRy$. This notion sits within the set-theoretic
 foundation of mathematics, under the interpretation of a subset $S \subset X \times Y$, which is, in turn, a generalization
 of maps between spaces.
-This relational view of mathematics is attested by seminal works such as \cite{frege1879begriffsschrift, whitehead1910principia}
-and is ever more embraced by Category theory,
-whose main claim is precisely that an object is fully grasped
+
+Category theory is, in turn, a natural fit for such a view, given that
+one of the main results of the field is the Yonneda Lemma,
+which states that an object is fully grasped
 by the relations it has to others \cite{maclane1998categories}.
-More specifically, optimization can be seen as a single
+
+We ought to show that under specific formulation,
+solving an optimization problem is equivalent of performing algebraic
+composition in a suitable category, which generalize other notions
+such as variable elimination and, therefore, relational composition.
+More specifically, that convex optimization can actually
+be constructed as a single
 compositional framework \cite{stein2024compositional, hanks2024compositionalopt}.
-We ought to show that under specific formulation, solving an optimization problem
-is equivalent of performing algebraic
-composition in a suitable category,
-which generalize other notions such as variable
-elimination and, therefore, relational composition.
 In this way, optimization itself becomes an algebraic
 process and an internal setting across mathematics.
-
-The development follows a natural progression.
-Classical binary relations appear as Boolean-valued morphisms, weighted relations arise
-through Lawvere quantales (Example~\ref{example:weighted-relations}), convex bifunctions introduce infimal composition
-(Definition~\ref{def:arrows}), quadratic
-relations capture least-squares and energy minimization \cite{stein2024gqa}, polyhedral relations describe
-systems of inequalities (Definition~\ref{polyform}), and finally linear programming extends the framework to optimization
-problems with decision variables and constraints (Chapter~\ref{sec:glp}). Each level enlarges the expressive power of
-the previous one while preserving compositional structure.
-
-Figure~\ref{img:general_view} illustrates the path from the theory of interacting hopf algebras \cite{bonchi2017interacting}
-to more expressive languages presented in this thesis, one generator at a time. It also illustrates how adding  a specific class
-of "measurement" generators lifts the category from the binary relations category (indicator functions) into the one of
-weighted relations (bifunctions/optimization problems).
-
-\begin{figure}
-	\centering
-	\includegraphics[width=1.0\linewidth]{images/Overview.png}
-	\caption{This image represents the category of subcategories of $\mathbf{Rel}$. We circle two classes of subcategories:
-		those contained in the Binary Relations category, and those embedded in the Weighted Relations category.
-		Morphisms between objects (classes of relations) correspond to the addition of a single generator, together with some axioms.
-		The horizontal morphisms add generators that are themselves binary relations, keeping the object in the subclass of binary relations.
-		The vertical morphisms, by contrast, add a generator that resembles an output or measurement, lifting the relation into the Weighted Relations class.
-	}
-	\label{img:general_view}
-\end{figure}
 
 This expressivity becomes especially apparent when analyzed through
 the language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer}.
 Originating as a rigorous graphical language for
 monoidal categories, string diagrams provide an intuitive yet mathematically
 precise syntax in which the sequential and parallel composition of morphisms
-correspond directly to vertical and horizontal juxtaposition of diagrams
+correspond directly to vertical and horizontal juxtaposition of diagrams (e.g. computational processes)
 \cite{joyal1991geometry, maclane1998categories}. Building on this foundation,
 a rich family of \emph{diagrammatic} or \emph{graphical calculi} has emerged,
 offering complete axiomatisations of various algebraic structures purely through
@@ -122,13 +102,13 @@ corresponds directly to categorical composition, allowing optimization problems
 to be manipulated diagrammatically before computation.
 
 In particular, every piecewise affine convex function can be represented as the value function of a linear program \cite{rockafellar1970convex},
-which means the Graphical Linear Programming \textbf(GLP) theory provides a syntax for a broad class of nonsmooth convex models that appear in optimization,
+which means the Graphical Linear Programming \textbf{GLP} theory provides a syntax for a broad class of nonsmooth convex models that appear in optimization,
 control, economics, and machine learning.
 In Section~\ref{sec:glp} we show the diagrammatical equivalence
 of this two classes of objects and how diagrammatically they are instances of the same normal form.
 Thus, our diagrammatical syntax blurs the distinction between expressing LP programs as optimization problems
 and piecewise convex functions.
-In other words, more poetic stated, \textit{our diagrammatical theory unifies under the same view, the relational and optimization nature of linear programming}.
+In other words, more poetically stated, \textit{our diagrammatical theory unifies under the same view, the relational and optimization nature of linear programming}.
 
 More broadly, the thesis suggests that graphical methods
 can play for optimization the same role that graphical linear

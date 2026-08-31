@@ -27,14 +27,14 @@ To begin we define the most basic kind of relation:
 	\]
 \end{definition}
 
-A binary relation specifies wheather $x$ is related to $y$.
+A binary relation specifies whether $x$ is related to $y$.
 Observe that one can think of a relation in two different ways that will prove useful later.
 First, as a set of pairs, where every relation is just a pair $(x,y) \in R$,
 or as a map that has $x,y$ as inputs and outputs 0 if they are related, and $+\infty$ if they are not
-the choice of $\infty$ is arbitrary and will be justified later. Normal choices here are actually $\{true,false\}$ or $\{0,1\}$)
+the choice of $\infty$ is arbitrary and will be justified later. Normal choices here are actually $\{true,false\}$ or $\{0,1\}$.
 
 This is a general construct as the sets $X$ and $Y$ can be anything.
-We can, for instance, ask for further structures on such sets and obtain differents kinds of relations.
+We can, for instance, ask for further structures on such sets and obtain different kinds of relations.
 \begin{definition}[Linear/Affine Relations]
 	Let $X$ and $Y$ be vector spaces. A \emph{linear relation} from $X$ to $Y$ is a linear subspace
 	\[
@@ -195,7 +195,7 @@ weighted relations as special cases corresponding to particular quantales.
 
 Note that linear and affine relations are not recovered by this construction,
 since they demand extra structure
-on the sets $X$ and $Y$, speciffically that $R$ be a linear or affine subspace of
+on the sets $X$ and $Y$, specifically that $R$ be a linear or affine subspace of
 $X \times Y$. They are, nonetheless,
 fully embedded in the framework of binary relations.
 
@@ -631,13 +631,14 @@ objects form a special  class of hypergraph categories, and it is the later, mor
 
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images/froberniusDiagram.png}
-		\caption{Frobernius additive(black) and co-additive(white) structure}
+		\input{paper/tikz/FrobeniusGeneratorLegend.tex}
+		\caption{Frobenius additive(black) and co-additive(white) structure}
 	\end{figure}
 
-	Subject to the Frobernius Law (both colors)
+	Subject to the Frobenius Law (both colors)
 	\begin{figure}[H]
-		\includegraphics[width=1\linewidth]{images/FroberniusLaw.png}
+		\centering
+		\input{paper/tikz/FrobeniusLaw.tex}
 	\end{figure}
 \end{remark}
 

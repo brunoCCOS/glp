@@ -1,0 +1,29 @@
+\tikzset{axpic/.style={baseline=(current bounding box.center), line cap=round}}
+\newcommand{\diageq}[2]{%
+  \begin{tikzpicture}[axpic]#1\end{tikzpicture}%
+  \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;%
+  \begin{tikzpicture}[axpic]#2\end{tikzpicture}%
+}
+
+\newcommand{\diagdef}[2]{%
+  \begin{tikzpicture}[axpic]#1\end{tikzpicture}%
+  \;\begin{tikzpicture}[axpic]\node{$\coloneq$};\end{tikzpicture}\;%
+  \begin{tikzpicture}[axpic]#2\end{tikzpicture}%
+}
+% one row: label, LHS, RHS — auto = sign and spacing
+\newcommand{\diagrow}[3]{%
+    #1 & \begin{tikzpicture}[axpic]#2\end{tikzpicture}
+     & \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;%
+     & \begin{tikzpicture}[axpic]#3\end{tikzpicture} \\[1mm]
+ }
+
+\newcommand{\diagrowc}[3]{%
+    #1 & \begin{tikzpicture}[axpic]#2\end{tikzpicture}
+     & \;\begin{tikzpicture}[axpic]\node{$\supseteq$};\end{tikzpicture}\;%
+     & \begin{tikzpicture}[axpic]#3\end{tikzpicture} \\[1mm]
+ }
+ \newcommand{\inlinegen}[1]{
+    \begin{tikzpicture}
+        \pic {#1};
+    \end{tikzpicture}
+}

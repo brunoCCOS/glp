@@ -10,10 +10,10 @@ precisely variable elimination, and it is this operation that categorical
 composition will simulate diagrammatically.
 
 The theory developed here remains
-a within  the category of binary relations since morphisms are still indicator functions
+within the category of binary relations, since morphisms are still indicator functions
 of subsets of $\mathbb{R}^n \times \mathbb{R}^m$, encoding feasibility
 constraints rather than objective functions. In this sense, $\mathbf{GPA}$
-does not yet enter the weighted relational world of not being able to express more meaningful
+does not yet enter the weighted relational world, and so is not yet able to express more meaningful
 optimization problems. This is nonetheless a critical step in the development.
 Axiomatizing linear inequality constraints diagrammatically,  $\mathbf{GPA}$ provides
 the Symmetric Monoidal Inequality Theory (SMIT)~\cite{bonchi2021polyhedral}  that will
@@ -22,7 +22,7 @@ where these constraints are combined with a linear objective to form full parame
 
 
 In what follows we describe and show the complete theory of polyhedral relations and polyhedral cones.
-Just as $\mathbf{AffinRel}$ captured affine space as morphisms, the categories $\mathbf{PCRel}$ and
+Just as $\mathbf{AffRel}$ captured affine space as morphisms, the categories $\mathbf{PCRel}$ and
 $\mathbf{PolyRel}$ capture polyhedral cones and polyhedra as morphisms,
 with relational composition playing the role of variable elimination.
 
@@ -60,13 +60,13 @@ We begin by recalling the standard definitions of polyhedral cones and the corre
 \end{definition}
 
 Observe that in comparison with the previous categories of \textbf{AffRel},
-this category is way more general although it does not completly encodes the notion of Affine Spaces. However,
-it does introduce to us a somewhat unortodoxy notion of conical polyhedral relations. That is,
+this category is way more general although it does not completely encode the notion of Affine Spaces. However,
+it does introduce to us a somewhat unorthodox notion of conical polyhedral relations. That is,
 the fact that two elements $x,y$ may be related to one another by a relation $R$ such that the set of all pairs $xRy$
 form a polyhedral cone.
 Although this description remains very set-theoretically,
-it starts to flert with the idea of $x$ and $y$ being apparted from a specific class of maps.
-More precisely, instead of thinking of the whole geometry of polydral cones,
+it starts to flirt with the idea of $x$ and $y$ being apparted from a specific class of maps.
+More precisely, instead of thinking of the whole geometry of polyhedral cones,
 one may think of the pairs $(x,y)$ such that $Ax \ge By$ for some $A$ and $B$ fully defined by the relation $R$.
 
 \section{Syntax: the algebra \texorpdfstring{$\mathbf{GPA}_{\rtop}$}{GPA}}
@@ -81,7 +81,7 @@ one may think of the pairs $(x,y)$ such that $Ax \ge By$ for some $A$ and $B$ fu
 	along with the following additional equations:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.2\linewidth]{images//GPA/AffineAxiom.png}
+		\includegraphics[width=0.2\linewidth]{images/GPA/AffineAxiom.png}
 	\end{figure}
 	\begin{figure}[H]
 		\centering
@@ -137,7 +137,7 @@ With those results in places we are ready to prove the diagrammatic FME:
 	algorithm
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/FMEDiag.png}
+		\input{paper/tikz/FMEDiagram.tex}
 	\end{figure}
 \end{proposition}
 
@@ -145,11 +145,11 @@ With those results in places we are ready to prove the diagrammatic FME:
 	The proof proceeds by induction on the number of inequalities.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/ProofFMEDiag.png}
+		\includegraphics[width=1\linewidth]{images/GPA/ProofFMEDiag.png}
 	\end{figure}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/ProofFMEDiag2.png}
+		\includegraphics[width=1\linewidth]{images/GPA/ProofFMEDiag2.png}
 	\end{figure}
 
 	Now we show the inductive step for $n+1$:
@@ -175,24 +175,24 @@ canonical block form.
 	First, the $\ge$ generator:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=.75\linewidth]{images//GPA/BaseCase1NormalFormProof.png}
+		\includegraphics[width=.75\linewidth]{images/GPA/BaseCase1NormalFormProof.png}
 	\end{figure}
 	Second, for any diagram $c$ in $\mathbf{GLA}$:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/BaseCase2NormalFormProof.png}
+		\includegraphics[width=1\linewidth]{images/GPA/BaseCase2NormalFormProof.png}
 	\end{figure}
 	For the inductive step, we consider composition of two diagrams
 	$c; d$ in $\mathbf{GPA}_{\rtop}$. By the inductive hypothesis, both
 	$c$ and $d$ are already in normal form:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=.75\linewidth]{images//GPA/InductiveCase1NormalFormProof.png}
+		\includegraphics[width=.75\linewidth]{images/GPA/InductiveCase1NormalFormProof.png}
 	\end{figure}
 	And for the tensor product:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/InductiveCase2NormalFormProof.png}
+		\includegraphics[width=1\linewidth]{images/GPA/InductiveCase2NormalFormProof.png}
 	\end{figure}
 \end{proof}
 
@@ -241,7 +241,7 @@ exchanging the  $H$-representation (intersection of halfspaces) with the  $V$-re
 	Every diagram $s \in \mathbf{GPA}_{\rtop}$ can be written as:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=.75\linewidth]{images//GPA/SecondNormalFormGPA.png}
+		\includegraphics[width=.75\linewidth]{images/GPA/SecondNormalFormGPA.png}
 	\end{figure}
 \end{proposition}
 
@@ -277,11 +277,11 @@ $\mathbf{PCRel}$.
 	semantics:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/SoundnessPCRel1.png}
+		\includegraphics[width=1\linewidth]{images/GPA/SoundnessPCRel1.png}
 	\end{figure}
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/SoundnessPCRel2.png}
+		\includegraphics[width=1\linewidth]{images/GPA/SoundnessPCRel2.png}
 	\end{figure}
 \end{proof}
 
@@ -298,7 +298,7 @@ $\mathbf{PCRel}$.
 	interpretation of the diagram:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=.75\linewidth]{images//GPA/PCRelExpressivity.png}
+		\includegraphics[width=.75\linewidth]{images/GPA/PCRelExpressivity.png}
 	\end{figure}
 \end{proof}
 
@@ -312,7 +312,7 @@ $\mathbf{PCRel}$.
 	$V$-representation form:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/ProofCompleteness1.png}
+		\includegraphics[width=1\linewidth]{images/GPA/ProofCompleteness1.png}
 	\end{figure}
 	The semantics of such a diagram is the conic hull of the column
 	vectors of $V$. Since $[s] = [t]$ implies in particular
@@ -321,7 +321,7 @@ $\mathbf{PCRel}$.
 	that $CV_t = V_s$. The diagrammatic witness is:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images//GPA/ProofCompleteness2.png}
+		\includegraphics[width=1\linewidth]{images/GPA/ProofCompleteness2.png}
 	\end{figure}
 	The inclusion $[s] \subseteq [t]$ follows by the same argument,
 	yielding equality.
@@ -339,7 +339,7 @@ $\mathbf{PCRel}$.
 
 \section{Semantics: the prop \texorpdfstring{$\mathbf{PolyRel}$}{PolyRel}
   of polyhedra}
-Now we start the presentation of the more broader class of polydral relations by recalling the definition of a polyhedral.
+Now we start the presentation of the broader class of polyhedral relations by recalling the definition of a polyhedron.
 
 \begin{definition}\label{polyform}
 	A set $P \subseteq \mathbb{R}^n$ is called a \emph{polyhedron} if there
@@ -380,7 +380,7 @@ In that light, one can define the category of polyhedral relations as:
 
 Notice how, the same way that \textbf{PCRel} offered us a more relational way to think about Polyhedral Cones, so does \textbf{PolyRel}.
 Indeed, one may think of polyhedrals as closed spaces in some geometry that respects some linear constraints.
-We argue, however, that this definition is overly convuleted, and a more natural way
+We argue, however, that this definition is overly convoluted, and a more natural way
 to denote such objects is to think in terms of relations $R$,
 such that $xRy \iff Ax + b \ge By +c$ for some matrices $A,B$ and  vectors $b,c$.
 Once again, we move from a set-theoretic heavy description to a more logical one.
@@ -400,7 +400,7 @@ homogeneous case.
 	such that $c = d$ modulo the axioms and $d$ is of the form:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images/GPA/NormalFormGPA.png}
+		\input{paper/tikz/NormalFormGPA.tex}
 	\end{figure}
 \end{theorem}
 
@@ -413,7 +413,7 @@ homogeneous case.
 		\includegraphics[width=1\linewidth]{images/GPA/affineGPAProof1.png}
 	\end{figure}
 
-	From \ref{thm:FirstNormalForm} we know that $c'$ admits a normal form in
+	From Theorem~\ref{thm:FirstNormalForm} we know that $c'$ admits a normal form in
 	terms of matrices A and B. Breaking down the matrix A in columns we get:
 
 	\begin{figure}[H]
@@ -466,7 +466,7 @@ homogeneous case.
 	Every polyhedron $P$ can be homogenised by introducing a slack variable,
 	reducing the affine case to the conic one
 	$P^H = \{(x,y) \in k^{n+1} | Ax + by \ge 0, y \ge 0\}$ which
-	admits a normal form \ref{thm:FirstNormalForm}.
+	admits a normal form (Theorem~\ref{thm:FirstNormalForm}).
 	Under this homogenisation, for each two diagrams $s, t \in \mathbf{GPA}$
 	with $[s] = [t]$ in  $\mathbf{PolyRel}$, there are $s', t'$
 	in $\mathbf{GPA}_{\rtop}$ such that $[s'] = [s]^H, [t'] = [t]^H $.
@@ -495,4 +495,31 @@ homogeneous case.
 \begin{proof}
 	By the preceding three lemmas.
 \end{proof}
+
+\begin{remark}[Invariance under non-negative matrices]
+	Whereas the linearity axiom shows the linear generator to be exactly
+	invariant under column-stochastic reweightings (Remark~\ref{rmk:stochastic}),
+	the order generator $\mathrm{ge}$ enjoys a related but weaker property with
+	respect to non-negative matrices. Let $A \in \mathbb{R}^{n \times m}$ with
+	$A_{ij} \ge 0$ for all $i,j$. If $x, y \in \mathbb{R}^m$ satisfy $x \ge y$
+	componentwise, then $Ax \ge Ay$ componentwise: for each row $i$,
+	\[
+		(Ax)_i - (Ay)_i = \sum_{j} A_{ij}(x_j - y_j) \ge 0,
+	\]
+	since every term is a product of a non-negative entry and a non-negative
+	difference. Diagrammatically, this is the inclusion
+	\[
+		\mathrm{matrix}[A] \; ; \; \mathrm{ge}^{\otimes n}
+		\;\subseteq\;
+		\mathrm{ge}^{\otimes m} \; ; \; \mathrm{matrix}[A]^{\otimes 2},
+	\]
+	verified directly in the semantics of $\mathbf{PolyRel}$, exactly as the
+	axioms of $\mathbf{GPA}$ are themselves verified. Unlike
+	Remark~\ref{rmk:stochastic}, this is only an inclusion and not an equality:
+	a non-negative matrix need not reflect the order, only preserve it, so
+	$Ax \ge Ay$ can hold even when $x \ge y$ fails (take $A = 0$). In other
+	words, a non-negative matrix always goes through the order generator,
+	certifying that any inequality derived in $\mathbf{GPA}$ remains valid
+	after left multiplication by $A$.
+\end{remark}
 
