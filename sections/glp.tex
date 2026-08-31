@@ -294,7 +294,7 @@ Proposition~\ref{prop:equalepi}.
     be rewritten as a diagram $d'$ of the form:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\linewidth]{images//GLP/epiForm1.png}
+        \input{paper/tikz/EpigraphFormGLP.tex}
     \end{figure}
     where the semantics of the dotted diagram is
     \[\left\{(t,y)\mid \exists\, x,\; A'x + a \ge [B\; -C]\, y,\; t\ge x,\; y =
@@ -307,6 +307,15 @@ Proposition~\ref{prop:equalepi}.
     \end{align*}
     such that $A = [A' \;C]$. We call this the \emph{epigraph form} of a linear program.
 \end{corollary}
+
+\begin{proof}
+    Starting from $d$ in normal form, split the relation generator along
+    $A = [A' \; C]$ and pull the resulting $C$-block through the $\inlinegen{ge}$
+    generator using the antipode axiom:
+    \input{paper/tikz/EpigraphProof.tex}
+    The resulting diagram is precisely the claimed form $d'$, with the
+    dotted box exhibiting $\mathrm{epi}([d])$ as a $\mathbf{GPA}$ diagram.
+\end{proof}
 
 \section{Presentation results for \texorpdfstring{$\mathbf{LPRel}$}{LPRel}}
 
