@@ -5,9 +5,8 @@ would call an "ideal" object. This notion of "ideal" often refers to the
 simplest object that meets a specific criteria,
 such as being the smallest element in a set,
 or the one that factor out all others.
-Although it might not seem immediately,
-finding such an object is
-an implicit optimization problem to be solved.
+This particular description of "ideal", reveals a interest
+interconnection between categories and optimization.
 Consider, for instance, the greatest common divisor of two integers
 $a, b \in \mathbb{Z}$. This is, from an optimization perspective,
 to meet the max object from the set of common divisor of $a,b$,
@@ -28,19 +27,24 @@ mathematics, and therefore optimization, can be understood within a
 relational framework.
 By relation, we mean any logical proposition of the
 form $xRy$. This notion sits within the set-theoretic
-foundation of mathematics, under the interpretation of a subset $S \subset X \times Y$, which is, in turn, a generalization
+foundation of mathematics, under the interpretation of a
+subset $S \subset X \times Y$, which is, in turn, a generalization
 of maps between spaces.
 
 Category theory is, in turn, a natural fit for such a view, given that
 one of the main results of the field is the Yonneda Lemma,
 which states that an object is fully grasped
-by the relations it has to others \cite{maclane1998categories}.
+by the relations it has to others \cite{maclane1998categories}. More interestingly,
+we can actually talk about the optimal object from two different perspectives,
+namely: a categorical one through the lens of terminal/initial objects and an
+optimization one through the ideas of ordered and measure,
+which we ought to show that, in the end, are one and the same.
 
-We ought to show that under specific formulation,
+Formally, we show that under specific formulation,
 solving an optimization problem is equivalent of performing algebraic
 composition in a suitable category, which generalize other notions
 such as variable elimination and, therefore, relational composition.
-More specifically, that convex optimization can actually
+More broadly, that convex optimization can actually
 be constructed as a single
 compositional framework \cite{stein2024compositional, hanks2024compositionalopt}.
 In this way, optimization itself becomes an algebraic
