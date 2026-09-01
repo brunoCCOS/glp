@@ -116,14 +116,14 @@ lower-dimensional space by eliminating one variable at a time.
 
 To derive it diagrammatically, we need some previous results regarding small
 diagrammatic operations. The first result we prove is the transitivity property
-of the generator, i.e. $-\ge-\ge- = -\ge- $
+of the generator, i.e. $\inlinegen{ge};\inlinegen{ge}=\inlinegen{ge}$
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\linewidth]{images/GPA/transitivity.png}
 \end{figure}
 
-Next, we show that $\ge$ is reflexive
+Next, we show that $\inlinegen{ge}$ is reflexive
 
 \begin{figure}[H]
 	\centering
@@ -486,10 +486,10 @@ homogeneous case.
 	Diagrammatically this goes as follows:
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images/GPA/CompletenessGPAProof.png}
+        \input{paper/tikz/ProofCompletenessGPA.tex}
 	\end{figure}
 
-	Whereas the interpretation of the diagram in the dotted box is
+	Whereas the interpretation of the last diagram is
 	$\{(x,y,z) \in k^m | Ax + by \ge Bz, y \ge 0\}$, which is the same
 	as $P^H$. Therefore, the semantics of $s'$ is that of the homogenisation
 	of $[s]$ and follows the above argument.
