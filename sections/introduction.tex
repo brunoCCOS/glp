@@ -16,39 +16,48 @@ Prior works have already characterised the internal
 optimization structure within categorical constructs \cite{Khadh2026bridging},
 but such results are still isolated.
 
-This thesis is motivated by this observation: We believe that
-there's a very expressive and surprisingly suitable optimization view
-to mathematics, and that many important  structures
-can actually be described
-as the solution of a particular optimization problem.
-In an analogous manner, we think that, just as some seminal works have
-tried to argue \cite{frege1879begriffsschrift, whitehead1910principia},
-mathematics, and therefore optimization, can be understood within a
-relational framework.
-By relation, we mean any logical proposition of the
-form $xRy$. This notion sits within the set-theoretic
-foundation of mathematics, under the interpretation of a
-subset $S \subset X \times Y$, which is, in turn, a generalization
-of maps between spaces.
+The gcd is not an isolated case. Many of the constructions mathematics singles
+out as canonical are optimal in this same sense: they are the best object of a
+collection, with respect to an ordering carried by that collection. This thesis
+makes that pattern structural rather than anecdotal. Composition in a category
+of $Q$-valued relations is a join over the mediating variable,
+\[
+	(S \circ R)(x,z) \;=\; \bigvee_{y} R(x,y) \otimes S(y,z),
+\]
+so eliminating an internal variable is composition and nothing else. A join,
+however, is already an optimization: $\bigvee A$ is the least of the upper
+bounds of $A$, the ideal object of the previous paragraph read inside the order
+of $Q$, and universal in exactly the sense the gcd was. Composition is therefore
+always the solution of an optimization problem, and the choice of $Q$ fixes only
+which order is being optimized over. Over the extended reals the join is an
+infimum, and composing two morphisms minimizes a cost in the eliminated
+variable. Over the Booleans it is a disjunction, and the very same optimum,
+the least upper bound of a family of truth values, reads as $\exists y$. Ordinary
+relational composition is thus a particular case of optimization rather than a
+parallel to it, and Sections~\ref{sec:quantale-relations}
+and~\ref{sec:composability} make this precise.
 
-Category theory is, in turn, a natural fit for such a view, given that
-one of the main results of the field is the Yonneda Lemma,
-which states that an object is fully grasped
-by the relations it has to others \cite{maclane1998categories}. More interestingly,
-we can actually talk about the optimal object from two different perspectives,
-namely: a categorical one through the lens of terminal/initial objects and an
-optimization one through the ideas of ordered and measure,
-which we ought to show that, in the end, are one and the same.
+Relations are the language in which both readings are written. A relation
+between sets $X$ and $Y$ is a proposition $xRy$, or equivalently a subset
+$R \subseteq X \times Y$ \cite{frege1879begriffsschrift, whitehead1910principia}.
+Relations are more permissive than maps, and orderings,
+constraints, and morphisms are all instances of them. The passage between an
+optimization problem and its categorical description therefore takes place
+inside a single framework.
 
-Formally, we show that under specific formulation,
-solving an optimization problem is equivalent of performing algebraic
-composition in a suitable category, which generalize other notions
-such as variable elimination and, therefore, relational composition.
-More broadly, that convex optimization can actually
-be constructed as a single
-compositional framework \cite{stein2024compositional, hanks2024compositionalopt}.
-In this way, optimization itself becomes an algebraic
-process and an internal setting across mathematics.
+Category theory supplies that framework. The Yoneda Lemma determines an object,
+up to isomorphism, by the relations it bears to every other object
+\cite{maclane1998categories}; an initial or terminal object is the extreme case,
+related to everything in exactly one way. Optimization reaches the same object
+from the other side, as the extremum of a cost taking values in an ordered set.
+In the settings we treat, these two descriptions coincide.
+
+Formally, we show that in the categories treated here solving an optimization
+problem amounts to composing morphisms, and that composition carries out the
+variable elimination such a solution requires. Convex optimization then admits a
+single compositional presentation \cite{stein2024compositional, hanks2024compositionalopt}, 
+in which optimization is an algebraic operation
+rather than a technique applied from outside.
 
 This expressivity becomes especially apparent when analyzed through
 the language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer}.
@@ -62,10 +71,8 @@ offering complete axiomatisations of various algebraic structures purely through
 equational diagram rewriting \cite{selinger2010survey, bonchi2017interacting}.
 These calculi have proved remarkably versatile, finding applications across a
 wide range of fields: in \emph{quantum computing} \cite{coecke2011interacting};
-\emph{electronics} \cite{baez2018compositional}; \emph{linear algebra} \cite{bonchi2017interacting,
-	bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
-and in \emph{optimisation and probability} \cite{stein2024gqa,stein2025compositional,
-	bonchi2021polyhedral}. Throughout this work
+\emph{electronics} \cite{baez2018compositional}; \emph{linear algebra} \cite{bonchi2017interacting, bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
+and in \emph{optimisation and probability} \cite{stein2024gqa,stein2025compositional, bonchi2021polyhedral}. Throughout this work
 we explore how, step by step, one can enrich the already known theories for linear
 \cite{bonchi2017interacting} algebra by adding one new generator at a time, along with a particular
 set of axioms, and derive even richer structures for convex problems \cite{stein2024compositional}.
@@ -73,13 +80,10 @@ set of axioms, and derive even richer structures for convex problems \cite{stein
 The development followed a strict linear discipline, adding exactly one new
 generator at a time and verifying at each step that the resulting algebra is
 sound, expressive, and complete with respect to a precisely defined semantic
-category. This methodology is itself one
-of the work's implicit arguments. The fact that such a linear development is
-possible, that each new class of optimization problems requires only a single
-additional generator and a finite set of axioms, is evidence that the
-compositional structure is not imposed artificially but is genuinely present in
-the mathematics. This is made precise by the normal form and completeness results of
-Theorem~\ref{thm:normalformgpa} and Theorem~\ref{thm:NormalFormGLP}, which follow the very
+category. Each new class of optimization problems then costs a single
+additional generator and a finite set of axioms.
+This is made precise by the normal form and completeness results of
+Theorem~\ref{thm:normalformgpa} and Theorem~\ref{thm:NormalFormGLP}, which follow the
 same pattern already established for graphical linear and affine algebra
 \cite{bonchi2017interacting, bonchi2019affine} and for their quadratic
 \cite{stein2024gqa} and polyhedral \cite{bonchi2021polyhedral} extensions.
@@ -110,29 +114,26 @@ which means the Graphical Linear Programming \textbf{GLP} theory provides a synt
 control, economics, and machine learning.
 In Section~\ref{sec:glp} we show the diagrammatical equivalence
 of this two classes of objects and how diagrammatically they are instances of the same normal form.
-Thus, our diagrammatical syntax blurs the distinction between expressing LP programs as optimization problems
-and piecewise convex functions.
-In other words, more poetically stated, \textit{our diagrammatical theory unifies under the same view, the relational and optimization nature of linear programming}.
+The diagrammatic syntax therefore erases the distinction between expressing a
+linear program as an optimization problem and expressing it as a piecewise
+affine convex function.
 
-More broadly, the thesis suggests that graphical methods
-can play for optimization the same role that graphical linear
-algebra plays for matrices: providing normal forms,
-symbolic rewriting rules, and completeness results within a rigorous categorical setting.
-This reinforces the effort of using diagrammatic reasoning
-not only for proofs,
-but also for designing compositional optimization systems
-and formal symbolic calculi for convex programming.
+For optimization, graphical methods can then play the role graphical linear
+algebra plays for matrices: normal forms, symbolic rewriting rules, and
+completeness results within a categorical setting. Beyond their use in proofs,
+this makes diagrammatic calculi a plausible basis for compositional
+optimization systems.
 
 \paragraph{Thesis overview}
-In Section~\ref{sec:quantale-relations} we introduce the algebraic and categorical playground on which the rest
-of the work is built, present the initial notions of quantales and relations, and how they play an interchangeable
-role in a categorical view. Next, in Section~\ref{sec:composability}, we introduce a basic application of this theory to the
-vast field of convex optimization \cite{stein2024compositional, Khadh2026bridging},
-showing how many of its important constructs fall within such a categorical framework.
+In Section~\ref{sec:quantale-relations} we set up the algebraic and categorical
+setting on which the rest of the work is built, introducing quantales and
+relations and the interchangeable role they play in a categorical view. Next, in
+Section~\ref{sec:composability}, we apply this theory to convex optimization
+\cite{stein2024compositional, Khadh2026bridging}, showing how several of its
+central constructs fall within the same categorical framework.
 
 Chapter~\ref{sec:gpa} presents the already-known graphical theory of Polyhedral Algebra \cite{bonchi2021polyhedral},
 where some of the known proofs are recalled and refined.
 
 Finally, in Chapter~\ref{sec:glp}, we define and prove the completeness of an entirely new Graphical Algebra dedicated
 to expressing parametric Linear Programs. This work represents a first step toward a complete diagrammatic calculus for convex optimization.
-

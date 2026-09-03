@@ -1,14 +1,15 @@
 \section{Relations and Quantales}\label{sec:quantale-relations}
 
 In this section we explore the theory of relations.
-While much of mathematical theory is built on functional thinking,
-we argue that most of mathematics actually has a relational nature.
-Category theory is the natural language for this purpose. It is precisely built on top of this notion,
-in which everything one needs to know about an object is determined by its morphisms.
+On set-theoretical foundations, relations are among the most primitive notions
+available, and yet they already support remarkably powerful abstractions: many
+other structures, functions among them, are derived from relations alone.
+Later we shall see that relations sit comfortably within the language of
+category theory, which in turn offers a natural vocabulary for describing them.
 
-To begin we define the most basic kind of relation:
+We begin with the most basic kind of relation:
 
-\begin{definition}[Binary Relations]
+\begin{definition}[Binary Relations]\label{def:binary-relations}
 	Let $X$ and $Y$ be sets. A \emph{binary relation} $R$ from $X$ to $Y$ is a subset
 	\[
 		R \subseteq X \times Y.
@@ -168,6 +169,15 @@ Now we are ready to build our previous relations as particular cases of this mor
 	\]
 	Thus $Q$-valued relations coincide with classical binary relations.
 
+	This also settles the indicator convention adopted in
+	Definition~\ref{def:binary-relations}, where relations were valued in
+	$\{0,+\infty\}$ rather than $\{0,1\}$. The two are the same quantale: the map
+	$1 \mapsto 0$, $0 \mapsto +\infty$ sends $\lor$ to $\min$, $\land$ to $+$,
+	and the unit $1$ to the unit $0$, hence is an isomorphism of the truth
+	quantale onto the sub-quantale $\{0,+\infty\}$ of the Lawvere quantale below.
+	We work with $\{0,+\infty\}$ throughout, so that Boolean relations sit inside
+	the cost-valued ones without any change of convention.
+
 	\medskip
 
 	\noindent
@@ -226,9 +236,16 @@ not appear elsewhere in the literature.
 		      \[
 			      a \otimes b := a + b,
 		      \]
-		      where addition is extended in the usual way
-		      (with $a + (+\infty) = +\infty$ and
-		      $a + (-\infty) = -\infty$ whenever defined).
+		      where addition is extended to $\overline{\mathbb{R}}$ by
+		      $a + (+\infty) = +\infty$ for every $a$, and
+		      $a + (-\infty) = -\infty$ for every $a \neq +\infty$.
+		      In particular we adopt the convention
+		      \[
+			      (+\infty) + (-\infty) := +\infty,
+		      \]
+		      so that $+\infty$ is absorbing. This is Moreau's
+		      \emph{inf-addition} \cite{rockafellar1970convex}, and it is the
+		      only extension under which the structure below is a quantale.
 
 		\item The unit element is
 		      \[
@@ -241,6 +258,50 @@ not appear elsewhere in the literature.
 	is a commutative quantale. Joins are ordinary infima,
 	and addition distributes over arbitrary joins.
 \end{definition}
+
+The convention above is not a matter of taste. Without it, $+$ is only
+partially defined on $\overline{\mathbb{R}}$, so
+$(\overline{\mathbb{R}},+,0)$ fails to be a monoid and the quantale axioms
+cannot even be stated. The next proposition checks that inf-addition repairs
+this.
+
+\begin{proposition}
+	$(\overline{\mathbb{R}},\geq,+,0)$ with inf-addition is a commutative
+	quantale.
+\end{proposition}
+
+\begin{proof}
+	Since $\overline{\mathbb{R}}$ under the reversed order is a complete lattice
+	with $\bigvee A = \inf A$, $\bot = \bigvee \varnothing = +\infty$ and
+	$\top = -\infty$, only the monoid structure and distributivity need checking.
+
+	\medskip
+	\noindent
+	\textbf{(1) Monoid.}
+	Inf-addition is commutative by construction and total, since the one
+	ambiguous sum is now assigned the value $+\infty$. For associativity, note
+	that $a + b = +\infty$ exactly when $a = +\infty$ or $b = +\infty$, and
+	$a + b = -\infty$ exactly when neither is $+\infty$ and at least one is
+	$-\infty$. Both conditions are symmetric in the summands and depend only on
+	the multiset $\{a,b\}$, so $(a+b)+c$ and $a+(b+c)$ agree on every triple:
+	each equals $+\infty$ if some argument is $+\infty$, else $-\infty$ if some
+	argument is $-\infty$, else the ordinary finite sum. The unit is $0$.
+
+	\medskip
+	\noindent
+	\textbf{(2) Distributivity.}
+	Let $a \in \overline{\mathbb{R}}$ and $\{b_i\}_{i \in I}$ be any family. We
+	must show $a + \inf_i b_i = \inf_i (a + b_i)$, where both sides are $+\infty$
+	when $I = \varnothing$.
+
+	If $a = +\infty$, both sides are $+\infty$ by absorption. If $a$ is finite,
+	the identity is the standard translation invariance of the infimum. If
+	$a = -\infty$ and every $b_i = +\infty$, then $\inf_i b_i = +\infty$ and both
+	sides are $+\infty$; if instead some $b_{i_0} < +\infty$, then
+	$\inf_i b_i < +\infty$, so the left side is $-\infty$, and the right side is
+	$-\infty$ as well because $a + b_{i_0} = -\infty$.
+	Commutativity gives distributivity in the other variable.
+\end{proof}
 
 
 \begin{definition}[Optimization (Cost/Reward) Relations]
