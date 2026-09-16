@@ -1,9 +1,8 @@
 \chapter{Conclusion}
 
-Looking back at the road we walked, it is worth retracing it briefly.
-We started from quantale-valued relations and the quiet observation that
-composing them is already a form of optimization, transitivity being its
-simplest instance. From there, we recalled and refined the graphical theory
+We started with a remind of the quantale-valued relations
+and the quiet observation that composing them is already a form of optimization,
+transitivity being its simplest instance. From there, we recalled and refined the graphical theory
 of polyhedral relations, giving it a home inside this same categorical
 hierarchy rather than treating it as a self-contained formalism. On that
 foundation, we built \textbf{GLP}, a graphical algebra for parametric linear
@@ -23,10 +22,13 @@ something genuinely structural about linear programming rather than
 something we imposed on it: the \emph{invariance of a linear program under
 column-stochastic reweighting of its objective} (Remark~\ref{rmk:stochastic})
 falls directly out of the algebra, as a single generator-level equation,
-instead of being proved separately for each formulation.
+instead of being proved separately for each formulation. This is one of the 
+core properties of linear systems and thanks to our Graphical Algebra is 
+a syntatical operation in itself. As we claimend at the introduction,
+the diagrammatic calculi makes the system properties evident in the syntax, 
+instead of a higher level result and this is the evidence.
 
-The payoff of that work is fairly concrete. A linear program is now a
-morphism like any other in the hierarchy, one that composes with the
+A linear program is now a morphism like any other in the hierarchy, one that composes with the
 relations and quadratic blocks studied earlier without any special
 pleading. Its diagrammatic syntax, once reduced to normal form, coincides
 with the syntax of its own value function, so the diagram and the object it
@@ -55,21 +57,9 @@ structures.
 	      $\{0,+\infty\}$-valued characteristic function.
 \end{itemize}
 
-Seen together, the picture says something that none of its layers says on
-its own. Polyhedral relations and quadratic relations are not two unrelated
-formalisms that happen to both be drawable; they are sibling enrichments of
-the same affine backbone, each dialing up expressiveness along a different
-axis, and their shared root in \textbf{AffRel} is a theorem rather than a
-coincidence of notation. \textbf{GLP} sits at the top of this hierarchy, and
-with it comes every parametric linear program as a composable morphism, and,
-through the correspondence with piecewise affine convex functions
-\cite{rockafellar1970convex}, every function in that class besides.
-
-It is a modest step, in the end, toward something larger: a diagrammatic
-language expressive enough to hold optimization in its own right, rather
-than borrowing it from outside. The three theories developed here read less
-like separate constructions sharing a notation and more like one theory
-examined at three levels of resolution. Which brings us back to where we
-started: the join that eliminates a variable and the composition that
-chains two morphisms were the same operation all along, and everything in
-between was just that idea, said a little more expressively each time.
+It is a modest step, in the end, toward something larger: a diagrammatic 
+and more calculational language expressive enough to hold optimization in its own right, rather
+than borrowing it from outside. The theories presented and developed here
+read less like separate constructions sharing a notation and one theory
+examined at different levels of resolution. A sequential increment of the theory,
+one generator at a time, lifting the whole thoery.
