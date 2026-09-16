@@ -1,80 +1,153 @@
 \chapter{Introduction}
 
 Mathematics is permeated by this notion of what one
-would call an "ideal" object. This notion of "ideal" often refers to the
-simplest object that meets a specific criteria,
-such as being the smallest element in a set,
-or the one that factor out all others.
-This particular description of "ideal", reveals a interest
-interconnection between categories and optimization.
-Consider, for instance, the greatest common divisor of two integers
-$a, b \in \mathbb{Z}$. This is, from an optimization perspective,
-to meet the max object from the set of common divisor of $a,b$,
-categorically, this is precisely the terminal object of
-the poset of common divisors of $a$ and $b$ ordered by divisibility.
-Prior works have already characterised the internal
-optimization structure within categorical constructs \cite{Khadh2026bridging},
-but such results are still isolated.
-
-The gcd is not an isolated case. Many of the constructions mathematics singles
+would call an ``ideal'' object. This notion of ``ideal'' often refers to the
+simplest object that meets a specific criterion, such as being the smallest
+element in a set, or the one through which all others factor uniquely.
+This particular description of ``ideal'' reveals an interesting
+interconnection between categories and optimization \cite{Khadh2026bridging}.
+Many of the constructions mathematics singles
 out as canonical are optimal in this same sense: they are the best object of a
-collection, with respect to an ordering carried by that collection. This thesis
-makes that pattern structural rather than anecdotal. Composition in a category
-of $Q$-valued relations is a join over the mediating variable,
+collection, with respect to an ordering or universal property carried by that
+collection. This thesis aims to explore this idea and provide a formal and
+intuitive view on such topics.
+
+Consider for instance the familiar transitivity condition for a relation
+$R\subseteq X\times X$:
 \[
-	(S \circ R)(x,z) \;=\; \bigvee_{y} R(x,y) \otimes S(y,z),
+\bigl(\exists y\in X:\;xRy\wedge yRz\bigr)\implies xRz,
+\qquad x,z\in X.
 \]
-so eliminating an internal variable is composition and nothing else. A join,
-however, is already an optimization: $\bigvee A$ is the least of the upper
-bounds of $A$, the ideal object of the previous paragraph read inside the order
-of $Q$, and universal in exactly the sense the gcd was. Composition is therefore
-always the solution of an optimization problem, and the choice of $Q$ fixes only
-which order is being optimized over. Over the extended reals the join is an
-infimum, and composing two morphisms minimizes a cost in the eliminated
-variable. Over the Booleans it is a disjunction, and the very same optimum,
-the least upper bound of a family of truth values, reads as $\exists y$. Ordinary
-relational composition is thus a particular case of optimization rather than a
-parallel to it, and Sections~\ref{sec:quantale-relations}
+
+Here the premise demands the existence of an intermediate object, namely $y$.
+Nothing forces $y$ to be unique; in fact, it is often the case that we have
+a set of such objects. The connection with an ``ideal'' object can be made
+explicit if we change the settings of the problem. Consider the indicator function
+representation of $R$,
+$R:X\times X\to\{0,\infty\}$, defined by
+\[
+R(x,y)=
+\begin{cases}
+0, & \text{if }xRy,\\
+\infty, & \text{otherwise}.
+\end{cases}
+\]
+Then the above is the same as:
+\[
+\inf_{y\in X}\bigl(R(x,y)+R(y,z)\bigr)=0
+\implies R(x,z)=0,
+\]
+where $\inf\varnothing=\infty$.
+Since the values are either zero or infinity, this is also equivalent to
+\[
+\inf_{y\in X}\bigl(R(x,y)+R(y,z)\bigr) 
+\ge R(x,z)
+\]
+
+The resemblance is not mere coincidence: these are particular cases of
+a more general construction using quantales
+\cite{lawvere1973metric}.
+More generally, let $Q$ be a unital quantale: a complete lattice equipped
+with an associative operation $\otimes$, with unit $e$, that preserves
+arbitrary joins in each argument.
+By interpreting $\exists$ and $\inf$ through the lattice join
+operator $\bigvee$, and $\wedge$ and $+$ through the monoidal operator
+$\otimes$, we obtain, for a $Q$-valued relation
+$R:X\times X\to Q$, the generalized transitivity condition
+\[
+\bigvee_{y\in X}R(x,y)\otimes R(y,z)\le_Q R(x,z).
+\]
+
+Notice that here $a\le_Q b \iff a\ge b$, so this replacement recovers exactly the same expression as above.
+
+However, there is still more to it: as one may notice, the commonalities
+between these equations go beyond the simply visual structure;
+they actually share an \textit{algebraic} structure.
+Explicitly, all the expressions on the left of the abstract inequality
+perform the very important role of \textit{variable elimination}.
+The two terms share the same middle variable $y$, and taking the join
+over $y$ produces a new expression depending only on $x$ and $z$.
+
+A join, however, already has an optimization characterization:
+for $A\subseteq Q$, $\bigvee A$ is the least of the upper bounds of $A$,
+the ``ideal'' upper bound inside the order of $Q$.
+Here the collection being aggregated is
+\[
+A_{x,z}=\{R(x,y)\otimes R(y,z):y\in X\}.
+\]
+Eliminating the intermediate variable therefore computes an optimal
+aggregate value. The choice of $Q$ fixes both the order used for aggregation and
+the operation used to combine values.
+Ordinary existential quantification is thus a particular case of this
+order-theoretic aggregation, and its indicator function makes the
+connection with optimization exact.
+
+This variable elimination is precisely how composition of
+quantale-valued relations is defined. Given
+$R:X\times Y\to Q$ and $S:Y\times Z\to Q$, we have
+\[
+(S\circ R)(x,z)
+:=
+\bigvee_{y\in Y}R(x,y)\otimes S(y,z).
+\]
+The generalized transitivity condition above is therefore simply
+\[
+R\circ R\le_Q R,
+\]
+with the inequality understood pointwise.
+In this setting, composition is variable elimination, and the join
+gives it the optimization interpretation described above.
+Sections~\ref{sec:quantale-relations}
 and~\ref{sec:composability} make this precise.
 
-Relations are the language in which both readings are written. A relation
-between sets $X$ and $Y$ is a proposition $xRy$, or equivalently a subset
-$R \subseteq X \times Y$ \cite{frege1879begriffsschrift, whitehead1910principia}.
-Relations are more permissive than maps, and orderings,
-constraints, and morphisms are all instances of them. The passage between an
-optimization problem and its categorical description therefore takes place
-inside a single framework.
+Category theory gives us an abstraction to describe such operations:
+it explicitly encodes the notion of composition inside its own definition.
+Quantale-valued relations form a category under the operation above,
+with identity taking value $e$ on the diagonal and $\bot$ elsewhere.
+More generally, composition in a category $\mathcal C$ is given by
+\[
+\circ:\mathcal C(Y,Z)\times\mathcal C(X,Y)
+\longrightarrow\mathcal C(X,Z),
+\]
+subject to associativity and identity laws.
+Its particular expression as a join over an intermediate variable
+uses the additional quantale-valued structure.
 
-Category theory supplies that framework. The Yoneda Lemma determines an object,
-up to isomorphism, by the relations it bears to every other object
-\cite{maclane1998categories}; an initial or terminal object is the extreme case,
-related to everything in exactly one way. Optimization reaches the same object
-from the other side, as the extremum of a cost taking values in an ordered set.
-In the settings we treat, these two descriptions coincide.
-
-Formally, we show that in the categories treated here solving an optimization
+Formally, we show that, in the categories treated here, solving an optimization
 problem amounts to composing morphisms, and that composition carries out the
 variable elimination such a solution requires. Convex optimization then admits a
 single compositional presentation \cite{stein2024compositional, hanks2024compositionalopt}, 
-in which optimization is an algebraic operation
-rather than a technique applied from outside.
+in which optimization is an algebraic operation rather than a technique applied from outside.
+That is, optimization and variable elimination are a syntactic operation,
+namely the composition $\circ$ of two objects $A$ and $B$ that share a common variable, or type.
 
 This expressivity becomes especially apparent when analyzed through
 the language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer}.
 Originating as a rigorous graphical language for
 monoidal categories, string diagrams provide an intuitive yet mathematically
 precise syntax in which the sequential and parallel composition of morphisms
-correspond directly to vertical and horizontal juxtaposition of diagrams (e.g. computational processes)
-\cite{joyal1991geometry, maclane1998categories}. Building on this foundation,
+correspond directly to vertical and horizontal juxtaposition of diagrams
+(e.g., representing computational processes)
+\cite{joyal1991geometry, maclane1998categories}.
+Graphical languages therefore are remarkably well suited to the use case in evidence.
+They make the semantics of the underlying mathematics explicit at the syntax level,
+in the sense that one need not go through atomic and subtle operations in order
+to express the relevant ideas,
+\textit{but the system's main properties are the syntax operations themselves}.
+
+Building on this foundation, 
 a rich family of \emph{diagrammatic} or \emph{graphical calculi} has emerged,
 offering complete axiomatisations of various algebraic structures purely through
 equational diagram rewriting \cite{selinger2010survey, bonchi2017interacting}.
 These calculi have proved remarkably versatile, finding applications across a
 wide range of fields: in \emph{quantum computing} \cite{coecke2011interacting};
 \emph{electronics} \cite{baez2018compositional}; \emph{linear algebra} \cite{bonchi2017interacting, bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
-and in \emph{optimisation and probability} \cite{stein2024gqa,stein2025compositional, bonchi2021polyhedral}. Throughout this work
-we explore how, step by step, one can enrich the already known theories for linear
-\cite{bonchi2017interacting} algebra by adding one new generator at a time, along with a particular
+and in \emph{optimisation and probability} \cite{stein2024gqa, stein2025compositional, bonchi2021polyhedral}. 
+
+Throughout this work we explore how, step by step,
+one can enrich the already known theories for linear
+\cite{bonchi2017interacting} algebra by adding one new generator at a time,
+along with a particular
 set of axioms, and derive even richer structures for convex problems \cite{stein2024compositional}.
 
 The development followed a strict linear discipline, adding exactly one new
@@ -88,23 +161,22 @@ same pattern already established for graphical linear and affine algebra
 \cite{bonchi2017interacting, bonchi2019affine} and for their quadratic
 \cite{stein2024gqa} and polyhedral \cite{bonchi2021polyhedral} extensions.
 
-We start by extending the Symmetric Monoidal Theory of Graphical Affine Algebra (\textbf{GAA}) \cite{bonchi2019affine}
-into the even more general theory of Symmetric Inequality Monoidal Theory.
+We start by recalling how the Symmetric Monoidal Theory of Graphical Affine Algebra (\textbf{GAA}) \cite{bonchi2019affine}
+can be extended into the even more general theory of Symmetric Inequality Monoidal Theory.
 This is achieved by adding the inequality generator $\inlinegen{ge}$. Geometrically,
 this allows our algebra to go beyond affine spaces and start representing polyhedral figures as linear inequality constraints in optimization.
 \[
 	\{| x \in P\} =
 	\begin{cases}
-		0 \quad if \;Ax +b\ge 0 \\
-		+\infty \quad \text{otherwise}
+		0, & Ax+b\ge 0,\\
+		+\infty, & \text{otherwise}.
 	\end{cases}
 \]
-Inspired by these observations, and parallel works on this \cite{stein2024gqa, lawvere1973metric} we make our central contribution
-in the final section. The introduction of graphical
-algebra for parametric linear programming. In this
-setting, a linear program is no longer viewed only as
-a numerical problem to be solved, but as a morphism that
-can be composed with other optimization blocks.
+
+Inspired by these observations, and parallel works in this direction \cite{stein2024gqa, lawvere1973metric}, we make our central contribution in the final chapter the construction and completeness of
+a graphical algebra for parametric linear programming. In this
+setting, a linear program is represented as a morphism that
+can be composed with other optimization blocks, leading to the idea of \textit{composing optimization problems}. 
 This gives a symbolic language in which the elimination of internal variables
 corresponds directly to categorical composition, allowing optimization problems
 to be manipulated diagrammatically before computation.
@@ -112,17 +184,11 @@ to be manipulated diagrammatically before computation.
 In particular, every piecewise affine convex function can be represented as the value function of a linear program \cite{rockafellar1970convex},
 which means the Graphical Linear Programming \textbf{GLP} theory provides a syntax for a broad class of nonsmooth convex models that appear in optimization,
 control, economics, and machine learning.
-In Section~\ref{sec:glp} we show the diagrammatical equivalence
-of this two classes of objects and how diagrammatically they are instances of the same normal form.
+In Chapter~\ref{sec:glp} we show the diagrammatic equivalence
+of these two classes of objects and how diagrammatically they are instances of the same normal form.
 The diagrammatic syntax therefore erases the distinction between expressing a
 linear program as an optimization problem and expressing it as a piecewise
 affine convex function.
-
-For optimization, graphical methods can then play the role graphical linear
-algebra plays for matrices: normal forms, symbolic rewriting rules, and
-completeness results within a categorical setting. Beyond their use in proofs,
-this makes diagrammatic calculi a plausible basis for compositional
-optimization systems.
 
 \paragraph{Thesis overview}
 In Section~\ref{sec:quantale-relations} we set up the algebraic and categorical
@@ -132,8 +198,12 @@ Section~\ref{sec:composability}, we apply this theory to convex optimization
 \cite{stein2024compositional, Khadh2026bridging}, showing how several of its
 central constructs fall within the same categorical framework.
 
-Chapter~\ref{sec:gpa} presents the already-known graphical theory of Polyhedral Algebra \cite{bonchi2021polyhedral},
-where some of the known proofs are recalled and refined.
+Chapter~\ref{sec:gpa} presents the already-known graphical theory of Polyhedral Algebra
+\cite{bonchi2021polyhedral}, where some of the known proofs are recalled and refined.
 
-Finally, in Chapter~\ref{sec:glp}, we define and prove the completeness of an entirely new Graphical Algebra dedicated
-to expressing parametric Linear Programs. This work represents a first step toward a complete diagrammatic calculus for convex optimization.
+Finally, in Chapter~\ref{sec:glp}, we present the central contribution of this thesis:
+an entirely new Graphical Algebra, \textbf{GLP}, dedicated to expressing parametric Linear Programs.
+Building on the polyhedral generators of Chapter~\ref{sec:gpa}, we introduce a single new generator
+for the linear objective function and derive a complete axiomatization for right-hand side parametric
+linear programming, proving that \textbf{GLP} presents the prop $\mathbf{LPRel}$.
+This work represents a first step toward a complete diagrammatic calculus for convex optimization.
