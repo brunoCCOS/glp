@@ -1,0 +1,30 @@
+% Cone form: bending the outputs of a two-sided normal form turns Ax >= By
+% into the homogeneous cone Ax - By >= 0.
+\begin{center}
+    \begin{tikzpicture}[axpic]
+        \pic[val=A] (g1) at (0.500,0.500) {matrix};
+        \pic (g2) at (1.750,0.500) {ge};
+        \pic[val=B] (g3) at (3.000,0.500) {comatrix};
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+        \draw (g3-out-0) -- (4.100,0.500) arc (90:-90:0.500) -- (0.000,-0.500);
+        \node[font=\scriptsize] at (0.150,0.700) {$n$};
+        \node[font=\scriptsize] at (2.375,0.700) {$p$};
+        \node[font=\scriptsize] at (0.150,-0.300) {$m$};
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic[val={[A \ {-B}]}] (g1) at (1.100,0.000) {2dmatrix};
+        \pic (g2) at (2.600,0.000) {ge};
+        \pic (g3) at (3.850,0.000) {cozero};
+        \coordinate (id_in_1) at (0.000,0.300);
+        \coordinate (id_in_2) at (0.000,-0.300);
+        \draw (id_in_1) -- (g1-in-0);
+        \draw (id_in_2) -- (g1-in-1);
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+        \node[font=\scriptsize] at (0.150,0.500) {$n$};
+        \node[font=\scriptsize] at (0.150,-0.500) {$m$};
+        \node[font=\scriptsize] at (2.150,0.200) {$p$};
+    \end{tikzpicture}
+\end{center}

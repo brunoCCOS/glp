@@ -1,0 +1,35 @@
+% One elimination step: the generator on the first input wire is absorbed into
+% a new cone M'.
+\begin{center}
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.000) {ge};
+        \pic[val=M] (g2) at (2.000,0.500) {2dmatrix};
+        \pic (g3) at (3.250,0.500) {ge};
+        \pic (g4) at (4.500,0.500) {cozero};
+        \coordinate (id_in_1)  at (0.000,0.000);
+        \coordinate (id_out_1) at (1.250,0.000);
+        \draw (id_in_1) -- (id_out_1);
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (id_out_1) to[out=0,in=180] (g2-in-1);
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+        \node[font=\scriptsize] at (0.100,1.200) {$1$};
+        \node[font=\scriptsize] at (0.150,-0.200) {$q-1$};
+        \node[font=\scriptsize] at (2.800,0.700) {$p$};
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic[val=M'] (g1) at (1.000,0.000) {2dmatrix};
+        \pic (g2) at (2.400,0.000) {ge};
+        \pic (g3) at (3.650,0.000) {cozero};
+        \coordinate (id_in_1) at (0.000,0.300);
+        \coordinate (id_in_2) at (0.000,-0.300);
+        \draw (id_in_1) -- (g1-in-0);
+        \draw (id_in_2) -- (g1-in-1);
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+        \node[font=\scriptsize] at (0.100,0.500) {$1$};
+        \node[font=\scriptsize] at (0.150,-0.500) {$q-1$};
+        \node[font=\scriptsize] at (1.950,0.200) {$p'$};
+    \end{tikzpicture}
+\end{center}

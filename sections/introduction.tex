@@ -23,7 +23,7 @@ Here the premise demands the existence of an intermediate object, namely $y$.
 Nothing forces $y$ to be unique; in fact, it is often the case that we have
 a set of such objects. The connection with an ``ideal'' object can be made
 explicit if we change the settings of the problem. Consider the indicator function
-representation of $R$,
+representation of $R$ in the sense of convex analysis \cite{rockafellar1970convex},
 $R:X\times X\to\{0,\infty\}$, defined by
 \[
 R(x,y)=
@@ -58,7 +58,9 @@ $R:X\times X\to Q$, the generalized transitivity condition
 \bigvee_{y\in X}R(x,y)\otimes R(y,z)\le_Q R(x,z).
 \]
 
-Notice that here $a\le_Q b \iff a\ge b$, so this replacement recovers exactly the same expression as above.
+Notice that for the cost quantale $([0,\infty],\ge,+)$ we have
+$a\le_Q b \iff a\ge b$, so this replacement recovers exactly the same
+expression as above.
 
 However, there is still more to it: as one may notice, the commonalities
 between these equations go beyond the simply visual structure;
@@ -121,7 +123,7 @@ in which optimization is an algebraic operation rather than a technique applied 
 That is, optimization and variable elimination are a syntactic operation,
 namely the composition $\circ$ of two objects $A$ and $B$ that share a common variable, or type.
 
-This expressivity becomes especially apparent when analyzed through
+This compositional view of optimization becomes especially apparent when analyzed through
 the language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer}.
 Originating as a rigorous graphical language for
 monoidal categories, string diagrams provide an intuitive yet mathematically
@@ -129,19 +131,45 @@ precise syntax in which the sequential and parallel composition of morphisms
 correspond directly to vertical and horizontal juxtaposition of diagrams
 (e.g., representing computational processes)
 \cite{joyal1991geometry, maclane1998categories}.
-Graphical languages therefore are remarkably well suited to the use case in evidence.
+Graphical languages therefore are remarkably well suited to the case at hand.
 They make the semantics of the underlying mathematics explicit at the syntax level,
 in the sense that one need not go through atomic and subtle operations in order
 to express the relevant ideas,
-\textit{but the system's main properties are the syntax operations themselves}.
+\textit{but the system's main properties are explicit in the syntax operations themselves}.
 
-Building on this foundation, 
-a rich family of \emph{diagrammatic} or \emph{graphical calculi} has emerged,
+For example, consider the simple composition of functions as it is normally stated
+$f \circ g (x)$, diagrammatically this may be pictured as:
+
+\begin{figure}[H]
+\begin{tikzpicture}
+  \pic[val=A] (g1) at (0.500,0.500) {relation};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic[val=B] (g2) at (0.500,0.500) {relation};
+  \end{scope}
+  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  \node (rel4) at (3.000,0.500) {$=$};
+  \begin{scope}[shift={(3.500,0.000)}]
+  \pic[val=C] (g3) at (0.500,0.500) {relation};
+  \end{scope}
+\end{tikzpicture}
+\end{figure}
+
+Where the fact that those become a single piece is a consequence of categorical
+composition and made evident by the visual nature of the diagram. The same way 
+we can think of \textit{decomposing} a process in it's parts, so reasoning about 
+large systems become a matter of taste wheter which parts are meant to be 
+exposed and which are to be abstracted.
+
+Other areas have far off recognize the benefits of such denotation, mainly in 
+engineering fields such as \emph{quantum computing} \cite{coecke2011interacting} and
+\emph{electronics} \cite{baez2018compositional}.
+More recently, mathmaticians and computer scientists have also 
+built upon this foundation deriving a rich family of \emph{diagrammatic} 
+or \emph{graphical calculi},
 offering complete axiomatisations of various algebraic structures purely through
 equational diagram rewriting \cite{selinger2010survey, bonchi2017interacting}.
 These calculi have proved remarkably versatile, finding applications across a
-wide range of fields: in \emph{quantum computing} \cite{coecke2011interacting};
-\emph{electronics} \cite{baez2018compositional}; \emph{linear algebra} \cite{bonchi2017interacting, bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
+wide range of fields:  \emph{linear algebra} \cite{bonchi2017interacting, bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
 and in \emph{optimisation and probability} \cite{stein2024gqa, stein2025compositional, bonchi2021polyhedral}. 
 
 Throughout this work we explore how, step by step,

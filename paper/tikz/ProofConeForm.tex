@@ -1,0 +1,47 @@
+% Proof of the cone form: bending the comatrix produces a white sum with an
+% antipode, and the cap-form lemma pushes the inequality past it.
+\begin{center}
+    \begin{tikzpicture}[axpic]
+        \pic[val=A] (g1) at (0.500,1.000) {matrix};
+        \pic (g2) at (1.750,1.000) {ge};
+        \pic[val=B] (g3) at (0.500,0.000) {matrix};
+        \pic (g4) at (1.750,0.000) {antipode};
+        \pic (g5) at (3.000,0.500) {multiplication};
+        \pic (g6) at (4.250,0.500) {cozero};
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+        \draw (g2-out-0) to[out=0,in=180] (g5-in-0);
+        \draw (g4-out-0) to[out=0,in=180] (g5-in-1);
+        \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{cap form})}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic[val=A] (g1) at (0.500,1.000) {matrix};
+        \pic[val=B] (g2) at (0.500,0.000) {matrix};
+        \pic (g3) at (1.750,0.000) {antipode};
+        \pic (g4) at (3.000,0.500) {multiplication};
+        \pic (g5) at (4.250,0.500) {ge};
+        \pic (g6) at (5.500,0.500) {cozero};
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+        \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+        \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
+        \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+        \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{G1})}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic[val={[A \ {-B}]}] (g1) at (1.100,0.000) {2dmatrix};
+        \pic (g2) at (2.600,0.000) {ge};
+        \pic (g3) at (3.850,0.000) {cozero};
+        \coordinate (id_in_1) at (0.000,0.300);
+        \coordinate (id_in_2) at (0.000,-0.300);
+        \draw (id_in_1) -- (g1-in-0);
+        \draw (id_in_2) -- (g1-in-1);
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+    \end{tikzpicture}
+\end{center}

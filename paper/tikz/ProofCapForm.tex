@@ -1,0 +1,133 @@
+% Proof of (C1): an inequality may be applied before or after a white sum.
+% Proof of (C2): closing the sum with a white cozero gives the cap form.
+% Broken over lines to fit the text block; all diagrams share the
+% convention that the sum sits at y=1.0, its top leg at y=1.5 and its bottom
+% leg at y=0.5, so that legs meet the sum without kinks.
+\begin{center}
+    \begin{tikzpicture}[axpic]\node{$(C1)$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.500) {ge};
+        \pic (a1) at (1.750,1.000) {multiplication};
+        \coordinate (id_in_1)  at (0.000,0.500);
+        \coordinate (id_out_1) at (1.000,0.500);
+        \draw (id_in_1) -- (id_out_1);
+        \draw (g1-out-0) -- (a1-in-0);
+        \draw (id_out_1) -- (a1-in-1);
+        \draw (a1-out-0) -- (2.750,1.000);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.500) {ge};
+        \pic (g2) at (1.750,1.500) {ge};
+        \pic (a1) at (3.000,1.000) {multiplication};
+        \coordinate (id_in_1)  at (0.000,0.500);
+        \coordinate (id_out_1) at (2.250,0.500);
+        \draw (id_in_1) -- (id_out_1);
+        \draw (g1-out-0) -- (g2-in-0);
+        \draw (g2-out-0) -- (a1-in-0);
+        \draw (id_out_1) -- (a1-in-1);
+        \draw (a1-out-0) -- (4.000,1.000);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.500) {ge};
+        \pic (g2) at (0.500,0.500) {ge};
+        \pic (a1) at (1.750,1.000) {multiplication};
+        \pic (g3) at (3.000,1.000) {ge};
+        \draw (g1-out-0) -- (a1-in-0);
+        \draw (g2-out-0) -- (a1-in-1);
+        \draw (a1-out-0) -- (g3-in-0);
+        \draw (g3-out-0) -- (3.500,1.000);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (a1) at (0.750,1.000) {multiplication};
+        \pic (g1) at (2.000,1.000) {ge};
+        \pic (g2) at (3.250,1.000) {ge};
+        \draw (a1-out-0) -- (g1-in-0);
+        \draw (g1-out-0) -- (g2-in-0);
+        \draw (g2-out-0) -- (3.750,1.000);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (a1) at (0.750,1.000) {multiplication};
+        \pic (g1) at (2.000,1.000) {ge};
+        \draw (a1-out-0) -- (g1-in-0);
+        \draw (g1-out-0) -- (2.500,1.000);
+    \end{tikzpicture}
+\end{center}
+
+\vspace{4mm}
+
+\begin{center}
+    \begin{tikzpicture}[axpic]\node{$(C2)$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (a1) at (0.750,1.000) {multiplication};
+        \pic (g1) at (2.000,1.000) {ge};
+        \pic (z1) at (3.250,1.000) {cozero};
+        \draw (a1-out-0) -- (g1-in-0);
+        \draw (g1-out-0) -- (z1-in-0);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(C1)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.500) {ge};
+        \pic (a1) at (1.750,1.000) {multiplication};
+        \pic (z1) at (3.000,1.000) {cozero};
+        \coordinate (id_in_1)  at (0.000,0.500);
+        \coordinate (id_out_1) at (1.000,0.500);
+        \draw (id_in_1) -- (id_out_1);
+        \draw (g1-out-0) -- (a1-in-0);
+        \draw (id_out_1) -- (a1-in-1);
+        \draw (a1-out-0) -- (z1-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(P6)}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.500) {coge};
+        \pic (s1) at (1.750,1.500) {antipode};
+        \pic (a1) at (3.000,1.000) {multiplication};
+        \pic (z1) at (4.250,1.000) {cozero};
+        \coordinate (id_in_1)  at (0.000,0.500);
+        \coordinate (id_out_1) at (2.250,0.500);
+        \draw (id_in_1) -- (id_out_1);
+        \draw (g1-out-0) -- (s1-in-0);
+        \draw (s1-out-0) -- (a1-in-0);
+        \draw (id_out_1) -- (a1-in-1);
+        \draw (a1-out-0) -- (z1-in-0);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.500) {ge};
+        \pic (s1) at (1.750,1.500) {antipode};
+        \pic (s2) at (3.000,1.500) {antipode};
+        \pic (a1) at (4.250,1.000) {multiplication};
+        \pic (z1) at (5.500,1.000) {cozero};
+        \coordinate (id_in_1)  at (0.000,0.500);
+        \coordinate (id_out_1) at (3.500,0.500);
+        \draw (id_in_1) -- (id_out_1);
+        \draw (g1-out-0) -- (s1-in-0);
+        \draw (s1-out-0) -- (s2-in-0);
+        \draw (s2-out-0) -- (a1-in-0);
+        \draw (id_out_1) -- (a1-in-1);
+        \draw (a1-out-0) -- (z1-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{white cap})}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.500) {ge};
+        \pic (s1) at (1.750,1.500) {antipode};
+        \pic (c1) at (3.000,1.000) {cocopy};
+        \pic (d1) at (4.250,1.000) {discard};
+        \coordinate (id_in_1)  at (0.000,0.500);
+        \coordinate (id_out_1) at (2.250,0.500);
+        \draw (id_in_1) -- (id_out_1);
+        \draw (g1-out-0) -- (s1-in-0);
+        \draw (s1-out-0) -- (c1-in-0);
+        \draw (id_out_1) -- (c1-in-1);
+        \draw (c1-out-0) -- (d1-in-0);
+    \end{tikzpicture}
+\end{center}

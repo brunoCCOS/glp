@@ -1,0 +1,64 @@
+% Transitivity of the inequality generator: the (spider) axiom with one input
+% fed by the black unit and one output discarded.
+\begin{center}
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,0.500) {ge};
+        \pic (g2) at (1.750,0.500) {ge};
+        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{unit})}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (u)  at (0.400,0.000) {codiscard};
+        \pic (g1) at (1.900,1.000) {ge};
+        \pic (g2) at (1.900,0.000) {ge};
+        \pic (c1) at (3.150,0.500) {cocopy};
+        \pic (c2) at (4.400,0.500) {copy};
+        \pic (h1) at (5.650,1.000) {ge};
+        \pic (h2) at (5.650,0.000) {ge};
+        \pic (d)  at (6.900,0.000) {discard};
+        \draw (0.900,1.000) -- (g1-in-0);
+        \draw (u-out-0) -- (g2-in-0);
+        \draw (g1-out-0) to[out=0,in=180] (c1-in-0);
+        \draw (g2-out-0) to[out=0,in=180] (c1-in-1);
+        \draw (c1-out-0) -- (c2-in-0);
+        \draw (c2-out-0) to[out=0,in=180] (h1-in-0);
+        \draw (c2-out-1) to[out=0,in=180] (h2-in-0);
+        \draw (h1-out-0) -- (6.900,1.000);
+        \draw (h2-out-0) -- (d-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{spider})}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (u)   at (0.400,-0.500) {codiscard};
+        \pic (c1)  at (1.400,1.500) {copy};
+        \pic (c2)  at (1.400,-0.500) {copy};
+        \pic (g11) at (2.900,2.000) {ge};
+        \pic (g12) at (2.900,1.000) {ge};
+        \pic (g21) at (2.900,0.000) {ge};
+        \pic (g22) at (2.900,-1.000) {ge};
+        \pic (d1)  at (4.650,1.500) {cocopy};
+        \pic (d2)  at (4.650,-0.500) {cocopy};
+        \pic (dd)  at (5.900,-0.500) {discard};
+        \draw (0.400,1.500) -- (c1-in-0);
+        \draw (u-out-0) -- (c2-in-0);
+        \draw (c1-out-0) to[out=0,in=180] (g11-in-0);
+        \draw (c1-out-1) to[out=0,in=180] (g12-in-0);
+        \draw (c2-out-0) to[out=0,in=180] (g21-in-0);
+        \draw (c2-out-1) to[out=0,in=180] (g22-in-0);
+        \draw (g11-out-0) to[out=0,in=180] (d1-in-0);
+        \draw (g21-out-0) to[out=0,in=180] (d1-in-1);
+        \draw (g12-out-0) to[out=0,in=180] (d2-in-0);
+        \draw (g22-out-0) to[out=0,in=180] (d2-in-1);
+        \draw (d1-out-0) -- (5.900,1.500);
+        \draw (d2-out-0) -- (dd-in-0);
+    \end{tikzpicture} \\
+    \vspace{3mm}
+
+    \;\begin{tikzpicture}[axpic]\node{$\overset{(P3),(\text{unit})}{=}$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,0.500) {ge};
+    \end{tikzpicture}
+\end{center}
