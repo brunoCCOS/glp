@@ -203,6 +203,9 @@ minimization, the infimum of any quantity lies in its lower bound.
 Finally, the axiom at the middle is
 the tautological case. \[inf 0 = 0\]
 
+From this simple axioms, we get immediatly another core property of linear programs,
+namely, that they are invariant to stochastics matrices.
+
 \begin{remark}[Invariance under column-stochastic matrices]\label{rmk:stochastic}
     The \textit{linearity} axiom encodes the fundamental invariance of linear
     programs under column-stochastic reweightings of the objective: for any
@@ -221,6 +224,21 @@ the tautological case. \[inf 0 = 0\]
         \input{paper/tikz/RemarkStochastic.tex}
     \end{figure}
 \end{remark}
+
+Such result is particularly interesting because it follows a pattern present in
+every algebra presented so far. In the digrammatic calculi of Linear subspaces
+(GLA) we can demonstrate that surjective matrices are very special because the
+$\inlinegen{\codiscard}$ is invariant to it, which is a very important feature
+in the completeness of the language itself. The same occurs in GPA, where non-negative
+matrices they just slide through the $\inlinegen{\ge}$. Here, the new class of
+matrices that interact with the new generator $\inlinegen{\linear}$ is that 
+of stochastic matrices. Other works have spotted the same pattern, such as 
+\cite{stein2024gqa} which shows that a generator representing the $l_2$ is 
+invariant to orthogonal matrices(also are normal distributed random variables).
+
+Is not yer entirely clear the relationship between each class of morphisms and
+that class of matrices and how they emerge and their natural role. However is a
+signature and very interesting properties of such languages.
 
 \begin{definition}
     We call $\mathrm{FreeP}_{\mathbf{GLP}}$ the PROP freely generated
