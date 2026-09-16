@@ -344,6 +344,15 @@ $\mathbf{PCRel}$.
 	morphism is an isomorphism.
 \end{proof}
 
+This settles the homogeneous case: every polyhedral cone is diagrammatically
+expressible, and two diagrams denote the same cone exactly when the axioms
+can prove them equal. Cones are, however, a narrow class, they always
+contain the origin, so they cannot represent an arbitrary feasible region
+or, later, an arbitrary linear program. The next step lifts this result
+from cones to general polyhedra, replacing the homogeneous inequalities
+$Ax \ge 0$ with the affine $Ax \ge b$, and the machinery developed above
+will carry over almost unchanged.
+
 \section{Semantics: the prop \texorpdfstring{$\mathbf{PolyRel}$}{PolyRel}
   of polyhedra}
 Now we start the presentation of the broader class of polyhedral relations by recalling the definition of a polyhedron.
@@ -502,6 +511,14 @@ homogeneous case.
 \begin{proof}
 	By the preceding three lemmas.
 \end{proof}
+
+This is the result the rest of the thesis leans on: every polyhedral
+relation, not just the conic ones from earlier, has a diagrammatic
+representative, and semantic equality between polyhedra can always be
+certified by a finite rewriting sequence in $\mathbf{GPA}$. It is this
+presentation, together with its normal form, that
+Chapter~\ref{sec:glp} builds on when it adds a single new generator for
+the objective function.
 
 \begin{remark}[Invariance under non-negative matrices]
 	Whereas the linearity axiom shows the linear generator to be exactly

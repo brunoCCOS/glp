@@ -399,12 +399,19 @@ As a consequence of the three lemmas above:
 \end{proof}
 
 Finally, we've built, through the addition of one generator and three axioms,
-an elegant and complete diagrammatical theory for Parametric Linear Programming.
-We argue that, such result, not just unlocks a new way to interact with LP problems in a algebraic
-and computational way, but also provide a new perspective to optimization through the lens of
-a compositional framework. Whereas optimization, namely LP problems, are lifted above
-the settings of functional thinking and achieves a new status as a relational-theoretic
-field embeded into the Extended-Lawvere Quantale category.
+an elegant and complete diagrammatic theory for parametric linear programming.
+This result does more than unlock a new algebraic and computational way to
+interact with LP problems: it relocates linear programming itself. A linear
+program is ordinarily presented as a function to be evaluated, an
+$x \mapsto c^\top x$ subject to constraints, solved from the outside by an
+algorithm. Here it is instead a morphism, an object with an interface that
+composes with others of its kind, and solving it, evaluating it, and
+eliminating one of its variables are all the same operation, composition in
+$\mathbf{LPRel}$. Optimization stops being a technique applied to a
+relational structure and becomes a property internal to it, and linear
+programming, in particular, is lifted out of the setting of functional
+thinking and given a new home as a relational field embedded in the
+Extended-Lawvere Quantale category.
 
 The \textbf{GLP} theory, in turn, has a natural extension to an even more expressive theory
 when enriched with the gray arrow generator from \textbf{GQA}. We believe that the class
