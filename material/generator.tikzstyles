@@ -6,6 +6,7 @@
 \tikzstyle{matrixnode_left} = [rounded rectangle,  rounded rectangle left arc=none, fill=white, draw=black, inner sep=8pt, anchor=center]
 \tikzstyle{relationnode_right}=[draw, chamfered rectangle, chamfered rectangle corners={north east}, fill=white, inner sep=4pt, anchor=center]
 \tikzstyle{relationnode_left}=[draw, chamfered rectangle, chamfered rectangle corners={north west}, fill=white, inner sep=4pt, anchor=center]
+\tikzstyle{diagram}=[draw, rectangle, fill=white, inner sep=4pt, anchor=center]
 \tikzstyle{leftseminode}=[ rounded rectangle, rounded rectangle right arc=none, draw, fill=white, inner sep=4pt, anchor=center ]
 \tikzstyle{rightseminode}=[ rounded rectangle, rounded rectangle left arc=none, draw, fill=white, inner sep=4pt, anchor=center ]
 

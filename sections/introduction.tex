@@ -143,14 +143,14 @@ $f \circ g (x)$, diagrammatically this may be pictured as:
 \begin{figure}[H]
     \begin{center}
 \begin{tikzpicture}
-  \pic[val=A] (g1) at (0.500,0.500) {relation};
+  \pic[val=A] (g1) at (0.500,0.500) {diagram};
   \begin{scope}[shift={(1.500,0.000)}]
-  \pic[val=B] (g2) at (0.500,0.500) {relation};
+  \pic[val=B] (g2) at (0.500,0.500) {diagram};
   \end{scope}
   \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
   \node (rel4) at (3.000,0.500) {$=$};
   \begin{scope}[shift={(3.500,0.000)}]
-  \pic[val=C] (g3) at (0.500,0.500) {relation};
+  \pic[val=C] (g3) at (0.500,0.500) {diagram};
   \end{scope}
 \end{tikzpicture}
 \end{center}
@@ -159,13 +159,13 @@ $f \circ g (x)$, diagrammatically this may be pictured as:
 Where the fact that those become a single piece is a consequence of categorical
 composition and made evident by the visual nature of the diagram. The same way 
 we can think of \textit{decomposing} a process in it's parts, so reasoning about 
-large systems become a matter of taste wheter which parts are meant to be 
+large systems become a matter of taste whether which parts are meant to be 
 exposed and which are to be abstracted.
 
 Other areas have far off recognize the benefits of such denotation, mainly in 
 engineering fields such as \emph{quantum computing} \cite{coecke2011interacting} and
 \emph{electronics} \cite{baez2018compositional}.
-More recently, mathmaticians and computer scientists have also 
+More recently, mathematicians and computer scientists have also 
 built upon this foundation deriving a rich family of \emph{diagrammatic} 
 or \emph{graphical calculi},
 offering complete axiomatisations of various algebraic structures purely through
