@@ -141,6 +141,7 @@ For example, consider the simple composition of functions as it is normally stat
 $f \circ g (x)$, diagrammatically this may be pictured as:
 
 \begin{figure}[H]
+    \begin{center}
 \begin{tikzpicture}
   \pic[val=A] (g1) at (0.500,0.500) {relation};
   \begin{scope}[shift={(1.500,0.000)}]
@@ -152,6 +153,7 @@ $f \circ g (x)$, diagrammatically this may be pictured as:
   \pic[val=C] (g3) at (0.500,0.500) {relation};
   \end{scope}
 \end{tikzpicture}
+\end{center}
 \end{figure}
 
 Where the fact that those become a single piece is a consequence of categorical
