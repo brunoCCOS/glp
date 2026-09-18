@@ -230,15 +230,17 @@ every algebra presented so far. In the digrammatic calculi of Linear subspaces
 (GLA) we can demonstrate that surjective matrices are very special because the
 $\inlinegen{codiscard}$ is invariant to it, which is a very important feature
 in the completeness of the language itself. The same occurs in GPA, where non-negative
-matrices they just slide through the $\inlinegen{ge}$. Here, the new class of
+matrices slide through the $\inlinegen{ge}$. Here, the new class of
 matrices that interact with the new generator $\inlinegen{linear}$ is that 
 of stochastic matrices. Other works have spotted the same pattern, such as 
-\cite{stein2024gqa} which shows that a generator representing the $l_2$ is 
-invariant to orthogonal matrices(also are normal distributed random variables).
+\cite{stein2024gqa} which shows that a generator representing the $l_2$ norm is 
+invariant to orthogonal matrices (also are normal distributed random variables).
 
 Is not yer entirely clear the relationship between each class of morphisms and
-that class of matrices and how they emerge and their natural role. However is a
-signature and very interesting properties of such languages.
+that class of matrices and how they emerge. However is a
+signature and very interesting property of such languages.
+
+With the SMT above we now define the complete category.
 
 \begin{definition}
     We call $\mathrm{FreeP}_{\mathbf{GLP}}$ the PROP freely generated
@@ -347,13 +349,11 @@ the three presentation properties for $\mathbf{GLP}$.
     such that $[s] = f$.
 \end{lemma}
 
-\begin{proof}
-    Since every polyhedral function is the maximum of a finite family of
-    affine functions, it suffices to show that every piecewise affine
-    convex function is expressible in $\mathbf{GLP}$. For an arbitrary
-    such function $f(y) = \max_i R_i(y)$, where $\{R_i\}_{i=1,\dots,n}$
-    is a family of affine functions, the following diagram provides the
-    required syntactic representative:
+\begin{proof} 
+    Any RHS Parametric linear program can be written as 
+    $\inf_z \{ c^\top z \mid Ax + b \ge By$ therefore is enough to show that we
+    can always depict such a problem. The following diagram provides the required
+    syntactic representative:
     \begin{figure}[H]
         \centering
         \input{paper/tikz/ProofExpressivity.tex}
@@ -432,7 +432,7 @@ thinking and given a new home as a relational field embedded in the
 Extended-Lawvere Quantale category.
 
 The \textbf{GLP} theory, in turn, has a natural extension to an even more expressive theory
-when enriched with the gray arrow generator from \textbf{GQA}. We believe that the class
-of quadratic programs could be, just as was done in this work, fully axiomatized by such
-broader SMIT. However, such studies are left for future works, along with other possible applications
-of current results.
+when enriched with the gray arrow generator from \textbf{GQA} \cite{stein2024gqa}.
+We believe that the class of quadratic programs could be, just as was done in this work,
+fully axiomatized by such broader SMIT. However, such studies are left for future works,
+along with other possible applications of current results.

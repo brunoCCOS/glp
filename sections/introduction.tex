@@ -115,7 +115,7 @@ subject to associativity and identity laws.
 Its particular expression as a join over an intermediate variable
 uses the additional quantale-valued structure.
 
-Formally, we show that, in the categories treated here, solving an optimization
+We show that, in the categories treated here, solving an optimization
 problem amounts to composing morphisms, and that composition carries out the
 variable elimination such a solution requires. Convex optimization then admits a
 single compositional presentation \cite{stein2024compositional, hanks2024compositionalopt}, 
@@ -131,36 +131,124 @@ precise syntax in which the sequential and parallel composition of morphisms
 correspond directly to vertical and horizontal juxtaposition of diagrams
 (e.g., representing computational processes)
 \cite{joyal1991geometry, maclane1998categories}.
-Graphical languages therefore are remarkably well suited to the case at hand.
+Graphical languages are remarkably well suited to the case at hand.
 They make the semantics of the underlying mathematics explicit at the syntax level,
-in the sense that one need not go through atomic and subtle operations in order
-to express the relevant ideas,
+in the sense that one doesn`t need to go through atomic and subtle operations in order
+to express the core ideas of a theory,
 \textit{but the system's main properties are explicit in the syntax operations themselves}.
 
-For example, consider the simple composition of functions as it is normally stated
-$f \circ g (x)$, diagrammatically this may be pictured as:
+For example, consider the following diagram. Because of the monoidal structure
+one may parse it by reading in two manners: composing the boxes in the same line
+and then stack them togheter, or stacking the boxes that are vertically aligned 
+and then composing then sequentially, as the dotted boxes shows.
 
 \begin{figure}[H]
     \begin{center}
-\begin{tikzpicture}
+\begin{tikzpicture}[axpic]
   \pic[val=A] (g1) at (0.500,0.500) {diagram};
   \begin{scope}[shift={(1.500,0.000)}]
   \pic[val=B] (g2) at (0.500,0.500) {diagram};
   \end{scope}
-  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-  \node (rel4) at (3.000,0.500) {$=$};
-  \begin{scope}[shift={(3.500,0.000)}]
-  \pic[val=C] (g3) at (0.500,0.500) {diagram};
+  \pic[val=C] (g3) at (0.500,-0.500) {diagram};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic[val=D] (g4) at (0.500,-0.500) {diagram};
   \end{scope}
+  \draw[dotted, thick] (0,-0.1) rectangle (2.5,-1);
+  \draw[dotted, thick] (0,0.1) rectangle (2.5,1);
+  \draw[dotted, thick] (-0.2,-1.2) rectangle (2.7,1.2);
+
+  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+\end{tikzpicture}
+\begin{tikzpicture}[axpic]
+  \node (rel4) at (3.000,0.500) {$=$};
+\end{tikzpicture}
+\begin{tikzpicture}[axpic]
+  \pic[val=A] (g1) at (0.500,0.500) {diagram};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic[val=B] (g2) at (0.500,0.500) {diagram};
+  \end{scope}
+  \pic[val=C] (g3) at (0.500,-0.500) {diagram};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic[val=D] (g4) at (0.500,-0.500) {diagram};
+  \end{scope}
+  \draw[dotted, thick] (0,-1.0) rectangle (1,1.0);
+  \draw[dotted, thick] (2.5,-1.0) rectangle (1.5,1.0);
+  \draw[dotted, thick] (-0.2,-1.2) rectangle (2.7,1.2);
+  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
 \end{tikzpicture}
 \end{center}
 \end{figure}
 
-Where the fact that those become a single piece is a consequence of categorical
-composition and made evident by the visual nature of the diagram. The same way 
-we can think of \textit{decomposing} a process in it's parts, so reasoning about 
-large systems become a matter of taste whether which parts are meant to be 
-exposed and which are to be abstracted.
+This denotes the fact that the composition and the monoidal product
+interact nicely, or, formally, that the operator $\otimes$ is actually
+an endofunctor, so $a;b \otimes c;d = a \otimes c; b \otimes d$. Observe how
+this entire property is underloaded by the syntax, so one don't even need to keep
+track of it but simply parse the diagram in any direction. This is what we mean
+when we say that the main properties are in the syntax itself, we don't get to
+invoke the definition or property to show the equality,
+but the very depicting (or drawing) embeds the property.
+
+A fine example, that will be later explained, is one that uses the very syntax
+developed in this work. Consider the equivalence between these two Linear Programs
+\[
+f(y) = \inf_{x_1,x_2} \{ x_1 + x_2 \mid \; a_1 x_1 + a_2 x_2 = y\}
+\]
+\[
+f_2(y) = \inf_{w_1,w_2} \{ inf_{x_1} \{ x_1 \mid a_1 x_1 = w_1 \} + inf_{x_2} \{ x_2 \mid a_2 x_2 = w_2 \} \mid w_1 + w_2 = y \}
+\]
+
+These two functions are, in fact, the same. To see this, introduce the change of variables
+$ w_1=a_1x_1,\; w_2=a_2x_2. $
+
+Assuming \(a_1,a_2\neq 0\), each inner optimization problem has a unique feasible point,
+so substituting \(w_i=a_ix_i\) yields
+$ f_2(y) = \inf_{a_1x_1+a_2x_2=y} \left\{ x_1+x_2 \right\} = f(y). $
+
+Thus, the second formulation does not change the underlying optimization problem;
+rather, it decomposes the original constraint through the intermediate variables
+\(w_1\) and \(w_2\). Now look at the diagram denoting these same problems.
+
+\begin{figure}[H]
+    \begin{center}
+\begin{tikzpicture}[axpic]
+  \pic (g2) at (-0.500,0.500) {linear};
+  \pic[val=a_1] (g1) at (0.500,0.500) {scalar};
+  \pic (g2) at (-0.500,-0.500) {linear};
+  \pic[val=a_2] (g3) at (0.500,-0.500) {scalar};
+  \pic (g4) at (2.,0.0) {multiplication};
+  \draw[dotted, thick] (0,-0.9) rectangle (2.6,1);
+  \draw[dotted, thick] (-0.9,-0.9) rectangle (-0.1,1);
+  \draw[dotted, thick] (-1.0,-1.2) rectangle (2.7,1.2);
+
+  \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
+\end{tikzpicture}
+\begin{tikzpicture}[axpic]
+  \node (rel4) at (3.000,0.500) {$=$};
+\end{tikzpicture}
+\begin{tikzpicture}[axpic]
+  \pic (g2) at (-0.500,0.500) {linear};
+  \pic[val=a_1] (g1) at (0.500,0.500) {scalar};
+  \pic (g2) at (-0.500,-0.500) {linear};
+  \pic[val=a_2] (g3) at (0.500,-0.500) {scalar};
+  \pic (g4) at (2.,0.0) {multiplication};
+  \draw[dotted, thick] (-.9,0.1) rectangle (1.0,1.1);
+  \draw[dotted, thick] (-.9,-0.1) rectangle (1.0,-.9);
+  \draw[dotted, thick] (1.1,-0.9) rectangle (2.6,1.1);
+  \draw[dotted, thick] (-1.0,-1.2) rectangle (2.7,1.2);
+
+  \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+Once again, both problems are depicted as the very same diagram, being just
+a different order of parsing it. In this case all the variable changing was 
+hidden by the syntax, and only the main semmantics -- the \textit{problem itself} --
+is exposed.
 
 Other areas have far off recognize the benefits of such denotation, mainly in 
 engineering fields such as \emph{quantum computing} \cite{coecke2011interacting} and
@@ -181,7 +269,7 @@ along with a particular
 set of axioms, and derive even richer structures for convex problems \cite{stein2024compositional}.
 
 The development followed a strict linear discipline, adding exactly one new
-generator at a time and verifying at each step that the resulting algebra is
+generator and verifying that the resulting algebra is
 sound, expressive, and complete with respect to a precisely defined semantic
 category. Each new class of optimization problems then costs a single
 additional generator and a finite set of axioms.
@@ -203,22 +291,25 @@ this allows our algebra to go beyond affine spaces and start representing polyhe
 	\end{cases}
 \]
 
-Inspired by these observations, and parallel works in this direction \cite{stein2024gqa, lawvere1973metric}, we make our central contribution in the final chapter the construction and completeness of
+Inspired by these observations, and parallel works in this direction \cite{stein2024gqa, lawvere1973metric},
+we make our central contribution in the final chapter: the construction and completeness of
 a graphical algebra for parametric linear programming. In this
 setting, a linear program is represented as a morphism that
-can be composed with other optimization blocks, leading to the idea of \textit{composing optimization problems}. 
-This gives a symbolic language in which the elimination of internal variables
+can be composed with other optimization blocks, leading to the idea of
+\textit{composing optimization problems}. This gives a symbolic language
+in which the elimination of internal variables
 corresponds directly to categorical composition, allowing optimization problems
 to be manipulated diagrammatically before computation.
 
-In particular, every piecewise affine convex function can be represented as the value function of a linear program \cite{rockafellar1970convex},
-which means the Graphical Linear Programming \textbf{GLP} theory provides a syntax for a broad class of nonsmooth convex models that appear in optimization,
+In particular, every piecewise affine convex function can be represented as
+the value function of a linear program \cite{rockafellar1970convex},
+which means the Graphical Linear Programming \textbf{GLP}
+theory provides a syntax for a broad class of nonsmooth convex models that appear in optimization,
 control, economics, and machine learning.
-In Chapter~\ref{sec:glp} we show the diagrammatic equivalence
-of these two classes of objects and how diagrammatically they are instances of the same normal form.
 The diagrammatic syntax therefore erases the distinction between expressing a
 linear program as an optimization problem and expressing it as a piecewise
-affine convex function.
+affine convex function. As the example above, we have only one syntax to denote
+one object, instead of two distinct ways to syntactically depict it.
 
 \paragraph{Thesis overview}
 In Section~\ref{sec:quantale-relations} we set up the algebraic and categorical
