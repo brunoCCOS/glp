@@ -1,0 +1,80 @@
+% comatrix(A);copy;((ge;cozero) * matrix(B))=(id(1) * (codiscard;copy));((comatrix(A) * comatrix(B)) * id(1));((cocopy;ge;cozero) *id(1))
+\begin{tikzpicture}
+  \begin{scope}[shift={(0.000,0.250)}]
+  \begin{scope}[shift={(0.000,0.500)}]
+  \pic[val=A] (g1) at (0.500,0.500) {comatrix};
+  \begin{scope}[shift={(1.500,0.500)}]
+  \pic (g2) at (0.500,0.000) {copy};
+  \end{scope}
+  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  \end{scope}
+  \begin{scope}[shift={(3.500,0.000)}]
+  \begin{scope}[shift={(0.000,1.000)}]
+  \pic (g3) at (0.500,0.500) {ge};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic (g4) at (0.500,0.500) {cozero};
+  \end{scope}
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+  \end{scope}
+  \begin{scope}[shift={(0.750,0.000)}]
+  \pic[val=B] (g5) at (0.500,0.500) {matrix};
+  \end{scope}
+  \coordinate (a6) at (0.000,0 |- g5-in-0);
+  \draw (g5-in-0) -- (a6);
+  \coordinate (a7) at (2.500,0 |- g5-out-0);
+  \draw (g5-out-0) -- (a7);
+  \end{scope}
+  \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+  \draw (g2-out-1) to[out=0,in=180] (a6);
+  \end{scope}
+  \node (rel25) at (6.500,1.250) {$=$};
+  \begin{scope}[shift={(7.000,0.000)}]
+  \begin{scope}[shift={(0.000,0.500)}]
+  \begin{scope}[shift={(0.750,1.000)}]
+  \coordinate (id_in_8) at (0,0.500);
+  \coordinate (id_out_9) at (1.000,0.500);
+  \draw (id_in_8) -- (id_out_9);
+  \end{scope}
+  \pic (g10) at (0.500,0.000) {codiscard};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic (g11) at (0.500,0.000) {copy};
+  \end{scope}
+  \draw (g10-out-0) to[out=0,in=180] (g11-in-0);
+  \coordinate (a12) at (0.000,0 |- id_in_8);
+  \draw (id_in_8) -- (a12);
+  \coordinate (a13) at (2.500,0 |- id_out_9);
+  \draw (id_out_9) -- (a13);
+  \end{scope}
+  \begin{scope}[shift={(3.750,0.000)}]
+  \begin{scope}[shift={(0.000,0.500)}]
+  \begin{scope}[shift={(0.000,1.000)}]
+  \pic[val=A] (g14) at (0.500,0.500) {comatrix};
+  \end{scope}
+  \pic[val=B] (g15) at (0.500,0.500) {comatrix};
+  \end{scope}
+  \coordinate (id_in_16) at (0,0.000);
+  \coordinate (id_out_17) at (1.000,0.000);
+  \draw (id_in_16) -- (id_out_17);
+  \end{scope}
+  \draw (a13) to[out=0,in=180] (g14-in-0);
+  \draw (g11-out-0) to[out=0,in=180] (g15-in-0);
+  \draw (g11-out-1) to[out=0,in=180] (id_in_16);
+  \begin{scope}[shift={(6.000,0.500)}]
+  \begin{scope}[shift={(0.000,0.500)}]
+  \pic (g18) at (0.500,0.500) {cocopy};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic (g19) at (0.500,0.500) {ge};
+  \end{scope}
+  \draw (g18-out-0) to[out=0,in=180] (g19-in-0);
+  \begin{scope}[shift={(3.000,0.000)}]
+  \pic (g20) at (0.500,0.500) {cozero};
+  \end{scope}
+  \draw (g19-out-0) to[out=0,in=180] (g20-in-0);
+  \end{scope}
+  \begin{scope}[shift={(1.500,0.000)}]
+  \end{scope}
+  \end{scope}
+  \draw (g14-out-0) to[out=0,in=180] (g18-in-0);
+  \draw (g15-out-0) to[out=0,in=180] (g18-in-1);
+  \end{scope}
+\end{tikzpicture}

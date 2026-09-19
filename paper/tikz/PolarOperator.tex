@@ -1,0 +1,152 @@
+\begin{center}\begin{tabular}{c c c @{\hspace{1cm}} c c c}
+  % copy |-> comult
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {copy};
+      \draw (-0.250,0.500) -- (a-in-0);
+      \draw (a-out-0) -- (1.200,1.000);
+      \draw (a-out-1) -- (1.200,0.000);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {comultiplication};
+      \draw (-0.250,0.500) -- (a-in-0);
+      \draw (a-out-0) -- (1.200,1.000);
+      \draw (a-out-1) -- (1.200,0.000);
+  \end{tikzpicture} &
+
+  % cocopy |-> mult
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {cocopy};
+      \draw (-0.250,1.000) -- (a-in-0);
+      \draw (-0.250,0.000) -- (a-in-1);
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {multiplication};
+      \draw (-0.250,1.000) -- (a-in-0);
+      \draw (-0.250,0.000) -- (a-in-1);
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} \\[4mm]
+
+  % discard |-> cozero
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {discard};
+      \draw (-0.250,0.500) -- (a-in-0);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {cozero};
+      \draw (-0.250,0.500) -- (a-in-0);
+  \end{tikzpicture} &
+
+  % codiscard |-> zero
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {codiscard};
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {zero};
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} \\[4mm]
+
+  % scalar(k) |-> coscalar(k)
+  \begin{tikzpicture}[axpic]
+      \pic[val=k] (a) at (0.500,0.500) {scalar};
+      \draw (-0.250,0.500) -- (a-in-0);
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic[val=k] (a) at (0.500,0.500) {coscalar};
+      \draw (-0.250,0.500) -- (a-in-0);
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+
+  % coscalar(k) |-> scalar(k)
+  \begin{tikzpicture}[axpic]
+      \pic[val=k] (a) at (0.500,0.500) {coscalar};
+      \draw (-0.250,0.500) -- (a-in-0);
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic[val=k] (a) at (0.500,0.500) {scalar};
+      \draw (-0.250,0.500) -- (a-in-0);
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} \\[4mm]
+
+  % mult |-> cocopy
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {multiplication};
+      \draw (-0.250,1.000) -- (a-in-0);
+      \draw (-0.250,0.000) -- (a-in-1);
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {cocopy};
+      \draw (-0.250,1.000) -- (a-in-0);
+      \draw (-0.250,0.000) -- (a-in-1);
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+
+  % comult |-> copy
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {comultiplication};
+      \draw (-0.250,0.500) -- (a-in-0);
+      \draw (a-out-0) -- (1.200,1.000);
+      \draw (a-out-1) -- (1.200,0.000);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {copy};
+      \draw (-0.250,0.500) -- (a-in-0);
+      \draw (a-out-0) -- (1.200,1.000);
+      \draw (a-out-1) -- (1.200,0.000);
+  \end{tikzpicture} \\[4mm]
+
+  % zero |-> codiscard
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {zero};
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {codiscard};
+      \draw (a-out-0) -- (1.200,0.500);
+  \end{tikzpicture} &
+
+  % cozero |-> discard
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {cozero};
+      \draw (-0.250,0.500) -- (a-in-0);
+  \end{tikzpicture} &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture} &
+  \begin{tikzpicture}[axpic]
+      \pic (a) at (0.500,0.500) {discard};
+      \draw (-0.250,0.500) -- (a-in-0);
+  \end{tikzpicture} \\
+\end{tabular}\end{center}
+
+% ==================== second row: ge |-> copy;((ge;cozero)(x)id) ====================
+\begin{center}\begin{tabular}{c c c}
+  \begin{tikzpicture}[axpic]
+      \pic (g) at (0.500,0.500) {ge};
+      \draw (-0.250,0.500) -- (g-in-0);
+      \draw (g-out-0) -- (1.200,0.500);
+  \end{tikzpicture}
+  &
+  \begin{tikzpicture}[axpic]\node{$\mapsto$};\end{tikzpicture}
+  &
+  \begin{tikzpicture}[axpic]
+      \pic (cp) at (0.500,0.500) {copy};
+      \pic (g)  at (1.750,1.000) {ge};
+      \pic (cz) at (3.000,1.000) {cozero};
+      \draw (-0.250,0.500) -- (cp-in-0);
+      \draw (cp-out-0) to[out=0,in=180] (g-in-0);
+      \draw (g-out-0) to[out=0,in=180] (cz-in-0);
+      \draw (cp-out-1) -- (3.750,0.000);
+  \end{tikzpicture}
+\end{tabular}\end{center}
