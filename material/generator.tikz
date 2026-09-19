@@ -1,10 +1,10 @@
-% Every pic occupies the uniform frame x in [-0.5, 0.5], y in [-0.5, 0.5].
-% Tips live on the left/right edges as (-in-k) / (-out-k), top-first,
+% every pic occupies the uniform frame x in [-0.5, 0.5], y in [-0.5, 0.5].
+% tips live on the left/right edges as (-in-k) / (-out-k), top-first,
 % evenly spaced in [-0.5, 0.5]: for n tips, y_k = 0.5 - k/(n-1) (n >= 2),
-% or y_0 = 0 when n = 1. Codegen relies on this convention to align tips
-% across composition without needing tip data in JSON.
+% or y_0 = 0 when n = 1. codegen relies on this convention to align tips
+% across composition without needing tip data in json.
 %
-% Coloured node glyphs (whitedot / boxnode_*) are drawn *after* the wires so
+% coloured node glyphs (whitedot / boxnode_*) are drawn *after* the wires so
 % the fill covers any wire segment passing through the node interior.
 \tikzset{
   val/.store in = \argval,
@@ -174,7 +174,7 @@
     \coordinate (-out-0) at (0.5, 0);
     \draw (-in-0) to (0,0);
     \draw (0,0)   to (-out-0);
-    \node[draw, fill=white] (-node) at (0,0) {ReLU};
+    \node[draw, fill=white] (-node) at (0,0) {relu};
   },
   antipode/.pic = {
     \coordinate (-in-0) at (-0.5, 0);
@@ -189,5 +189,14 @@
     \draw (-in-0) to (0,0);
     \draw (0,0)   to (-out-0);
     \node[diagram] (-node) at (0,0) {$\argval$};
-  }
+  },
+  2ddiagram/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0.3);
+    \coordinate (-in-1)  at (-1.0, -0.3);
+    \coordinate (-out-0) at ( 1.0, 0);
+    \draw (-in-0) to (0,0.3);
+    \draw (-in-1) to (0,-0.3);
+    \draw (0,0)   to (-out-0);
+    \node[diagram] (-node) at (0,0) {$\argval$};
+  },
 }

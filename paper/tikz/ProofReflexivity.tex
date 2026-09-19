@@ -1,0 +1,145 @@
+% ===================== TOP ROW: derivation of (*) =====================
+\begin{center}\begin{tabular}{c c c}
+  % Panel A: comult;(ge (x) id)
+  \begin{tikzpicture}[axpic]
+      \node at (-0.5, 0.5) {$(H1)$};
+      \pic (c) at (0.500,0.500) {comultiplication};
+      \pic (g) at (1.750,1.000) {ge};
+      \draw (c-out-0) to[out=0,in=180] (g-in-0);
+      \draw (c-out-1) to[out=0,in=180] (2.500,0.000);
+  \end{tikzpicture}
+  \begin{tikzpicture}[axpic]\node{$\overset{\textstyle IH}{\equiv}$};\end{tikzpicture} &
+
+  % Panel B: (id (x) (codiscard;copy)); (id (x) antipode (x) id); ((mult;ge) (x) id)
+  \begin{tikzpicture}[axpic]
+      \pic (cd) at (0.500,-0.500) {codiscard};
+      \pic (cp) at (1.750,-0.500) {copy};
+      \pic (ap) at (3.500, 0.000) {antipode};
+      \pic (m)  at (5.000, 0.500) {multiplication};
+      \pic (g)  at (6.750, 0.500) {ge};
+      \draw (-0.250,1.000) -- (m-in-0);
+      \draw (cd-out-0) to[out=0,in=180] (cp-in-0);
+      \draw (cp-out-0) to[out=0,in=180] (ap-in-0);
+      \draw (ap-out-0) to[out=0,in=180] (m-in-1);
+      \draw (cp-out-1) -- (7.500,-1.000);
+      \draw (m-out-0) to[out=0,in=180] (g-in-0);
+      \draw (g-out-0) -- (7.500, 0.500);
+  \end{tikzpicture}\\
+  \begin{tikzpicture}[axpic]\node{$\overset{\textstyle P2}{\equiv}$};\end{tikzpicture} &
+
+  % Panel C: (ge_A) (x) (antipode;ge)_B  ; mult (x) id
+  \begin{tikzpicture}[axpic]
+      \pic (ga) at (0.500, 1.000) {ge};
+      \pic (cd) at (0.500,-0.500) {codiscard};
+      \pic (cp) at (1.750,-0.500) {copy};
+      \pic (ap) at (3.000, 0.000) {antipode};
+      \pic (gb) at (4.250, 0.000) {ge};
+      \pic (m)  at (5.750, 0.500) {multiplication};
+      \draw (-0.250,1.000) -- (ga-in-0);
+      \draw (ga-out-0) to[out=0,in=180] (m-in-0);
+      \draw (cd-out-0) to[out=0,in=180] (cp-in-0);
+      \draw (cp-out-0) to[out=0,in=180] (ap-in-0);
+      \draw (ap-out-0) -- (gb-in-0);
+      \draw (gb-out-0) to[out=0,in=180] (m-in-1);
+      \draw (cp-out-1) -- (6.500,-1.000);
+  \end{tikzpicture}
+  \\ \begin{tikzpicture}[axpic]\node{$\overset{\textstyle P6}{\equiv}$};\end{tikzpicture}&
+
+  % Panel D: (ge_A) (x) (coge;antipode)_B ; mult (x) id
+  \begin{tikzpicture}[axpic]
+      \pic (ga) at (0.500, 1.000) {ge};
+      \pic (cd) at (0.500,-0.500) {codiscard};
+      \pic (cp) at (1.750,-0.500) {copy};
+      \pic (cg) at (3.000, 0.000) {coge};
+      \pic (ap) at (4.250, 0.000) {antipode};
+      \pic (m)  at (5.750, 0.500) {multiplication};
+      \draw (-0.250,1.000) -- (ga-in-0);
+      \draw (ga-out-0) to[out=0,in=180] (m-in-0);
+      \draw (cd-out-0) to[out=0,in=180] (cp-in-0);
+      \draw (cp-out-0) to[out=0,in=180] (cg-in-0);
+      \draw (cg-out-0) -- (ap-in-0);
+      \draw (ap-out-0) to[out=0,in=180] (m-in-1);
+      \draw (cp-out-1) -- (6.500,-1.000);
+  \end{tikzpicture}
+  \\[2mm]
+\end{tabular}\end{center}
+
+\begin{center}\begin{tabular}{c c c c}
+  \begin{tikzpicture}[axpic]\node{$\overset{\textstyle IH}{\equiv}$};\end{tikzpicture} &
+
+  % Panel E = (*):  ge;comult;(id (x) ge)
+  \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {ge};
+      \pic (c)  at (1.750,0.500) {comultiplication};
+      \pic (g2) at (3.000,0.000) {ge};
+      \draw (-0.250,0.500) -- (g1-in-0);
+      \draw (g1-out-0) to[out=0,in=180] (c-in-0);
+      \draw (c-out-0) -- (3.750,1.000);
+      \draw (c-out-1) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) -- (3.750,0.000);
+  \end{tikzpicture}
+\end{tabular}\end{center}
+
+% ===================== BOTTOM ROW: reflexivity of >= =====================
+\begin{center}\begin{tabular}{c c c c c c c c c c c}
+  % id
+  \begin{tikzpicture}[axpic]
+      \draw (0.000,0.500) -- (1.500,0.500);
+  \end{tikzpicture}
+  & \begin{tikzpicture}[axpic]\node{$\overset{\textstyle IH}{\equiv}$};\end{tikzpicture} &
+
+  % comult (open dangling outputs)
+  \begin{tikzpicture}[axpic]
+      \pic (c) at (0.500,0.500) {comultiplication};
+      \draw (-0.250,0.500) -- (c-in-0);
+      \draw (c-out-0) -- (1.500,1.000);
+      \draw (c-out-1) -- (1.500,0.000);
+      \pic at (1.500,1.000) {cozero};
+  \end{tikzpicture}
+  & \begin{tikzpicture}[axpic]\node{$\overset{\textstyle P4}{\subseteq}$};\end{tikzpicture} &
+
+  % comult;(ge (x) id)  (open dangling outputs)
+  \begin{tikzpicture}[axpic]
+      \pic (c) at (0.500,0.500) {comultiplication};
+      \pic (g) at (1.750,1.000) {ge};
+      \draw (-0.250,0.500) -- (c-in-0);
+      \draw (c-out-0) to[out=0,in=180] (g-in-0);
+      \draw (g-out-0) -- (2.500,1.000);
+      \draw (c-out-1) -- (2.500,0.000);
+      \pic at (2.500,1.000) {cozero};
+  \end{tikzpicture}
+  & \begin{tikzpicture}[axpic]\node{$\overset{\textstyle (H1)}{\equiv}$};\end{tikzpicture} &
+
+  % ge;comult;(id (x) ge)  (open dangling outputs)
+  \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {ge};
+      \pic (c)  at (1.750,0.500) {comultiplication};
+      \pic (g2) at (3.000,0.000) {ge};
+      \draw (-0.250,0.500) -- (g1-in-0);
+      \draw (g1-out-0) to[out=0,in=180] (c-in-0);
+      \draw (c-out-0) -- (3.750,1.000);
+      \draw (c-out-1) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) -- (3.750,0.000);
+      \pic at (3.750,1.000) {cozero};
+  \end{tikzpicture}
+  \\[2mm]
+\end{tabular}\end{center}
+
+\begin{center}\begin{tabular}{c c c c c}
+  \begin{tikzpicture}[axpic]\node{$\overset{\textstyle IH}{\equiv}$};\end{tikzpicture} &
+
+  % ge;ge
+  \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {ge};
+      \pic (g2) at (1.750,0.500) {ge};
+      \draw (-0.250,0.500) -- (g1-in-0);
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  \end{tikzpicture}
+  & \begin{tikzpicture}[axpic]\node{$\overset{\textstyle trans}{=}$};\end{tikzpicture} &
+
+  % ge
+  \begin{tikzpicture}[axpic]
+      \pic (g) at (0.500,0.500) {ge};
+      \draw (-0.250,0.500) -- (g-in-0);
+  \end{tikzpicture}
+\end{tabular}\end{center}

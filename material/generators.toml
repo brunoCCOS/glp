@@ -190,3 +190,19 @@ sig.arity = 1
 sig.coarity = 1
 pic = "relu"
 symbol = "relu"
+
+[generators.diagram]
+sig.arity = 1
+sig.coarity = 1
+visual_arity = 1
+visual_coarity = 1
+pic = "diagram"
+params = ["val"]
+
+[generators.twoddiagram]
+sig.arity = 2
+sig.coarity = 1
+visual_arity = 1
+visual_coarity = 1
+pic = "2ddiagram"
+params = ["val"]

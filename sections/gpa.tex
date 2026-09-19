@@ -85,10 +85,6 @@ one may think of the pairs $(x,y)$ such that $Ax \ge By$ for some $A$ and $B$ fu
         \end{tikzpicture}
 	\end{figure}
 	along with the following additional equations:
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.2\linewidth]{images/GPA/AffineAxiom.png}
-	\end{figure}
 	\input{paper/tikz/AxiomsGPA.tex}
 \end{definition}
 
@@ -141,9 +137,9 @@ $\subseteq$.
 	(co)unit laws:
 	\input{paper/tikz/ProofTransitivity.tex}
 
-	\noindent Reflexivity:
+	\noindent For reflexivity we need a previous results that we call $H1$
 	\begin{center}
-		\includegraphics[width=\linewidth]{images/GPA/reflexivity.png}
+	    \input{paper/tikz/ProofReflexivity.tex}
 	\end{center}
 
 	\noindent Antisymmetry, the converse of the inclusion (antisym):
@@ -348,8 +344,34 @@ exchanging the  $H$-representation (intersection of halfspaces) with the  $V$-re
 \begin{proposition}[Second Normal Form]
 	Every diagram $s \in \mathbf{GPA}_{\rtop}$ can be written as:
 	\begin{figure}[H]
-		\centering
-		\includegraphics[width=.75\linewidth]{images/GPA/SecondNormalFormGPA.png}
+        \centering
+        % LHS: (A ; ge ; B)^o
+        \begin{tikzpicture}[axpic]
+         \node at (-.6,0.5) {$\Big($}
+          \pic[val=A] (a) at (0.500,0.500) {matrix};
+          \pic (g)        at (1.750,0.500) {ge};
+          \pic[val=B] (b) at (3.000,0.500) {comatrix};
+          \draw (-0.500,0.500) -- (a-in-0);
+          \draw (a-out-0) to[out=0,in=180] (g-in-0);
+          \draw (g-out-0) to[out=0,in=180] (b-in-0);
+          \draw (b-out-0) -- (4.000,0.500);
+         \node at (4.1,0.5) {$\Big)^{\circ}$}
+        \end{tikzpicture}
+        \quad=\quad
+        % RHS: A^T ; copy ; ((ge;cozero) (x) B^T)
+        \begin{tikzpicture}[axpic]
+          \pic[val={A^T}] (a) at (0.500,0.500) {comatrix};
+          \pic (cp)           at (1.750,0.500) {copy};
+          \pic (g)            at (3.000,1.000) {ge};
+          \pic (cz)           at (4.250,1.000) {cozero};
+          \pic[val={B^T}] (b) at (3.500,0.000) {matrix};
+          \draw (-0.500,0.500) -- (a-in-0);
+          \draw (a-out-0) to[out=0,in=180] (cp-in-0);
+          \draw (cp-out-0) to[out=0,in=180] (g-in-0);
+          \draw (g-out-0) to[out=0,in=180] (cz-in-0);
+          \draw (cp-out-1) to[out=0,in=180] (b-in-0);
+          \draw (b-out-0) -- (4.000,0.000);
+        \end{tikzpicture}
 	\end{figure}
 \end{proposition}
 
@@ -526,9 +548,29 @@ homogeneous case.
 	diagram of \textbf{GPA}. Then we can collect all $\rtop$ on the left such
 	that $c'$ is a diagram of $\textbf{GPA}_{\rtop}$
 
+    \begin{center}
 	\begin{figure}[H]
-		\includegraphics[width=1\linewidth]{images/GPA/affineGPAProof1.png}
+        \begin{tikzpicture}
+          \begin{scope}[shift={(0.000,0.250)}]
+          \pic[val=C] (g1) at (0.500,0.500) {diagram};
+          \end{scope}
+          \node (rel6) at (1.500,0.750) {$=$};
+          \begin{scope}[shift={(3.500,0.000)}]
+          \begin{scope}[shift={(0.000,1.000)}]
+          \coordinate (id_in_2) at (0.25,0.050);
+          \coordinate (id_out_3) at (0.500,0.050);
+          \draw (id_in_2) -- (id_out_3);
+          \end{scope}
+          \pic (g4) at (0.500,0.450) {affine};
+          \begin{scope}[shift={(1.750,0.250)}]
+          \pic[val=C'] (g5) at (0.500,0.500) {2ddiagram};
+          \end{scope}
+          \draw (id_out_3) to[out=0,in=180] (g5-in-0);
+          \draw (g4-out-0) to[out=0,in=180] (g5-in-1);
+          \end{scope}
+        \end{tikzpicture}
 	\end{figure}
+	\end{center}
 
 	From Theorem~\ref{thm:FirstNormalForm} we know that $c'$ admits a normal form in
 	terms of matrices A and B. Breaking down the matrix A in columns we get:
