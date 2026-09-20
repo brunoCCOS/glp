@@ -48,98 +48,18 @@
     \end{tikzpicture}
     \qquad
     \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,1.000) {coge};
+        \pic (g1) at (0.500,1.000) {ge};
+        \pic (g4) at (1.500,1.000) {antipode};
         \pic[val=a_j^{-1}] (g2) at (0.900,0.000) {scalar};
         \pic (g3) at (2.150,0.000) {antipode};
         \coordinate (id_in_1) at (0.000,0.000);
         \draw (id_in_1) -- (g2-in-0);
         \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-        \draw (g1-out-0) -- (3.050,1.000) arc (90:-90:0.500) -- (g3-out-0);
+        \draw (g4-out-0) -- (3.050,1.000) arc (90:-90:0.500) -- (g3-out-0);
+        \draw (g1-out-0) -- (g4-in-0);
         \node[font=\scriptsize] at (0.100,1.200) {$t$};
         \node[font=\scriptsize] at (0.150,-0.250) {$u_j$};
         \node[font=\scriptsize] at (1.500,-0.750) {$j\in N$};
     \end{tikzpicture} \\
     \vspace{5mm}
-
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,1.000) {ge};
-        \pic (g2) at (0.500,0.000) {ge};
-        \pic (c1) at (1.750,0.500) {cocopy};
-        \pic (c2) at (3.000,0.500) {copy};
-        \pic (h1) at (4.250,1.000) {ge};
-        \pic (h2) at (4.250,0.000) {ge};
-        \draw (g1-out-0) to[out=0,in=180] (c1-in-0);
-        \draw (g2-out-0) to[out=0,in=180] (c1-in-1);
-        \draw (c1-out-0) -- (c2-in-0);
-        \draw (c2-out-0) to[out=0,in=180] (h1-in-0);
-        \draw (c2-out-1) to[out=0,in=180] (h2-in-0);
-        \node[font=\scriptsize] at (0.050,1.200) {$x_1$};
-        \node[font=\scriptsize] at (0.050,-0.250) {$m_j$};
-        \node[font=\scriptsize] at (4.950,1.200) {$m_i$};
-        \node[font=\scriptsize] at (4.950,-0.250) {$m_{i'}$};
-    \end{tikzpicture}
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{spider})}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic (c1) at (0.500,1.500) {copy};
-        \pic (c2) at (0.500,-0.500) {copy};
-        \pic (g11) at (2.000,2.000) {ge};
-        \pic (g12) at (2.000,1.000) {ge};
-        \pic (g21) at (2.000,0.000) {ge};
-        \pic (g22) at (2.000,-1.000) {ge};
-        \pic (d1) at (3.750,1.500) {cocopy};
-        \pic (d2) at (3.750,-0.500) {cocopy};
-        \draw (c1-out-0) to[out=0,in=180] (g11-in-0);
-        \draw (c1-out-1) to[out=0,in=180] (g12-in-0);
-        \draw (c2-out-0) to[out=0,in=180] (g21-in-0);
-        \draw (c2-out-1) to[out=0,in=180] (g22-in-0);
-        \draw (g11-out-0) to[out=0,in=180] (d1-in-0);
-        \draw (g21-out-0) to[out=0,in=180] (d1-in-1);
-        \draw (g12-out-0) to[out=0,in=180] (d2-in-0);
-        \draw (g22-out-0) to[out=0,in=180] (d2-in-1);
-        \node[font=\scriptsize] at (0.050,1.700) {$x_1$};
-        \node[font=\scriptsize] at (0.050,-0.750) {$m_j$};
-        \node[font=\scriptsize] at (4.450,1.700) {$m_i$};
-        \node[font=\scriptsize] at (4.450,-0.750) {$m_{i'}$};
-    \end{tikzpicture} \\
-    \vspace{5mm}
-
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,0.000) {antipode};
-        \pic (g2) at (2.000,0.500) {multiplication};
-        \pic (g3) at (3.250,0.500) {ge};
-        \pic (g4) at (4.500,0.500) {cozero};
-        \coordinate (id_in_1)  at (0.000,1.000);
-        \coordinate (id_out_1) at (1.250,1.000);
-        \draw (id_in_1) -- (id_out_1);
-        \draw (id_out_1) to[out=0,in=180] (g2-in-0);
-        \draw (g1-out-0) to[out=0,in=180] (g2-in-1);
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
-        \node[font=\scriptsize] at (0.050,1.200) {$x_1$};
-        \node[font=\scriptsize] at (0.050,-0.250) {$m_i$};
-    \end{tikzpicture}
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{G1})}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic[val=\widetilde{M}] (g1) at (1.000,0.000) {2dmatrix};
-        \pic (g2) at (2.400,0.000) {ge};
-        \pic (g3) at (3.650,0.000) {cozero};
-        \coordinate (id_in_1) at (0.000,0.300);
-        \coordinate (id_in_2) at (0.000,-0.300);
-        \draw (id_in_1) -- (g1-in-0);
-        \draw (id_in_2) -- (g1-in-1);
-        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-    \end{tikzpicture}
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{cone form})}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic[val=M'] (g1) at (1.000,0.000) {2dmatrix};
-        \pic (g2) at (2.400,0.000) {ge};
-        \pic (g3) at (3.650,0.000) {cozero};
-        \coordinate (id_in_1) at (0.000,0.300);
-        \coordinate (id_in_2) at (0.000,-0.300);
-        \draw (id_in_1) -- (g1-in-0);
-        \draw (id_in_2) -- (g1-in-1);
-        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-    \end{tikzpicture}
 \end{center}

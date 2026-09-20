@@ -212,36 +212,6 @@ With the three moves available we can eliminate a single variable. Let
 $M\in\mathbb{R}^{p\times q}$ have first column $a$, and split the row indices
 into $P=\{i\mid a_i>0\}$, $N=\{j\mid a_j<0\}$ and $Z=\{i\mid a_i=0\}$.
 
-\begin{lemma}[One elimination step]\label{lem:fmestep}
-    Let $M'$ be the matrix with rows $M_i$ for $i\in P\cup Z$ and
-    $|a_j|M_i+a_iM_j$ for $(i,j)\in P\times N$, so that
-    $p'=|P|+|Z|+|P||N|$. Then
-    \input{paper/tikz/LemmaFMEStep.tex}
-\end{lemma}
-
-Write $t$ for the wire leaving the generator, $x_r$ for the remaining inputs,
-$u_i=(M_rx_r)_i$ and $m_i=-u_i/a_i$. Row $i$ of the system reads
-$a_it+u_i\ge0$; the rows in $Z$ do not mention $t$ and are carried along
-unchanged.
-
-\begin{proof}
-    \input{paper/tikz/ProofFMEStep.tex}
-
-    \noindent
-    The first line brings a row to cap form and divides by its coefficient, so
-    that it becomes $t\ge m_i$ for $i\in P$ and $t\le m_j$ for $j\in N$. The
-    second merges the bounds by (spider), the $m_j$ legs having been slid
-    across their caps so that the node carries an inequality on every leg. The
-    third relinearises the resulting pairs and rescales them by the positive
-    constants $a_i$ and $a_i|a_j|$. When $P=\varnothing$ every bound is
-    discarded by (P3), which is the statement that $t$ may be chosen
-    arbitrarily small; when $N=\varnothing$ nothing is bent and the node is
-    just copied by (P1).
-\end{proof}
-
-Iterating the step eliminates the variables bound by the outer generators one
-at a time, which is the diagrammatic FME.
-
 \begin{proposition}[Fourier-Motzkin Elimination]\label{prop:fme}
     The following diagrammatic procedure is equivalent to perform the FME
     algorithm
@@ -254,18 +224,6 @@ at a time, which is the diagrammatic FME.
 A pair $(x,y)$ is related by $\inlinegen{ge};g;\inlinegen{ge}$ precisely when
 there are $v,w$ with $x\ge v$, $(v,w)\in\llbracket g\rrbracket$ and $w\ge y$,
 so the two bound variables $v,w$ are what the elimination has to remove.
-
-\begin{proof}
-    \input{paper/tikz/ProofFME.tex}
-
-    \noindent
-    The cospan form (G2) presents the middle condition as an equation, which
-    the cone form (Lemma~\ref{lem:coneform}) and the antipode turn into a
-    single block $M_1$ of $2k$ rows; Lemma~\ref{lem:fmestep}, applied $n+m$
-    times, eliminates the bound variables and leaves $M_2$; unbending the last
-    $m$ inputs returns the claimed shape. The rows coming from the middle
-    equations are never eliminated and simply survive in the final cone.
-\end{proof}
 
 With FME available as a diagrammatic operation, we can now prove the
 normal form theorem for $\mathbf{GPA}_{\rtop}$. We proceed by structural induction,

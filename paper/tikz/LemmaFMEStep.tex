@@ -2,12 +2,12 @@
 % a new cone M'.
 \begin{center}
     \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,1.000) {ge};
+        \pic (g1) at (0.500,0.800) {ge};
         \pic[val=M] (g2) at (2.000,0.500) {2dmatrix};
         \pic (g3) at (3.250,0.500) {ge};
         \pic (g4) at (4.500,0.500) {cozero};
-        \coordinate (id_in_1)  at (0.000,0.000);
-        \coordinate (id_out_1) at (1.250,0.000);
+        \coordinate (id_in_1)  at (0.000,0.200);
+        \coordinate (id_out_1) at (1.000,0.200);
         \draw (id_in_1) -- (id_out_1);
         \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
         \draw (id_out_1) to[out=0,in=180] (g2-in-1);
