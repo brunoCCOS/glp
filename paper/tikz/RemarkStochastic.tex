@@ -1,7 +1,7 @@
 \begin{center}
     \begin{tikzpicture}[axpic]
       \pic (l1) at (0.500,0.500) {linear};
-      \pic[val=S] (m1) at (1.750,0.500) {comatrix};
+      \pic[val=S] (m1) at (2.000,0.500) {comatrix};
       \draw (l1-out-0) to[out=0,in=180] (m1-in-0);
     \end{tikzpicture}
     \;\begin{tikzpicture}[axpic]\node{$\overset{(def)}{=}$};\end{tikzpicture}\;
@@ -14,8 +14,8 @@
       \pic[val=s_{1,2}] (s12) at (3.000,2.000) {coscalar};
       \pic[val=s_{2,1}] (s21) at (3.000,1.000) {coscalar};
       \pic[val=s_{2,2}] (s22) at (3.000,0.000) {coscalar};
-      \pic (k1) at (5.000,2.500) {cocopy};
-      \pic (k2) at (5.000,0.500) {cocopy};
+      \pic (k1) at (5.500,2.500) {cocopy};
+      \pic (k2) at (5.500,0.500) {cocopy};
       \draw (l1-out-0) to[out=0,in=180] (c1-in-0);
       \draw (l2-out-0) to[out=0,in=180] (c2-in-0);
       \draw (c1-out-0) to[out=0,in=180] (s11-in-0);
@@ -33,14 +33,14 @@
     \begin{tikzpicture}[axpic]
       \pic (l1) at (0.500,1.500) {linear};
       \pic (c0) at (1.750,1.500) {comultiplication};
-      \pic (c1) at (3.000,2.500) {comultiplication};
-      \pic (c2) at (3.000,0.500) {comultiplication};
-      \pic[val=s_{1,1}] (s11) at (4.250,3.000) {coscalar};
-      \pic[val=s_{1,2}] (s12) at (4.250,2.000) {coscalar};
-      \pic[val=s_{2,1}] (s21) at (4.250,1.000) {coscalar};
-      \pic[val=s_{2,2}] (s22) at (4.250,0.000) {coscalar};
-      \pic (k1) at (6.250,2.500) {cocopy};
-      \pic (k2) at (6.250,0.500) {cocopy};
+      \pic (c1) at (3.500,2.500) {comultiplication};
+      \pic (c2) at (3.500,0.500) {comultiplication};
+      \pic[val=s_{1,1}] (s11) at (4.750,3.000) {coscalar};
+      \pic[val=s_{1,2}] (s12) at (4.750,2.000) {coscalar};
+      \pic[val=s_{2,1}] (s21) at (4.750,1.000) {coscalar};
+      \pic[val=s_{2,2}] (s22) at (4.750,0.000) {coscalar};
+      \pic (k1) at (7.250,2.500) {cocopy};
+      \pic (k2) at (7.250,0.500) {cocopy};
       \draw (l1-out-0) to[out=0,in=180] (c0-in-0);
       \draw (c0-out-0) to[out=0,in=180] (c1-in-0);
       \draw (c0-out-1) to[out=0,in=180] (c2-in-0);
@@ -59,14 +59,14 @@
     \begin{tikzpicture}[axpic]
       \pic (l1) at (0.500,1.500) {linear};
       \pic (c0) at (1.750,1.500) {comultiplication};
-      \pic (c1) at (3.000,2.500) {comultiplication};
-      \pic (c2) at (3.000,0.500) {comultiplication};
-      \pic[val=s_{1,1}] (s11) at (4.250,3.000) {coscalar};
-      \pic[val=s_{2,1}] (s21) at (4.250,2.000) {coscalar};
-      \pic[val=s_{1,2}] (s12) at (4.250,1.000) {coscalar};
-      \pic[val=s_{2,2}] (s22) at (4.250,0.000) {coscalar};
-      \pic (k1) at (5.500,2.500) {cocopy};
-      \pic (k2) at (5.500,0.500) {cocopy};
+      \pic (c1) at (3.500,2.500) {comultiplication};
+      \pic (c2) at (3.500,0.500) {comultiplication};
+      \pic[val=s_{1,1}] (s11) at (4.750,3.000) {coscalar};
+      \pic[val=s_{2,1}] (s21) at (4.750,2.000) {coscalar};
+      \pic[val=s_{1,2}] (s12) at (4.750,1.000) {coscalar};
+      \pic[val=s_{2,2}] (s22) at (4.750,0.000) {coscalar};
+      \pic (k1) at (6.000,2.500) {cocopy};
+      \pic (k2) at (6.000,0.500) {cocopy};
       \draw (l1-out-0) to[out=0,in=180] (c0-in-0);
       \draw (c0-out-0) to[out=0,in=180] (c1-in-0);
       \draw (c0-out-1) to[out=0,in=180] (c2-in-0);

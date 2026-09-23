@@ -1,21 +1,13 @@
 \begin{tikzpicture}
-    \begin{scope}[shift={(0.000,0.800)}]
-    \pic (g1) at (0.000,0.500) {linear};
-    \end{scope}
+    \pic (g1) at (0.500,1.300) {linear};
     \coordinate (id_in_2) at (0,0.700);
-    \coordinate (id_out_3) at (0.300,0.700);
+    \coordinate (id_out_3) at (1.000,0.700);
     \draw (id_in_2) -- (id_out_3);
-    \begin{scope}[shift={(.7,0.500)}]
-    \pic[val=A] (g4) at (0.500,0.500) {2drelation};
-    \end{scope}
+    \pic[val=A] (g4) at (2.000,1.000) {2drelation};
     \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
     \draw (id_out_3) to[out=0,in=180] (g4-in-1);
-    \begin{scope}[shift={(2.000,0.500)}]
-    \pic (g5) at (0.500,0.500) {ge};
-    \end{scope}
+    \pic (g5) at (3.500,1.000) {ge};
     \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-    \begin{scope}[shift={(3.050,0.500)}]
-    \pic[val=B] (g6) at (0.500,0.500) {corelation};
-    \end{scope}
+    \pic[val=B] (g6) at (5.000,1.000) {corelation};
     \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
 \end{tikzpicture}

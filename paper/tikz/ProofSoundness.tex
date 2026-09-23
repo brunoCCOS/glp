@@ -7,25 +7,23 @@
     \node at (5.2,0) {$(\bullet, y) \mapsto \inf_{x \ge y} x$};
     \node at (7.4,0) {$\llbracket = \rrbracket$};
     \pic at (8.3,0) {linear};
-    \draw (8.8,0) to (9.3,0);
-    \pic at (9.5,0) {ge};
+    \pic at (9.3,0) {ge};
 \end{tikzpicture}
 \begin{tikzpicture}
     \node at (-1.5,0) {(\textit{lin.sum})};
-    \pic (g1) at (0.000,0.25) {linear};
-    \pic (g2) at (0.000,-0.25) {linear};
+    \pic (g1) at (0.000,0.350) {linear};
+    \pic (g2) at (0.000,-0.350) {linear};
     \node at (1.2,0) {$\llbracket = \rrbracket$};
     \node at (3.5,0) {$(\bullet,\left(\begin{smallmatrix} y_1 \\ y_2 \end{smallmatrix}\right)) \mapsto y_1 + y_2$};
     \node at (5.8,0) {$\llbracket = \rrbracket$};
     \pic at (6.6,0) {linear};
-    \draw (7.1,0) to (7.6,0);
-    \pic at (7.8,0) {comultiplication};
+    \pic at (7.85,0) {comultiplication};
+    \draw (7.1,0) -- (7.35,0);
 \end{tikzpicture}
 \vspace{6mm}
 \begin{tikzpicture}
     \node at (-1.5,0) {(\textit{lin.zero})};
     \pic at (0.0,0) {linear};
-    \draw (.2,0) to (0.5,0);
     \pic at (1.0,0) {cozero};
     \node at (1.7,0) {$\llbracket = \rrbracket$};
     \node at (3.9,0) {$(\bullet, \bullet) \mapsto \inf_{x = 0} x = 0$};
