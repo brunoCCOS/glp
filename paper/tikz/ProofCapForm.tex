@@ -81,41 +81,7 @@
         \draw (g1-out-0) -- (a1-in-0);
         \draw (id_out_1) -- (a1-in-1);
         \draw (a1-out-0) -- (z1-in-0);
-    \end{tikzpicture} \\
-    \vspace{3mm}
-
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(P6)}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,1.500) {coge};
-        \pic (s1) at (1.750,1.500) {antipode};
-        \pic (a1) at (3.000,1.000) {multiplication};
-        \pic (z1) at (4.250,1.000) {cozero};
-        \coordinate (id_in_1)  at (0.000,0.500);
-        \coordinate (id_out_1) at (2.250,0.500);
-        \draw (id_in_1) -- (id_out_1);
-        \draw (g1-out-0) -- (s1-in-0);
-        \draw (s1-out-0) -- (a1-in-0);
-        \draw (id_out_1) -- (a1-in-1);
-        \draw (a1-out-0) -- (z1-in-0);
     \end{tikzpicture}
-    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,1.500) {ge};
-        \pic (s1) at (1.750,1.500) {antipode};
-        \pic (s2) at (3.000,1.500) {antipode};
-        \pic (a1) at (4.250,1.000) {multiplication};
-        \pic (z1) at (5.500,1.000) {cozero};
-        \coordinate (id_in_1)  at (0.000,0.500);
-        \coordinate (id_out_1) at (3.500,0.500);
-        \draw (id_in_1) -- (id_out_1);
-        \draw (g1-out-0) -- (s1-in-0);
-        \draw (s1-out-0) -- (s2-in-0);
-        \draw (s2-out-0) -- (a1-in-0);
-        \draw (id_out_1) -- (a1-in-1);
-        \draw (a1-out-0) -- (z1-in-0);
-    \end{tikzpicture} \\
-    \vspace{3mm}
-
     \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{white cap})}{=}$};\end{tikzpicture}\;
     \begin{tikzpicture}[axpic]
         \pic (g1) at (0.500,1.500) {ge};

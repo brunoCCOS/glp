@@ -1,4 +1,12 @@
 \tikzset{axpic/.style={baseline=(current bounding box.center), line cap=round}}
+
+% "=" annotated with the justification for the step, used between diagrams
+% in equational proof chains, e.g. \begin{tikzpicture}...\end{tikzpicture}
+% \eqby{(P5)}\begin{tikzpicture}...\end{tikzpicture}
+\newcommand{\eqby}[1]{\mathrel{\overset{\text{\scriptsize #1}}{=}}}
+
+% Scale content down to fit the line width, otherwise leave it untouched.
+\newcommand{\fits}[1]{\begingroup\setbox0=\hbox{$\displaystyle #1$}\ifdim\wd0>\linewidth\resizebox{\linewidth}{!}{\box0}\else\box0\fi\endgroup}
 \newcommand{\diageq}[2]{%
   \begin{tikzpicture}[axpic]#1\end{tikzpicture}%
   \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;%

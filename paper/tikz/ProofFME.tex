@@ -1,99 +1,972 @@
-% Diagrammatic derivation of Fourier--Motzkin Elimination in GPA_\rtop.
-% Six steps, following the semantic reading given in the surrounding proof:
-%   0.  >= ; g ; >=
-%   1.  g = E ; F^op                                          (G2)
-%   2.  bend the m outputs; outer >= on that side becomes <=  (bend)
-%   3.  the equation becomes two inequalities; <= becomes >=   (antipode)
-%   4.  eliminate the n+m bound variables                      (FME)
-%   5.  unbend the last m inputs                               (unbend)
-\begin{center}
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,0.500) {ge};
-        \pic[val=g] (g2) at (1.750,0.500) {relation};
-        \pic (g3) at (3.000,0.500) {ge};
-        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-        \node[font=\scriptsize] at (0.150,0.700) {$n$};
-        \node[font=\scriptsize] at (3.350,0.700) {$m$};
-    \end{tikzpicture} \\
-    \vspace{3mm}
+\tikzset{bridge/.style={preaction={draw=white,line width=2.6pt}},
+ every picture/.append style={line width=.5pt,line cap=round,line join=round}}
+First consider one middle wire; ellipses denote parallel repetitions.
 
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(G2)}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,0.500) {ge};
-        \pic[val=E] (g2) at (1.750,0.500) {matrix};
-        \pic[val=F] (g3) at (3.000,0.500) {comatrix};
-        \pic (g4) at (4.250,0.500) {ge};
-        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
-        \node[font=\scriptsize] at (0.150,0.700) {$n$};
-        \node[font=\scriptsize] at (2.375,0.700) {$k$};
-        \node[font=\scriptsize] at (4.600,0.700) {$m$};
-    \end{tikzpicture} \\
-    \vspace{3mm}
 
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{bend})}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,1.000) {ge};
-        \pic (g2) at (0.500,0.000) {coge};
-        \pic[val={[E \ {-F}]}] (g3) at (2.100,0.500) {2dmatrix};
-        \pic (g4) at (3.450,0.500) {cozero};
-        \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-1);
-        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
-        \node[font=\scriptsize] at (0.150,1.200) {$n$};
-        \node[font=\scriptsize] at (0.150,-0.200) {$m$};
-        \node[font=\scriptsize] at (2.800,0.700) {$k$};
-    \end{tikzpicture} \\
-    \vspace{3mm}
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[] (g) at (0,0) {ge};
+        \pic[val={A},] (a) at (1.95,0) {comatrix};
+        \pic[val={B},] (b) at (4.55,0) {matrix};
+        \pic[] (h) at (6.5,0) {ge};
+        \draw (g-out-0) -- (a-in-0);
+        \draw (a-out-0) -- (b-in-0);
+        \draw (b-out-0) -- (h-in-0);
 
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{antipode})}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,1.000) {ge};
-        \pic (g2) at (0.500,0.000) {antipode};
-        \pic (g3) at (1.750,0.000) {ge};
-        \pic[val=M_1] (g4) at (3.100,0.500) {2dmatrix};
-        \pic (g5) at (4.350,0.500) {ge};
-        \pic (g6) at (5.600,0.500) {cozero};
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-        \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
-        \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
-        \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-        \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
-        \node[font=\scriptsize] at (0.150,1.200) {$n$};
-        \node[font=\scriptsize] at (0.150,-0.200) {$m$};
-        \node[font=\scriptsize] at (3.950,0.700) {$2k$};
-    \end{tikzpicture} \\
-    \vspace{3mm}
-
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(FME)}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic (g1) at (0.500,0.000) {antipode};
-        \pic[val=M_2] (g2) at (1.750,0.500) {2dmatrix};
-        \pic (g3) at (3.000,0.500) {ge};
-        \pic (g4) at (4.250,0.500) {cozero};
-        \coordinate (id_in_1)  at (0.000,0.800);
-        \coordinate (id_out_1) at (1.250,0.800);
-        \draw (id_in_1) -- (id_out_1);
-        \draw (g1-out-0) to[out=0,in=180] (g2-in-1);
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-        \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
-        \node[font=\scriptsize] at (0.150,1.000) {$n$};
-        \node[font=\scriptsize] at (0.150,-0.200) {$m$};
-        \node[font=\scriptsize] at (2.625,0.700) {$p$};
-    \end{tikzpicture} \\
-    \vspace{3mm}
-
-    \;\begin{tikzpicture}[axpic]\node{$\overset{(\text{unbend})}{=}$};\end{tikzpicture}\;
-    \begin{tikzpicture}[axpic]
-        \pic[val=A'] (g1) at (0.500,0.500) {matrix};
-        \pic (g2) at (1.750,0.500) {ge};
-        \pic[val=B'] (g3) at (3.000,0.500) {comatrix};
-        \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-        \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-        \node[font=\scriptsize] at (0.150,0.700) {$n$};
-        \node[font=\scriptsize] at (2.375,0.700) {$p$};
-        \node[font=\scriptsize] at (3.350,0.700) {$m$};
     \end{tikzpicture}
-\end{center}
+\eqby{(matrix def.)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[] (gi0) at (0,1) {ge};
+        \pic[val={a_1},] (a0) at (1.35,1) {coscalar};
+        \pic[val={b_1},] (b0) at (5.15,1) {scalar};
+        \pic[] (go0) at (6.5,1) {ge};
+        \draw (gi0-out-0) -- (a0-in-0);
+        \draw (b0-out-0) -- (go0-in-0);
+        \pic[] (gi1) at (0,-1) {ge};
+        \pic[val={a_n},] (a1) at (1.35,-1) {coscalar};
+        \pic[val={b_m},] (b1) at (5.15,-1) {scalar};
+        \pic[] (go1) at (6.5,-1) {ge};
+        \draw (gi1-out-0) -- (a1-in-0);
+        \draw (b1-out-0) -- (go1-in-0);
+        \pic[yscale=2] (mu) at (2.65,0) {cocopy};
+        \pic[yscale=2] (de) at (3.85,0) {copy};
+        \draw (mu-out-0) -- (de-in-0);
+        \draw (a0-out-0) -- (mu-in-0);
+        \draw (de-out-0) -- (b0-in-0);
+        \draw (a1-out-0) -- (mu-in-1);
+        \draw (de-out-1) -- (b1-in-0);
+        \node[font=\scriptsize,anchor=center] at (0,0) {$\vdots$};
+        \node[font=\scriptsize,anchor=center] at (6.5,0) {$\vdots$};
+
+\end{tikzpicture}}
+\]
+
+For positive coefficients,
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (a) at (0,0) {ge};
+\pic[val={d},] (b) at (1.3,0) {coscalar};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (b-in-0);\end{pgfonlayer}
+\end{tikzpicture}\eqby{inversion lemma}\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (a) at (0,0) {ge};
+\pic[val={d^{-1}},] (b) at (1.3,0) {scalar};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (b-in-0);\end{pgfonlayer}
+\end{tikzpicture}\eqby{(P5)}\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={d^{-1}},] (a) at (0,0) {scalar};
+\pic[] (b) at (1.3,0) {ge};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (b-in-0);\end{pgfonlayer}
+\end{tikzpicture}\eqby{inversion lemma}\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={d},] (a) at (0,0) {coscalar};
+\pic[] (b) at (1.3,0) {ge};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (b-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+            \pic[val={d},] (n0) at (0.5,0) {scalar};
+            \pic[] (n1) at (1.85,0) {ge};
+            \draw (n0-out-0) -- (n1-in-0);
+
+            \end{tikzpicture}
+\eqby{(P5)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+            \pic[] (n0) at (0.5,0) {ge};
+            \pic[val={d},] (n1) at (1.85,0) {scalar};
+            \draw (n0-out-0) -- (n1-in-0);
+
+        \end{tikzpicture}}
+\]
+
+and for negative coefficients,
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (a) at (0,0) {ge};
+\pic[val={d},] (b) at (1.3,0) {coscalar};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (b-in-0);\end{pgfonlayer}
+\end{tikzpicture}\eqby{inversion lemma}\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (a) at (0,0) {ge};
+\pic[val={d^{-1}},] (b) at (1.3,0) {scalar};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (b-in-0);\end{pgfonlayer}
+\end{tikzpicture}\eqby{(P6)}\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={d^{-1}},] (a) at (0,0) {scalar};
+\pic[] (b) at (1.3,0) {coge};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (b-in-0);\end{pgfonlayer}
+\end{tikzpicture}\eqby{inversion lemma}\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={d},] (a) at (0,0) {coscalar};
+\pic[] (b) at (1.3,0) {coge};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (b-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+            \pic[val={d},] (n0) at (0.5,0) {scalar};
+            \pic[] (n1) at (1.85,0) {ge};
+            \draw (n0-out-0) -- (n1-in-0);
+
+            \end{tikzpicture}
+\eqby{(P6)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+            \pic[] (n0) at (0.5,0) {coge};
+            \pic[val={d},] (n1) at (1.85,0) {scalar};
+            \draw (n0-out-0) -- (n1-in-0);
+
+        \end{tikzpicture}}
+\]
+
+Zero legs detach:
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[] (n0) at (0.5,0) {ge};
+        \pic[val={0},] (n1) at (1.85,0) {coscalar};
+        \draw (n0-out-0) -- (n1-in-0);
+
+        \end{tikzpicture}
+\eqby{(zero sc.), (slide)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[] (g) at (0.5,0) {ge};
+        \pic[] (z) at (1.75,0) {cozero};
+        \pic[] (d) at (2.95,0) {codiscard};
+        \draw (g-out-0) -- (z-in-0);
+
+    \end{tikzpicture}}
+\]
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[val={0},] (n0) at (0.5,0) {scalar};
+        \pic[] (n1) at (1.85,0) {ge};
+        \draw (n0-out-0) -- (n1-in-0);
+
+        \end{tikzpicture}
+\eqby{(zero sc.)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[] (d) at (0.5,0) {discard};
+        \pic[] (z) at (1.65,0) {zero};
+        \pic[] (g) at (2.85,0) {ge};
+        \draw (z-out-0) -- (g-in-0);
+
+    \end{tikzpicture}}
+\]
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (u) at (0,-0.5) {codiscard};
+\pic[] (m) at (1.4,0) {cocopy};
+\begin{pgfonlayer}{background}\draw (-.5,.5) -- (m-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (u-out-0) -- (m-in-1);\end{pgfonlayer}
+\end{tikzpicture}
+\eqby{(unit)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\begin{pgfonlayer}{background}\draw (0,0) -- (1.4,0);\end{pgfonlayer}
+\end{tikzpicture}\qquad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (m) at (0,0) {copy};
+\pic[] (u) at (1.4,-0.5) {discard};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (1.9,.5);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (m-out-1) -- (u-in-0);\end{pgfonlayer}
+\end{tikzpicture}
+\eqby{(unit)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\begin{pgfonlayer}{background}\draw (0,0) -- (1.4,0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+Bend the reversed legs:
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (g) at (0.5,0.65) {coge};
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (1.55,.65) to[out=0,in=0,looseness=1.4] (1.55,-.65) -- (0,-.65);\end{pgfonlayer}
+\end{tikzpicture}
+\eqby{(slide)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (g) at (0.5,-0.65) {ge};
+\begin{pgfonlayer}{background}\draw (0,.65) -- (1.55,.65) to[out=0,in=0,looseness=1.4] (1.55,-.65) -- (g-out-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+
+The nonzero part now rewrites as follows.
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[val={d_1},] (a0) at (0,1) {coscalar};
+        \pic[val={e_1},] (b0) at (7.2,1) {scalar};
+        \pic[val={d_p},] (a1) at (0,-1) {coscalar};
+        \pic[val={e_q},] (b1) at (7.2,-1) {scalar};
+        \pic[] (g0) at (1.5,1) {ge};
+        \pic[] (h0) at (5.7,1) {ge};
+        \draw (a0-out-0) -- (g0-in-0);
+        \draw (h0-out-0) -- (b0-in-0);
+        \pic[] (g1) at (1.5,-1) {ge};
+        \pic[] (h1) at (5.7,-1) {ge};
+        \draw (a1-out-0) -- (g1-in-0);
+        \draw (h1-out-0) -- (b1-in-0);
+        \pic[yscale=2] (mu) at (2.85,0) {cocopy};
+        \pic[yscale=2] (de) at (4.35,0) {copy};
+        \draw (mu-out-0) -- (de-in-0);
+        \draw (g0-out-0) -- (mu-in-0);
+        \draw (de-out-0) -- (h0-in-0);
+        \draw (g1-out-0) -- (mu-in-1);
+        \draw (de-out-1) -- (h1-in-0);
+        \node[font=\scriptsize,anchor=center] at (0,0) {$\vdots$};
+        \node[font=\scriptsize,anchor=center] at (7.2,0) {$\vdots$};
+
+    \end{tikzpicture}
+\eqby{generalised (spider)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[val={d_1},] (a0) at (0,1) {coscalar};
+        \pic[val={e_1},] (b0) at (7.2,1) {scalar};
+        \pic[val={d_p},] (a1) at (0,-1) {coscalar};
+        \pic[val={e_q},] (b1) at (7.2,-1) {scalar};
+        \pic[] (d0) at (1.5,1) {copy};
+        \pic[] (m0) at (5.7,1) {cocopy};
+        \draw (a0-out-0) -- (d0-in-0);
+        \draw (m0-out-0) -- (b0-in-0);
+        \pic[] (d1) at (1.5,-1) {copy};
+        \pic[] (m1) at (5.7,-1) {cocopy};
+        \draw (a1-out-0) -- (d1-in-0);
+        \draw (m1-out-0) -- (b1-in-0);
+        \pic[] (g0) at (3.1,1.5) {ge};
+        \pic[] (g1) at (3.1,0.5) {ge};
+        \pic[] (g2) at (3.1,-0.5) {ge};
+        \pic[] (g3) at (3.1,-1.5) {ge};
+        \draw (d0-out-0) -- (g0-in-0);
+        \draw (d0-out-1) -- (g1-in-0);
+        \draw (d1-out-0) -- (g2-in-0);
+        \draw (d1-out-1) -- (g3-in-0);
+        \draw (g0-out-0) -- (m0-in-0);
+        \draw (g3-out-0) -- (m1-in-1);
+        \draw (g1-out-0) to[out=0,in=180] (m1-in-0);
+        \draw[bridge] (g2-out-0) to[out=0,in=180] (m0-in-1);
+        \node[font=\scriptsize,anchor=center] at (0,0) {$\vdots$};
+        \node[font=\scriptsize,anchor=center] at (7.2,0) {$\vdots$};
+
+\node[font=\scriptsize] at (3.1,1) {$\vdots$};
+\node[font=\scriptsize] at (3.1,0) {$\vdots$};
+\node[font=\scriptsize] at (3.1,-1) {$\vdots$};
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{inversion lemma}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[val={d_1^{-1}},] (a0) at (0,1) {scalar};
+        \pic[val={e_1^{-1}},] (b0) at (7.2,1) {coscalar};
+        \pic[val={d_p^{-1}},] (a1) at (0,-1) {scalar};
+        \pic[val={e_q^{-1}},] (b1) at (7.2,-1) {coscalar};
+        \pic[] (d0) at (1.5,1) {copy};
+        \pic[] (m0) at (5.7,1) {cocopy};
+        \draw (a0-out-0) -- (d0-in-0);
+        \draw (m0-out-0) -- (b0-in-0);
+        \pic[] (d1) at (1.5,-1) {copy};
+        \pic[] (m1) at (5.7,-1) {cocopy};
+        \draw (a1-out-0) -- (d1-in-0);
+        \draw (m1-out-0) -- (b1-in-0);
+        \pic[] (g0) at (3.1,1.5) {ge};
+        \pic[] (g1) at (3.1,0.5) {ge};
+        \pic[] (g2) at (3.1,-0.5) {ge};
+        \pic[] (g3) at (3.1,-1.5) {ge};
+        \draw (d0-out-0) -- (g0-in-0);
+        \draw (d0-out-1) -- (g1-in-0);
+        \draw (d1-out-0) -- (g2-in-0);
+        \draw (d1-out-1) -- (g3-in-0);
+        \draw (g0-out-0) -- (m0-in-0);
+        \draw (g3-out-0) -- (m1-in-1);
+        \draw (g1-out-0) to[out=0,in=180] (m1-in-0);
+        \draw[bridge] (g2-out-0) to[out=0,in=180] (m0-in-1);
+        \node[font=\scriptsize,anchor=center] at (0,0) {$\vdots$};
+        \node[font=\scriptsize,anchor=center] at (7.2,0) {$\vdots$};
+
+\node[font=\scriptsize] at (3.1,1) {$\vdots$};
+\node[font=\scriptsize] at (3.1,0) {$\vdots$};
+\node[font=\scriptsize] at (3.1,-1) {$\vdots$};
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(matrix def.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[val={H},] (a) at (0,0) {matrix};
+        \pic[] (g) at (2,0) {ge};
+        \pic[val={K},] (b) at (4,0) {comatrix};
+        \draw (a-out-0) -- (g-in-0);
+        \draw (g-out-0) -- (b-in-0);
+
+\end{tikzpicture}}
+\]
+
+\needspace{28mm}
+For an empty family of bounds,
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (g) at (0,0.55) {ge};
+\pic[] (h) at (0,-0.55) {ge};
+\pic[yscale=1.1] (m) at (1.4,0) {cocopy};
+\pic[] (e) at (2.7,0) {discard};
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (m-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (h-out-0) -- (m-in-1);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (e-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (0,0) {$\vdots$};
+\end{tikzpicture}
+\eqby{generalised (spider)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (a) at (0,0.55) {discard};
+\pic[] (b) at (0,-0.55) {discard};
+\node[font=\scriptsize] at (0,0) {$\vdots$};
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (s) at (0,0) {codiscard};
+\pic[yscale=1.1] (d) at (1.3,0) {copy};
+\pic[] (g) at (2.7,0.55) {ge};
+\pic[] (h) at (2.7,-0.55) {ge};
+\begin{pgfonlayer}{background}\draw (s-out-0) -- (d-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (d-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (d-out-1) -- (h-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (2.7,0) {$\vdots$};
+\end{tikzpicture}
+\eqby{generalised (spider)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (a) at (0,0.55) {codiscard};
+\pic[] (b) at (0,-0.55) {codiscard};
+\node[font=\scriptsize] at (0,0) {$\vdots$};
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (s) at (0,0) {codiscard};
+\pic[] (e) at (1.2,0) {discard};
+\begin{pgfonlayer}{background}\draw (s-out-0) -- (e-in-0);\end{pgfonlayer}
+\end{tikzpicture}
+\eqby{empty-scalar lemma}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\path[use as bounding box] (0,-.2) rectangle (.65,.2);\draw[dashed] (.1,-.18) rectangle (.5,.18);
+\end{tikzpicture}}
+\]
+
+Bend the detached output constraints as well:
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (z) at (0,0.6) {zero};
+\pic[] (g) at (1.3,0.6) {ge};
+\begin{pgfonlayer}{background}\draw (z-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (2.2,.6) to[out=0,in=0] (2.2,-.6) -- (0,-.6);\end{pgfonlayer}
+\end{tikzpicture}
+\eqby{cone form}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[] (s) at (0.3,0) {antipode};
+\pic[] (g) at (1.6,0) {ge};
+\pic[] (z) at (2.9,0) {cozero};
+\begin{pgfonlayer}{background}\draw (s-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+
+Reattach the zero branches; the permutation restores their boundary positions.
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=26mm}]
+\pic[val={\Pi},] (p) at (0,-0.45) {2dmatrix};
+\end{scope}
+\begin{pgfonlayer}{background}\draw (-2.65,.3) -- (0,.3);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-2.65,-.3) -- (0,-.3);\end{pgfonlayer}
+\pic[val={H},] (h) at (3.7,1.4) {matrix};
+\pic[] (g) at (5.75,1.4) {ge};
+\pic[val={K},] (k) at (7.8,1.4) {comatrix};
+\begin{pgfonlayer}{background}\draw (0,1.4) -- (h-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (h-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (k-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (k-out-0) -- (9.1,1.4) to[out=0,in=0,looseness=1.35] (9.1,0) -- (0,0);\end{pgfonlayer}
+\pic[] (ga) at (4.9,-1.2) {ge};
+\pic[] (za) at (6.2,-1.2) {cozero};
+\begin{pgfonlayer}{background}\draw (0,-1.2) -- (ga-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (ga-out-0) -- (za-in-0);\end{pgfonlayer}
+\pic[] (sa) at (3.4,-2.3) {antipode};
+\pic[] (gb) at (4.9,-2.3) {ge};
+\pic[] (zb) at (6.2,-2.3) {cozero};
+\begin{pgfonlayer}{background}\draw (0,-2.3) -- (sa-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (sa-out-0) -- (gb-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (gb-out-0) -- (zb-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{cone form}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=26mm}]
+\pic[val={\Pi},] (p) at (0,-0.45) {2dmatrix};
+\end{scope}
+\begin{pgfonlayer}{background}\draw (-2.65,.3) -- (0,.3);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-2.65,-.3) -- (0,-.3);\end{pgfonlayer}
+\pic[val={H},] (h) at (3.7,1.4) {matrix};
+\pic[val={K},] (k) at (3.7,0) {matrix};
+\begin{pgfonlayer}{background}\draw (0,1.4) -- (h-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (0,0) -- (k-in-0);\end{pgfonlayer}
+\pic[] (s) at (5.4,0) {antipode};
+\begin{pgfonlayer}{background}\draw (k-out-0) -- (s-in-0);\end{pgfonlayer}
+\pic[yscale=1.4] (sum) at (7.5,0.7) {multiplication};
+\begin{pgfonlayer}{background}\draw (h-out-0) -- (sum-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (s-out-0) -- (sum-in-1);\end{pgfonlayer}
+\pic[] (g) at (8.9,0.7) {ge};
+\pic[] (z) at (10.2,0.7) {cozero};
+\begin{pgfonlayer}{background}\draw (sum-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\pic[] (ga) at (4.9,-1.2) {ge};
+\pic[] (za) at (6.2,-1.2) {cozero};
+\begin{pgfonlayer}{background}\draw (0,-1.2) -- (ga-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (ga-out-0) -- (za-in-0);\end{pgfonlayer}
+\pic[] (sa) at (3.4,-2.3) {antipode};
+\pic[] (gb) at (4.9,-2.3) {ge};
+\pic[] (zb) at (6.2,-2.3) {cozero};
+\begin{pgfonlayer}{background}\draw (0,-2.3) -- (sa-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (sa-out-0) -- (gb-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (gb-out-0) -- (zb-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(comp.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=26mm}]
+\pic[val={\Pi},] (p) at (0,-0.45) {2dmatrix};
+\end{scope}
+\begin{pgfonlayer}{background}\draw (-2.65,.3) -- (0,.3);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-2.65,-.3) -- (0,-.3);\end{pgfonlayer}
+\pic[val={H},] (h) at (3.7,1.4) {matrix};
+\pic[val={J},] (k) at (3.7,0) {matrix};
+\begin{pgfonlayer}{background}\draw (0,1.4) -- (h-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (0,0) -- (k-in-0);\end{pgfonlayer}
+\pic[yscale=1.4] (sum) at (7.5,0.7) {multiplication};
+\begin{pgfonlayer}{background}\draw (h-out-0) -- (sum-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (k-out-0) -- (sum-in-1);\end{pgfonlayer}
+\pic[] (g) at (8.9,0.7) {ge};
+\pic[] (z) at (10.2,0.7) {cozero};
+\begin{pgfonlayer}{background}\draw (sum-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\pic[] (ga) at (4.9,-1.2) {ge};
+\pic[] (za) at (6.2,-1.2) {cozero};
+\begin{pgfonlayer}{background}\draw (0,-1.2) -- (ga-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (ga-out-0) -- (za-in-0);\end{pgfonlayer}
+\pic[] (sa) at (3.4,-2.3) {antipode};
+\pic[] (gb) at (4.9,-2.3) {ge};
+\pic[] (zb) at (6.2,-2.3) {cozero};
+\begin{pgfonlayer}{background}\draw (0,-2.3) -- (sa-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (sa-out-0) -- (gb-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (gb-out-0) -- (zb-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(row)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=26mm}]
+\pic[val={\Pi},] (p) at (0,-0.45) {2dmatrix};
+\end{scope}
+\begin{pgfonlayer}{background}\draw (-2.65,.3) -- (0,.3);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-2.65,-.3) -- (0,-.3);\end{pgfonlayer}
+\pic[val={L},] (l) at (4.1,0.7) {2dmatrix};
+\begin{pgfonlayer}{background}\draw (0,1.4) -- (2.5,1.4) to[out=0,in=180] (l-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (0,0) -- (2.5,0) to[out=0,in=180] (l-in-1);\end{pgfonlayer}
+\pic[] (g) at (6.3,0.7) {ge};
+\pic[] (z) at (7.6,0.7) {cozero};
+\begin{pgfonlayer}{background}\draw (l-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\pic[] (ga) at (4.9,-1.2) {ge};
+\pic[] (za) at (6.2,-1.2) {cozero};
+\begin{pgfonlayer}{background}\draw (0,-1.2) -- (ga-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (ga-out-0) -- (za-in-0);\end{pgfonlayer}
+\pic[] (sa) at (3.4,-2.3) {antipode};
+\pic[] (gb) at (4.9,-2.3) {ge};
+\pic[] (zb) at (6.2,-2.3) {cozero};
+\begin{pgfonlayer}{background}\draw (0,-2.3) -- (sa-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (sa-out-0) -- (gb-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (gb-out-0) -- (zb-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(matrix def.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={\Pi},] (p) at (0,0) {2dmatrix};
+\pic[val={T},] (m) at (2.5,0) {matrix};
+\begin{pgfonlayer}{background}\draw (p-out-0) -- (m-in-0);\end{pgfonlayer}
+\pic[] (g) at (4.5,0) {ge};
+\pic[] (z) at (5.8,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(comp.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={C},] (m) at (0,0) {2dmatrix};
+\pic[] (g) at (2,0) {ge};
+\pic[] (z) at (3.3,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+
+Restore the original input--output boundary:
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={C},] (m) at (0,0) {2dmatrix};
+\pic[] (g) at (2,0) {ge};
+\pic[] (z) at (3.3,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}
+\eqby{(row)}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={A'},] (a) at (0,0.75) {matrix};
+\pic[val={Q},] (b) at (0,-0.75) {matrix};
+\pic[yscale=1.5] (sum) at (3,0) {multiplication};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (sum-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (b-out-0) -- (sum-in-1);\end{pgfonlayer}
+\pic[] (g) at (4.3,0) {ge};
+\pic[] (z) at (5.55,0) {cozero};
+\begin{pgfonlayer}{background}\draw (sum-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(antipode), (comp.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={A'},] (a) at (0,0.75) {matrix};
+\pic[val={Q},] (b) at (0,-0.75) {matrix};
+\pic[] (s) at (1.7,-0.75) {antipode};
+\pic[] (t) at (2.8,-0.75) {antipode};
+\pic[yscale=1.5] (sum) at (4.1,0) {multiplication};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (sum-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (b-out-0) -- (s-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (s-out-0) -- (t-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (t-out-0) -- (sum-in-1);\end{pgfonlayer}
+\pic[] (g) at (5.4,0) {ge};
+\pic[] (z) at (6.65,0) {cozero};
+\begin{pgfonlayer}{background}\draw (sum-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(comp.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={A'},] (a) at (0,0.75) {matrix};
+\pic[val={B'},] (b) at (0,-0.75) {matrix};
+\pic[] (s) at (1.9,-0.75) {antipode};
+\pic[yscale=1.5] (sum) at (3.3,0) {multiplication};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (sum-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (b-out-0) -- (s-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (s-out-0) -- (sum-in-1);\end{pgfonlayer}
+\pic[] (g) at (4.6,0) {ge};
+\pic[] (z) at (5.85,0) {cozero};
+\begin{pgfonlayer}{background}\draw (sum-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(C2)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={A'},] (a) at (0,0.75) {matrix};
+\pic[val={B'},] (b) at (0,-0.75) {matrix};
+\pic[] (g) at (2,0.75) {ge};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (3.1,.75) to[out=0,in=0,looseness=1.3] (3.1,-.75) -- (b-out-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[] (g) at (0,0) {ge};
+        \pic[val={A},] (a) at (1.95,0) {comatrix};
+        \pic[val={B},] (b) at (4.55,0) {matrix};
+        \pic[] (h) at (6.5,0) {ge};
+        \draw (g-out-0) -- (a-in-0);
+        \draw (a-out-0) -- (b-in-0);
+        \draw (b-out-0) -- (h-in-0);
+
+    \end{tikzpicture}
+\eqby{unbend}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[val={A'},] (a) at (0,0) {matrix};
+        \pic[] (g) at (2,0) {ge};
+        \pic[val={B'},] (b) at (4,0) {comatrix};
+        \draw (a-out-0) -- (g-in-0);
+        \draw (g-out-0) -- (b-in-0);
+
+    \end{tikzpicture}}
+\]
+
+Now bend an arbitrary middle bundle and expose its independent sources.
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[] (g) at (0,0) {ge};
+        \pic[val={A},] (a) at (1.95,0) {comatrix};
+        \pic[val={B},] (b) at (4.55,0) {matrix};
+        \pic[] (h) at (6.5,0) {ge};
+        \draw (g-out-0) -- (a-in-0);
+        \draw (a-out-0) -- (b-in-0);
+        \draw (b-out-0) -- (h-in-0);
+        \draw(h-out-0) to[out=0,in=0,looseness=1.4] (7,-1.15) -- (-.5,-1.15);
+
+    \end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(slide)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\pic[] (u) at (0,0.85) {codiscard};
+\pic[yscale=.8] (du) at (1.3,0.85) {copy};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- (du-in-0);\end{pgfonlayer}
+\pic[] (v) at (0,-0.85) {codiscard};
+\pic[yscale=.8] (dv) at (1.3,-0.85) {copy};
+\begin{pgfonlayer}{background}\draw (v-out-0) -- (dv-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (0,0) {$\vdots$};
+\begin{scope}[matrixnode_left/.append style={minimum height=10mm}]
+\pic[val={A},] (a) at (4,1.35) {2dmatrix};
+\end{scope}
+\begin{scope}[matrixnode_left/.append style={minimum height=10mm}]
+\pic[val={B},] (b) at (4,-1.35) {2dmatrix};
+\end{scope}
+\begin{pgfonlayer}{background}\draw (du-out-0) to[out=0,in=180] (a-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (du-out-1) to[out=0,in=180] (b-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw[bridge] (dv-out-0) to[out=0,in=180] (a-in-1);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (dv-out-1) to[out=0,in=180] (b-in-1);\end{pgfonlayer}
+\pic[] (gx) at (6.1,2.65) {ge};
+\begin{pgfonlayer}{background}\draw (-.5,2.65) -- (gx-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (gx-out-0) -- (7,2.65) to[out=0,in=0] (7,1.35) -- (a-out-0);\end{pgfonlayer}
+\pic[] (gy) at (6.1,-1.35) {ge};
+\begin{pgfonlayer}{background}\draw (b-out-0) -- (gy-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (gy-out-0) -- (7,-1.35) to[out=0,in=0] (7,-2.65) -- (-.5,-2.65);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(C2)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\pic[] (u) at (0,0.85) {codiscard};
+\pic[yscale=.8] (du) at (1.3,0.85) {copy};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- (du-in-0);\end{pgfonlayer}
+\pic[] (v) at (0,-0.85) {codiscard};
+\pic[yscale=.8] (dv) at (1.3,-0.85) {copy};
+\begin{pgfonlayer}{background}\draw (v-out-0) -- (dv-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (0,0) {$\vdots$};
+\begin{scope}[matrixnode_left/.append style={minimum height=10mm}]
+\pic[val={A},] (a) at (4,1.35) {2dmatrix};
+\end{scope}
+\begin{scope}[matrixnode_left/.append style={minimum height=10mm}]
+\pic[val={B},] (b) at (4,-1.35) {2dmatrix};
+\end{scope}
+\begin{pgfonlayer}{background}\draw (du-out-0) to[out=0,in=180] (a-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (du-out-1) to[out=0,in=180] (b-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw[bridge] (dv-out-0) to[out=0,in=180] (a-in-1);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (dv-out-1) to[out=0,in=180] (b-in-1);\end{pgfonlayer}
+\pic[] (sa) at (5.7,1.35) {antipode};
+\pic[yscale=1.3] (sx) at (7.3,2) {multiplication};
+\begin{pgfonlayer}{background}\draw (-.5,2.65) -- (sx-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (sa-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (sa-out-0) -- (sx-in-1);\end{pgfonlayer}
+\pic[] (sb) at (5.7,-2.65) {antipode};
+\pic[yscale=1.3] (sy) at (7.3,-2) {multiplication};
+\begin{pgfonlayer}{background}\draw (b-out-0) -- (sy-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-.5,-2.65) -- (sb-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (sb-out-0) -- (sy-in-1);\end{pgfonlayer}
+\pic[] (gx) at (8.7,2) {ge};
+\pic[] (zx) at (10,2) {cozero};
+\begin{pgfonlayer}{background}\draw (sx-out-0) -- (gx-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (gx-out-0) -- (zx-in-0);\end{pgfonlayer}
+\pic[] (gy) at (8.7,-2) {ge};
+\pic[] (zy) at (10,-2) {cozero};
+\begin{pgfonlayer}{background}\draw (sy-out-0) -- (gy-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (gy-out-0) -- (zy-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+
+
+\[
+\fits{\eqby{(matrix def.), (row), (comp.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.9,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=24mm}]
+\pic[val={M},] (m) at (3.2,0) {matrix};
+\end{scope}
+\pic[] (t) at (-0.5,1.55) {codiscard};
+\begin{pgfonlayer}{background}\draw (t-out-0) -- ($(m-node.center)+(0,1.55)$);\end{pgfonlayer}
+\pic[] (u) at (-0.5,0.7) {codiscard};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- ($(m-node.center)+(0,0.7)$);\end{pgfonlayer}
+\pic[] (v) at (-0.5,0) {codiscard};
+\begin{pgfonlayer}{background}\draw (v-out-0) -- ($(m-node.center)+(0,0)$);\end{pgfonlayer}
+\node[font=\scriptsize] at (-0.85,0.35) {$\vdots$};
+\begin{pgfonlayer}{background}\draw (-1,-.8) -- ($(m-node.center)+(0,-.8)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-1,-1.45) -- ($(m-node.center)+(0,-1.45)$);\end{pgfonlayer}
+\pic[] (g) at (6.05,0) {ge};
+\pic[] (z) at (7.35,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+Separate one source.
+
+
+\[
+\fits{\eqby{(row)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=17mm}]
+\pic[val={R},] (r) at (2.7,0) {matrix};
+\end{scope}
+\pic[] (u) at (-0.5,0.7) {codiscard};
+\pic[] (v) at (-0.5,0) {codiscard};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- ($(r-node.center)+(0,.7)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (v-out-0) -- (r-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (-0.85,0.35) {$\vdots$};
+\begin{pgfonlayer}{background}\draw (-1,-.65) -- ($(r-node.center)+(0,-.65)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-1,-1.25) -- ($(r-node.center)+(0,-1.25)$);\end{pgfonlayer}
+\pic[] (t) at (-0.5,-2.8) {codiscard};
+\pic[val={c},] (c) at (2.7,-2.8) {matrix};
+\begin{pgfonlayer}{background}\draw (t-out-0) -- (c-in-0);\end{pgfonlayer}
+\pic[yscale=2.8] (s) at (5.8,-1.4) {multiplication};
+\begin{pgfonlayer}{background}\draw (r-out-0) -- (s-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (c-out-0) -- (s-in-1);\end{pgfonlayer}
+\pic[] (g) at (7.2,-1.4) {ge};
+\pic[] (z) at (8.5,-1.4) {cozero};
+\begin{pgfonlayer}{background}\draw (s-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(C2)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=17mm}]
+\pic[val={R},] (r) at (2.7,0) {matrix};
+\end{scope}
+\pic[] (u) at (-0.5,0.7) {codiscard};
+\pic[] (v) at (-0.5,0) {codiscard};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- ($(r-node.center)+(0,.7)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (v-out-0) -- (r-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (-0.85,0.35) {$\vdots$};
+\begin{pgfonlayer}{background}\draw (-1,-.65) -- ($(r-node.center)+(0,-.65)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-1,-1.25) -- ($(r-node.center)+(0,-1.25)$);\end{pgfonlayer}
+\pic[] (t) at (-0.5,-2.8) {codiscard};
+\pic[val={c},] (c) at (2.7,-2.8) {matrix};
+\begin{pgfonlayer}{background}\draw (t-out-0) -- (c-in-0);\end{pgfonlayer}
+\pic[] (a) at (4.35,-2.8) {antipode};
+\begin{pgfonlayer}{background}\draw (c-out-0) -- (a-in-0);\end{pgfonlayer}
+\pic[] (g) at (5,0) {ge};
+\begin{pgfonlayer}{background}\draw (r-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (6.5,0) to[out=0,in=0,looseness=1.3] (6.5,-2.8) -- (a-out-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(comp.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=17mm}]
+\pic[val={R},] (r) at (2.7,0) {matrix};
+\end{scope}
+\pic[] (u) at (-0.5,0.7) {codiscard};
+\pic[] (v) at (-0.5,0) {codiscard};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- ($(r-node.center)+(0,.7)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (v-out-0) -- (r-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (-0.85,0.35) {$\vdots$};
+\begin{pgfonlayer}{background}\draw (-1,-.65) -- ($(r-node.center)+(0,-.65)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-1,-1.25) -- ($(r-node.center)+(0,-1.25)$);\end{pgfonlayer}
+\pic[] (t) at (-0.5,-2.8) {codiscard};
+\pic[val={F},] (c) at (2.7,-2.8) {matrix};
+\begin{pgfonlayer}{background}\draw (t-out-0) -- (c-in-0);\end{pgfonlayer}
+\pic[] (g) at (5,0) {ge};
+\begin{pgfonlayer}{background}\draw (r-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (6.5,0) to[out=0,in=0,looseness=1.3] (6.5,-2.8) -- (c-out-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(slide)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=17mm}]
+\pic[val={R},] (r) at (2.7,0) {matrix};
+\end{scope}
+\pic[] (u) at (-0.5,0.7) {codiscard};
+\pic[] (v) at (-0.5,0) {codiscard};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- ($(r-node.center)+(0,.7)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (v-out-0) -- (r-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (-0.85,0.35) {$\vdots$};
+\begin{pgfonlayer}{background}\draw (-1,-.65) -- ($(r-node.center)+(0,-.65)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-1,-1.25) -- ($(r-node.center)+(0,-1.25)$);\end{pgfonlayer}
+\pic[] (g) at (5,0) {ge};
+\pic[val={F},] (f) at (7.05,0) {comatrix};
+\pic[] (e) at (9.1,0) {discard};
+\begin{pgfonlayer}{background}\draw (r-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (f-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (f-out-0) -- (e-in-0);\end{pgfonlayer}
+\node[draw,dashed,rounded corners=2pt,fit=(g-in-0)(g-node)(f-node)(e-node),inner sep=5pt] {};
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{one-wire case; (matrix def.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.88,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=17mm}]
+\pic[val={R},] (r) at (2.7,0) {matrix};
+\end{scope}
+\pic[] (u) at (-0.5,0.7) {codiscard};
+\pic[] (v) at (-0.5,0) {codiscard};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- ($(r-node.center)+(0,.7)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (v-out-0) -- (r-in-0);\end{pgfonlayer}
+\node[font=\scriptsize] at (-0.85,0.35) {$\vdots$};
+\begin{pgfonlayer}{background}\draw (-1,-.65) -- ($(r-node.center)+(0,-.65)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-1,-1.25) -- ($(r-node.center)+(0,-1.25)$);\end{pgfonlayer}
+\pic[val={E},] (e) at (5.3,0) {matrix};
+\pic[] (g) at (7.3,0) {ge};
+\pic[] (z) at (8.6,0) {cozero};
+\begin{pgfonlayer}{background}\draw (r-out-0) -- (e-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (e-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{(comp.)}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.9,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=24mm}]
+\pic[val={M'},] (m) at (3.2,0) {matrix};
+\end{scope}
+\pic[] (u) at (-0.5,0.7) {codiscard};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- ($(m-node.center)+(0,0.7)$);\end{pgfonlayer}
+\pic[] (v) at (-0.5,0) {codiscard};
+\begin{pgfonlayer}{background}\draw (v-out-0) -- ($(m-node.center)+(0,0)$);\end{pgfonlayer}
+\node[font=\scriptsize] at (-0.85,0.35) {$\vdots$};
+\begin{pgfonlayer}{background}\draw (-1,-.8) -- ($(m-node.center)+(0,-.8)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-1,-1.45) -- ($(m-node.center)+(0,-1.45)$);\end{pgfonlayer}
+\pic[] (g) at (6.05,0) {ge};
+\pic[] (z) at (7.35,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+
+Repeat the same local rewrite until no source remains.
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.9,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=24mm}]
+\pic[val={M'},] (m) at (3.2,0) {matrix};
+\end{scope}
+\pic[] (u) at (-0.5,0.7) {codiscard};
+\begin{pgfonlayer}{background}\draw (u-out-0) -- ($(m-node.center)+(0,0.7)$);\end{pgfonlayer}
+\pic[] (v) at (-0.5,0) {codiscard};
+\begin{pgfonlayer}{background}\draw (v-out-0) -- ($(m-node.center)+(0,0)$);\end{pgfonlayer}
+\node[font=\scriptsize] at (-0.85,0.35) {$\vdots$};
+\begin{pgfonlayer}{background}\draw (-1,-.8) -- ($(m-node.center)+(0,-.8)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-1,-1.45) -- ($(m-node.center)+(0,-1.45)$);\end{pgfonlayer}
+\pic[] (g) at (6.05,0) {ge};
+\pic[] (z) at (7.35,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}\eqby{same rewrite}\ \cdots\ \eqby{same rewrite}\begin{tikzpicture}[x=.77cm,y=.64cm,scale=0.9,baseline=(current bounding box.center)]
+\begin{scope}[matrixnode_left/.append style={minimum height=14mm}]
+\pic[val={N},] (m) at (0,0) {matrix};
+\end{scope}
+\pic[] (t) at (-2.2,0.7) {codiscard};
+\begin{pgfonlayer}{background}\draw (t-out-0) -- ($(m-node.center)+(0,.7)$);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-2.2,0) -- (m-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (-2.2,-.7) -- ($(m-node.center)+(0,-.7)$);\end{pgfonlayer}
+\pic[] (g) at (2.4,0) {ge};
+\pic[] (z) at (3.7,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\eqby{same rewrite}\quad\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={C},] (m) at (0,0) {2dmatrix};
+\pic[] (g) at (2,0) {ge};
+\pic[] (z) at (3.3,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+Apply the boundary-restoration chain above:
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={C},] (m) at (0,0) {2dmatrix};
+\pic[] (g) at (2,0) {ge};
+\pic[] (z) at (3.3,0) {cozero};
+\begin{pgfonlayer}{background}\draw (m-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (z-in-0);\end{pgfonlayer}
+\end{tikzpicture}
+\eqby{cone form}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+\pic[val={A'},] (a) at (0,0.75) {matrix};
+\pic[val={B'},] (b) at (0,-0.75) {matrix};
+\pic[] (g) at (2,0.75) {ge};
+\begin{pgfonlayer}{background}\draw (a-out-0) -- (g-in-0);\end{pgfonlayer}
+\begin{pgfonlayer}{background}\draw (g-out-0) -- (3.1,.75) to[out=0,in=0,looseness=1.3] (3.1,-.75) -- (b-out-0);\end{pgfonlayer}
+\end{tikzpicture}}
+\]
+
+
+\[
+\fits{\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[] (g) at (0,0) {ge};
+        \pic[val={A},] (a) at (1.95,0) {comatrix};
+        \pic[val={B},] (b) at (4.55,0) {matrix};
+        \pic[] (h) at (6.5,0) {ge};
+        \draw (g-out-0) -- (a-in-0);
+        \draw (a-out-0) -- (b-in-0);
+        \draw (b-out-0) -- (h-in-0);
+
+        \end{tikzpicture}
+\eqby{unbend}
+\begin{tikzpicture}[x=.77cm,y=.64cm,scale=1,baseline=(current bounding box.center)]
+        \pic[val={A'},] (a) at (0,0) {matrix};
+        \pic[] (g) at (2,0) {ge};
+        \pic[val={B'},] (b) at (4,0) {comatrix};
+        \draw (a-out-0) -- (g-in-0);
+        \draw (g-out-0) -- (b-in-0);
+
+    \end{tikzpicture}}
+\]

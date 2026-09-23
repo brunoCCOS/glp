@@ -6,8 +6,8 @@
     \begin{center}\textbf{(G1) Matrices}\quad{\footnotesize\cite{bonchi2017interacting,paixao2022highlevel}}\end{center}
     \begin{center}\begin{tabular}{r c c c}
       \diagrow{(comp.)}{
-          \pic[val=A] (g1) at (0.500,0.500) {matrix};
-          \pic[val=B] (g2) at (1.750,0.500) {matrix};
+          \pic[val=A] (g1) at (0.250,0.500) {matrix};
+          \pic[val=B] (g2) at (2.250,0.500) {matrix};
           \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
       }{
           \pic[val=BA] (g1) at (0.500,0.500) {matrix};
@@ -15,7 +15,7 @@
       \diagrow{(row)}{
           \pic[val=A] (g1) at (0.500,1.000) {matrix};
           \pic[val=B] (g2) at (0.500,0.000) {matrix};
-          \pic (g3) at (1.750,0.500) {multiplication};
+          \pic (g3) at (2.050,0.500) {multiplication};
           \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
           \draw (g2-out-0) to[out=0,in=180] (g3-in-1);
       }{
@@ -35,6 +35,11 @@
           \pic (g2) at (1.750,0.500) {zero};
           \draw (0.000,0.500) -- (g1-in-0);
           \draw (g2-out-0) -- (2.500,0.500);
+      }
+      \diagrow{(inversion)}{
+          \pic[val=k] (g1) at (0.500,0.500) {scalar};
+      }{
+          \pic[val=k^{-1}] (g1) at (0.500,0.500) {coscalar};
       }
     \end{tabular}\end{center}
 \end{minipage}}
@@ -58,7 +63,7 @@
           \pic[val=g] (g1) at (0.500,0.500) {relation};
       }{
           \pic[val=E] (g1) at (0.500,0.500) {matrix};
-          \pic[val=F] (g2) at (1.750,0.500) {comatrix};
+          \pic[val=F] (g2) at (2.250,0.500) {comatrix};
           \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
       }
     \end{tabular}\end{center}
