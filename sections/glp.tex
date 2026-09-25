@@ -153,7 +153,7 @@ The prop $\mathbf{LPRel}$ is defined as follows:
     \item A morphism $n \to m$ is a right-hand side parametric linear
     program with value function
     \[
-    (x,y) \mapsto \inf_z \{ c^\top z \mid Az \ge B[x\ y]^\top \},
+    (x,y) \mapsto \inf_z \{ c^\top z \mid Az \ge B[x\ y]^\top + b \},
     \]
     where $x \in \mathbb{R}^n$ and $y \in \mathbb{R}^m$.
     \item Composition is given by minimisation over the shared variable.
