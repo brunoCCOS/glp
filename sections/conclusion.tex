@@ -10,27 +10,22 @@ programs: a single new generator for the linear objective, a handful of
 axioms, and a proof that these suffice, both for completeness and for a
 normal form (Theorem~\ref{thm:NormalFormGLP}).
 
-Three results are worth calling out on their own. First, \textbf{GLP} is
+Two results are worth calling out on their own. First, \textbf{GLP} is
 \emph{complete}: any two diagrams with the same semantics can be rewritten
 into one another using only the axioms of the algebra, so there is no gap
 between what the theory can prove equal and what is actually equal. Second,
 every such diagram admits a \emph{normal form}
 (Theorem~\ref{thm:NormalFormGLP}), a canonical shape that every parametric
 linear program reduces to, which is what makes the correspondence with value
-functions below more than a loose analogy. Third, one of the axioms encodes
-something genuinely structural about linear programming rather than
-something we imposed on it: the \emph{invariance of a linear program under
-column-stochastic reweighting of its objective} (Remark~\ref{rmk:stochastic})
-falls directly out of the algebra, as a single generator-level equation,
-instead of being proved separately for each formulation. This is one of the 
+functions below more than a loose analogy. This is one of the 
 core properties of linear systems and thanks to our Graphical Algebra is 
-a syntatical operation in itself. As we claimend at the introduction,
+a syntatical operation in itself. As stated at the introduction,
 the diagrammatic calculi makes the system properties evident in the syntax, 
 instead of a higher level result and this is the evidence.
 
-A linear program is now a morphism like any other in the hierarchy, one that composes with the
-relations and quadratic blocks studied earlier without any special
-pleading. Its diagrammatic syntax, once reduced to normal form, coincides
+A linear program is now a fully composable object understood as a particular
+class of relations such as the previous affine and polyhedral relations.
+Its diagrammatic syntax, once reduced to normal form, coincides
 with the syntax of its own value function, so the diagram and the object it
 computes are, in a precise sense, the same picture drawn twice.
 
@@ -38,6 +33,12 @@ Just like that, other theories can be developed by enriching the here presented
 language. Figure~\ref{fig:overview} lays out the resulting hierarchy of categorical
 structures that were developed by this very recipe and what can actually be achieved
 in the end of the road.
+
+The \textbf{GLP} theory, in turn, has a natural extension to an even more expressive theory
+when enriched with the gray arrow generator from \textbf{GQA} \cite{stein2024gqa}.
+We believe that the class of quadratic programs could be, just as was done in this work,
+fully axiomatized by such broader SMIT. However, such studies are left for future works,
+along with other possible applications of current results.
 
 \begin{figure}[H]
 	\centering
@@ -59,9 +60,9 @@ in the end of the road.
 	      $\{0,+\infty\}$-valued characteristic function.
 \end{itemize}
 
-It is a modest step, in the end, toward something larger: a diagrammatic 
-and more calculational language expressive enough to hold optimization in its own right.
-The theories presented and developed here
-read less like separate constructions sharing a notation and one theory
-examined at different levels of resolution. A sequential increment of the theory,
-one generator at a time, lifting the whole theory.
+In the end, this is a forward step towards providing a compositional and
+calculational language to express convex optimization.
+The diagrammatic structure here presented and developed provides a more expressive
+and intutive language for mathematical and computational reasoning,
+through the addition of a simple generator and small number of axioms.
+A sequential increment of the theory, one generator at a time, lifting the whole theory.

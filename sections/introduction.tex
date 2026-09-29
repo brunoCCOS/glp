@@ -193,10 +193,10 @@ but the very depicting (or drawing) embeds the property.
 A fine example, that will be later explained, is one that uses the very syntax
 developed in this work. Consider the equivalence between these two Linear Programs
 \[
-f(y) = \inf_{x_1,x_2} \{ x_1 + x_2 \mid \; a_1 x_1 + a_2 x_2 = y\}
+f_1(y) = \inf_{x_1,x_2} \{ x_1 + x_2 \mid \; a_1 x_1 + a_2 x_2 = y\}
 \]
 \[
-f_2(y) = \inf_{w_1,w_2} \{ inf_{x_1} \{ x_1 \mid a_1 x_1 = w_1 \} + inf_{x_2} \{ x_2 \mid a_2 x_2 = w_2 \} \mid w_1 + w_2 = y \}
+f_2(y) = \inf_{w_1,w_2} \{ \inf_{x_1} \{ x_1 \mid a_1 x_1 = w_1 \} + \inf_{x_2} \{ x_2 \mid a_2 x_2 = w_2 \} \mid w_1 + w_2 = y \}
 \]
 
 These two functions are, in fact, the same. To see this, introduce the change of variables
@@ -204,7 +204,7 @@ $ w_1=a_1x_1,\; w_2=a_2x_2. $
 
 Assuming \(a_1,a_2\neq 0\), each inner optimization problem has a unique feasible point,
 so substituting \(w_i=a_ix_i\) yields
-$ f_2(y) = \inf_{a_1x_1+a_2x_2=y} \left\{ x_1+x_2 \right\} = f(y). $
+$ f_2(y) = \inf\limits_{a_1x_1+a_2x_2=y} \left\{x_1+x_2\right\} = f_1(y).$
 
 Thus, the second formulation does not change the underlying optimization problem;
 rather, it decomposes the original constraint through the intermediate variables
@@ -247,7 +247,7 @@ rather, it decomposes the original constraint through the intermediate variables
 
 Once again, both problems are depicted as the very same diagram, being just
 a different order of parsing it. In this case all the variable changing was 
-hidden by the syntax, and only the main semmantics -- the \textit{problem itself} --
+hidden by the syntax, and only the main semantics -- the \textit{problem itself} --
 is exposed.
 
 Other areas have far off recognize the benefits of such denotation, mainly in 
@@ -306,10 +306,6 @@ the value function of a linear program \cite{rockafellar1970convex},
 which means the Graphical Linear Programming \textbf{GLP}
 theory provides a syntax for a broad class of nonsmooth convex models that appear in optimization,
 control, economics, and machine learning.
-The diagrammatic syntax therefore erases the distinction between expressing a
-linear program as an optimization problem and expressing it as a piecewise
-affine convex function. As the example above, we have only one syntax to denote
-one object, instead of two distinct ways to syntactically depict it.
 
 \paragraph{Thesis overview}
 In Section~\ref{sec:quantale-relations} we set up the algebraic and categorical
