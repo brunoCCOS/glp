@@ -92,7 +92,7 @@ Notice, however, that we have been restricting the relations between $x$ and $y$
 \end{definition}
 
 and the codomain is not restricted to a binary set anymore.
-In fact, one could choose any other set instead of the $\extendR^+$ to be the codomain of the characteristic function as long as it satisfy some properties. In fact, the whole structure of a relation is further generalized by the notion of a quantale.
+In fact, one could choose any other set instead of the $\extendR^+$ to be the codomain of the characteristic function as long as it satisfy some properties. The whole structure of a relation is further generalized by the notion of a quantale.
 \begin{definition}[Quantale]
 	A \emph{quantale} is a structure $(Q,\leq,\otimes,e)$ such that:
 
@@ -219,10 +219,8 @@ on the sets $X$ and $Y$, specifically that $R$ be a linear or affine subspace of
 $X \times Y$. They are, nonetheless,
 fully embedded in the framework of binary relations.
 
-Within this framework, we propose an extension of the Lawvere Quantale and
-weighted relations called the Extended-Lawvere Quantale and
-the Cost/Reward Relations, respectively. To our knowledge, this definition does
-not appear elsewhere in the literature.
+Next, we expand the current definition of Lawvere Quantales to the more general
+Extended-Lawvere Quantale:
 
 \begin{definition}[Optimization/Extended Lawvere Quantale]
 	Let
@@ -272,8 +270,7 @@ not appear elsewhere in the literature.
 The convention above is not a matter of taste. Without it, $+$ is only
 partially defined on $\overline{\mathbb{R}}$, so
 $(\overline{\mathbb{R}},+,0)$ fails to be a monoid and the quantale axioms
-cannot even be stated. The next proposition checks that inf-addition repairs
-this.
+cannot even be stated. 
 
 \begin{proposition}
 	$(\overline{\mathbb{R}},\geq,+,0)$ with inf-addition is a commutative
@@ -353,7 +350,7 @@ central concept of this framework: the composition of relations.
 The following lemma shows how to build such a category and establishes
 that this category also has a very important monoidal structure
 behind it. Particularly, the category is a compact closed
-symmetric monoidal category~\cite{maclane1998categories}:
+symmetric monoidal category (for the definition of such see~\ref{appendix:smc})~\cite{maclane1998categories}:
 
 \begin{proposition}[Category $\mathbf{Rel}(Q)$]
 	For a quantale $Q$, the $Q$-relations form a category \textbf{Rel}(Q) with composition and identities
@@ -649,7 +646,7 @@ To illustrate these new concepts, we look at some of our previous relations now 
 		\big).
 	\]
 
-	Thus composition is given by \emph{infimal convolution} (or shortest-path composition).
+    Thus composition is given by \emph{infimal convolution}~\cite{stein2024compositional}. 
 
 	Since addition is commutative, the Lawvere quantale is commutative,
 	and $\mathbf{Rel}(Q)$ carries a symmetric monoidal structure:
@@ -826,6 +823,7 @@ Those three properties capture the idea that everything we can prove in the synt
 			m{3.2cm}
 			m{4.5cm}
 		}
+        \\
 		\toprule
 		\textbf{Set theory}      &
 		\textbf{Category theory} &

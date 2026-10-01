@@ -5,9 +5,11 @@ cones. These are the fundamental geometric structures underlying linear
 programming, and they admit a categorical treatment entirely analogous to
 the one developed for linear and affine relations.
 The key difference is that
-composition here is governed by Fourier-Motzkin Elimination (FME): projecting a polyhedron onto a subspace is
+composition here is governed by  polyhedron projection onto a subspace, which is
 precisely variable elimination, and it is this operation that categorical
-composition will simulate diagrammatically.
+composition will simulate diagrammatically. One particular way to perform polyhedral
+projection is the Fourier-Motzkin Elimination (FME), which is the algorithm explored
+in this section to show, diagrammatically, that the composition of polyhedrals yields another polyhedral.
 
 The theory developed here remains
 within the category of binary relations, since morphisms are still indicator functions
@@ -108,18 +110,6 @@ The central computational primitive for reasoning inside this algebra is
 Fourier--Motzkin Elimination, which projects a polyhedral cone onto a
 lower-dimensional space by eliminating one variable at a time.
 
-It is worth being explicit about what that algorithm actually does to a system
-$Ax\ge0$, because it fixes exactly which diagrammatic rules we have to
-establish first. To eliminate a variable $t$, the algorithm divides each row
-containing $t$ by its coefficient, so that the row becomes a bound on $t$;
-it records whether the bound is an upper or a lower one, according to the sign
-of that coefficient; and it then replaces the whole collection of bounds by
-one inequality for each upper--lower pair. Three moves, therefore: rescaling a
-row, moving a term across a sum, and merging bounds pairwise. Two of them are
-axioms of Definition~\ref{def:gpa}; this section supplies the third and the
-order laws the axioms omit, and Section~\ref{sec:gpa-fme} assembles them into
-the elimination itself.
-
 Rescaling and sign are given outright by (P5) and (P6), and the pairwise merge
 by (spider). What the axioms do not state, and what we need first, is that
 $\inlinegen{ge}$ deserves its name: reflexivity and transitivity are not among
@@ -193,7 +183,7 @@ cone by positive constants leaves it unchanged, since $Dz\ge0$ iff $z\ge0$ for
 diagonal $D>0$; this is (P5) again, applied row by row.
 
 \begin{proof}
-    Bending the comatrix exposes a white sum with an antipode on one leg, and
+    Bending the matrix B exposes a white sum with an antipode on one leg, and
     the cap form pushes the inequality past it.
     \input{paper/tikz/ProofConeForm.tex}
 \end{proof}
@@ -259,13 +249,14 @@ canonical block form.
 
     \noindent And for the tensor product:
     \input{paper/tikz/NormalFormTensor.tex}
+
+    \noindent where $\overline{A} = [A \; C]$ and $\overline{B} = [B \; D]$
 \end{proof}
 
 Working with a normal form defined up to isomorphism is in principle
 weaker than requiring syntactic equality of terms. This choice is motivated
 by the compact-closed structure, which
-provides a canonical bijection $\mathrm{Hom}(A,B) \cong
-\mathrm{Hom}(\mathbb{1}, A^* \otimes B)$, allowing input wires
+provides a canonical bijection $\mathrm{Hom}(A,B) \cong \mathrm{Hom}(\mathbb{1}, A^* \otimes B)$, allowing input wires
 to be treated symmetrically with output wires but only up to
 this isomorphism, not up to equality. As shown in~\cite{bonchi2021polyhedral}, the same completeness
 argument can be carried out using strict diagrammatic equality;
@@ -278,18 +269,23 @@ This idea was already encountered in the treatment of Graphical Quadratic Algebr
 but it is worth pausing to appreciate its significance.
 The compact-closed structure does not merely allow a more convenient
 notation; it enables diagrammatic reasoning to serve as a rigorous
-replacement for coordinate-based algebraic manipulation while remaining
-extremely intuitive: bending a wire to the left or to the right
+replacement for coordinate-based algebraic manipulation:
+bending a wire to the left or to the right
 does exactly what one would expect. Even more, a statement that would
 classically require several lines of matrix algebra, tracking indices,
 transposing, and substituting, can instead be verified by a sequence
 of local wire manipulations, each justified by a single axiom.
 
 This first normal form expresses every diagram as a system of inequalities
-applied to a linear map. A dual normal form can be obtained by applying  the polar operator,
-which we now define. The polar operator plays the  role of duality in the polyhedral setting,
+applied to a linear map. A dual normal form can, in turn, be obtained by applying
+bijective operator into it and deriving them, a second normal form.
+By bijective operator, we mean a fully and faithfull endofunctor
+in the categories of diagrams 
+
+This operator is called the polar operator, and plays the role of duality in the polyhedral setting,
 exchanging the  $H$-representation (intersection of halfspaces) with the  $V$-representation
-(conic hull of generators), in direct analogy with  the Farkas lemma \cite{bonchi2021.9farkas}.
+(conic hull of generators), in direct analogy with  the Farkas lemma
+(see \cite{bonchi2021.9farkas, bonchi2021polyhedral}) for more details on the operator).
 
 \begin{definition}[Polar Operator]
     The \emph{polar operator} $-^\circ$ is the involution on generators

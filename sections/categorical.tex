@@ -271,16 +271,17 @@ Having established the general framework, we now restrict our attention to the c
 
 Observe that we have constructed a category whose morphisms
 are interpreted as convex optimization problems.
-Since every bifunction $F: \mathbb{R}^m \times \mathbb{R}^n
+Since every convex bifunction $F: \mathbb{R}^m \times \mathbb{R}^n
 	\to \extendR$ can be written as
 
 \[
 	F(x,y) = \inf_{z} z \quad s.t \;z=F(x,y)
 \]
 
-This observation is central to the thesis. It shows that there's some sort of duality between relations and optimization.
-For a single morphism, however, this remains imprecise.
-The compositional structure yields more substantive insights.
+This observation is relevant since it shows that there's some sort of duality
+between relations and optimization, where a convex relation $R$
+is a bifunction of the form above.
+The compositional structure yields even more substantive insights.
 
 \[
 	(S\circ R)(x,z)=\inf_y \{R(x,y)+S(y,z)\}

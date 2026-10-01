@@ -102,9 +102,7 @@ Thus $v$ is piecewise affine convex.
 
 The following proposition is the key technical lemma for the completeness
 proof of $\mathbf{GLP}$. It states that two parametric linear programs
-with the same value function must share the same epigraph polyhedron,
-providing the bridge between semantic equality and syntatical equality
-that the completeness argument requires.
+with the same value function must share the same epigraph polyhedron.
 
 \begin{proposition}\label{prop:equalepi}
 Let
@@ -230,7 +228,6 @@ namely, that they are invariant to stochastics matrices.
     \end{figure}
 \end{remark}
 
-It's particularly interesting to observe the invariance property.
 This is a pattern present in every algebra discussed so far, 
 where a particular class of matrices is invariant to one of it's core generators.
 \footnote{In the digrammatic calculi of Linear subspaces (GLA)
@@ -241,13 +238,10 @@ Other works have spotted the same pattern, such as
 \cite{stein2024gqa} which shows that a generator representing the $l_2$ norm is 
 invariant to orthogonal matrices (also are normal distributed random variables).}
 Here, the new class of matrices that interact with the new generator
-$\inlinegen{linear}$ is that of stochastic matrices.
-Is not yet entirely clear the relationship between each class of morphisms and
-that class of matrices and how they emerge. However is a
-signature and very interesting property of such languages.
+$\inlinegen{linear}$ is that of stochastic matrices, agreeing with what one
+would expect when discussing linear problems.
 
 With the SMT above we now define the complete category.
-
 \begin{definition}
     We call $\mathrm{FreeP}_{\mathbf{GLP}}$ the PROP freely generated
     by $\mathbf{GLP}$.

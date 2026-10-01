@@ -292,7 +292,7 @@ this allows our algebra to go beyond affine spaces and start representing polyhe
 \]
 
 Inspired by these observations, and parallel works in this direction \cite{stein2024gqa, lawvere1973metric},
-we make our central contribution in the final chapter: the construction and completeness of
+we make our central contribution in the final chapter: the construction of
 a graphical algebra for parametric linear programming. In this
 setting, a linear program is represented as a morphism that
 can be composed with other optimization blocks, leading to the idea of
@@ -301,11 +301,13 @@ in which the elimination of internal variables
 corresponds directly to categorical composition, allowing optimization problems
 to be manipulated diagrammatically before computation.
 
-In particular, every piecewise affine convex function can be represented as
-the value function of a linear program \cite{rockafellar1970convex},
-which means the Graphical Linear Programming \textbf{GLP}
-theory provides a syntax for a broad class of nonsmooth convex models that appear in optimization,
-control, economics, and machine learning.
+For that we present the new prop of Parametric Linear Programas where morphisms
+are linear programas, this will serve as our semantics.
+Additionally, we make the addition of the new generator
+$\inlinegen{linear}$ and other three characteristic axioms,
+and through a epigraph-based argument,
+provide a normal form proof to show that this small set of generators and rules fully
+present the semantics category, i.e, it's sound, complete and expressible.
 
 \paragraph{Thesis overview}
 In Section~\ref{sec:quantale-relations} we set up the algebraic and categorical
