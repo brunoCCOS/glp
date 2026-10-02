@@ -278,6 +278,42 @@ Theorem~\ref{thm:normalformgpa} and Theorem~\ref{thm:NormalFormGLP}, which follo
 same pattern already established for graphical linear and affine algebra
 \cite{bonchi2017interacting, bonchi2019affine} and for their quadratic
 \cite{stein2024gqa} and polyhedral \cite{bonchi2021polyhedral} extensions.
+Table~\ref{tab:language-hierarchy} summarizes the resulting hierarchy of
+languages, indicating where each syntax and axiomatisation is introduced.
+
+\begin{table}[H]
+\centering
+\caption{Hierarchy of the graphical languages used in this thesis.}
+\label{tab:language-hierarchy}
+\small
+\begin{tabular}{c p{3.1cm} p{3.5cm} c c}
+    \\
+\toprule
+\textbf{Language} & \textbf{Syntax} & \textbf{Axioms} & \textbf{Reference} & \textbf{Semantics} \\
+\midrule
+$\mathbf{GLA}$
+& Appendix~\ref{sec:appendix-gla}: linear generators
+& Appendix~\ref{sec:appendix-gla}: linear equations
+& \cite{bonchi2017interacting}
+& $\mathbf{LinRel}$ \\
+$\mathbf{GAA}$
+& $\mathbf{GLA}+\rtop$; Table~\ref{tab:appendix-gla-generators}
+& $\mathbf{GLA}$ axioms $+$ affine-point axioms; Appendix~\ref{sec:appendix-gla}
+& \cite{bonchi2019affine}
+& $\mathbf{AffRel}$ \\
+$\mathbf{GPA}$
+& $\mathbf{GAA}+\inlinegen{ge}$; Definition~\ref{def:gpa}
+& $\mathbf{GAA}$ axioms $+$ order axioms; Definition~\ref{def:gpa}
+& \cite{bonchi2021polyhedral}
+& $\mathbf{PolyRel}$ \\
+$\mathbf{GLP}$
+& $\mathbf{GPA}+\inlinegen{linear}$; Definition~\ref{def:glp}
+& $\mathbf{GPA}$ axioms $+$ objective axioms; Definition~\ref{def:glp}
+& This work
+& $\mathbf{LinProg}\;(\mathbf{LPRel})$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 We start by recalling how the Symmetric Monoidal Theory of Graphical Affine Algebra (\textbf{GAA}) \cite{bonchi2019affine}
 can be extended into the even more general theory of Symmetric Inequality Monoidal Theory.

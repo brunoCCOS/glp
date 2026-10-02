@@ -1,21 +1,21 @@
-\chapter{Categorical and graphical linear algebra}\label{sec:appendix-gla}
+\chapter{Categorical and graphical affine algebra}\label{sec:appendix-gla}
 
 This appendix develops the categorical background used by the graphical
 calculi in this thesis.  Its purpose is not to survey category theory in full,
-but to make the passage from ordinary composition to Graphical Linear Algebra
-(GLA) explicit and self-contained.  The central idea is simple: a diagram is a
+but to make the passage from ordinary composition to Graphical Affine Algebra
+(GAA) explicit and self-contained.  The central idea is simple: a diagram is a
 morphism, joining diagrams eliminates their common variables, and placing
- diagrams side by side forms independent systems.  Category theory isolates
+diagrams side by side forms independent systems.  Category theory isolates
 these two operations; symmetric monoidal categories make them graphical; and
-GLA specializes the resulting language to systems of linear equations.
+GAA specializes the resulting language to systems of affine equations.
 
 The development proceeds in four stages.  First we recall categories, functors,
 and the category of relations.  We then add a symmetric monoidal product and
 explain the corresponding string-diagram notation.  Next we introduce PROPs,
 monoid and Frobenius structures, which provide the algebraic operations for
 copying, deleting, adding, and constraining variables.  Finally we define the
-PROP of linear relations and state the presentation theorem identifying it
-with GLA.
+PROP of affine relations and state the presentation theorem identifying it
+with GAA.
 
 \section{Categories: systems and their composition}
 
@@ -93,7 +93,7 @@ respectively.
 Ordinary categorical composition describes processes in sequence.  To describe
 independent processes in parallel we need a second operation.
 
-\begin{definition}[Symmetric monoidal category]
+\begin{definition}[Symmetric monoidal category]\label{appendix:smc}
 A \emph{symmetric monoidal category} is a category $\mathcal C$ equipped with a
 bifunctor
 \[
@@ -127,10 +127,50 @@ A bare wire is an identity and crossing wires represents symmetry.  The
 interchange law is built into the geometry: disjoint boxes may move past one
 another because their relative horizontal order carries no information.
 Consequently, diagrams are considered equal up to deformations that preserve
-connectivity, boundary, and the order of ports on each box.
+connectivity, boundary, and the order of ports on each box.  The basic
+translation between categorical notation and string diagrams is displayed in
+Figure~\ref{fig:appendix-string-diagram-dictionary}.
 
 \begin{figure}[H]
 \centering
+\begin{tikzpicture}[axpic]
+  % Identity and a general morphism
+  \draw (-0.6,1.1) -- (0.6,1.1);
+  \node at (0,0.45) {$\mathrm{id}_A:A\to A$};
+
+  \pic[val=f] (single) at (2.6,1.1) {diagram};
+  \node at (2.6,0.45) {$f:A\to B$};
+
+  % Sequential composition
+  \pic[val=f] (cf) at (4.6,1.1) {diagram};
+  \pic[val=g] (cg) at (5.9,1.1) {diagram};
+  \draw (cf-out-0) -- (cg-in-0);
+  \node at (5.25,0.45) {$g\circ f$};
+
+  % Tensor product
+  \pic[val=f] (tf) at (7.8,1.65) {diagram};
+  \pic[val=g] (tg) at (7.8,0.75) {diagram};
+  \node at (7.8,0.1) {$f\otimes g$};
+
+  % Symmetry
+    \draw (9.5,1.45) to[out=0,in=180] (10.7,0.75);
+    \draw (9.5,0.75) to[out=0,in=180] (10.7,1.45);
+  \node at (10.1,0.1) {$\sigma_{A,B}$};
+\end{tikzpicture}
+\caption{String-diagram notation for the structure of a symmetric monoidal
+category.  Diagrams are read from left to right: horizontal connection is
+composition, while vertical juxtaposition is the tensor product.}
+\label{fig:appendix-string-diagram-dictionary}
+\end{figure}
+
+The labels beneath the pictures record the corresponding morphisms.  In
+particular, the two wires in the drawing of $f\otimes g$ do not interact: they
+represent processes performed in parallel.  The crossing represents the
+canonical reordering $A\otimes B\to B\otimes A$, not an additional operation
+chosen for the particular objects.
+
+\begin{figure}[H]
+    \centering
 \begin{tikzpicture}[axpic]
   \pic[val=f] (f) at (0,0.7) {diagram};
   \pic[val=g] (g) at (1.5,0.7) {diagram};
@@ -145,8 +185,8 @@ connectivity, boundary, and the order of ports on each box.
   \pic[val=h] (h2) at (4.0,-0.7) {diagram};
   \pic[val=k] (k2) at (5.5,-0.7) {diagram};
   \draw (h2-out-0) -- (k2-in-0);
-  \node[below=8pt of f-node] {$(g\circ f)\otimes(k\circ h)$};
-  \node[below=8pt of f2-node] {$(g\otimes k)\circ(f\otimes h)$};
+  \node[below=2 of f-node] {$(g\circ f)\otimes(k\circ h)$};
+  \node[below=2 of f2-node] {$(g\otimes k)\circ(f\otimes h)$};
 \end{tikzpicture}
 \caption{The interchange law expressed as a string diagram.}
 \label{fig:appendix-interchange}
@@ -181,46 +221,10 @@ $\mathbb K$, let $\mathbf{Mat}_{\mathbb K}$ have morphisms $m\to n$ given by
 $n\times m$ matrices.  Composition is matrix multiplication, tensor is block
 diagonal sum, and the symmetry is a permutation matrix.
 
-\begin{definition}[Symmetric monoidal theory]
-A \emph{symmetric monoidal theory} (SMT) is a pair $(\Sigma,E)$, where
-$\Sigma$ is a collection of typed generators $o:m\to n$ and $E$ is a
-collection of equations between equally typed string diagrams built from
-those generators, identities, symmetries, composition, and tensor product.
-The PROP presented by the theory is denoted $\mathbf{P}_{\Sigma,E}$.
-\end{definition}
-
-The word ``free'' in a free PROP means that two generated diagrams are equal
-only when this follows from the symmetric monoidal laws and the equations in
-$E$.  To give a semantics for the syntax is therefore to give a strict
-symmetric monoidal functor
-\[
- \llbracket{-}\rrbracket:\mathbf{P}_{\Sigma,E}\longrightarrow\mathbf{Sem}
-\]
-that sends every generating equation to a true semantic equality.
-
-\begin{definition}[Soundness, completeness, and expressivity]
-Let $c,d:m\to n$ be diagrams.
-\begin{itemize}
-    \item The theory is \emph{sound} when
-    $c={}_E d$ implies $\llbracket c\rrbracket=\llbracket d\rrbracket$.
-    \item It is \emph{complete} when
-    $\llbracket c\rrbracket=\llbracket d\rrbracket$ implies $c={}_E d$.
-    \item It is \emph{expressive} when every morphism of the semantic PROP is
-    the interpretation of some diagram.
-\end{itemize}
-Equivalently, the interpretation functor is well defined, faithful, and full,
-respectively.
-\end{definition}
-
-These distinctions are essential.  Soundness prevents an equation from
-identifying different systems.  Completeness ensures that diagram rewriting
-can prove every valid semantic equality.  Expressivity ensures that the
-language can denote every system under consideration.
-
 \section{Monoids, comonoids, and Frobenius structure}
 
-The nodes in GLA are not arbitrary operations.  They arise from standard
-algebraic structures internal to a symmetric monoidal category.
+The algebraic nodes in GAA are not arbitrary operations.  They arise from
+standard algebraic structures internal to a symmetric monoidal category.
 
 \begin{definition}[Monoid and comonoid]
 A \emph{commutative monoid} on an object $A$ consists of
@@ -264,18 +268,18 @@ category equipped coherently with such a structure on each object is called a
 \emph{hypergraph category}~\cite{fong2019hypergraph}.  This compact structure
 is what makes the converse of a relation available graphically by reflection.
 
-\section{The PROP of linear relations}
+\section{The PROP of affine relations}
 
 Fix a field $\mathbb K$; all applications in this thesis use
 $\mathbb K=\mathbb R$.
 
-\begin{definition}[Linear relation]
-A \emph{linear relation} $R:m\to n$ is a linear subspace
+\begin{definition}[Affine relation]
+An \emph{affine relation} $R:m\to n$ is an affine subspace (or the empty set)
 \[
  R\subseteq\mathbb K^m\oplus\mathbb K^n.
 \]
 We write $x\mathrel{R}y$ when $(x,y)\in R$.  The PROP
-$\mathbf{LinRel}_{\mathbb K}$ has natural numbers as objects and linear
+$\mathbf{AffRel}_{\mathbb K}$ has natural numbers as objects and affine
 relations as morphisms.  Its identity, composition, and tensor are
 \begin{align*}
  \mathrm{id}_n
@@ -292,10 +296,10 @@ $\mathbb K^m\oplus\mathbb K^p\cong\mathbb K^{m+p}$, the tensor on objects is
 addition.
 \end{definition}
 
-The composite is again a linear subspace: the simultaneous constraints
-$(x,y)\in R$ and $(y,z)\in S$ define a linear subspace, and projecting away
-$y$ preserves linearity.  Hence composition of linear relations is exactly
-linear variable elimination.
+The composite is again an affine subspace or empty: the simultaneous
+constraints $(x,y)\in R$ and $(y,z)\in S$ form an affine system, and projecting
+away $y$ preserves affinity.  Hence composition of affine relations is exactly
+affine variable elimination.
 
 Every matrix $A\in\mathbb K^{n\times m}$ determines the functional linear
 relation
@@ -308,34 +312,37 @@ Matrix multiplication is recovered by relational composition:
  \operatorname{graph}(B)\circ\operatorname{graph}(A)
  =\operatorname{graph}(BA).
 \]
-Linear relations are nevertheless strictly more general than matrices.  For
-example, the converse
+Affine relations are nevertheless strictly more general than affine maps.
+Linear maps embed as the special case with zero translation.  For example, the
+converse
 \[
  \operatorname{graph}(A)^{\mathrm{op}}
  =\{(y,x)\mid y=Ax\}
 \]
-may be partial or multivalued.  More generally, every linear relation admits a
-presentation by homogeneous linear equations:
+may be partial or multivalued.  More generally, every affine relation admits a presentation by affine linear
+equations:
 \[
- R=\{(x,y)\mid Ex=Fy\}
+ R=\{(x,y)\mid Ex+b=Fy\}
 \]
-for suitable matrices $E$ and $F$.  This cospan form is the semantic origin of
-GLA normal forms.
+for suitable matrices $E,F$ and vector $b$.  This affine cospan form is the
+semantic origin of GAA normal forms.
 
-\section{Graphical Linear Algebra}
+\section{Graphical Affine Algebra}
 
-Graphical Linear Algebra is a graphical presentation of
-$\mathbf{LinRel}_{\mathbb K}$~\cite{bonchi2017interacting,paixao2022highlevel}.
-Its diagrams are generated by two interacting families of nodes and by one
-scalar box for each $k\in\mathbb K$.  We read diagrams from left to right.
-The following table gives the type and exact relation denoted by every basic
-orientation; the reversed orientation denotes the converse relation.
+Graphical Affine Algebra is a graphical presentation of
+$\mathbf{AffRel}_{\mathbb K}$~\cite{bonchi2019affine}.  Its diagrams are
+generated by two interacting families of nodes, one scalar box for each
+$k\in\mathbb K$, and the affine point $\rtop:0\to1$.  We read diagrams from
+left to right.  The following table gives the type and exact relation denoted
+by every basic orientation; the reversed orientation denotes the converse
+relation.
 
 \begin{table}[H]
 \centering
-\caption{Generators of $\mathbf{GLA}$ and their linear-relation semantics.}
+\caption{Generators of $\mathbf{GAA}$ and their affine-relation semantics.}
 \label{tab:appendix-gla-generators}
 \begin{tabular}{c c p{8.1cm}}
+\\
 \toprule
 \textbf{diagram} & \textbf{type} & \textbf{interpretation} \\
 \midrule
@@ -349,6 +356,8 @@ orientation; the reversed orientation denotes the converse relation.
 & $1\to0$ & $\{(x,*)\mid x\in\mathbb K\}$ \\
 \begin{tikzpicture}[axpic]\pic[val=k] (g) at (0,0) {scalar};\end{tikzpicture}
 & $1\to1$ & $\{(x,y)\mid y=kx\}$, for $k\in\mathbb K$ \\
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {affine};\end{tikzpicture}
+& $0\to1$ & $\{(*,1)\}$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -367,9 +376,7 @@ same equation as a constraint.  When $k\ne0$, a reflected $k$-box is equivalent
 to a forward $k^{-1}$-box; when $k=0$, its semantics is the non-functional
 constraint $x=0$ with arbitrary output.
 
-\subsection{The equations of GLA}
-
-The equational theory can be organized into four layers.
+The equational theory of GAA can be organized into five layers.
 
 \begin{enumerate}[label=\textnormal{(\roman*)}]
     \item The addition node and zero form a commutative monoid, while copy and
@@ -387,9 +394,14 @@ The equational theory can be organized into four layers.
     \item Scalar boxes obey the arithmetic of $\mathbb K$: consecutive boxes
     multiply, parallel copied-and-added boxes add, $1$ is the identity, and
     scalars commute with the appropriate copying and addition nodes.
+
+    \item The affine point $\rtop$ denotes the constant $1$.  It is copied by
+    the black comultiplication and discarded by the black counit; these are the
+    affine equations that allow constants and translations to propagate
+    through a diagram.
 \end{enumerate}
 
-Every equation is sound because both sides denote the same linear subspace.
+Every equation is sound because both sides denote the same affine subspace.
 For example, copying after addition and adding copied components both denote
 \[
  \{((x_1,x_2),(y_1,y_2))\mid
@@ -397,41 +409,26 @@ For example, copying after addition and adding copied components both denote
 \]
 The equations do more than preserve semantics: they characterize it.
 
-\begin{theorem}[Presentation theorem for GLA]\label{thm:appendix-gla-presentation}
+\begin{theorem}[Presentation theorem for GAA]\label{thm:appendix-gla-presentation}
 For a field $\mathbb K$, the standard interpretation extends to an isomorphism
 of PROPs
 \[
  \llbracket{-}\rrbracket:
- \mathbf{GLA}_{\mathbb K}\xrightarrow{\ \cong\ }
- \mathbf{LinRel}_{\mathbb K}.
+ \mathbf{GAA}_{\mathbb K}\xrightarrow{\ \cong\ }
+ \mathbf{AffRel}_{\mathbb K}.
 \]
-Consequently, GLA is sound, complete, and expressive for linear
-relations~\cite{bonchi2017interacting,paixao2022highlevel}.
+Consequently, GAA is sound, complete, and expressive for affine
+relations~\cite{bonchi2019affine}.
 \end{theorem}
 
-\begin{proof}[Proof idea]
-The matrix fragment generated by addition, zero, copy, discard, and scalars
-represents every matrix over $\mathbb K$.  Reflection represents converse
-relations.  Since every linear relation has a cospan presentation
-$Ex=Fy$, every relation is represented by a diagram consisting of a matrix
-$E$ followed by the converse of a matrix $F$; this proves expressivity.
-The interacting Hopf and Frobenius equations rewrite arbitrary diagrams to
-such a form.  Equality of the resulting linear subspaces is then reducible to
-ordinary matrix equivalence, whose elementary operations are derivable in the
-calculus.  This yields completeness; soundness follows by checking the
-relations assigned to the generators and equations.
-\end{proof}
-
-The theorem explains why GLA is useful in the main text.  A diagram is not
+The theorem explains why GAA is useful in the main text.  A diagram is not
 merely a picture of a chosen matrix calculation: it denotes the entire
-solution relation of a linear system.  Sequential composition existentially
+solution relation of an affine system.  Sequential composition existentially
 eliminates internal variables, tensor combines independent systems, and
 reflection exchanges a relation with its converse.  Diagram rewriting is
-therefore a complete algebra of linear systems.
+therefore a complete algebra of affine systems.
 
-\subsection{Notation and derived rules used in this thesis}
-
-A matrix box $A:m\to n$ abbreviates any GLA diagram whose interpretation is
+A matrix box $A:m\to n$ abbreviates any GAA diagram whose interpretation is
 $y=Ax$.  Its reflected box denotes the converse relation.  For compatible
 matrices, connecting boxes gives matrix multiplication, while copying inputs,
 applying two matrices, and adding their outputs gives the corresponding block
@@ -448,15 +445,16 @@ contract by the spider theorem.
 The particular derived equalities invoked by the proofs in
 Chapters~\ref{sec:gpa} and~\ref{sec:glp} are collected below.  They are grouped
 as (G1) matrix calculus, (G2) transposition and cospan form, (G3) bending, and
-(G4) the black spider laws.  All follow from the GLA equations summarized
-above and are included here so that later diagrammatic derivations can be
-checked without expanding every matrix box into scalar generators.
+(G4) the black spider laws.  All follow from the linear fragment of the GAA equations summarized above and
+are included here so that later diagrammatic derivations can be checked without
+expanding every matrix box into scalar generators.
 
 \input{tikz/RulesBackgroundGLA.tex}
 
-To pass from linear to affine relations one adjoins a constant point
-$1:0\to1$; this gives Graphical Affine Algebra (GAA)
-~\cite{bonchi2019affine}.  The later calculi in this thesis extend that affine
-base with order and optimization generators.  Their new equations are studied
-in the main chapters, whereas the categorical and linear rules on which they
-rely are exactly those established in this appendix.
+The affine point additionally turns homogeneous matrix equations into affine
+ones: together with copying and scalar multiplication it constructs any
+constant vector $b$, and hence any constraint $Ex+b=Fy$.  The later calculi in
+this thesis extend this affine base with order and optimization generators.
+Their new equations are studied in the main chapters, whereas the categorical
+and affine rules on which they rely are exactly those established in this
+appendix.
