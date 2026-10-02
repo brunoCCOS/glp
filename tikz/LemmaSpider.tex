@@ -1,0 +1,48 @@
+% Generalised spider: a connected black node with an inequality on every leg
+% equals the all-pairs diagram.
+\begin{center}
+    \begin{tikzpicture}[axpic]
+        \pic (g1) at (0.500,1.400) {ge};
+        \pic (g2) at (0.500,-0.400) {ge};
+        \node at (0.500,0.500) {$\vdots$};
+        \pic (c1) at (2.000,0.500) {cocopy};
+        \pic (c2) at (3.250,0.500) {copy};
+        \pic (h1) at (4.750,1.400) {ge};
+        \pic (h2) at (4.750,-0.400) {ge};
+        \node at (4.750,0.500) {$\vdots$};
+        \draw (g1-out-0) to[out=0,in=180] (c1-in-0);
+        \draw (g2-out-0) to[out=0,in=180] (c1-in-1);
+        \draw (c1-out-0) -- (c2-in-0);
+        \draw (c2-out-0) to[out=0,in=180] (h1-in-0);
+        \draw (c2-out-1) to[out=0,in=180] (h2-in-0);
+        \node[font=\scriptsize] at (0.100,1.600) {$x_1$};
+        \node[font=\scriptsize] at (0.100,-0.600) {$x_a$};
+        \node[font=\scriptsize] at (5.400,1.600) {$y_1$};
+        \node[font=\scriptsize] at (5.400,-0.600) {$y_b$};
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+        \pic (c1) at (0.500,1.400) {copy};
+        \pic (c2) at (0.500,-0.400) {copy};
+        \node at (0.500,0.500) {$\vdots$};
+        \pic (g11) at (2.000,1.900) {ge};
+        \pic (g12) at (2.000,0.900) {ge};
+        \pic (g21) at (2.000,0.100) {ge};
+        \pic (g22) at (2.000,-0.900) {ge};
+        \pic (d1) at (3.750,1.400) {cocopy};
+        \pic (d2) at (3.750,-0.400) {cocopy};
+        \node at (3.750,0.500) {$\vdots$};
+        \draw (c1-out-0) to[out=0,in=180] (g11-in-0);
+        \draw (c1-out-1) to[out=0,in=180] (g12-in-0);
+        \draw (c2-out-0) to[out=0,in=180] (g21-in-0);
+        \draw (c2-out-1) to[out=0,in=180] (g22-in-0);
+        \draw (g11-out-0) to[out=0,in=180] (d1-in-0);
+        \draw (g21-out-0) to[out=0,in=180] (d1-in-1);
+        \draw (g12-out-0) to[out=0,in=180] (d2-in-0);
+        \draw (g22-out-0) to[out=0,in=180] (d2-in-1);
+        \node[font=\scriptsize] at (0.100,1.600) {$x_1$};
+        \node[font=\scriptsize] at (0.100,-0.600) {$x_a$};
+        \node[font=\scriptsize] at (4.400,1.600) {$y_1$};
+        \node[font=\scriptsize] at (4.400,-0.600) {$y_b$};
+    \end{tikzpicture}
+\end{center}

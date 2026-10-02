@@ -1,0 +1,11 @@
+\begin{tikzpicture}[axpic]
+    \pic[val=A] (g1) at (0.500,0.500) {relation};
+    \begin{scope}[shift={(1.250,0.000)}]
+        \pic (g2) at (0.500,0.500) {ge};
+    \end{scope}
+    \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+    \begin{scope}[shift={(2.500,0.000)}]
+        \pic[val=B] (g3) at (0.500,0.500) {comatrix};
+    \end{scope}
+    \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+\end{tikzpicture}

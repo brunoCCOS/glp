@@ -1,0 +1,126 @@
+% Derived rules of GPA_\rtop used throughout the FME derivation.
+\begin{tabular}{r c c c}
+  \diagrow{(a)}{
+      \pic (g1) at (0.500,0.500) {antipode};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {ge};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {coge};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {antipode};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }
+  \diagrow{(b) $k>0$}{
+      \pic[val=k] (g1) at (0.500,0.500) {scalar};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {ge};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {ge};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic[val=k] (g2) at (0.500,0.500) {scalar};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }
+  \diagrow{(b) $k<0$}{
+      \pic[val=k] (g1) at (0.500,0.500) {scalar};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic (g2) at (0.500,0.500) {ge};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {coge};
+      \begin{scope}[shift={(1.250,0.000)}]
+      \pic[val=k] (g2) at (0.500,0.500) {scalar};
+      \end{scope}
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }
+  \diagrow{(c)}{
+      \pic (g1) at (0.500,1.000) {ge};
+      \pic (g2) at (0.500,0.000) {ge};
+      \pic (g3) at (1.750,0.500) {multiplication};
+      \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-1);
+  }{
+      \pic (g1) at (0.500,0.500) {multiplication};
+      \pic (g2) at (1.750,0.500) {ge};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }
+  \diagrow{(c$^{*}$)}{
+      \pic (g1) at (0.500,0.500) {ge};
+      \pic (g2) at (1.750,0.500) {comultiplication};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {comultiplication};
+      \pic (g2) at (1.750,1.000) {ge};
+      \pic (g3) at (1.750,0.000) {ge};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (g1-out-1) to[out=0,in=180] (g3-in-0);
+  }
+  \diagrow{(d)}{
+      \pic (g1) at (0.500,0.500) {ge};
+      \pic (g2) at (1.750,0.500) {discard};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {discard};
+      \coordinate (id_in_1) at (-0.250,0.500);
+      \draw (id_in_1) -- (g1-in-0);
+  }
+  \diagrow{(d$^{*}$)}{
+      \pic (g1) at (0.500,0.500) {codiscard};
+      \pic (g2) at (1.750,0.500) {ge};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {codiscard};
+      \coordinate (id_out_1) at (1.250,0.500);
+      \draw (g1-out-0) -- (id_out_1);
+  }
+  \diagrowc{(e)}{
+      \pic (g1) at (0.500,1.000) {ge};
+      \pic (g2) at (0.500,0.000) {ge};
+      \pic (g3) at (1.750,0.500) {cocopy};
+      \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-1);
+  }{
+      \pic (g1) at (0.500,0.500) {cocopy};
+      \pic (g2) at (1.750,0.500) {ge};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }
+  \diagrow{(f) transitivity}{
+      \pic (g1) at (0.500,0.500) {ge};
+      \pic (g2) at (1.750,0.500) {ge};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {ge};
+  }
+  \diagrow{(f) direction}{
+      \pic (g1) at (0.500,0.500) {coge};
+      \pic (g2) at (1.750,0.500) {ge};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  }{
+      \pic (g1) at (0.500,0.500) {discard};
+      \pic (g2) at (1.750,0.500) {codiscard};
+      \coordinate (id_in_1) at (-0.250,0.500);
+      \draw (id_in_1) -- (g1-in-0);
+      \coordinate (id_out_1) at (2.500,0.500);
+      \draw (g2-out-0) -- (id_out_1);
+  }
+  \diagrow{(g)}{
+      \pic (g1) at (0.500,1.000) {ge};
+      \draw (g1-out-0) -- (1.600,1.000) to[out=0,in=0] (1.600,0.000) -- (0.000,0.000);
+  }{
+      \pic (g1) at (0.500,0.000) {coge};
+      \draw (g1-out-0) -- (1.600,0.000) to[out=0,in=0] (1.600,1.000) -- (0.000,1.000);
+  }
+  \diagrow{(g) $k\neq0$}{
+      \pic[val=k] (g1) at (0.500,1.000) {scalar};
+      \draw (g1-out-0) -- (1.600,1.000) to[out=0,in=0] (1.600,0.000) -- (0.000,0.000);
+  }{
+      \pic[val=k^{-1}] (g1) at (0.500,0.000) {scalar};
+      \draw (g1-out-0) -- (1.600,0.000) to[out=0,in=0] (1.600,1.000) -- (0.000,1.000);
+  }
+\end{tabular}

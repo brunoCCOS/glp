@@ -1,0 +1,271 @@
+\section*{(P1)}
+
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (g) at (0.500,0.500) {ge};
+  \pic (c) at (1.750,0.500) {copy};
+  \draw (-0.250,0.500) -- (g-in-0);
+  \draw (g-out-0) to[out=0,in=180] (c-in-0);
+  \draw (c-out-0) -- (2.500,1.000);
+  \draw (c-out-1) -- (2.500,0.000);
+\end{tikzpicture}
+\Big]
+=
+\Big\{\big(x,\tbinom{y_1}{y_2}\big) \;\Big|\; x\ge y_1 \wedge x\ge y_2 \wedge y_1=y_2\Big\}
+\]
+\[
+\subseteq\;
+\Big\{\big(x,\tbinom{y_1}{y_2}\big) \;\Big|\; x\ge y_1 \wedge x\ge y_2\Big\}
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (c)  at (0.500,0.500) {copy};
+  \pic (g1) at (1.750,1.000) {ge};
+  \pic (g2) at (1.750,0.000) {ge};
+  \draw (-0.250,0.500) -- (c-in-0);
+  \draw (c-out-0) to[out=0,in=180] (g1-in-0);
+  \draw (c-out-1) to[out=0,in=180] (g2-in-0);
+\end{tikzpicture}
+\Big]
+\]
+
+\section*{(P2)}
+
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (m) at (0.500,0.500) {multiplication};
+  \pic (g) at (1.750,0.500) {ge};
+  \draw (-0.250,1.000) -- (m-in-0);
+  \draw (-0.250,0.000) -- (m-in-1);
+  \draw (m-out-0) to[out=0,in=180] (g-in-0);
+\end{tikzpicture}
+\Big]
+=
+\Big\{\big(\tbinom{x_1}{x_2},y\big)\mid x_1+x_2\ge y\Big\}
+=
+\Big\{\big(\tbinom{x_1}{x_2},y\big)\ \Big|\ \exists c,d.\ x_1+x_2\ge c+d \wedge c+d=y\Big\}
+\]
+\[
+=
+\Big\{\big(\tbinom{x_1}{x_2},y\big)\ \Big|\ \exists \hat c,\hat d.\ x_1\ge\hat c\wedge x_2\ge\hat d\wedge \hat c+\hat d=y\Big\}
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (g1) at (0.500,1.000) {ge};
+  \pic (g2) at (0.500,0.000) {ge};
+  \pic (m)  at (1.750,0.500) {multiplication};
+  \draw (-0.250,1.000) -- (g1-in-0);
+  \draw (-0.250,0.000) -- (g2-in-0);
+  \draw (g1-out-0) to[out=0,in=180] (m-in-0);
+  \draw (g2-out-0) to[out=0,in=180] (m-in-1);
+\end{tikzpicture}
+\Big]
+\]
+
+\section*{(P3)}
+
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (g) at (0.500,0.500) {ge};
+  \pic (d) at (1.750,0.500) {discard};
+  \draw (-0.250,0.500) -- (g-in-0);
+  \draw (g-out-0) -- (d-in-0);
+\end{tikzpicture}
+\Big]
+=
+\{(x,\bullet)\mid \exists c.\ x\ge c\}
+\underset{\text{tautology}}{=}
+\{(x,\bullet)\mid x\in\mathbb R\}
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (d) at (0.500,0.500) {discard};
+  \draw (-0.250,0.500) -- (d-in-0);
+\end{tikzpicture}
+\Big]
+\]
+
+\section*{(P4)}
+
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (z) at (0.500,0.500) {zero};
+\end{tikzpicture}
+\Big]
+=
+\{(x,\bullet)\mid x=0\}
+\subseteq
+\{(x,\bullet)\mid x\ge0\}
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (z) at (0.500,0.500) {zero};
+  \pic (g) at (1.750,0.500) {ge};
+  \draw (z-out-0) to[out=0,in=180] (g-in-0);
+\end{tikzpicture}
+\Big]
+\]
+
+\section*{(P5), (P6)}
+
+For $k>0$:
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic[val=k] (s) at (0.500,0.500) {scalar};
+  \pic (g) at (1.750,0.500) {ge};
+  \draw (-0.250,0.500) -- (s-in-0);
+  \draw (s-out-0) to[out=0,in=180] (g-in-0);
+\end{tikzpicture}
+\Big]
+=
+\{(x,y)\mid kx\ge y \wedge k>0\}
+=
+\Big\{(x,y)\ \Big|\ x\ge\frac{y}{k}\wedge k>0\Big\}
+\]
+\[
+=
+\{(x,y)\mid \exists c.\ x\ge c \wedge kc=y \wedge k>0\}
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (g) at (0.500,0.500) {ge};
+  \pic[val=k] (s) at (1.750,0.500) {scalar};
+  \draw (-0.250,0.500) -- (g-in-0);
+  \draw (g-out-0) to[out=0,in=180] (s-in-0);
+\end{tikzpicture}
+\Big]
+\]
+
+For $k<0$: the same computation, dividing by the negative $k$ flips the inequality, so
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic[val=k] (s) at (0.500,0.500) {scalar};
+  \pic (g) at (1.750,0.500) {ge};
+  \draw (-0.250,0.500) -- (s-in-0);
+  \draw (s-out-0) to[out=0,in=180] (g-in-0);
+\end{tikzpicture}
+\Big]
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (g) at (0.500,0.500) {coge};
+  \pic[val=k] (s) at (1.750,0.500) {scalar};
+  \draw (-0.250,0.500) -- (g-in-0);
+  \draw (g-out-0) to[out=0,in=180] (s-in-0);
+\end{tikzpicture}
+\Big]
+\]
+
+\section*{(antisym)}
+
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (c1) at (0.500,0.500) {copy};
+  \pic (g)  at (1.750,1.000) {ge};
+  \pic (cg) at (1.750,0.000) {coge};
+  \pic (c2) at (3.000,0.500) {cocopy};
+  \draw (-0.250,0.500) -- (c1-in-0);
+  \draw (c1-out-0) to[out=0,in=180] (g-in-0);
+  \draw (c1-out-1) to[out=0,in=180] (cg-in-0);
+  \draw (g-out-0) to[out=0,in=180] (c2-in-0);
+  \draw (cg-out-0) to[out=0,in=180] (c2-in-1);
+\end{tikzpicture}
+\Big]
+=
+\{(x,y)\mid x\ge y \wedge x\le y\}
+\]
+\[
+=
+\{(x,y)\mid x=y,\ x,y\in\mathbb R\}
+\subseteq
+\{(x,y)\mid x=y,\ x,y\in\mathbb R\}
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \draw (0.000,0.500) -- (1.500,0.500);
+\end{tikzpicture}
+\Big]
+\]
+
+\section*{(spider)}
+
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (g1) at (0.500,1.000) {ge};
+  \pic (g2) at (0.500,0.000) {ge};
+  \pic (c1) at (1.750,0.500) {cocopy};
+  \pic (c2) at (3.000,0.500) {copy};
+  \pic (h1) at (4.250,1.000) {ge};
+  \pic (h2) at (4.250,0.000) {ge};
+  \draw (-0.250,1.000) -- (g1-in-0);
+  \draw (-0.250,0.000) -- (g2-in-0);
+  \draw (g1-out-0) to[out=0,in=180] (c1-in-0);
+  \draw (g2-out-0) to[out=0,in=180] (c1-in-1);
+  \draw (c1-out-0) -- (c2-in-0);
+  \draw (c2-out-0) to[out=0,in=180] (h1-in-0);
+  \draw (c2-out-1) to[out=0,in=180] (h2-in-0);
+\end{tikzpicture}
+\Big]
+=
+\Big\{\big(\tbinom{x_1}{x_2},\tbinom{y_1}{y_2}\big)\ \Big|\ \exists z.\ x_1\ge z\wedge x_2\ge z\wedge z\ge y_1\wedge z\ge y_2\Big\}
+\]
+\[
+=
+\Big\{\big(\tbinom{x_1}{x_2},\tbinom{y_1}{y_2}\big)\ \Big|\ x_1\ge y_1\wedge x_1\ge y_2\wedge x_2\ge y_1\wedge x_2\ge y_2\Big\}
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (c1) at (0.500,1.500) {copy};
+  \pic (c2) at (0.500,-0.500) {copy};
+  \pic (g11) at (2.000,2.000) {ge};
+  \pic (g12) at (2.000,1.000) {ge};
+  \pic (g21) at (2.000,0.000) {ge};
+  \pic (g22) at (2.000,-1.000) {ge};
+  \pic (d1) at (3.750,1.500) {cocopy};
+  \pic (d2) at (3.750,-0.500) {cocopy};
+  \draw (c1-out-0) to[out=0,in=180] (g11-in-0);
+  \draw (c1-out-1) to[out=0,in=180] (g12-in-0);
+  \draw (c2-out-0) to[out=0,in=180] (g21-in-0);
+  \draw (c2-out-1) to[out=0,in=180] (g22-in-0);
+  \draw (g11-out-0) to[out=0,in=180] (d1-in-0);
+  \draw (g21-out-0) to[out=0,in=180] (d1-in-1);
+  \draw (g12-out-0) to[out=0,in=180] (d2-in-0);
+  \draw (g22-out-0) to[out=0,in=180] (d2-in-1);
+\end{tikzpicture}
+\Big]
+\]
+
+\section*{(direction)}
+
+\[
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (g1) at (0.500,0.500) {coge};
+  \pic (g2) at (1.500,0.500) {ge};
+  \draw (-0.250,0.500) -- (g1-in-0);
+  \draw (g1-out-0) -- (g2-in-0);
+  \draw (g2-out-0) -- (2.250,0.500);
+\end{tikzpicture}
+\Big]
+=
+\{(x,y)\mid \exists z.\ z\ge y \wedge z\ge x\}
+=
+\{(x,y)\mid x,y\in\mathbb R\}
+=
+\Big[
+\begin{tikzpicture}[axpic]
+  \pic (d) at (0.500,0.500) {discard};
+  \pic (cd) at (1.750,0.500) {codiscard};
+  \draw (-0.250,0.500) -- (d-in-0);
+  \draw (cd-out-0) -- (2.500,0.500);
+\end{tikzpicture}
+\Big]
+\]

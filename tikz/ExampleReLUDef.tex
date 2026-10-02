@@ -1,0 +1,27 @@
+\diagdef{
+    \node[draw, fill=white] at (0,0) {ReLU};
+    \draw (0.55,0.0) to (1.0,0);
+    \draw (-0.55,0.0) to (-1.0,0);
+  }{
+  \begin{scope}[shift={(0.000,0.500)}]
+  \begin{scope}[shift={(1.250,0.000)}]
+  \pic (g2) at (0.500,0.500) {copy};
+  \end{scope}
+  \end{scope}
+  \begin{scope}[shift={(2.500,0.000)}]
+  \begin{scope}[shift={(0.625,1.000)}]
+  \pic (g3) at (0.500,0.500) {ge};
+  \end{scope}
+  \pic (g4) at (0.500,0.500) {ge};
+  \begin{scope}[shift={(1.250,0.000)}]
+  \pic (g5) at (0.500,0.500) {cozero};
+  \end{scope}
+  \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+  \coordinate (a6) at (0.000,0 |- g3-in-0);
+  \draw (g3-in-0) -- (a6);
+  \coordinate (a7) at (2.250,0 |- g3-out-0);
+  \draw (g3-out-0) -- (a7);
+  \end{scope}
+  \draw (g2-out-0) to[out=0,in=180] (a6);
+  \draw (g2-out-1) to[out=0,in=180] (g4-in-0);
+  }

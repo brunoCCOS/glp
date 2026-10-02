@@ -1,0 +1,31 @@
+\begin{center}
+    \begin{tikzpicture}
+        \pic (g1) at (0.500,0.500) {copy};
+        \node[scale=1.5] at (1.25,0.5) {$|$};
+        \pic (g2) at (2.000,0.500) {discard};
+        \node[scale=1.5] at (3,0.5) {$|$};
+        \pic (g3) at (3.500,0.500) {codiscard};
+        \node[scale=1.5] at (4.25,0.5) {$|$};
+        \pic (g4) at (5.000,0.500) {cocopy};
+        \node at (0.5,-0.5) {\footnotesize copy};
+        \node at (2.0,-0.5) {\footnotesize discard};
+        \node at (3.5,-0.5) {\footnotesize unit};
+        \node at (5.0,-0.5) {\footnotesize comp};
+    \end{tikzpicture}
+
+    \vspace{0.5em}
+
+    \begin{tikzpicture}
+        \pic (g1) at (0.500,0.500) {comultiplication};
+        \node[scale=1.5] at (1.25,0.5) {$|$};
+        \pic (g2) at (2.000,0.500) {cozero};
+        \node[scale=1.5] at (3,0.5) {$|$};
+        \pic (g3) at (3.500,0.500) {zero};
+        \node[scale=1.5] at (4.25,0.5) {$|$};
+        \pic (g4) at (5.000,0.500) {multiplication};
+        \node at (0.5,-0.5) {\footnotesize coadd};
+        \node at (2.0,-0.5) {\footnotesize cozero};
+        \node at (3.5,-0.5) {\footnotesize zero};
+        \node at (5.0,-0.5) {\footnotesize add};
+    \end{tikzpicture}
+\end{center}
