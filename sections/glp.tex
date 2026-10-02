@@ -174,13 +174,13 @@ linear cost to the feasible region.
     extending $\mathbf{GPA}$ with the following generator:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/LinearGeneratorSemantics.tex}
+        \input{tikz/LinearGeneratorSemantics.tex}
     \end{figure}
     together with the following axioms governing its interaction with
     the existing generators:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/AxiomsGLP.tex}
+        \input{tikz/AxiomsGLP.tex}
     \end{figure}
 \end{definition}
 
@@ -224,7 +224,7 @@ namely, that they are invariant to stochastics matrices.
     the same chain of rewrites goes through verbatim for arbitrary $n \times m$.
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/RemarkStochastic.tex}
+        \input{tikz/RemarkStochastic.tex}
     \end{figure}
 \end{remark}
 
@@ -258,12 +258,12 @@ normal form for $\mathbf{GPA}$ as the inductive base.
     in normal form such that $c = c'$:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/NormalFormGLP.tex}
+        \input{tikz/NormalFormGLP.tex}
     \end{figure}
     With $A$ and $b$ being an affine transformation. Namely:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/AffineTransformation.tex}
+        \input{tikz/AffineTransformation.tex}
     \end{figure}
 \end{theorem}
 
@@ -273,13 +273,13 @@ normal form for $\mathbf{GPA}$ as the inductive base.
         \item The generator $\mushroom$
         \begin{figure}[H]
             \centering
-            \input{paper/tikz/ProofNormalFormBaseLinear.tex}
+            \input{tikz/ProofNormalFormBaseLinear.tex}
         \end{figure}
         \item A diagram $c \in \mathbf{GPA}$
 
         \begin{figure}[H]
             \centering
-            \input{paper/tikz/ProofNormalFormBaseGPA.tex}
+            \input{tikz/ProofNormalFormBaseGPA.tex}
         \end{figure}
     \end{itemize}
     For the inductive step, we verify that for any two diagrams
@@ -290,7 +290,7 @@ normal form for $\mathbf{GPA}$ as the inductive base.
     block-diagonal matrix pair, as shown below:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/ProofNormalFormVerticalComp.tex}
+        \input{tikz/ProofNormalFormVerticalComp.tex}
     \end{figure}
     For horizontal composition, the two normal forms are joined along the wire connecting
     $B_1$ to $A_2$; applying Fourier-Motzkin Elimination to this pair recovers a fresh
@@ -299,7 +299,7 @@ normal form for $\mathbf{GPA}$ as the inductive base.
     the normal form:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/ProofNormalFormHorizontalComp.tex}
+        \input{tikz/ProofNormalFormHorizontalComp.tex}
     \end{figure}
 \end{proof}
 
@@ -314,7 +314,7 @@ Proposition~\ref{prop:equalepi}.
     be rewritten as a diagram $d'$ of the form:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/EpigraphFormGLP.tex}
+        \input{tikz/EpigraphFormGLP.tex}
     \end{figure}
     where the semantics of the dotted diagram is
     \[\left\{(t,y)\mid \exists\, x,\; A'x + a \ge [B\; -C]\, y,\; t\ge x,\; y =
@@ -332,7 +332,7 @@ Proposition~\ref{prop:equalepi}.
     Starting from $d$ in normal form, split the relation generator along
     $A = [A' \; C]$ and pull the resulting $C$-block through the $\inlinegen{ge}$
     generator using the antipode axiom:
-    \input{paper/tikz/EpigraphProof.tex}
+    \input{tikz/EpigraphProof.tex}
     The resulting diagram is precisely the claimed form $d'$, with the
     dotted box exhibiting $\mathrm{epi}([d])$ as a $\mathbf{GPA}$ diagram.
 \end{proof}
@@ -356,7 +356,7 @@ the three presentation properties for $\mathbf{GLP}$.
     syntactic representative:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/ProofExpressivity.tex}
+        \input{tikz/ProofExpressivity.tex}
     \end{figure}
 \end{proof}
 
@@ -372,7 +372,7 @@ the three presentation properties for $\mathbf{GLP}$.
     follows by direct computation:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/ProofSoundness.tex}
+        \input{tikz/ProofSoundness.tex}
     \end{figure}
 \end{proof}
 
@@ -402,7 +402,7 @@ completeness of $\mathbf{GPA}$, and the FME-based normal form.
     $c$ and $d$ to the same $\mathbf{GLP}$ diagram:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/ProofCompletenessLemma.tex}
+        \input{tikz/ProofCompletenessLemma.tex}
     \end{figure}
     Therefore $c = \mushroom ; c^* = \mushroom ; d^* = d$.
 \end{proof}

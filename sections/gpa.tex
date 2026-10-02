@@ -87,7 +87,7 @@ one may think of the pairs $(x,y)$ such that $Ax \ge By$ for some $A$ and $B$ fu
         \end{tikzpicture}
     \end{figure}
     along with the following additional equations:
-    \input{paper/tikz/AxiomsGPA.tex}
+    \input{tikz/AxiomsGPA.tex}
 \end{definition}
 
 \begin{definition}[Graphical Polyhedral Cones Algebra]
@@ -125,16 +125,16 @@ $\subseteq$.
     Transitivity is (spider) with one input fed by the black unit and one
     output discarded, the plugs being absorbed by (P3) and the black
     (co)unit laws:
-    \input{paper/tikz/ProofTransitivity.tex}
+    \input{tikz/ProofTransitivity.tex}
 
     \noindent For reflexivity we need a previous results that we call $H1$
     \begin{center}
-        \input{paper/tikz/ProofReflexivity.tex}
+        \input{tikz/ProofReflexivity.tex}
     \end{center}
 
     \noindent Antisymmetry, the converse of the inclusion (antisym):
     \begin{center}
-        \input{paper/tikz/AntiSymmetriOfGE.tex}
+        \input{tikz/AntiSymmetriOfGE.tex}
     \end{center}
 \end{proof}
 
@@ -148,7 +148,7 @@ and it is the content of the next lemma.
 
 \begin{lemma}[Cap form]\label{lem:capform}
     In $\mathbf{GPA}_{\rtop}$,
-    \input{paper/tikz/LemmaCapForm.tex}
+    \input{tikz/LemmaCapForm.tex}
 \end{lemma}
 
 The first chain reads $x+u\ge v$ iff $v-u\le x$: an inequality may be applied
@@ -163,7 +163,7 @@ that a row $s+u\ge0$ of a system is the cap form of the bound $s\ge-u$.
     hom-sets, so the first equation may be compared in bent form; the third
     follows by commutativity of the sum. Closing the bent leg with a white
     cozero then gives the second equation.
-    \input{paper/tikz/ProofCapForm.tex}
+    \input{tikz/ProofCapForm.tex}
 \end{proof}
 
 The same bending turns a two-sided system $Ax\ge By$ into a homogeneous one.
@@ -175,7 +175,7 @@ single block of rows and no distinguished side.
     $A;\inlinegen{ge};B^{\mathrm{op}}$ into inputs yields the cone
     $[A\;\;{-B}];\inlinegen{ge}^{\oplus p};\mathsf{coz}^{\oplus p}$, and
     unbending recovers the original diagram.
-    \input{paper/tikz/LemmaConeForm.tex}
+    \input{tikz/LemmaConeForm.tex}
 \end{lemma}
 
 That is, $\exists v.\;Ax\ge v,\ v=By$ iff $Ax-By\ge0$. Rescaling the rows of a
@@ -185,7 +185,7 @@ diagonal $D>0$; this is (P5) again, applied row by row.
 \begin{proof}
     Bending the matrix B exposes a white sum with an antipode on one leg, and
     the cap form pushes the inequality past it.
-    \input{paper/tikz/ProofConeForm.tex}
+    \input{tikz/ProofConeForm.tex}
 \end{proof}
 
 The third move, the pairwise merge, is (spider). It is the only one of the
@@ -207,12 +207,12 @@ into $P=\{i\mid a_i>0\}$, $N=\{j\mid a_j<0\}$ and $Z=\{i\mid a_i=0\}$.
     algorithm
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/FMEDiagram.tex}
+        \input{tikz/FMEDiagram.tex}
     \end{figure}
 \end{proposition}
 
 \begin{proof}
-        \input{paper/tikz/ProofFME.tex}
+        \input{tikz/ProofFME.tex}
 \end{proof}
 A pair $(x,y)$ is related by $\inlinegen{ge};g;\inlinegen{ge}$ precisely when
 there are $v,w$ with $x\ge v$, $(v,w)\in\llbracket g\rrbracket$ and $w\ge y$,
@@ -229,26 +229,26 @@ canonical block form.
     modulo the axioms, of the following form:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/NormalFormGPA_.tex}
+        \input{tikz/NormalFormGPA_.tex}
     \end{figure}
 \end{theorem}
 
 \begin{proof}
     We proceed by structural induction. The two base cases are as follows.
     First, the $\ge$ generator:
-    \input{paper/tikz/NormalFormBaseGe.tex}
+    \input{tikz/NormalFormBaseGe.tex}
 
     \noindent Second, for any diagram $c$ in $\mathbf{GLA}$:
-    \input{paper/tikz/NormalFormBaseGLA.tex}
+    \input{tikz/NormalFormBaseGLA.tex}
 
     \noindent
     For the inductive step, we consider composition of two diagrams
     $c; d$ in $\mathbf{GPA}_{\rtop}$. By the inductive hypothesis, both
     $c$ and $d$ are already in normal form:
-    \input{paper/tikz/NormalFormComposition.tex}
+    \input{tikz/NormalFormComposition.tex}
 
     \noindent And for the tensor product:
-    \input{paper/tikz/NormalFormTensor.tex}
+    \input{tikz/NormalFormTensor.tex}
 
     \noindent where $\overline{A} = [A \; C]$ and $\overline{B} = [B \; D]$
 \end{proof}
@@ -292,7 +292,7 @@ exchanging the  $H$-representation (intersection of halfspaces) with the  $V$-re
     defined by:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/PolarOperator.tex}
+        \input{tikz/PolarOperator.tex}
     \end{figure}
     Its action on diagrams is defined functorially by
     $(a \circ b)^\circ = a^\circ \circ b^\circ$.
@@ -363,7 +363,7 @@ $\mathbf{PCRel}$.
     verified. It suffices to check that the new axioms preserve the
     semantics:
 
-    \input{paper/tikz/GPAProofSoundness.tex}
+    \input{tikz/GPAProofSoundness.tex}
 \end{proof}
 
 \begin{lemma}[Expressivity]
@@ -403,7 +403,7 @@ $\mathbf{PCRel}$.
     $V$-representation form:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/ProofCompleteness1.tex}
+        \input{tikz/ProofCompleteness1.tex}
     \end{figure}
     The semantics of such a diagram is the conic hull of the column
     vectors of $V$. Since $[s] = [t]$ implies in particular
@@ -500,7 +500,7 @@ homogeneous case.
     such that $c = d$ modulo the axioms and $d$ is of the form:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/NormalFormGPA.tex}
+        \input{tikz/NormalFormGPA.tex}
     \end{figure}
 \end{theorem}
 
@@ -649,7 +649,7 @@ homogeneous case.
     Diagrammatically this goes as follows:
     \begin{figure}[H]
         \centering
-        \input{paper/tikz/ProofCompletenessGPA.tex}
+        \input{tikz/ProofCompletenessGPA.tex}
     \end{figure}
 
     Whereas the interpretation of the last diagram is

@@ -1,21 +1,462 @@
-\chapter{Rules of the underlying algebras}\label{sec:appendix-gla}
+\chapter{Categorical and graphical linear algebra}\label{sec:appendix-gla}
 
-The derivations of Chapter~\ref{sec:gpa} and Chapter~\ref{sec:glp} rest on a
-body of rules that belong to the linear and affine theories
-$\mathbf{GLA}$ and $\mathbf{GAA}$ rather than to the inequality layer studied
-here. They are established in
-\cite{bonchi2017interacting,bonchi2019affine,paixao2022highlevel} and are
-collected below for reference, grouped as they are cited in the text: (G1)
-matrices, (G2) transposition, (G3) bending and (G4) the spider property of the
-black structure.
+This appendix develops the categorical background used by the graphical
+calculi in this thesis.  Its purpose is not to survey category theory in full,
+but to make the passage from ordinary composition to Graphical Linear Algebra
+(GLA) explicit and self-contained.  The central idea is simple: a diagram is a
+morphism, joining diagrams eliminates their common variables, and placing
+ diagrams side by side forms independent systems.  Category theory isolates
+these two operations; symmetric monoidal categories make them graphical; and
+GLA specializes the resulting language to systems of linear equations.
 
-Semantically the four groups say, respectively: that diagrams denoting linear
-maps compose as matrices, so any such diagram may be replaced by a single box;
-that reflecting a diagram left-to-right denotes the converse relation, and that
-every linear relation factors as a cospan $E;F^{\mathrm{op}}$, i.e.\ as the
-solution set of a system $Ev=Fw$; that an output wire may be bent into an input
-wire and back, the white cap differing from the black one by an antipode; and
-that a connected network of black nodes is determined by its number of inputs
-and outputs alone.
+The development proceeds in four stages.  First we recall categories, functors,
+and the category of relations.  We then add a symmetric monoidal product and
+explain the corresponding string-diagram notation.  Next we introduce PROPs,
+monoid and Frobenius structures, which provide the algebraic operations for
+copying, deleting, adding, and constraining variables.  Finally we define the
+PROP of linear relations and state the presentation theorem identifying it
+with GLA.
 
-\input{paper/tikz/RulesBackgroundGLA.tex}
+\section{Categories: systems and their composition}
+
+\begin{definition}[Category]
+A \emph{category} $\mathcal C$ consists of:
+\begin{itemize}
+    \item a class of objects $A,B,\ldots$;
+    \item for each pair of objects, a class $\mathcal C(A,B)$ of morphisms
+          $f:A\to B$;
+    \item for every $A$, an identity morphism $\mathrm{id}_A:A\to A$;
+    \item for $f:A\to B$ and $g:B\to C$, a composite
+          $g\circ f:A\to C$.
+\end{itemize}
+Composition is associative and identities are neutral:
+\[
+ h\circ(g\circ f)=(h\circ g)\circ f,
+ \qquad
+ \mathrm{id}_B\circ f=f=f\circ\mathrm{id}_A.
+\]
+\end{definition}
+
+A category therefore retains only what is required to connect processes.  An
+object records the type of an interface, while a morphism records a process
+with a specified input and output.  The equation $g\circ f$ is meaningful
+exactly when the output type of $f$ agrees with the input type of $g$.
+Associativity says that a composite process does not depend on how it is
+parenthesized.
+
+Two examples will be used repeatedly.
+
+\begin{example}[Functions]
+The category $\mathbf{Set}$ has sets as objects and functions as morphisms.
+Composition and identities are the usual ones.  A function is deterministic:
+each input has exactly one output.
+\end{example}
+
+\begin{example}[Relations]\label{ex:appendix-rel}
+The category $\mathbf{Rel}$ has sets as objects and binary relations
+$R\subseteq X\times Y$ as morphisms $R:X\to Y$.  Given $R:X\to Y$ and
+$S:Y\to Z$, their composite is
+\[
+ S\circ R
+ =\{(x,z)\mid \text{there exists }y\in Y
+              \text{ with }xRy\text{ and }ySz\}.
+\]
+The identity on $X$ is the equality relation
+$\{(x,x)\mid x\in X\}$.  Thus relational composition eliminates the shared
+variable $y$.  Unlike a function, a relation may associate an input with no
+output or with several outputs; this is why relations, rather than functions,
+are the appropriate semantics for systems of equations and inequalities.
+\end{example}
+
+\begin{definition}[Functor]
+A \emph{functor} $F:\mathcal C\to\mathcal D$ assigns an object $FA$ to every
+object $A$ and a morphism $Ff:FA\to FB$ to every morphism $f:A\to B$, while
+preserving identities and composition:
+\[
+ F(\mathrm{id}_A)=\mathrm{id}_{FA},
+ \qquad
+ F(g\circ f)=Fg\circ Ff.
+\]
+It is \emph{faithful} when every map
+$\mathcal C(A,B)\to\mathcal D(FA,FB)$ is injective, and \emph{full} when every
+such map is surjective.
+\end{definition}
+
+In this work, a functor usually interprets syntax as semantics.  Faithfulness
+means that semantically equal diagrams are already equal in the calculus;
+fullness means that every semantic process of the intended kind can be drawn.
+These are the categorical forms of completeness and expressivity,
+respectively.
+
+\section{Parallel composition and string diagrams}
+
+Ordinary categorical composition describes processes in sequence.  To describe
+independent processes in parallel we need a second operation.
+
+\begin{definition}[Symmetric monoidal category]
+A \emph{symmetric monoidal category} is a category $\mathcal C$ equipped with a
+bifunctor
+\[
+ \otimes:\mathcal C\times\mathcal C\longrightarrow\mathcal C,
+\]
+a monoidal unit $I$, and coherent natural isomorphisms for associativity,
+units, and symmetry.  In particular, for morphisms $f:A\to B$ and $g:C\to D$
+there is a morphism
+\[
+ f\otimes g:A\otimes C\longrightarrow B\otimes D,
+\]
+and the interchange law holds:
+\[
+ (f_2\circ f_1)\otimes(g_2\circ g_1)
+ = (f_2\otimes g_2)\circ(f_1\otimes g_1).
+\]
+The symmetry $\sigma_{A,B}:A\otimes B\to B\otimes A$ exchanges the two
+components.
+\end{definition}
+
+Mac Lane's coherence theorem allows the associativity and unit isomorphisms to
+be suppressed without ambiguity~\cite{maclane1998categories}.  We use this
+strict notation throughout.
+
+A symmetric monoidal category has a sound two-dimensional notation: its
+\emph{string diagrams}~\cite{joyal1991geometry,selinger2010survey}.  A wire
+represents an object and a box with input and output wires represents a
+morphism.  Reading from left to right, joining the outputs of $f$ to the inputs
+of $g$ represents $g\circ f$; placing $f$ above $g$ represents $f\otimes g$.
+A bare wire is an identity and crossing wires represents symmetry.  The
+interchange law is built into the geometry: disjoint boxes may move past one
+another because their relative horizontal order carries no information.
+Consequently, diagrams are considered equal up to deformations that preserve
+connectivity, boundary, and the order of ports on each box.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[axpic]
+  \pic[val=f] (f) at (0,0.7) {diagram};
+  \pic[val=g] (g) at (1.5,0.7) {diagram};
+  \draw (f-out-0) -- (g-in-0);
+  \pic[val=h] (h) at (0,-0.7) {diagram};
+  \pic[val=k] (k) at (1.5,-0.7) {diagram};
+  \draw (h-out-0) -- (k-in-0);
+  \node at (3.0,0) {$=$};
+  \pic[val=f] (f2) at (4.0,0.7) {diagram};
+  \pic[val=g] (g2) at (5.5,0.7) {diagram};
+  \draw (f2-out-0) -- (g2-in-0);
+  \pic[val=h] (h2) at (4.0,-0.7) {diagram};
+  \pic[val=k] (k2) at (5.5,-0.7) {diagram};
+  \draw (h2-out-0) -- (k2-in-0);
+  \node[below=8pt of f-node] {$(g\circ f)\otimes(k\circ h)$};
+  \node[below=8pt of f2-node] {$(g\otimes k)\circ(f\otimes h)$};
+\end{tikzpicture}
+\caption{The interchange law expressed as a string diagram.}
+\label{fig:appendix-interchange}
+\end{figure}
+
+For $\mathbf{Rel}$ the monoidal product is Cartesian product on objects.  If
+$R:X\to Y$ and $S:U\to V$, then
+\[
+ R\otimes S:X\times U\longrightarrow Y\times V,
+ \qquad
+ ((x,u),(y,v))\in R\otimes S
+ \Longleftrightarrow xRy\text{ and }uSv.
+\]
+The singleton set is the unit.  Sequential composition eliminates shared
+variables; monoidal composition juxtaposes independent systems.
+
+\section{PROPs and graphical theories}
+
+The graphical calculi used in this thesis have one generating wire type.  An
+interface is therefore determined only by its number of wires.
+
+\begin{definition}[PROP]
+A \emph{PROP} is a strict symmetric monoidal category whose objects are the
+natural numbers, whose tensor product on objects is addition, and whose
+monoidal unit is $0$.  A morphism $m\to n$ is drawn with $m$ input wires and
+$n$ output wires.
+\end{definition}
+
+Thus $1$ is the basic wire, $n=1^{\otimes n}$ is a bundle of $n$ wires, and
+$m\otimes n=m+n$.  Matrices provide the standard example: for a field
+$\mathbb K$, let $\mathbf{Mat}_{\mathbb K}$ have morphisms $m\to n$ given by
+$n\times m$ matrices.  Composition is matrix multiplication, tensor is block
+diagonal sum, and the symmetry is a permutation matrix.
+
+\begin{definition}[Symmetric monoidal theory]
+A \emph{symmetric monoidal theory} (SMT) is a pair $(\Sigma,E)$, where
+$\Sigma$ is a collection of typed generators $o:m\to n$ and $E$ is a
+collection of equations between equally typed string diagrams built from
+those generators, identities, symmetries, composition, and tensor product.
+The PROP presented by the theory is denoted $\mathbf{P}_{\Sigma,E}$.
+\end{definition}
+
+The word ``free'' in a free PROP means that two generated diagrams are equal
+only when this follows from the symmetric monoidal laws and the equations in
+$E$.  To give a semantics for the syntax is therefore to give a strict
+symmetric monoidal functor
+\[
+ \llbracket{-}\rrbracket:\mathbf{P}_{\Sigma,E}\longrightarrow\mathbf{Sem}
+\]
+that sends every generating equation to a true semantic equality.
+
+\begin{definition}[Soundness, completeness, and expressivity]
+Let $c,d:m\to n$ be diagrams.
+\begin{itemize}
+    \item The theory is \emph{sound} when
+    $c={}_E d$ implies $\llbracket c\rrbracket=\llbracket d\rrbracket$.
+    \item It is \emph{complete} when
+    $\llbracket c\rrbracket=\llbracket d\rrbracket$ implies $c={}_E d$.
+    \item It is \emph{expressive} when every morphism of the semantic PROP is
+    the interpretation of some diagram.
+\end{itemize}
+Equivalently, the interpretation functor is well defined, faithful, and full,
+respectively.
+\end{definition}
+
+These distinctions are essential.  Soundness prevents an equation from
+identifying different systems.  Completeness ensures that diagram rewriting
+can prove every valid semantic equality.  Expressivity ensures that the
+language can denote every system under consideration.
+
+\section{Monoids, comonoids, and Frobenius structure}
+
+The nodes in GLA are not arbitrary operations.  They arise from standard
+algebraic structures internal to a symmetric monoidal category.
+
+\begin{definition}[Monoid and comonoid]
+A \emph{commutative monoid} on an object $A$ consists of
+$\mu:A\otimes A\to A$ and $\eta:I\to A$ satisfying associativity, unitality,
+and commutativity.  Dually, a \emph{cocommutative comonoid} consists of
+$\delta:A\to A\otimes A$ and $\varepsilon:A\to I$ satisfying coassociativity,
+counitality, and cocommutativity.
+\end{definition}
+
+On a vector space, the intended monoid is addition:
+$\mu(x_1,x_2)=x_1+x_2$ and $\eta(*)=0$.  The intended comonoid copies and
+discards data:
+$\delta(x)=(x,x)$ and $\varepsilon(x)=*$.  Copying is linear, but its converse
+is not a function; this is the first indication that linear relations are the
+natural ambient category.
+
+\begin{definition}[Special commutative Frobenius algebra]
+A commutative monoid $(\mu,\eta)$ and a cocommutative comonoid
+$(\delta,\varepsilon)$ on the same object form a \emph{special commutative
+Frobenius algebra} when
+\[
+ (\mu\otimes\mathrm{id})\circ(\mathrm{id}\otimes\delta)
+ =\delta\circ\mu
+ =(\mathrm{id}\otimes\mu)\circ(\delta\otimes\mathrm{id})
+\]
+and $\mu\circ\delta=\mathrm{id}$.
+\end{definition}
+
+The Frobenius and special laws imply the \emph{spider theorem}: every connected
+diagram built only from $\mu,\eta,\delta,\varepsilon$ is determined by its
+number of input and output wires.  It may therefore be contracted to one
+multi-input, multi-output node.  This is the algebraic reason that wires can be
+split, merged, bent, and reconnected without recording an arbitrary parse
+tree.
+
+The cup $\delta\circ\eta:I\to A\otimes A$ and cap
+$\varepsilon\circ\mu:A\otimes A\to I$ induced by a special commutative
+Frobenius algebra satisfy the snake equations.  They make $A$ self-dual and allow an
+input wire to be bent into an output wire, or conversely.  A symmetric monoidal
+category equipped coherently with such a structure on each object is called a
+\emph{hypergraph category}~\cite{fong2019hypergraph}.  This compact structure
+is what makes the converse of a relation available graphically by reflection.
+
+\section{The PROP of linear relations}
+
+Fix a field $\mathbb K$; all applications in this thesis use
+$\mathbb K=\mathbb R$.
+
+\begin{definition}[Linear relation]
+A \emph{linear relation} $R:m\to n$ is a linear subspace
+\[
+ R\subseteq\mathbb K^m\oplus\mathbb K^n.
+\]
+We write $x\mathrel{R}y$ when $(x,y)\in R$.  The PROP
+$\mathbf{LinRel}_{\mathbb K}$ has natural numbers as objects and linear
+relations as morphisms.  Its identity, composition, and tensor are
+\begin{align*}
+ \mathrm{id}_n
+   &=\{(x,x)\mid x\in\mathbb K^n\},\\
+ S\circ R
+   &=\{(x,z)\mid \exists y\in\mathbb K^n:
+                    x\mathrel{R}y\text{ and }y\mathrel{S}z\},\\
+ R\otimes S
+   &=\{((x,u),(y,v))\mid x\mathrel{R}y,
+                              \ u\mathrel{S}v\}.
+\end{align*}
+After the canonical identification
+$\mathbb K^m\oplus\mathbb K^p\cong\mathbb K^{m+p}$, the tensor on objects is
+addition.
+\end{definition}
+
+The composite is again a linear subspace: the simultaneous constraints
+$(x,y)\in R$ and $(y,z)\in S$ define a linear subspace, and projecting away
+$y$ preserves linearity.  Hence composition of linear relations is exactly
+linear variable elimination.
+
+Every matrix $A\in\mathbb K^{n\times m}$ determines the functional linear
+relation
+\[
+ \operatorname{graph}(A)
+ =\{(x,y)\in\mathbb K^m\oplus\mathbb K^n\mid y=Ax\}.
+\]
+Matrix multiplication is recovered by relational composition:
+\[
+ \operatorname{graph}(B)\circ\operatorname{graph}(A)
+ =\operatorname{graph}(BA).
+\]
+Linear relations are nevertheless strictly more general than matrices.  For
+example, the converse
+\[
+ \operatorname{graph}(A)^{\mathrm{op}}
+ =\{(y,x)\mid y=Ax\}
+\]
+may be partial or multivalued.  More generally, every linear relation admits a
+presentation by homogeneous linear equations:
+\[
+ R=\{(x,y)\mid Ex=Fy\}
+\]
+for suitable matrices $E$ and $F$.  This cospan form is the semantic origin of
+GLA normal forms.
+
+\section{Graphical Linear Algebra}
+
+Graphical Linear Algebra is a graphical presentation of
+$\mathbf{LinRel}_{\mathbb K}$~\cite{bonchi2017interacting,paixao2022highlevel}.
+Its diagrams are generated by two interacting families of nodes and by one
+scalar box for each $k\in\mathbb K$.  We read diagrams from left to right.
+The following table gives the type and exact relation denoted by every basic
+orientation; the reversed orientation denotes the converse relation.
+
+\begin{table}[H]
+\centering
+\caption{Generators of $\mathbf{GLA}$ and their linear-relation semantics.}
+\label{tab:appendix-gla-generators}
+\begin{tabular}{c c p{8.1cm}}
+\toprule
+\textbf{diagram} & \textbf{type} & \textbf{interpretation} \\
+\midrule
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {multiplication};\end{tikzpicture}
+& $2\to1$ & $\{((x_1,x_2),y)\mid y=x_1+x_2\}$ \\
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {zero};\end{tikzpicture}
+& $0\to1$ & $\{(*,0)\}$ \\
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {copy};\end{tikzpicture}
+& $1\to2$ & $\{(x,(y_1,y_2))\mid y_1=x=y_2\}$ \\
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {discard};\end{tikzpicture}
+& $1\to0$ & $\{(x,*)\mid x\in\mathbb K\}$ \\
+\begin{tikzpicture}[axpic]\pic[val=k] (g) at (0,0) {scalar};\end{tikzpicture}
+& $1\to1$ & $\{(x,y)\mid y=kx\}$, for $k\in\mathbb K$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The white node is addition and the black node is equality.  Their reflected
+forms have the following readings:
+\begin{itemize}
+    \item white comultiplication $1\to2$ imposes $x=y_1+y_2$;
+    \item white counit $1\to0$ imposes $x=0$;
+    \item black multiplication $2\to1$ imposes $x_1=x_2=y$;
+    \item black unit $0\to1$ allows an arbitrary value of $y$;
+    \item a reflected scalar imposes $x=ky$.
+\end{itemize}
+Thus direction distinguishes solving an equation forward from treating the
+same equation as a constraint.  When $k\ne0$, a reflected $k$-box is equivalent
+to a forward $k^{-1}$-box; when $k=0$, its semantics is the non-functional
+constraint $x=0$ with arbitrary output.
+
+\subsection{The equations of GLA}
+
+The equational theory can be organized into four layers.
+
+\begin{enumerate}[label=\textnormal{(\roman*)}]
+    \item The addition node and zero form a commutative monoid, while copy and
+    discard form a cocommutative comonoid.  Reflecting these equations gives
+    the corresponding structures in the opposite direction.
+
+    \item Each color, together with its reflection, is a special commutative
+    Frobenius algebra.  The spider theorem therefore applies separately to
+    connected monochromatic regions.
+
+    \item The two colors interact by the bialgebra and Hopf laws.  These laws
+    express that copying preserves addition and zero, and that additive
+    inverses cancel.  The scalar $-1$ is the antipode.
+
+    \item Scalar boxes obey the arithmetic of $\mathbb K$: consecutive boxes
+    multiply, parallel copied-and-added boxes add, $1$ is the identity, and
+    scalars commute with the appropriate copying and addition nodes.
+\end{enumerate}
+
+Every equation is sound because both sides denote the same linear subspace.
+For example, copying after addition and adding copied components both denote
+\[
+ \{((x_1,x_2),(y_1,y_2))\mid
+       y_1=x_1+x_2=y_2\}.
+\]
+The equations do more than preserve semantics: they characterize it.
+
+\begin{theorem}[Presentation theorem for GLA]\label{thm:appendix-gla-presentation}
+For a field $\mathbb K$, the standard interpretation extends to an isomorphism
+of PROPs
+\[
+ \llbracket{-}\rrbracket:
+ \mathbf{GLA}_{\mathbb K}\xrightarrow{\ \cong\ }
+ \mathbf{LinRel}_{\mathbb K}.
+\]
+Consequently, GLA is sound, complete, and expressive for linear
+relations~\cite{bonchi2017interacting,paixao2022highlevel}.
+\end{theorem}
+
+\begin{proof}[Proof idea]
+The matrix fragment generated by addition, zero, copy, discard, and scalars
+represents every matrix over $\mathbb K$.  Reflection represents converse
+relations.  Since every linear relation has a cospan presentation
+$Ex=Fy$, every relation is represented by a diagram consisting of a matrix
+$E$ followed by the converse of a matrix $F$; this proves expressivity.
+The interacting Hopf and Frobenius equations rewrite arbitrary diagrams to
+such a form.  Equality of the resulting linear subspaces is then reducible to
+ordinary matrix equivalence, whose elementary operations are derivable in the
+calculus.  This yields completeness; soundness follows by checking the
+relations assigned to the generators and equations.
+\end{proof}
+
+The theorem explains why GLA is useful in the main text.  A diagram is not
+merely a picture of a chosen matrix calculation: it denotes the entire
+solution relation of a linear system.  Sequential composition existentially
+eliminates internal variables, tensor combines independent systems, and
+reflection exchanges a relation with its converse.  Diagram rewriting is
+therefore a complete algebra of linear systems.
+
+\subsection{Notation and derived rules used in this thesis}
+
+A matrix box $A:m\to n$ abbreviates any GLA diagram whose interpretation is
+$y=Ax$.  Its reflected box denotes the converse relation.  For compatible
+matrices, connecting boxes gives matrix multiplication, while copying inputs,
+applying two matrices, and adding their outputs gives the corresponding block
+matrix.  A general relation box may be replaced by its cospan form
+\[
+ x\mathrel{R}y
+ \quad\Longleftrightarrow\quad
+ Ex=Fy.
+\]
+Cups and caps bend wires, transposing a diagram from the functional fragment
+into its relational converse.  Finally, connected black Frobenius diagrams
+contract by the spider theorem.
+
+The particular derived equalities invoked by the proofs in
+Chapters~\ref{sec:gpa} and~\ref{sec:glp} are collected below.  They are grouped
+as (G1) matrix calculus, (G2) transposition and cospan form, (G3) bending, and
+(G4) the black spider laws.  All follow from the GLA equations summarized
+above and are included here so that later diagrammatic derivations can be
+checked without expanding every matrix box into scalar generators.
+
+\input{tikz/RulesBackgroundGLA.tex}
+
+To pass from linear to affine relations one adjoins a constant point
+$1:0\to1$; this gives Graphical Affine Algebra (GAA)
+~\cite{bonchi2019affine}.  The later calculi in this thesis extend that affine
+base with order and optimization generators.  Their new equations are studied
+in the main chapters, whereas the categorical and linear rules on which they
+rely are exactly those established in this appendix.
