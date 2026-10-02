@@ -1,0 +1,165 @@
+\begin{figure}[H]
+    \centering
+
+    \begin{tikzpicture}[
+        category/.style={
+            draw=black!75,
+            line width=.55pt,
+            rounded corners=2pt,
+            minimum width=2.15cm,
+            minimum height=8mm,
+            inner sep=4pt,
+            align=center,
+            font=\small
+        },
+        relational/.style={
+            category,
+            fill=blue!8
+        },
+        weighted/.style={
+            category,
+            fill=orange!12
+        },
+        inclusion/.style={
+            thick,
+            left hook->,
+            >=stealth,
+            shorten <=1pt,
+            shorten >=1pt
+        },
+        indicator/.style={
+            thick,
+            dashed,
+            -{Latex[length=1.7mm,width=1.2mm]},
+            shorten <=1pt,
+            shorten >=1pt
+        },
+        ilabel/.style={
+            font=\scriptsize,
+            fill=white,
+            inner sep=1.2pt
+        }
+    ]
+
+        % =================================================
+        % Regular relational semantics -- bottom band
+        % =================================================
+
+        \node[relational] (lin) at (0,0)
+            {$\mathbf{LinRel}$};
+
+        \node[relational] (aff) at (2.6,0.65)
+            {$\mathbf{AffRel}$};
+
+        \node[relational] (pc) at (5.2,-0.65)
+            {$\mathbf{PCRel}$};
+
+        \node[relational] (poly) at (7.8,0)
+            {$\mathbf{PolyRel}$};
+
+        \node[relational] (bool) at (10.4,0)
+            {$\mathbf{Rel}_{\mathbb B}$};
+
+        % Straight relational inclusions
+        \draw[inclusion] (lin.east) -- (aff.west);
+        \draw[inclusion] (lin.east) -- (pc.west);
+        \draw[inclusion] (aff.east) -- (poly.west);
+        \draw[inclusion] (pc.east) -- (poly.west);
+        \draw[inclusion] (poly.east) -- (bool.west);
+
+
+        % =================================================
+        % Indicator-image categories -- middle band
+        % =================================================
+
+        \node[weighted] (olin) at (0,3.0)
+            {$\overline{\mathbf{LinRel}}$};
+
+        \node[weighted] (oaff) at (2.6,3.65)
+            {$\overline{\mathbf{AffRel}}$};
+
+        \node[weighted] (opc) at (5.2,2.35)
+            {$\overline{\mathbf{PCRel}}$};
+
+        \node[weighted] (opoly) at (7.8,3.0)
+            {$\overline{\mathbf{PolyRel}}$};
+
+        \node[weighted] (obool) at (10.4,3.0)
+            {$\overline{\mathbf{Rel}}_{\mathbb B}$};
+
+        % Straight inclusions in the indicator-image layer
+        \draw[inclusion] (olin.east) -- (oaff.west);
+        \draw[inclusion] (olin.east) -- (opc.west);
+        \draw[inclusion] (oaff.east) -- (opoly.west);
+        \draw[inclusion] (opc.east) -- (opoly.west);
+        \draw[inclusion] (opoly.east) -- (obool.west);
+
+
+        % =================================================
+        % Indicator-function embeddings
+        % =================================================
+
+        \draw[indicator]
+            (lin.north) --
+            node[ilabel,left] {$\mathbf{1}$}
+            (olin.south);
+
+        \draw[indicator]
+            (aff.north) --
+            node[ilabel,left] {$\mathbf{1}$}
+            (oaff.south);
+
+        \draw[indicator]
+            (pc.north) --
+            node[ilabel,left] {$\mathbf{1}$}
+            (opc.south);
+
+        \draw[indicator]
+            (poly.north) --
+            node[ilabel,left] {$\mathbf{1}$}
+            (opoly.south);
+
+        \draw[indicator]
+            (bool.north) --
+            node[ilabel,left] {$\mathbf{1}$}
+            (obool.south);
+
+
+        % =================================================
+        % Broader weighted semantics -- top band
+        % =================================================
+
+        \node[weighted] (lp) at (7.8,6.0)
+            {$\mathbf{LPRel}$\\[-1mm]
+             {\scriptsize $(\mathbf{LinProg})$}};
+
+        \node[weighted] (convex) at (10.4,6.0)
+            {$\mathbf{CxBiFn}$};
+
+        \node[weighted] (bifunc) at (13.0,6.0)
+            {$\mathbf{BiFunc}$\\[-1mm]
+             {\scriptsize
+             $\simeq\mathbf{Rel}(\overline{\mathbb R})$}};
+
+        % Straight higher weighted inclusions
+        \draw[inclusion] (opoly.north) -- (lp.south);
+        \draw[inclusion] (lp.east) -- (convex.west);
+        \draw[inclusion] (convex.east) -- (bifunc.west);
+        \draw[inclusion] (obool.north east) -- (bifunc.south west);
+
+    \end{tikzpicture}
+
+    \caption{
+        Poset of semantic categories.
+        Solid hooked arrows denote inclusion functors.
+        Dashed arrows denote the indicator embedding
+        $R\mapsto\mathbf{1}_R$, where
+        $\mathbf{1}_R=0$ on $R$ and
+        $\mathbf{1}_R=+\infty$ outside $R$.
+    }
+
+    \label{fig:overview}
+
+\end{figure}
+
+\end{document}

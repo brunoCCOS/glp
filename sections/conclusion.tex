@@ -40,24 +40,20 @@ We believe that the class of quadratic programs could be, just as was done in th
 fully axiomatized by such broader SMIT. However, such studies are left for future works,
 along with other possible applications of current results.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.0\linewidth]{images/Overview.pdf}
-	\caption{The hierarchy of relational categories developed in this
-		thesis. Each inclusion preserves the monoidal and compositional
-		structure of the layer below.}
-	\label{fig:overview}
-\end{figure}
+\input{tikz/CategoryHierarchy.tex}
 
 \begin{itemize}
-	\item Moving upward corresponds to increasing expressive power: each
-	      layer generalises the one below by enlarging the class of morphisms,
-	      while preserving the compositional structure.
-	\item The morphisms marked $\hookrightarrow$ are inclusion functors,
-	      embedding each category as a full subcategory of the one above.
-	\item The morphism marked $\mathbf{1}$ denotes the indicator function
-	      embedding, which sends a set-valued relation to its
-	      $\{0,+\infty\}$-valued characteristic function.
+    \item Moving to the right along an inclusion enlarges the
+          class of morphisms while preserving composition and the monoidal
+          structure. While moving up, changes the denotation from subsets
+          to inclusion functions.
+    \item The branches through $\mathbf{AffRel}$ and $\mathbf{PCRel}$ meet
+          in $\mathbf{PolyRel}$: affine relations and polyhedral cones are
+          both polyhedral relations, but neither class contains the other.
+    \item The functor $\mathcal I$ sends a relation $R$ to its indicator
+          bifunction, with value $0$ on $R$ and $+\infty$ outside $R$.
+          The category $\mathbf{LPRel}$ then adds genuine objective values,
+          and sits inside the convex and general Lawvere-valued settings.
 \end{itemize}
 
 In the end, this is a forward step towards providing a compositional and
