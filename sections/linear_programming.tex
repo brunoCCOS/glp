@@ -1,0 +1,301 @@
+\chapter{Linear Programming background}\label{chap:lp-background}
+This chapter introduces the linear programming concepts needed to develop a
+compositional language for optimization. Readers already familiar with linear
+programming may proceed directly to Section~\ref{sec:lp-notions}, which specifies
+the definitions and conventions used in this work.
+
+\section{The structure of linear optimization}
+
+Optimization concerns the search for an object that minimizes or maximizes a
+specified criterion over a given set. Linear programs form an important class
+of optimization problems, with applications in engineering, economics, and
+other areas of applied mathematics.
+
+An optimization problem has two components: constraints and an objective.
+The constraints define the \emph{feasible region}, the set of admissible choices.
+For example, when travelling between cities, admissible routes may be restricted
+by a fuel budget, fuel consumption per kilometre, or the money available for
+refuelling. A route that violates these restrictions is infeasible.
+
+To obtain a continuous linear program, we model a divisible amount of traffic
+rather than the choice of one indivisible car route. Consider three cities
+$A,B,C$, with roads $A\to B$, $B\to C$, and $A\to C$. Let
+$x_{AB},x_{BC},x_{AC}\ge0$ be the amounts transported along these roads,
+let $p\ge0$ be the amount to transport from $A$ to $C$, and let $F\ge0$
+be the total fuel budget. Suppose each road consumes one unit of fuel per
+unit transported. The constraints are
+\[
+\begin{aligned}
+x_{AB}+x_{AC}&=p,\\
+x_{BC}&=x_{AB},\\
+x_{AB}+x_{BC}+x_{AC}&\le F,\\
+x_{AB},x_{BC},x_{AC}&\ge0.
+\end{aligned}
+\]
+The first two equations express conservation of traffic; the inequality
+expresses the fuel restriction. Requiring a single unsplit car route instead
+would require a discrete model, which is not the continuous LP considered here.
+
+Several feasible transportation plans may reach the same destination. The
+objective provides a criterion for comparing them, such as monetary cost or
+travel time. An optimal solution is a feasible choice that achieves the best
+objective value, when such a choice exists.
+
+For the continuous transportation model, suppose the monetary costs per unit
+on the three roads are $1$, $2$, and $4$, respectively. The objective is
+\[
+J(x_{AB},x_{BC},x_{AC})=x_{AB}+2x_{BC}+4x_{AC}.
+\]
+The route through $B$ costs less per unit than the direct road, but consumes
+more fuel. Thus the objective and the fuel constraint describe different
+aspects of the same choice.
+
+Together, the constraints and objective define the optimization problem:
+minimize the transportation cost over the feasible flows.
+
+Combining the objective and constraints gives the value function
+\[
+V(p,F)=\inf_{x_{AB},x_{BC},x_{AC}\ge0}
+\left\{x_{AB}+2x_{BC}+4x_{AC}\;\middle|\;
+\begin{aligned}
+x_{AB}+x_{AC}&=p,\\
+x_{BC}&=x_{AB},\\
+x_{AB}+x_{BC}+x_{AC}&\le F
+\end{aligned}\right\}.
+\]
+Here $p$ and $F$ are parameters, while the three road flows are decision
+variables. For example, $V(1,1)=4$, since only the direct road is feasible,
+whereas $V(1,2)=3$, since the cheaper route through $B$ becomes feasible.
+If $p\ge0$ and $F<p$, the problem is infeasible and its value is $+\infty$.
+
+A linear program has linear equality and inequality constraints and a linear
+objective, possibly with a constant offset. The feasible region is a polyhedron: an intersection of finitely many closed half-spaces. A nonempty feasible region defined only by linear equalities is an affine subspace, but inequalities generally make it a polyhedron rather than an affine subspace.
+
+Now consider a transportation problem planned in two stages. The first stage distributes the traffic
+leaving $A$, and the second stage forwards the traffic arriving at $B$ to $C$.
+Let $q$ be the amount sent through $B$ and $f$ the fuel allocated to the
+first stage. Their separate value functions are
+\[
+\begin{aligned}
+U(p,q,f)&=\inf_{x_{AB},x_{AC}\ge0}
+\left\{x_{AB}+4x_{AC}\;\middle|\;
+\begin{aligned}
+x_{AB}+x_{AC}&=p,\\
+x_{AB}&=q,\\
+x_{AB}+x_{AC}&\le f
+\end{aligned}\right\},\\[1ex]
+W(q,g)&=\inf_{x_{BC}\ge0}
+\{2x_{BC}\mid x_{BC}=q,\ x_{BC}\le g\}.
+\end{aligned}
+\]
+Taking $g=F-f$, the original problem is recovered by connecting the stages
+and choosing their shared variables optimally:
+\[
+V(p,F)=\inf_{q,f\in\mathbb{R}}
+\bigl(U(p,q,f)+W(q,F-f)\bigr).
+\]
+The costs add, and the internal choices $q$ and $f$ are eliminated by taking
+an infimum. Indeed, the two fuel inequalities admit such an $f$ exactly when
+$x_{AB}+x_{AC}+x_{BC}\le F$. All other constraints and costs are those of
+the original problem. In this example the stage values are finite or
+$+\infty$, so their sum does not require a convention for mixed infinities.
+
+Although this composition is straightforward, its notation requires explicit
+bookkeeping of interfaces, shared variables, and infima. Expanding $U$ and $W$
+introduces the additional infima that define each stage.
+
+We seek a language in which composition connects matching interfaces and the
+semantics performs the minimization over shared variables. Only the external
+interface remains exposed. This does not automatically compute the optimal
+value; rather, it removes the need to write the minimization explicitly each
+time two problems are composed. Such a language is
+\textit{compositional by construction}.
+
+Furthermore, as we will see in the next chapters, "eliminating" the inner
+variables has a geometric interpretation. We keep the external values for which
+some feasible choice of the inner variables exists. This operation is called
+projection. In our example, this means keeping the pairs $(p,F)$ that admit
+feasible choices of the flows and the shared variables $q,f$. For optimization,
+we also need to keep track of costs; we will explain how after introducing epigraphs.
+To reach that point, we need some formal definitions. The next section introduces
+the necessary notions for us.
+
+\section{Necessary notions}\label{sec:lp-notions}
+
+We use two descriptions of the same class of value functions: extended
+piecewise affine LP functions and right-hand side (RHS) parametric LP value
+functions. We begin with the finite-valued piecewise affine case.
+
+For the geometric arguments below, the \emph{epigraph} of a function
+$f:\mathbb{R}^k\to\overline{\mathbb{R}}$ is
+\[
+\mathrm{epi}(f) := \{(p,t) \in \mathbb{R}^k \times \mathbb{R} \mid t \ge f(p)\},
+\qquad \overline{\mathbb{R}}=\mathbb{R}\cup\{-\infty,+\infty\}.
+\]
+At a point where $f(p)=+\infty$, there is no real $t$ in the epigraph;
+where $f(p)=-\infty$, every real $t$ is in it.
+
+\begin{definition}[Piecewise Affine Convex Function]
+A function $f : \mathbb{R}^n \to \mathbb{R}$ is called
+\emph{piecewise affine convex} if there exist finitely many affine
+functions $a_i^\top x + b_i$, $i = 1,\dots,k$, with $k\ge1$, such that
+\[
+f(x) = \max_{i=1,\dots,k} \{ a_i^\top x + b_i \}.
+\]
+\end{definition}
+
+\begin{definition}[Extended Piecewise Affine LP Function]
+An \emph{extended piecewise affine LP function} is a function
+$f : \mathbb{R}^k \to \overline{\mathbb{R}}$, where
+$\overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty,+\infty\}$,
+of one of the following forms:
+\begin{enumerate}
+\item For a nonempty polyhedron $D \subseteq \mathbb{R}^k$,
+\[
+f(p) = \begin{cases}
+\max_{i=1,\dots,r}(a_i^\top p+\beta_i), & p \in D,\\
++\infty, & p \notin D,
+\end{cases}
+\qquad r \ge 1.
+\]
+\item For a nonempty polyhedron $D \subseteq \mathbb{R}^k$,
+\[
+f(p) = \begin{cases}
+-\infty, & p \in D,\\
++\infty, & p \notin D.
+\end{cases}
+\]
+\item $f(p)=+\infty$ for every $p$.
+\end{enumerate}
+The first form extends the preceding definition to a restricted domain;
+the second and third forms account for unboundedness and infeasibility.
+\end{definition}
+
+\begin{definition}[RHS Parametric Linear Program]
+A \emph{right-hand side parametric linear program} has value function
+\[
+v(p) := \inf_{x \in \mathbb{R}^n}
+\{ c^\top x+d \mid Ax \ge Bp+e \},
+\]
+where $A \in \mathbb{R}^{m\times n}$, $B \in \mathbb{R}^{m\times k}$,
+$c \in \mathbb{R}^n$, $e \in \mathbb{R}^m$, and $d \in \mathbb{R}$
+are fixed. Thus the parameter appears only on the right-hand side.
+We use $\inf\varnothing=+\infty$ for infeasibility and $v(p)=-\infty$
+when the objective is unbounded below. The form $Ax\ge p$ is a special case.
+\end{definition}
+
+The following proposition shows that these definitions describe the same value
+functions. This equivalence specifies the intended semantics of the graphical
+language: extended piecewise affine LP functions represented by RHS parametric
+linear programs.
+\begin{proposition}
+A function $v : \mathbb{R}^k \to \overline{\mathbb{R}}$ is an
+extended piecewise affine LP function if and only if it is the value
+function of a right-hand side parametric linear program as defined above.
+\end{proposition}
+
+\begin{proof}
+\textbf{($\Rightarrow$)} Write the nonempty domain as
+$D=\{p\mid Hp\ge h\}$.
+For the first form, use the program
+\[
+v(p)=\inf_{t\in\mathbb{R}}
+\{t\mid 0t\ge h-Hp,\quad
+ t\ge a_i^\top p+\beta_i\text{ for }i=1,\dots,r\}.
+\]
+For $p\in D$, the minimum is the largest affine expression;
+for $p\notin D$, the program is infeasible.
+For the second form, minimize a free variable $z$ subject only to
+$0z\ge h-Hp$. This has value $-\infty$ on $D$ and $+\infty$ outside it.
+The third form is represented by an inconsistent constraint $0z\ge1$.
+All these programs have the required affine RHS form.
+
+\medskip
+\textbf{($\Leftarrow$)} Let
+$v(p)=\inf_x\{c^\top x+d\mid Ax\ge Bp+e\}$.
+The feasible parameter domain
+\[
+D=\{p\mid \exists x:\ Ax\ge Bp+e\}
+\]
+is a polyhedron, since it is a projection of a polyhedron. Here projection
+means keeping the parameter coordinates and eliminating the decision variables.
+We use the standard facts that projections preserve polyhedra and that a
+feasible LP with an objective bounded below attains a finite optimum
+\cite{schrijver1986theory}.
+If $D$ is empty, $v$ has the third form.
+Otherwise, the recession cone of every feasible set is
+$\{r\mid Ar\ge0\}$, independently of $p$. Its elements are directions $r$
+such that moving from any feasible $x$ to $x+\lambda r$ remains feasible
+for every $\lambda\ge0$.
+By the standard recession criterion for linear programming
+\cite{schrijver1986theory}, the objective
+is unbounded below at a feasible parameter if and only if there exists
+$r$ with $Ar\ge0$ and $c^\top r<0$.
+Such a direction makes it unbounded below at every parameter in $D$,
+giving the second form.
+
+If no such direction exists, the optimum is finite and attained at every
+$p\in D$. Consequently,
+\[
+\mathrm{epi}(v)=\{(p,t)\mid \exists x:\
+Ax\ge Bp+e,\quad c^\top x+d\le t\}
+\]
+is a nonempty polyhedron. Write its defining inequalities as
+$u_j^\top p+\alpha_j t\ge\gamma_j$.
+Upward closure in $t$ implies $\alpha_j\ge0$.
+The inequalities with $\alpha_j=0$ define the domain $D$;
+those with $\alpha_j>0$ give finitely many affine lower bounds on $t$.
+There is at least one such lower bound, since $v$ is finite on $D$.
+Their maximum equals $v$ on $D$, giving the first form.
+\end{proof}
+
+These descriptions support different forms of reasoning. An RHS parametric
+linear program specifies constraints and an objective, whereas an extended
+piecewise affine LP function describes the geometry of its value function.
+Different LP formulations may have the same value function. The intended
+graphical language represents both descriptions and allows diagrams with the
+same value function to be proved equal using its axioms.
+
+The following proposition is the key technical lemma for the completeness
+proof in the last section. It states that two parametric linear programs
+with the same value function must share the same epigraph polyhedron.
+
+\begin{proposition}\label{prop:equalepi}
+Let
+\[
+v_i(y) := \inf_{x\in\mathbb{R}^{n_i}}\{c_i^\top x+d_i \mid A_i x \ge B_i y+e_i\},
+\qquad i=1,2,
+\]
+where $A_i \in \mathbb{R}^{m_i \times n_i}$,
+$B_i \in \mathbb{R}^{m_i \times k}$, $c_i\in\mathbb{R}^{n_i}$,
+$e_i\in\mathbb{R}^{m_i}$, and $d_i\in\mathbb{R}$. If $v_1(y) = v_2(y)$ for all
+$y \in \mathbb{R}^k$, then both programs admit a common representation
+through the same epigraph polyhedron:
+\[
+v_i(y) = \inf\{t \mid (y,t) \in E\},
+\qquad
+E := \mathrm{epi}(v_1) = \mathrm{epi}(v_2).
+\]
+\end{proposition}
+
+\begin{proof}
+We use $\inf\varnothing=+\infty$ throughout.
+At a feasible parameter, a finite optimum is attained; if the objective
+is unbounded below, every real threshold $t$ admits a feasible point
+with objective at most $t$. At an infeasible parameter, neither side
+of the following equivalence holds. Thus, for each $i = 1,2$,
+the epigraph of $v_i$ satisfies
+\[
+(y,t) \in \mathrm{epi}(v_i)
+\iff
+\exists x : A_i x \ge B_i y+e_i,\ c_i^\top x+d_i \le t,
+\]
+so $\mathrm{epi}(v_i)$ is the projection onto $(y,t)$ of the polyhedron
+$P_i = \{(x,y,t) \mid A_i x \ge B_i y+e_i,\ c_i^\top x+d_i \le t\}$.
+Projections of polyhedra are polyhedra, so each $\mathrm{epi}(v_i)$ is
+a polyhedron. Since $v_1 = v_2$ pointwise, we have
+$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
+Setting $E = \{(y,t) \mid Cy + at \ge h\}$ for suitable coefficients, we obtain
+$v_i(y) = \inf\{t \mid Cy + at \ge h\}$ for both $i = 1, 2$.
+\end{proof}
+

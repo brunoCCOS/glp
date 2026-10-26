@@ -1,0 +1,4 @@
+# Beamer-specific build products (general LaTeX products are ignored at root).
+*.nav
+*.snm
+*.vrb

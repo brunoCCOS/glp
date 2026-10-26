@@ -1,0 +1,507 @@
+\chapter{String Diagrams and Graphical Affine Algebra}\label{sec:gaa}
+
+Having established the categorical background, we now introduce string diagrams
+and the calculi of Graphical Linear Algebra and Graphical Affine Algebra
+\cite{bonchi2019affine}. Readers familiar with these calculi may use this chapter
+as a reference for the notation and conventions adopted here.
+
+\section{String diagrams}\label{sec:string-diagrams}
+
+A symmetric monoidal category has a sound two-dimensional notation: its
+\emph{string diagrams}~\cite{joyal1991geometry,selinger2010survey}.  A wire
+represents an object and a box with input and output wires represents a
+morphism.  Reading from left to right, joining the outputs of $f$ to the inputs
+of $g$ represents $g\circ f$; placing $f$ above $g$ represents $f\otimes g$.
+A bare wire is an identity and crossing wires represents symmetry.  The
+interchange law is built into the geometry: disjoint boxes may move past one
+another because their relative horizontal order carries no information.
+Consequently, diagrams are considered equal up to deformations that preserve
+connectivity, boundary, and the order of ports on each box.  The basic
+translation between categorical notation and string diagrams is displayed in
+Figure~\ref{fig:appendix-string-diagram-dictionary}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[axpic]
+  % Identity and a general morphism
+  \draw (-0.6,1.1) -- (0.6,1.1);
+  \node at (0,0.45) {$\mathrm{id}_A:A\to A$};
+
+  \pic[val=f] (single) at (2.6,1.1) {diagram};
+  \node at (2.6,0.45) {$f:A\to B$};
+
+  % Sequential composition
+  \pic[val=f] (cf) at (4.6,1.1) {diagram};
+  \pic[val=g] (cg) at (5.9,1.1) {diagram};
+  \draw (cf-out-0) -- (cg-in-0);
+  \node at (5.25,0.45) {$g\circ f$};
+
+  % Tensor product
+  \pic[val=f] (tf) at (7.8,1.65) {diagram};
+  \pic[val=g] (tg) at (7.8,0.75) {diagram};
+  \node at (7.8,0.1) {$f\otimes g$};
+
+  % Symmetry
+    \draw (9.5,1.45) to[out=0,in=180] (10.7,0.75);
+    \draw (9.5,0.75) to[out=0,in=180] (10.7,1.45);
+  \node at (10.1,0.1) {$\sigma_{A,B}$};
+\end{tikzpicture}
+\caption{String-diagram notation for the structure of a symmetric monoidal
+category.  Diagrams are read from left to right: horizontal connection is
+composition, while vertical juxtaposition is the tensor product.}
+\label{fig:appendix-string-diagram-dictionary}
+\end{figure}
+
+The labels beneath the pictures record the corresponding morphisms.  In
+particular, the two wires in the drawing of $f\otimes g$ do not interact: they
+represent processes performed in parallel.  The crossing represents the
+canonical reordering $A\otimes B\to B\otimes A$, not an additional operation
+chosen for the particular objects.
+
+\begin{figure}[H]
+    \centering
+\begin{tikzpicture}[axpic]
+  \pic[val=f] (f) at (0,0.7) {diagram};
+  \pic[val=g] (g) at (1.5,0.7) {diagram};
+  \draw (f-out-0) -- (g-in-0);
+  \pic[val=h] (h) at (0,-0.7) {diagram};
+  \pic[val=k] (k) at (1.5,-0.7) {diagram};
+  \draw (h-out-0) -- (k-in-0);
+  \node at (3.0,0) {$=$};
+  \pic[val=f] (f2) at (4.0,0.7) {diagram};
+  \pic[val=g] (g2) at (5.5,0.7) {diagram};
+  \draw (f2-out-0) -- (g2-in-0);
+  \pic[val=h] (h2) at (4.0,-0.7) {diagram};
+  \pic[val=k] (k2) at (5.5,-0.7) {diagram};
+  \draw (h2-out-0) -- (k2-in-0);
+  \node[below=2 of f-node] {$(g\circ f)\otimes(k\circ h)$};
+  \node[below=2 of f2-node] {$(g\otimes k)\circ(f\otimes h)$};
+\end{tikzpicture}
+\caption{The interchange law expressed as a string diagram.}
+\label{fig:appendix-interchange}
+\end{figure}
+
+For $\mathbf{Rel}$ the monoidal product is Cartesian product on objects.  If
+$R:X\to Y$ and $S:U\to V$, then
+\[
+ R\otimes S:X\times U\longrightarrow Y\times V,
+ \qquad
+ ((x,u),(y,v))\in R\otimes S
+ \Longleftrightarrow xRy\text{ and }uSv.
+\]
+The singleton set is the unit.  Sequential composition eliminates shared
+variables; monoidal composition juxtaposes independent systems.
+
+String diagrams encode structural bookkeeping, such as the interchange law
+and the associativity of composition, in their geometry. This allows derivations
+to focus on the operations and constraints of the system rather than repeatedly
+invoking structural identities.
+
+Diagrammatic equations can also be applied locally: a subdiagram may be replaced
+by another with the same boundary without changing the surrounding diagram.
+For the optimization language developed later, sequential composition denotes
+the infimum over shared variables. The notation therefore allows components
+to be manipulated without repeatedly expanding the corresponding infima.
+
+\section{Frobenius structure and hypergraph categories}\label{sec:main-hypergraph}
+
+The resulting categories are symmetric monoidal, and it is precisely this
+monoidal backbone that will provide the algebraic structure in which we
+are interested. A key piece of
+that structure is a \emph{Frobenius monoid} on each object 
+(see Appendix~\ref{appendix:frobenius}): a monoid $(\mu, \eta)$ 
+and a comonoid $(\delta, \varepsilon)$ on the same object, satisfying the Frobenius law
+\[
+	(\mathrm{id} \otimes \mu) \circ (\delta \otimes \mathrm{id})
+	\;=\;
+	\delta \circ \mu
+	\;=\;
+	(\mu \otimes \mathrm{id}) \circ (\mathrm{id} \otimes \delta).
+\]
+For a hypergraph category, this structure must also be \emph{commutative}
+and \emph{special}: the multiplication and comultiplication respect the symmetry,
+and $\mu\circ\delta=\mathrm{id}$. A symmetric monoidal category with a chosen
+special commutative Frobenius monoid on every object, compatibly with the tensor
+product and its unit, is called a \emph{hypergraph category}
+\cite[Definition~2.12]{fong2019hypergraph}.
+
+Hypergraph categories carry a self-dual compact closed structure
+\cite[Proposition~3.1]{fong2019hypergraph}. For each object $A$, its Frobenius
+operations define a cup and a cap by
+\[
+	\mathrm{cup}_A := \delta_A\circ\eta_A : I\to A\otimes A,
+	\qquad
+	\mathrm{cap}_A := \varepsilon_A\circ\mu_A : A\otimes A\to I.
+\]
+These satisfy the snake equations, so $A$ can serve as its own dual.
+It is this richer structure that we shall adopt as our ambient framework.
+
+\begin{remark}
+	If $Q$ is commutative, then $\mathbf{Rel}(Q)$ has a canonical special
+commutative Frobenius structure on every object: its maps copy, discard,
+and take the relational converses of those operations, with weight $e$ on
+allowed pairs and $\bot$ otherwise~\cite{coecke2018generalizedrelations}.
+\end{remark}
+
+This structure will justify identities in the calculi developed below.
+To illustrate its operations, we introduce the following symbols.
+
+\begin{figure}[H]
+    \centering
+    \input{tikz/FrobeniusGeneratorLegend.tex}
+    \caption{Frobenius additive(black) and co-additive(white) structure}
+\end{figure}
+
+The black structure consists of copying and discarding operations and their
+relational converses. These converses enforce equality between two values or
+create an arbitrary value, respectively. The copying and additive structures
+on linear relations are described in~\cite[Examples~2.10--2.11]{fong2019hypergraph}.
+The Frobenius law gives the identities below. Copying the first value and
+comparing it with the second is equivalent to copying the second and comparing
+it with the first, or to comparing both values and then copying the common value.
+
+\begin{figure}[H]
+    \centering
+    \input{tikz/FrobeniusLaw.tex}
+\end{figure}
+
+\section{Graphical Linear Algebra}\label{sec:linear-algebra}
+
+We now introduce an equational, diagrammatic syntax for linear algebra.
+We recall the relevant results without reproducing their proofs. The linear
+presentation and its proofs are given in~\cite{bonchi2017interacting}, and the
+affine extension is developed in~\cite{bonchi2019affine}.
+The categorical and graphical background is developed in
+Appendix~\ref{appendix:category-theory} and Section~\ref{sec:string-diagrams}.
+
+Fix a field $\mathbb K$; all applications in this thesis use
+$\mathbb K=\mathbb R$.
+
+\begin{definition}[Linear relation]\label{def:linear-relations}
+A \emph{linear relation} $R:m\to n$ is a linear subspace
+\[
+ R\subseteq\mathbb K^m\oplus\mathbb K^n.
+\]
+We write $x\mathrel{R}y$ when $(x,y)\in R$.  The PROP
+$\mathbf{LinRel}_{\mathbb K}$ has natural numbers as objects and linear
+relations as morphisms.  Its identity, composition, and tensor are
+\begin{align*}
+ \mathrm{id}_n
+   &=\{(x,x)\mid x\in\mathbb K^n\},\\
+ S\circ R
+   &=\{(x,z)\mid \exists y\in\mathbb K^n:
+                    x\mathrel{R}y\text{ and }y\mathrel{S}z\},\\
+ R\otimes S
+   &=\{((x,u),(y,v))\mid x\mathrel{R}y,
+                              \ u\mathrel{S}v\}.
+\end{align*}
+After the canonical identification
+$\mathbb K^m\oplus\mathbb K^p\cong\mathbb K^{m+p}$, the tensor on objects is
+addition.
+\end{definition}
+
+The composite is again a linear subspace: the simultaneous constraints
+form a homogeneous linear system, and projecting away the intermediate
+variables preserves linearity.
+\footnote{Composition is relational composition, computed by projecting the
+    simultaneous linear constraints onto the external variables.}
+
+Every matrix $A\in\mathbb K^{n\times m}$ determines the functional linear
+relation
+\[
+ \operatorname{graph}(A)
+ =\{(x,y)\in\mathbb K^m\oplus\mathbb K^n\mid y=Ax\}.
+\]
+Connecting these functional relations recovers ordinary matrix multiplication
+over $\mathbb K$:
+\[
+ \operatorname{graph}(B)\circ\operatorname{graph}(A)
+ =\operatorname{graph}(BA).
+\]
+Graphical Linear Algebra is a graphical presentation of
+$\mathbf{LinRel}_{\mathbb K}$~\cite{bonchi2017interacting}. Its diagrams are
+generated by two interacting families of nodes and one scalar box for each
+$k\in\mathbb K$.
+Reflecting a diagram exchanges its input and output interfaces. If the original
+diagram denotes $R:m\to n$, its reflection denotes the converse relation
+$R^{\mathrm{op}}:n\to m$, defined by
+\[
+ x\mathrel{R}y \iff y\mathrel{R^{\mathrm{op}}}x.
+\]
+Reflection is a contravariant involution: it reverses the order of composition,
+and reflecting twice recovers the original relation. In general, $R$ and
+$R^{\mathrm{op}}$ are different typed morphisms; reflection does not assert
+that they are equal or that $R$ is invertible.
+
+The following table gives the type and exact relation denoted
+by every basic orientation; the reversed orientation denotes the converse
+relation.
+
+\begin{table}[H]
+\centering
+\caption{Generators of Graphical Linear Algebra and their linear-relation semantics.}
+\label{tab:appendix-gla-generators}
+\begin{tabular}{c c p{8.1cm}}
+\\
+\toprule
+\textbf{diagram} & \textbf{type} & \textbf{interpretation} \\
+\midrule
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {multiplication};\end{tikzpicture}
+& $2\to1$ & $\{((x_1,x_2),y)\mid y=x_1+x_2\}$ \\
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {zero};\end{tikzpicture}
+& $0\to1$ & $\{(*,0)\}$ \\
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {copy};\end{tikzpicture}
+& $1\to2$ & $\{(x,(y_1,y_2))\mid y_1=x=y_2\}$ \\
+\begin{tikzpicture}[axpic]\pic (g) at (0,0) {discard};\end{tikzpicture}
+& $1\to0$ & $\{(x,*)\mid x\in\mathbb K\}$ \\
+\begin{tikzpicture}[axpic]\pic[val=k] (g) at (0,0) {scalar};\end{tikzpicture}
+& $1\to1$ & $\{(x,y)\mid y=kx\}$, for $k\in\mathbb K$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The white node is addition and the black node is equality.  Their reflected
+forms have the following readings:
+\begin{itemize}
+    \item white comultiplication $1\to2$ imposes $x=y_1+y_2$;
+    \item white counit $1\to0$ imposes $x=0$;
+    \item black multiplication $2\to1$ imposes $x_1=x_2=y$;
+    \item black unit $0\to1$ allows an arbitrary value of $y$;
+    \item a reflected scalar imposes $x=ky$.
+\end{itemize}
+Thus direction distinguishes solving an equation forward from treating the
+same equation as a constraint.  When $k\ne0$, a reflected $k$-box is equivalent
+to a forward $k^{-1}$-box; when $k=0$, its semantics is the non-functional
+constraint $x=0$ with arbitrary output.
+
+These generators allow us to represent an arbitrary matrix:
+
+\begin{definition}[Matrix diagram]
+Let $A=(a_{ij})\in\mathbb K^{n\times m}$. The matrix diagram
+$A:m\to n$ is built from the generators above as follows. Copy each input
+$x_j$ into $n$ wires, one for each output. On the wire from input $j$ to
+output $i$, place the scalar box $a_{ij}$. Reorder the wires to group them
+by output, and add the $m$ contributions in each group. Thus output $i$ is
+\[
+ y_i=\sum_{j=1}^{m}a_{ij}x_j,
+\]
+and the diagram denotes exactly $\operatorname{graph}(A)$.
+
+The following example illustrates the construction for a $2\times2$ matrix;
+the same procedure applies to an $n\times m$ matrix.
+
+\centering
+\input{tikz/MatrixNotationGLA.tex}
+
+\end{definition}
+
+The equational theory of Graphical Linear Algebra can be organized into four layers.
+
+\begin{enumerate}[label=\textnormal{(\roman*)}]
+    \item The addition node and zero form a commutative monoid, while copy and
+    discard form a cocommutative comonoid.  Reflecting these equations gives
+    the corresponding structures in the opposite direction.
+
+    \item Each color, together with its reflection, is a special commutative
+    Frobenius algebra.  The spider theorem therefore applies separately to
+    connected monochromatic regions.
+
+    \item The two colors interact by the bialgebra and Hopf laws.  These laws
+    express that copying preserves addition and zero, and that additive
+    inverses cancel.  The scalar $-1$ is the antipode.
+
+    \item Scalar boxes obey the arithmetic of $\mathbb K$: consecutive boxes
+    multiply, parallel copied-and-added boxes add, $1$ is the identity, and
+    scalars commute with the appropriate copying and addition nodes.
+
+\end{enumerate}
+
+Every equation is sound because both sides denote the same linear subspace.
+For example, copying after addition and adding copied components both denote
+\[
+ \{((x_1,x_2),(y_1,y_2))\mid
+       y_1=x_1+x_2=y_2\}.
+\]
+The equations do more than preserve semantics: they characterize it.
+
+\begin{definition}[The linear syntax]\label{def:linear-syntax}
+We call $\mathbf{Graphical\ Linear\ Algebra}_{\mathbb K}$ the PROP built from
+ the linear generators and equations presented above~\cite{bonchi2017interacting}.
+ A diagram $m\to n$ has $m$ input wires and $n$ output wires. We build
+ diagrams by connecting these generators or placing them in parallel,
+ and use the equations to identify them, as in our definition of a
+ graphical theory. The affine point and its axioms are not included.
+\end{definition}
+
+Notice that we already have a language here.
+We can express $x+y=0$, but not $x+y=1$. Why? Because every linear relation
+admits the zero assignment, and the second equation does not. The theorem
+below tells us that this smaller language captures exactly
+$\mathbf{LinRel}_{\mathbb K}$. We will start from this same language when
+we add inequalities in Chapter~\ref{sec:gpa}.
+
+\begin{theorem}[Presentation theorem for Graphical Linear Algebra]\label{thm:linear-algebra-presentation}
+For a field $\mathbb K$, the standard interpretation extends to an isomorphism
+of PROPs
+\[
+ \llbracket{-}\rrbracket:
+ \mathbf{Graphical\ Linear\ Algebra}_{\mathbb K}\xrightarrow{\ \cong\ }
+ \mathbf{LinRel}_{\mathbb K}.
+\]
+Consequently, Graphical Linear Algebra is sound, complete, and expressive for linear
+relations~\cite{bonchi2017interacting}.
+\end{theorem}
+
+Linear relations are more general than linear maps. A reflected matrix
+denotes the converse relation
+\[
+ \operatorname{graph}(A)^{\mathrm{op}}=\{(y,x)\mid y=Ax\},
+\]
+which may be partial or multivalued. Every linear relation has a homogeneous
+cospan form $Ex=Fy$, and hence a diagrammatic representative.
+
+A matrix box $A:m\to n$ abbreviates any Graphical Linear Algebra diagram whose interpretation is
+$y=Ax$.  Its reflected box denotes the converse relation.  For compatible
+matrices, connecting boxes gives matrix multiplication, while copying inputs,
+applying two matrices, and adding their outputs gives the corresponding block
+matrix.  A general linear relation box may be replaced by its homogeneous cospan form
+\[
+ x\mathrel{R}y\quad\Longleftrightarrow\quad Ex=Fy.
+\]
+
+\section{Graphical Affine Algebra}
+
+Without the affine point, all generators denote homogeneous linear relations.
+We now extend Graphical Linear Algebra with the affine point $\rtop:0\to1$, which
+denotes the constant $1$. Together with scalar multiplication and copying,
+it constructs constants and translations. The resulting language is
+Graphical Affine Algebra~\cite{bonchi2019affine}.
+
+\[
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+    \node (lbr) at (0,0) {$\llbracket$};
+
+    \pic (g) at (0.3,0) {affine};
+
+    \node (rbr) at (1.1,0) {$\rrbracket$};
+    \node (eq)  at (1.5,0) {$=$};
+    \node (rhs) at (2.4,0) {$\{(*,1)\}$};
+\end{tikzpicture}
+\]
+\begin{definition}[The affine syntax]\label{def:affine-syntax}
+We call $\mathbf{Graphical\ Affine\ Algebra}_{\mathbb K}$ the PROP built by adding
+ the affine point and its three equations to the linear syntax of
+ Definition~\ref{def:linear-syntax}. We build and identify diagrams in
+ the same way as before, now using both the linear and affine equations.
+\end{definition}
+
+What changes is that we can now supply the constant $1$. Multiplying it
+by a scalar gives any constant we need, and adding it to a variable lets
+us write equations such as $x+y=1$. More generally, $Ex=Fy$ becomes
+$Ex+b=Fy$. We have not changed how diagrams connect; we have added one
+component and the equations that tell us how to use it. If we leave that
+component out, we are back to diagrams describing linear relations.
+
+The same distinction will matter in the next chapter. Adding inequalities
+to the smaller linear language gives polyhedral cones. Adding them to the
+affine language gives general polyhedra. Once again, allowing constants
+is what makes the difference.
+
+This extension illustrates the incremental construction of the language:
+a new generator and its equations add a specific semantic capability.
+The same approach will be used to introduce inequalities and objectives,
+extending the calculus to polyhedra and linear programs. Comparing these
+presentations identifies the additional operations used to pass from one
+class of relations to another.
+
+
+\begin{definition}[Affine relation]
+An \emph{affine relation} $R:m\to n$ is an affine subspace (or the empty set)
+\[
+ R\subseteq\mathbb K^m\oplus\mathbb K^n.
+\]
+We write $x\mathrel{R}y$ when $(x,y)\in R$.  The PROP
+$\mathbf{AffRel}_{\mathbb K}$ has natural numbers as objects and affine
+relations as morphisms.  Its identity, composition, and tensor are
+\begin{align*}
+ \mathrm{id}_n
+   &=\{(x,x)\mid x\in\mathbb K^n\},\\
+ S\circ R
+   &=\{(x,z)\mid \exists y\in\mathbb K^n:
+                    x\mathrel{R}y\text{ and }y\mathrel{S}z\},\\
+ R\otimes S
+   &=\{((x,u),(y,v))\mid x\mathrel{R}y,
+                              \ u\mathrel{S}v\}.
+\end{align*}
+After the canonical identification
+$\mathbb K^m\oplus\mathbb K^p\cong\mathbb K^{m+p}$, the tensor on objects is
+addition.
+\end{definition}
+
+The composite is again an affine subspace or empty: the simultaneous
+constraints $(x,y)\in R$ and $(y,z)\in S$ form an affine system, and projecting
+away $y$ preserves affinity.  Hence composition of affine relations is exactly
+affine variable elimination.
+
+Affine relations are nevertheless strictly more general than affine maps.
+Linear relations embed as the special case with zero translation. More generally,
+every affine relation admits a presentation by affine linear equations:
+\[
+ R=\{(x,y)\mid Ex+b=Fy\}
+\]
+for suitable matrices $E,F$ and vector $b$. This affine cospan form is the
+semantic origin of Graphical Affine Algebra normal forms.
+
+\begin{remark}
+    Every morphism in $\textbf{AffRel}$ admits the following diagram representation
+    \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+          \pic[val=E] (g1) at (0.500,1.000) {matrix};
+          \pic (g3) at (2.500,0.500) {multiplication};
+          \pic (g4) at (0.000,-0.000) {affine};
+          \pic[val=b] (g5) at (0.750,0.000) {scalar};
+          \pic[val=F] (g2) at (3.750,0.500) {comatrix};
+          \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
+          \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+          \draw (g5-out-0) to[out=0,in=180] (g3-in-1);
+          \draw (g3-out-0) to[out=0,in=180] (g2-in-0);
+    \end{tikzpicture}
+    \end{figure}
+\end{remark}
+
+\begin{theorem}[Presentation theorem for Graphical Affine Algebra]\label{thm:appendix-gla-presentation}
+For a field $\mathbb K$, the standard interpretation extends to an isomorphism
+of PROPs
+\[
+ \llbracket{-}\rrbracket:
+ \mathbf{Graphical\ Affine\ Algebra}_{\mathbb K}\xrightarrow{\ \cong\ }
+ \mathbf{AffRel}_{\mathbb K}.
+\]
+Consequently, Graphical Affine Algebra is sound, complete, and expressive for affine
+relations~\cite{bonchi2019affine}.
+\end{theorem}
+
+The theorem explains why Graphical Affine Algebra is useful in the main text.  A diagram is not
+merely a picture of a chosen matrix calculation: it denotes the entire
+solution relation of an affine system.  Sequential composition existentially
+eliminates internal variables, tensor combines independent systems, and
+reflection exchanges a relation with its converse.  Diagram rewriting is
+therefore a complete algebra of affine systems.
+
+The particular derived equalities invoked by the proofs in
+Chapters~\ref{sec:gpa} and~\ref{sec:glp} are collected below.  They are grouped
+as (G1) matrix calculus, (G2) transposition and cospan form, (G3) bending, and
+(G4) the black spider laws.  All follow from the Graphical Linear Algebra and Graphical Affine Algebra equations summarized above and
+are included here so that later diagrammatic derivations can be checked without
+expanding every matrix box into scalar generators.
+
+\input{tikz/RulesBackgroundGLA.tex}
+
+The affine point additionally turns homogeneous matrix equations into affine
+ones: together with copying and scalar multiplication it constructs any
+constant vector $b$, and hence any constraint $Ex+b=Fy$.  The later calculi in
+this thesis extend this affine base with order and optimization generators.
+Their new equations are studied in the later chapters, whereas the affine
+rules on which they rely are established here. The categorical background
+is developed in Appendix~\ref{appendix:category-theory}.

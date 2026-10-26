@@ -1,177 +1,133 @@
 \chapter{The Linear Programming Category}\label{sec:glp}
 
-The theory developed so far has extended the categorical framework
-by adding a new class of  morphisms. We now introduce the
+We finally reach the point of most interest. Now introduce the
 final and most expressive theory of the thesis:
 a  graphical algebra for parametric linear programs.
-Linear programs combine  both the inequality structure of polyhedra and the notion of an objective function,
-and their value functions are precisely the polyhedral convex  functions.
+Linear programs combine  both the inequality structure of polyhedra
+and the notion of an objective function.
 The central result of this section is the presentation of a
 complete monoidal theory for right-hand side parametric linear programming.
 
-\section{Semantics: the prop \texorpdfstring{$\mathbf{LPRel}$}{LPRel}}
+\section{Semantics: the prop of linear programs}\label{sec:lprel}
 
-We begin with several classical results that establish the tight
-relationship between piecewise affine convex functions, polyhedral
-functions, and parametric linear programs. These will serve as the
-semantic foundation for the graphical algebra introduced in the following
-section, and they justify describing the morphisms of this chapter's
-semantic category, $\mathbf{LPRel}$, interchangeably as parametric linear
-programs or as polyhedral functions.
+The semantic category of this chapter is called $\mathbf{LPRel}$. Its
+morphisms are the value functions of right-hand side parametric linear
+programs, regarded as cost-valued relations in
+$\mathbf{Rel}(\extendR)$. Here $\extendR$ carries the optimization
+quantale introduced in the chapter on composition and order, with
+inf-addition $(+\infty)+(-\infty)=+\infty$.
 
-\begin{definition}[Piecewise Affine Convex Function]
-A function $f : \mathbb{R}^n \to \mathbb{R}$ is called
-\emph{piecewise affine convex} if there exist finitely many affine
-functions $a_i^\top x + b_i$, $i = 1,\dots,k$, such that
-\[
-f(x) = \max_{i=1,\dots,k} \{ a_i^\top x + b_i \}.
-\]
-\end{definition}
-
-\begin{definition}[Polyhedral Function]
-A function $f : \mathbb{R}^n \to \mathbb{R} \cup \{+\infty\}$ is
-\emph{polyhedral} if its epigraph
-\[
-\mathrm{epi}(f) := \{ (x,t) \mid t \ge f(x) \}
-\]
-is a polyhedron.
-\end{definition}
-
-\begin{definition}[RHS Parametric Linear Program]
-A \emph{right-hand side parametric linear program} has value function
-\[
-v(b) := \inf_{x} \{ c^\top x \mid Ax \ge b \}.
-\]
-\end{definition}
-
-The following two propositions establish that all three notions above
-are equivalent descriptions of the same class of functions. This
-equivalence is the semantic cornerstone of the section: it is what
-allows us to treat polyhedral functions and parametric linear programs
-as morphisms in the same category.
-
-\begin{proposition}
-A function is piecewise affine convex if and only if it is a polyhedral
-function.
-\end{proposition}
-
-\begin{proof}
-\textbf{($\Rightarrow$)} Let
-$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
-Then
-\[
-\mathrm{epi}(f) = \bigcap_{i=1}^k \{ (x,t) \mid t \ge a_i^\top x + b_i \},
-\]
-which is an intersection of finitely many halfspaces, hence a polyhedron.
-
-\medskip
-\textbf{($\Leftarrow$)} If $f$ is polyhedral, its epigraph is a
-polyhedron, so there exist finitely many affine inequalities
-$t \ge a_i^\top x + b_i$ such that
-$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
-Thus $f$ is piecewise affine and convex.
-\end{proof}
-
-\begin{proposition}
-A function $v : \mathbb{R}^m \to \mathbb{R} \cup \{+\infty\}$ is
-piecewise affine convex if and only if it is the value function of a
-right-hand side parametric linear program.
-\end{proposition}
-
-\begin{proof}
-\textbf{($\Rightarrow$)} Let
-$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$
-and define $Y := \mathrm{conv}\{y^1,\dots,y^k\}$.
-Then $v(b) = \max_{y \in Y} b^\top y$.
-Since $Y$ is a polyhedron admitting the representation
-$Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$,
-linear programming duality gives
-$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
-
-\medskip
-\textbf{($\Leftarrow$)} Let
-$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
-Dualising,
-$v(b) = \sup \{ b^\top y \mid A^\top y = c,\; y \ge 0 \}$.
-Since the feasible set $Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$
-is a polyhedron, the supremum is attained at its extreme points
-$y^1,\dots,y^k$, yielding
-$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$.
-Thus $v$ is piecewise affine convex.
-\end{proof}
-
-The following proposition is the key technical lemma for the completeness
-proof of $\mathbf{GLP}$. It states that two parametric linear programs
-with the same value function must share the same epigraph polyhedron.
-
-\begin{proposition}\label{prop:equalepi}
-Let
-\[
-v_i(y) := \inf\{\mathbf{1}^\top x \mid A_i x \ge B_i y\},
-\qquad i=1,2,
-\]
-where $A_i \in \mathbb{R}^{m_i \times n_i}$ and
-$B_i \in \mathbb{R}^{m_i \times k}$. If $v_1(y) = v_2(y)$ for all
-$y \in \mathbb{R}^k$, then both programs admit a common representation
-through the same epigraph polyhedron:
-\[
-v_i(y) = \inf\{t \mid (y,t) \in E\},
-\qquad
-E := \mathrm{epi}(v_1) = \mathrm{epi}(v_2).
-\]
-\end{proposition}
-
-\begin{proof}
-For each $i = 1,2$, the epigraph of $v_i$ satisfies
-\[
-(y,t) \in \mathrm{epi}(v_i)
-\iff
-\exists x : A_i x \ge B_i y,\ \mathbf{1}^\top x \le t,
-\]
-so $\mathrm{epi}(v_i)$ is the projection onto $(y,t)$ of the polyhedron
-$P_i = \{(x,y,t) \mid A_i x \ge B_i y,\ \mathbf{1}^\top x \le t\}$.
-Projections of polyhedra are polyhedra, so each $\mathrm{epi}(v_i)$ is
-a polyhedron. Since $v_1 = v_2$ pointwise, we have
-$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
-Setting $E = \{(y,t) \mid Cy + dt \ge 0\}$, we obtain
-$v_i(y) = \inf\{t \mid Cy + dt \ge 0\}$ for both $i = 1, 2$.
-\end{proof}
-
-With the equivalences above in place, we now define the semantic
-category of this chapter. $\mathbf{LPRel}$ describes morphisms as
-parametric linear programs; by the propositions above, these coincide
-with polyhedral functions, and we will use both descriptions
-interchangeably according to which is more convenient.
-
-\begin{definition}[The prop $\mathbf{LPRel}$ of Linear Programs]
-The prop $\mathbf{LPRel}$ is defined as follows:
-\begin{itemize}
-    \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
-    as the space $\mathbb{R}^n$.
-    \item A morphism $n \to m$ is a right-hand side parametric linear
-    program with value function
+\begin{definition}[LP value function]\label{def:lp-value}
+    Let $m,n\in\mathbb{N}$. A function
+    $v:\mathbb{R}^m\times\mathbb{R}^n\to\extendR$ is an
+    \emph{LP value function of type $m\to n$} if there exist
+    $k\in\mathbb{N}$, $A\in\mathbb{R}^{p\times k}$,
+    $B\in\mathbb{R}^{p\times m}$, $C\in\mathbb{R}^{p\times n}$,
+    $e\in\mathbb{R}^p$ and $c\in\mathbb{R}^k$ such that
     \[
-    (x,y) \mapsto \inf_z \{ c^\top z \mid Az \ge B[x\ y]^\top + b \},
+        v(x,y)=\inf_{z\in\mathbb{R}^k}\{c^\top z \mid Az\ge Bx+Cy+e\},
+        \qquad \inf\varnothing=+\infty .
     \]
-    where $x \in \mathbb{R}^n$ and $y \in \mathbb{R}^m$.
-    \item Composition is given by minimisation over the shared variable.
-    \item The monoidal product on objects is addition $n \otimes m := n+m$,
-    and on morphisms is direct sum.
-\end{itemize}
+    We call $(A,B,C,e,c)$ a \emph{presentation} of $v$. Different
+    presentations may define the same value function.
 \end{definition}
 
-\section{Syntax: the algebra \texorpdfstring{$\mathbf{GLP}$}{GLP}}
+By the equivalence proved in Chapter~\ref{chap:lp-background}, the LP
+value functions of type $m\to n$ are exactly the extended piecewise
+affine LP functions on $\mathbb{R}^{m+n}$. A constant offset $d$ in the
+objective adds no generality: introduce a fresh decision variable
+$z_0$, the two constraints $z_0\ge1$ and $-z_0\ge-1$, and the cost
+$d\,z_0$. Allowing $k=0$ is a convenience. With no decision variables,
+the infimum is taken over the one-point set $\mathbb{R}^0$, so it is
+$0$ when the constraints hold and $+\infty$ otherwise.
 
-With the semantic equivalences established, we now introduce the final
-graphical algebra of the thesis. The algebra $\mathbf{GLP}$ extends
-$\mathbf{GPA}$ with a single new generator whose semantics encodes the
-linear objective function $c^\top x$. This new generator lifts $\mathbf{GPA}$
+\begin{definition}[The prop $\mathbf{LPRel}$]\label{def:lprel}
+    The prop $\mathbf{LPRel}$ has the natural numbers as objects, with
+    $n$ interpreted as $\mathbb{R}^n$. A morphism $m\to n$ is an LP
+    value function of type $m\to n$; two programs with the same value
+    function are the \emph{same} morphism. Composition, identities,
+    tensor and symmetries are those of $\mathbf{Rel}(\extendR)$:
+    \begin{align*}
+        (w\circ v)(x,u) &= \inf_{y\in\mathbb{R}^n}\bigl(v(x,y)+w(y,u)\bigr),\\
+        (v\otimes v')\bigl((x,x'),(y,y')\bigr) &= v(x,y)+v'(x',y'),\\
+        \mathrm{id}_n(x,y) &=
+        \begin{cases}0 & x=y,\\ +\infty & \text{otherwise},\end{cases}
+    \end{align*}
+    where the sums use inf-addition. The symmetry is defined like the
+    identity, with the coordinates swapped. Hom-sets carry the quantale order
+    \[
+        v\sqsubseteq w \iff v(x,y)\ge w(x,y)\ \text{for all }(x,y),
+    \]
+    that is, a morphism is smaller when it is more costly.
+\end{definition}
+
+For $\mathbf{LPRel}$ to be a sub-prop of $\mathbf{Rel}(\extendR)$, the
+LP value functions must be closed under these operations. This is the
+point where the inf-addition convention matters.
+
+\begin{lemma}[Closure]\label{lem:lprel-closure}
+    Identities and symmetries are LP value functions, and LP value
+    functions are closed under composition and tensor. Composition and
+    tensor are monotone with respect to $\sqsubseteq$. Hence
+    $\mathbf{LPRel}$ is an ordered sub-prop of $\mathbf{Rel}(\extendR)$.
+\end{lemma}
+
+\begin{proof}
+    Identities and symmetries are presented with no decision variables,
+    by pairs of opposite inequalities. For composition, put the two
+    programs side by side, add their costs, and treat the shared
+    interface $y$ as an extra decision variable with zero cost. The
+    result is again an RHS-parametric program in the outer variables.
+    Tensor is the same construction without a shared variable. The only
+    point to check is the boundary case: if one stage is infeasible and
+    the other unbounded, the merged program is infeasible. This matches
+    inf-addition, $(+\infty)+(-\infty)=+\infty$. Monotonicity holds
+    because infima and inf-addition are monotone in each argument.
+\end{proof}
+
+Polyhedral relations sit inside $\mathbf{LPRel}$ as the programs whose
+cost is identically zero. As in the chapter on composition and order, we
+identify a relation $P$ with the cost-valued relation that is $0$ on
+pairs in $P$ and $+\infty$ elsewhere, and we use the same letter for both.
+
+\begin{proposition}[Polyhedral relations in $\mathbf{LPRel}$]\label{prop:indicator-embedding}
+    This identification defines an identity-on-objects strict symmetric
+    monoidal functor $\mathbf{PolyRel}\to\mathbf{LPRel}$. The functor is
+    faithful, and it is an order embedding: $P\subseteq Q$ if and only if
+    $P\sqsubseteq Q$.
+\end{proposition}
+
+\begin{proof}
+    If $P=\{(x,y)\mid Bx+Cy+e\le 0\}$, then $P$, read as a cost-valued
+    relation, is presented with $k=0$ by the constraints $0\ge Bx+Cy+e$.
+    It therefore lies in $\mathbf{LPRel}$. Composing in $\mathbf{LPRel}$,
+    \[
+        \inf_y\bigl(P(x,y)+Q(y,u)\bigr)
+    \]
+    is $0$ exactly when some $y$ satisfies $(x,y)\in P$ and $(y,u)\in Q$,
+    and $+\infty$ otherwise. This is the relational composite
+    $Q\circ P$. Tensor, identities and symmetries agree in the same way,
+    because $0+0=0$ and $+\infty$ is absorbing. Finally,
+    $P(x,y)\ge Q(x,y)$ holds for all $(x,y)$ exactly when every pair in
+    $P$ lies in $Q$. This gives faithfulness and the order embedding.
+\end{proof}
+
+Observe how composition in $\mathbf{LPRel}$ recalls the composition of
+value functions derived in Chapter~\ref{chap:lp-background}. We now build
+it into the syntax, so that diagrams handle the bookkeeping of the
+infima for us and we can work with the components directly.
+
+The algebra $\text{\bfseries Graphical Linear Programming}$ extends
+$\text{\bfseries Graphical Polyhedral Algebra}$ with a single new generator
+whose semantics encodes the
+linear objective function $c^\top x$. This new generator lifts
+$\text{\bfseries Graphical Polyhedral Algebra}$
 from polyhedral constraints to full linear programs by attaching a
 linear cost to the feasible region.
 
-\begin{definition}[$\mathbf{GLP}$]\label{def:glp}
-    We call $\mathbf{GLP}$ the symmetric monoidal theory obtained by
-    extending $\mathbf{GPA}$ with the following generator:
+\begin{definition}[$\text{\bfseries Graphical Linear Programming}$]\label{def:glp}
+    We call $\text{\bfseries Graphical Linear Programming}$ the symmetric monoidal theory obtained by
+    extending $\text{\bfseries Graphical Polyhedral Algebra}$ with the following generator:
     \begin{figure}[H]
         \centering
         \input{tikz/LinearGeneratorSemantics.tex}
@@ -230,10 +186,10 @@ namely, that they are invariant to stochastics matrices.
 
 This is a pattern present in every algebra discussed so far, 
 where a particular class of matrices is invariant to one of it's core generators.
-\footnote{In the digrammatic calculi of Linear subspaces (GLA)
+\footnote{In the digrammatic calculi of Linear subspaces (Graphical Linear Algebra)
 one can show that surjective matrices are invariant to $\inlinegen{codiscard}$
 which is a very important feature in the completeness of the language itself.
-The same occurs in GPA, where non-negative matrices slide through the $\inlinegen{ge}$.
+The same occurs in Graphical Polyhedral Algebra, where non-negative matrices slide through the $\inlinegen{ge}$.
 Other works have spotted the same pattern, such as 
 \cite{stein2024gqa} which shows that a generator representing the $l_2$ norm is 
 invariant to orthogonal matrices (also are normal distributed random variables).}
@@ -241,20 +197,43 @@ Here, the new class of matrices that interact with the new generator
 $\inlinegen{linear}$ is that of stochastic matrices, agreeing with what one
 would expect when discussing linear problems.
 
-With the SMT above we now define the complete category.
-\begin{definition}
-    We call $\mathrm{FreeP}_{\mathbf{GLP}}$ the PROP freely generated
-    by $\mathbf{GLP}$.
+Graphical Polyhedral Algebra is a theory with inequations, and
+Graphical Linear Programming inherits them. Its free prop is therefore
+ordered, in the same way as in Definition~\ref{def:free-gpa-conic}.
+
+\begin{definition}\label{def:free-glp}
+    We write $\mathrm{FreeP}_{\mathbf{GLP}}$ for the ordered prop
+    generated by Graphical Linear Programming. Its terms $m\to n$ are
+    built from the generators of $\mathbf{GPA}$ and $\inlinegen{linear}$
+    by composition and tensor. Its order is the smallest precongruence
+    containing the inequations of $\mathbf{GPA}$, both directions of
+    every equation (old and new), and the symmetric monoidal structural
+    laws. Two terms are equal when the order holds in both directions.
 \end{definition}
 
-The normal form theorem for $\mathbf{GLP}$ extends the one for
-$\mathbf{GPA}$: every diagram can be reduced to a $\mathbf{GPA}$ block
+\begin{definition}[Interpretation]\label{def:glp-interpretation}
+    The interpretation
+    $\llbracket{-}\rrbracket:\mathrm{FreeP}_{\mathbf{GLP}}\to\mathbf{LPRel}$
+    is the unique strict symmetric monoidal functor that sends each
+    generator of $\mathbf{GPA}$ to its polyhedral relation, read as a
+    cost-valued relation through
+    Proposition~\ref{prop:indicator-embedding}, and sends the cost
+    generator to $\llbracket\inlinegen{linear}\rrbracket(\bullet,t)=t$.
+    The cost generator lies in $\mathbf{LPRel}$: it is presented by
+    $\inf_{z\in\mathbb{R}}\{z\mid z\ge t,\ -z\ge -t\}$.
+    Lemma~\ref{lem:lprel-closure} ensures that composites of generators
+    stay in $\mathbf{LPRel}$.
+\end{definition}
+
+The normal form theorem for Graphical Linear Programming extends
+the one for Graphical Polyhedral Algebra: every diagram can be reduced to a
+$\mathbf{Graphical Linear Algebra}$ block
 encoding the constraints, composed with the new generator encoding the
 objective. The proof proceeds by structural induction, using the existing
-normal form for $\mathbf{GPA}$ as the inductive base.
+normal form for $\mathbf{Graphical Polyhedral Algebra}$ as the inductive base.
 
 \begin{theorem}[Normal Form]\label{thm:NormalFormGLP}
-    For every diagram $c \in \mathbf{GLP}$, there exists a diagram $c'$
+    For every diagram $c \in \mathbf{Graphical Linear Programming}$, there exists a diagram $c'$
     in normal form such that $c = c'$:
     \begin{figure}[H]
         \centering
@@ -275,7 +254,7 @@ normal form for $\mathbf{GPA}$ as the inductive base.
             \centering
             \input{tikz/ProofNormalFormBaseLinear.tex}
         \end{figure}
-        \item A diagram $c \in \mathbf{GPA}$
+        \item A diagram $c \in \text{\bfseries Graphical Polyhedral Algebra}$
 
         \begin{figure}[H]
             \centering
@@ -283,7 +262,7 @@ normal form for $\mathbf{GPA}$ as the inductive base.
         \end{figure}
     \end{itemize}
     For the inductive step, we verify that for any two diagrams
-    $c, d \in \mathbf{GLP}$ satisfying the inductive hypothesis,
+    $c, d \in \text{\bfseries Graphical Linear Programming}$ satisfying the inductive hypothesis,
     both horizontal and vertical composition preserve the normal form.
     Closure under vertical composition follows by stacking the two normal forms and
     collapsing the two independent $A_i, \mathrm{ge}, B_i$ blocks into a single
@@ -304,13 +283,13 @@ normal form for $\mathbf{GPA}$ as the inductive base.
 \end{proof}
 
 The following corollary reveals the geometric meaning of the normal form:
-the $\mathbf{GPA}$ part of every $\mathbf{GLP}$ diagram encodes the
+the $\text{\bfseries Graphical Polyhedral Algebra}$ part of every $\text{\bfseries Graphical Linear Programming}$ diagram encodes the
 epigraph of the corresponding value function. This is the key structural
 insight connecting the syntax to the semantic equivalence of
 Proposition~\ref{prop:equalepi}.
 
 \begin{corollary}[Epigraph Form]\label{cor:epigraph form}
-    Given a diagram $d \in \mathbf{GLP}$ in normal form, it can always
+    Given a diagram $d \in \text{\bfseries Graphical Linear Programming}$ in normal form, it can always
     be rewritten as a diagram $d'$ of the form:
     \begin{figure}[H]
         \centering
@@ -334,13 +313,13 @@ Proposition~\ref{prop:equalepi}.
     generator using the antipode axiom:
     \input{tikz/EpigraphProof.tex}
     The resulting diagram is precisely the claimed form $d'$, with the
-    dotted box exhibiting $\mathrm{epi}([d])$ as a $\mathbf{GPA}$ diagram.
+    dotted box exhibiting $\mathrm{epi}([d])$ as a $\text{\bfseries Graphical Polyhedral Algebra}$ diagram.
 \end{proof}
 
 \section{Presentation results for \texorpdfstring{$\mathbf{LPRel}$}{LPRel}}
 
 With the syntax and its normal form in place, we are now ready to prove
-the three presentation properties for $\mathbf{GLP}$.
+the three presentation properties for $\text{\bfseries Graphical Linear Programming}$.
 
 \begin{lemma}[Expressivity]
     For every $f : m \to n$ in $\mathbf{LPRel}$ there exists a
@@ -366,7 +345,7 @@ the three presentation properties for $\mathbf{GLP}$.
 \end{lemma}
 
 \begin{proof}
-    All axioms inherited from $\mathbf{GPA}$ are already sound by the
+    All axioms inherited from $\text{\bfseries Graphical Polyhedral Algebra}$ are already sound by the
     results of the previous section. It suffices to verify that the new
     axioms involving the LP generator preserve the semantics, which
     follows by direct computation:
@@ -377,10 +356,10 @@ the three presentation properties for $\mathbf{GLP}$.
 \end{proof}
 
 The final result of the thesis is the completeness theorem for
-$\mathbf{GLP}$. The proof brings together all the main tools developed
+$\text{\bfseries Graphical Linear Programming}$. The proof brings together all the main tools developed
 throughout: the epigraph form of Corollary~\ref{cor:epigraph form}, the
 shared epigraph property of Proposition~\ref{prop:equalepi}, the
-completeness of $\mathbf{GPA}$, and the FME-based normal form.
+completeness of $\text{\bfseries Graphical Polyhedral Algebra}$, and the FME-based normal form.
 
 \begin{lemma}[Completeness]
    If $[c] = [d]$ in $\mathbf{LPRel}$, then $c = d$ in
@@ -395,11 +374,11 @@ completeness of $\mathbf{GPA}$, and the FME-based normal form.
     By Corollary~\ref{cor:epigraph form}, both $c$ and $d$ admit
     epigraph forms $c = \inlinegen{linear} ; c^*$ and $d = \inlinegen{linear} ; d^*$
     with $[c^*] = [d^*] = E$ in $\mathbf{PolyRel}$. Since $c^*$ and $d^*$
-    are $\mathbf{GPA}$ diagrams with the same denotation, completeness of
-    $\mathbf{GPA}$ gives $c^* = d^*$ in $\mathrm{FreeP}_{\mathbf{GPA}}$;
-    in particular both reduce to the same $\mathbf{GPA}$ normal form.
+    are $\text{\bfseries Graphical Polyhedral Algebra}$ diagrams with the same denotation, completeness of
+    $\text{\bfseries Graphical Polyhedral Algebra}$ gives $c^* = d^*$ in $\mathrm{FreeP}_{\mathbf{GPA}}$;
+    in particular both reduce to the same $\text{\bfseries Graphical Polyhedral Algebra}$ normal form.
     Composing this common diagram with the leftover $\inlinegen{linear}$ collapses
-    $c$ and $d$ to the same $\mathbf{GLP}$ diagram:
+    $c$ and $d$ to the same $\text{\bfseries Graphical Linear Programming}$ diagram:
     \begin{figure}[H]
         \centering
         \input{tikz/ProofCompletenessLemma.tex}
@@ -426,3 +405,74 @@ algorithm. Here it is instead a morphism, an object with an interface that
 composes with others of its kind, and solving it, and
 eliminating one of its variables are all the same operation, composition in
 $\mathbf{LPRel}$.
+
+\section{The complete transportation program}\label{sec:glp-travel}
+
+We return to the constraint diagram of
+Section~\ref{sec:gpa-travel} and add the monetary costs $1,2,4$ on the
+roads $A\to B$, $B\to C$, and $A\to C$. The constraints stay exactly as
+they were; only the objective is new.
+
+The objective is attached road by road. For a price $c$, the diagram
+\[
+\begin{tikzpicture}[axpic]
+    \pic (g1) at (0.500,0.000) {linear};
+    \pic[val=c] (g2) at (1.500,0.000) {coscalar};
+    \draw (g1-out-0) -- (g2-in-0);
+\end{tikzpicture}
+\]
+denotes the cost $(\bullet,x)\mapsto cx$: the linear generator charges
+its wire value $t$, and the reflected scalar imposes $t=cx$. We call it
+a \emph{price tag}. A black node joins the price tag to the wire carrying
+the flow, so the flow is charged at price $c$ without being changed.
+This is the same construction used for $c^\top x$ in the expressivity
+proof above.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\linewidth}{!}{\input{tikz/TravelProgram}}
+    \caption{The complete transportation program in Graphical Linear
+    Programming. It is the constraint diagram of
+    Figure~\ref{fig:travel-constraints} with one price tag on each road.
+    The dotted boxes group the stage programs $U:2\to1$ and $W:2\to0$.}
+    \label{fig:travel-program}
+\end{figure}
+
+Compared with Figure~\ref{fig:travel-constraints}, three price tags have
+been added: price $1$ on $x_{AB}$ and price $4$ on $x_{AC}$ inside the
+first stage, and price $2$ on $x_{BC}$ inside the second. All other nodes
+are polyhedral generators, which denote indicator costs: $0$ when their
+constraint holds and $+\infty$ otherwise.
+
+Composition in $\mathbf{LPRel}$ adds costs and minimizes over internal
+wires. Inside each box this gives the two stage programs of
+Chapter~\ref{chap:lp-background}:
+\[
+\begin{aligned}
+U(p,q,f) &= \inf_{x_{AB},x_{AC}\ge0}
+\{x_{AB}+4x_{AC}\mid x_{AB}+x_{AC}=p,\ x_{AB}=q,\ p\le f\},\\
+W(q,g) &= \inf_{x_{BC}\ge0}\{2x_{BC}\mid x_{BC}=q,\ x_{BC}\le g\}.
+\end{aligned}
+\]
+Composing the boxes through $q$, and the fuel split $F=f+g$, eliminates the
+internal wires $f$, $g$, and $q$. The whole diagram has interface
+$(p,F)\to *$ and denotes
+\[
+\inf_{q,f}\bigl(U(p,q,f)+W(q,F-f)\bigr)=V(p,F),
+\]
+which is the formula of Chapter~\ref{chap:lp-background}. No infimum was
+written by hand: each one comes from an internal wire. Thus the same
+connections that eliminate feasibility variables in Graphical Polyhedral
+Algebra also minimize costs in Graphical Linear Programming.
+
+The values can be read off the diagram. For $p=F=1$, the split forces
+$f=1$ and $g=0$, so $q=0$ and all traffic takes the direct road:
+$V(1,1)=4$. For $p=1$, $F=2$, the choice $f=g=1$ and $q=1$ sends all traffic
+through $B$: $V(1,2)=1+2=3$. For $p\ge0$ and $F<p$, no split satisfies
+$p\le f$ and $q\le g$ with $q\ge0$, so $V(p,F)=+\infty$.
+
+Finally, the three price tags can be merged into one linear generator.
+By (linearity), two linear generators in parallel equal a single linear
+generator followed by a white comultiplication; applying it twice gives a
+single generator whose value is split among the three prices. This is the
+first step towards the normal form of Theorem~\ref{thm:NormalFormGLP}.

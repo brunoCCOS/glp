@@ -4,31 +4,40 @@ We now turn to a combinatorially richer class of objects: polyhedra and polyhedr
 cones. These are the fundamental geometric structures underlying linear
 programming, and they admit a categorical treatment entirely analogous to
 the one developed for linear and affine relations.
-The key difference is that
-composition here is governed by  polyhedron projection onto a subspace, which is
-precisely variable elimination, and it is this operation that categorical
-composition will simulate diagrammatically. One particular way to perform polyhedral
-projection is the Fourier-Motzkin Elimination (FME), which is the algorithm explored
-in this section to show, diagrammatically, that the composition of polyhedrals yields another polyhedral.
+As before, composition is governed by polyhedral projection,
+which is precisely variable elimination, and it is this
+operation that categorical composition will simulate diagrammatically.
 
-The theory developed here remains
-within the category of binary relations, since morphisms are still indicator functions
-of subsets of $\mathbb{R}^n \times \mathbb{R}^m$, encoding feasibility
-constraints rather than objective functions. In this sense, $\mathbf{GPA}$
-does not yet enter the weighted relational world, and so is not yet able to express more meaningful
-optimization problems. This is nonetheless a critical step in the development.
-Axiomatizing linear inequality constraints diagrammatically,  $\mathbf{GPA}$ provides
-the Symmetric Monoidal Inequality Theory (SMIT)~\cite{bonchi2021polyhedral}  that will
-serve as the structural foundation for our final contribution,  $\mathbf{GLP}$,
-where these constraints are combined with a linear objective to form full parametric linear programs.
+The morphisms encode feasibility constraints through linear inequalities.
+In the weighted framework, these constraints have indicator costs $0$ and
+$+\infty$. Their diagrammatic axiomatization is a Symmetric Monoidal
+Inequality Theory (SMIT)~\cite{bonchi2021polyhedral}. This theory provides the
+structural foundation for representing linear programs, where feasibility
+constraints are combined with a linear objective.
 
+In what follows we present the semantics from polyhedral cones to general
+polyhedra, then construct the corresponding graphical algebras in the same
+order. The normal forms and comparison results are stated as facts of the
+existing theory; only soundness, expressivity, and completeness are proved here.
 
-In what follows we describe and show the complete theory of polyhedral relations and polyhedral cones.
-Just as $\mathbf{AffRel}$ captured affine space as morphisms, the categories $\mathbf{PCRel}$ and
-$\mathbf{PolyRel}$ capture polyhedral cones and polyhedra as morphisms,
-with relational composition playing the role of variable elimination.
+Recall how we moved from Graphical Linear Algebra to Graphical Affine Algebra: we added
+one generator that allowed us to write constants. Here we will add a
+generator that lets us write inequalities. If we start without the affine
+point, we get polyhedral cones. If we include it, we get general polyhedra.
+The four categories fit this simple distinction:
+\[
+\begin{array}{c|cc}
+ & \text{without constants} & \text{with constants}\\
+\hline
+\text{equations} & \mathbf{LinRel} & \mathbf{AffRel}\\
+\text{inequalities} & \mathbf{PCRel} & \mathbf{PolyRel}
+\end{array}
+\]
+We do not lose equations when we add inequalities: $u=v$ can be written
+as $u\ge v$ and $v\ge u$. Nor do we change how relations compose.
+We simply gain more ways to describe them.
 
-\section{Semantics: the prop \texorpdfstring{$\mathbf{PCRel}$}{PCRel} of polyhedral cones}
+\section{Semantics: from polyhedral cones to polyhedra}\label{sec:gpa-semantics}
 
 We begin by recalling the standard definitions of polyhedral cones and the corresponding semantic category.
 
@@ -39,6 +48,10 @@ We begin by recalling the standard definitions of polyhedral cones and the corre
         C = \{x \in \mathbb{R}^n \mid Ax \ge 0\}.
     \]
 \end{definition}
+
+We use polyhedral cones as morphisms to expose their compositional and
+monoidal structure. A cone in a product space defines a binary relation and
+can equivalently be represented by its indicator function.
 
 \begin{definition}[The prop $\mathbf{PCRel}$ of polyhedral cones]
     Let $k$ be an ordered field, in this case the real numbers. The prop
@@ -60,301 +73,183 @@ We begin by recalling the standard definitions of polyhedral cones and the corre
     \end{itemize}
 \end{definition}
 
-Observe that in comparison with the previous categories of \textbf{AffRel},
-this category is way more general although it does not completely encode the notion of Affine Spaces. However,
-it does introduce to us a somewhat unorthodox notion of conical polyhedral relations. That is,
-the fact that two elements $x,y$ may be related to one another by a relation $R$ such that the set of all pairs $xRy$
-form a polyhedral cone.
-Although this description remains very set-theoretically,
-it starts to flirt with the idea of $x$ and $y$ being apparted from a specific class of maps.
-More precisely, instead of thinking of the whole geometry of polyhedral cones,
-one may think of the pairs $(x,y)$ such that $Ax \ge By$ for some $A$ and $B$ fully defined by the relation $R$.
+A polyhedral cone relation can be described by pairs $(x,y)$ satisfying
+$Ax\ge By$ for suitable matrices $A$ and $B$. Composition is relational
+composition. Polyhedral cones are closed under this operation and under
+Cartesian product, so they can be combined sequentially or in parallel.
 
-\section{Syntax: the algebra \texorpdfstring{$\mathbf{GPA}_{\rtop}$}{GPA}}
+Notice the connection with the previous chapter: where we could write
+$Ax=By$, we can now write $Ax\ge By$. We still have no constants, and
+setting all variables to zero still satisfies the constraints. This is
+why Graphical Linear Algebra is our starting point for the language of cones.
+Adding the inequality generator will let us describe exactly the
+relations in $\mathbf{PCRel}$.
 
-\begin{definition}[Graphical Polyhedral Algebra]\label{def:gpa}
-    We call $\mathbf{GPA}$ the SMT generated by extending $\mathbf{GAA}$
-    with the following generator and its semantics:
-    \begin{figure}[H]
-        \centering
-        \begin{tikzpicture}[axpic]
-            \node at (0.0,0.5) {$\llbracket$};
-            \pic (g1) at (0.600,0.500) {ge};
-            \node at (1.2,0.5) {$\rrbracket$};
-        \end{tikzpicture}
-        \begin{tikzpicture}[axpic]
-            \node{$= \{ (x,y) | x,y \in k, x \ge y\}$};
-        \end{tikzpicture}
-    \end{figure}
-    along with the following additional equations:
-    \input{tikz/AxiomsGPA.tex}
+The same construction extends from polyhedral cones to general polyhedra.
+
+\begin{definition}\label{polyform}
+    A set $P \subseteq \mathbb{R}^n$ is called a \emph{polyhedron} if there
+    exist $A \in \mathbb{R}^{m \times n}$ and $b \in \mathbb{R}^m$ such that
+    \[
+        P = \{x \in \mathbb{R}^n \mid Ax \ge b\}.
+    \]
 \end{definition}
 
-\begin{definition}[Graphical Polyhedral Cones Algebra]
-    We call $\mathbf{GPA}_{\rtop}$ the SMT generated by $\mathbf{GPA}$
-    but excluding the affine generator $\rtop$ and its associated
-    equations. This fragment axiomatises polyhedral cones, where no
-    translation is present.
+A polyhedral cone is the special case $b=0$. General polyhedra admit affine
+constraints and may be empty; they need not contain the origin. In that light,
+one can define the category of polyhedral relations as:
+
+\begin{definition}[The prop $\mathbf{PolyRel}$ of polyhedra]
+    Let $k$ be an ordered field. The prop $\mathbf{PolyRel}_k$ is defined
+    as follows:
+    \begin{itemize}
+        \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
+            as the space $k^n$.
+        \item A morphism $n \to m$ is a polyhedron
+            $R \subseteq k^n \times k^m$
+            for which there exist $p \in \mathbb{N}$,
+            $A \in k^{p \times (n+m)}$, and $b \in k^p$ such that
+            \[
+                R = \left\{ (x,y) \in k^n \times k^m \;\middle|\;
+                A \begin{pmatrix} x \\ y \end{pmatrix} + b \ge 0 \right\}.
+            \]
+        \item Composition is relational composition.
+        \item The monoidal product on objects is addition $n \otimes m := n+m$,
+            and on morphisms is the Cartesian product.
+    \end{itemize}
 \end{definition}
 
-\begin{definition}[The Free Categories of Polyhedral Diagrams]
-    We call $\mathrm{FreeP}_{\mathbf{GPA}}$ the PROP freely generated
-    by $\mathbf{GPA}$, and $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$ the
-    PROP freely generated by $\mathbf{GPA}_{\rtop}$.
+As with cone relations, a polyhedral relation may be described directly by
+constraints on its input and output values:
+$xRy \iff Ax+b\ge By+c$ for suitable matrices $A,B$ and vectors $b,c$.
+This is a relational formulation of the same inequality description.
+
+
+Once again, the affine point makes the difference. Without it we write
+$Ax\ge By$; with it we can write $Ax+b\ge By$. We can therefore start
+with Graphical Linear Algebra, add inequalities, and then add the affine point.
+Or we can start with Graphical Affine Algebra and add inequalities. Including the
+axioms for both generators gives the same language of polyhedra.
+
+This is what we mean by the affine version of cones: we allow constants
+in the inequalities. We do not mean that every polyhedron is a shifted
+cone; a bounded interval is already a counterexample. Cones remain a
+special case, so every relation in $\mathbf{PCRel}$ is also a relation
+in $\mathbf{PolyRel}$, composed in exactly the same way.
+
+In both categories, relational composition eliminates the shared variables.
+Projection and Cartesian product preserve polyhedral cones and polyhedra,
+so these operations stay within the stated classes
+\cite[Definition~2 and Section~5]{bonchi2021polyhedral}.
+The hom-sets are ordered by inclusion of relations.
+
+We construct the diagrammatic language in two stages. First, we extend
+Graphical Linear Algebra with inequalities to represent $\mathbf{PCRel}$.
+We then add the affine point to represent general polyhedra.
+
+\section{Syntax: from the conic fragment to Graphical Polyhedral Algebra}
+\label{sec:gpa-syntax}
+
+We start with the smaller language from Definition~\ref{def:linear-syntax}:
+Graphical Linear Algebra, without the affine point. We keep its generators and
+equations, and add the inequality generator with its axioms. This is
+the ``linear fragment of Graphical Affine Algebra'' mentioned below.
+
+We begin with the linear fragment of the previous chapter and add the
+inequality generator $\inlinegen{ge}:1\to1$, interpreted as
+$\llbracket \inlinegen{ge} \rrbracket = \{(x,y)\in k^2\mid x\ge y\}$.
+
+\begin{definition}[Graphical Polyhedral Cones Algebra]\label{def:gpa-conic}
+    We call $\mathbf{GPA}_{\rtop}$ the SMIT obtained by extending the
+    linear fragment of Graphical Affine Algebra with the inequality generator.
+    Its additional equations and inequations are the following:
+    \input{tikz/AxiomsGPAConic.tex}
+    This fragment axiomatises polyhedral cones, where no affine offset
+    is present.
 \end{definition}
 
+The linear fragment excludes the $\inlinegen{affine}$ generator and its axioms;
+it is precisely Graphical Linear Algebra. As in the previous chapter, we use
+the extended theory to generate a PROP.
 
-\section{The order structure of the inequality generator}\label{sec:gpa-rules}
+\begin{definition}[The PROP generated by the conic theory]\label{def:free-gpa-conic}
+    We write $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$ for the ordered
+    PROP generated by Definition~\ref{def:gpa-conic}. Its objects are
+    natural numbers, and its terms $m\to n$ are diagrams built from the
+    linear generators and $\inlinegen{ge}$ by composition and tensor.
+    The order is generated by the displayed inequations, the equations
+    in both directions, and the symmetric monoidal structural laws,
+    closed under composition and tensor. Morphisms are terms identified
+    when the order is derivable in both directions.
+\end{definition}
 
-The central computational primitive for reasoning inside this algebra is
-Fourier--Motzkin Elimination, which projects a polyhedral cone onto a
-lower-dimensional space by eliminating one variable at a time.
+An inequation records inclusion of relations; equality means that the
+inclusions hold in both directions. Interpreting the generators gives
+$\llbracket\cdot\rrbracket:
+\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}\to\mathbf{PCRel}$ once the
+soundness checks below establish that the interpretation respects these
+identifications.
 
-Rescaling and sign are given outright by (P5) and (P6), and the pairwise merge
-by (spider). What the axioms do not state, and what we need first, is that
-$\inlinegen{ge}$ deserves its name: reflexivity and transitivity are not among
-them, and antisymmetry is postulated only as the inclusion
-$\subseteq$.
-
-\begin{lemma}[The generator is an order]\label{lem:order}
-    In $\mathbf{GPA}_{\rtop}$ the generator $\inlinegen{ge}$ is reflexive,
-    transitive and antisymmetric.
-\end{lemma}
-
-\begin{proof}
-    Transitivity is (spider) with one input fed by the black unit and one
-    output discarded, the plugs being absorbed by (P3) and the black
-    (co)unit laws:
-    \input{tikz/ProofTransitivity.tex}
-
-    \noindent For reflexivity we need a previous results that we call $H1$
-    \begin{center}
-        \input{tikz/ProofReflexivity.tex}
-    \end{center}
-
-    \noindent Antisymmetry, the converse of the inclusion (antisym):
-    \begin{center}
-        \input{tikz/AntiSymmetriOfGE.tex}
-    \end{center}
-\end{proof}
-
-Since $\inlinegen{coge}$ is $\inlinegen{ge}$ with an antipode on each side, by
-(P6) at $k=-1$, every axiom comes in a mirrored version, and we use both
-without further comment.
-
-The move the axioms leave implicit is the transport of a term across a sum: it
-is the step that turns a row of a system into a bound on a single variable,
-and it is the content of the next lemma.
-
-\begin{lemma}[Cap form]\label{lem:capform}
-    In $\mathbf{GPA}_{\rtop}$,
-    \input{tikz/LemmaCapForm.tex}
-\end{lemma}
-
-The first chain reads $x+u\ge v$ iff $v-u\le x$: an inequality may be applied
-before or after a sum indifferently. The second reads $s+u\ge0$ iff
-$s\ge-u$, and it is the form we shall use: the diagram
-$(\inlinegen{ge}\oplus\mathrm{id});\varepsilon$, whose denotation is
-$\{(\ell,r)\mid \ell\ge r\}$, we call the \emph{cap form} of $\ell\ge r$, so
-that a row $s+u\ge0$ of a system is the cap form of the bound $s\ge-u$.
-
-\begin{proof}
-    Bending the second input of the white sum to an output is a bijection on
-    hom-sets, so the first equation may be compared in bent form; the third
-    follows by commutativity of the sum. Closing the bent leg with a white
-    cozero then gives the second equation.
-    \input{tikz/ProofCapForm.tex}
-\end{proof}
-
-The same bending turns a two-sided system $Ax\ge By$ into a homogeneous one.
-This is the presentation in which elimination takes place, since it has a
-single block of rows and no distinguished side.
-
-\begin{lemma}[Cone form]\label{lem:coneform}
-    Let $A:n\to p$ and $B:m\to p$ be matrices. Bending the $m$ outputs of
-    $A;\inlinegen{ge};B^{\mathrm{op}}$ into inputs yields the cone
-    $[A\;\;{-B}];\inlinegen{ge}^{\oplus p};\mathsf{coz}^{\oplus p}$, and
-    unbending recovers the original diagram.
-    \input{tikz/LemmaConeForm.tex}
-\end{lemma}
-
-That is, $\exists v.\;Ax\ge v,\ v=By$ iff $Ax-By\ge0$. Rescaling the rows of a
-cone by positive constants leaves it unchanged, since $Dz\ge0$ iff $z\ge0$ for
-diagonal $D>0$; this is (P5) again, applied row by row.
-
-\begin{proof}
-    Bending the matrix B exposes a white sum with an antipode on one leg, and
-    the cap form pushes the inequality past it.
-    \input{tikz/ProofConeForm.tex}
-\end{proof}
-
-The third move, the pairwise merge, is (spider). It is the only one of the
-three that is not local: on its left-hand side a black node forces a single
-intermediate value below every $x_i$ and above every $y_j$, and on its
-right-hand side that value is gone and only the relations $x_i\ge y_j$ survive.
-The axiom is therefore the elimination of an intermediate variable in the form
-discussed in the introduction, and the number of rows grows from $a+b$ to
-$ab$ exactly as it does in the classical algorithm.
-
-\section{Fourier--Motzkin Elimination}\label{sec:gpa-fme}
-
-With the three moves available we can eliminate a single variable. Let
-$M\in\mathbb{R}^{p\times q}$ have first column $a$, and split the row indices
-into $P=\{i\mid a_i>0\}$, $N=\{j\mid a_j<0\}$ and $Z=\{i\mid a_i=0\}$.
-
-\begin{proposition}[Fourier-Motzkin Elimination]\label{prop:fme}
-    The following diagrammatic procedure is equivalent to perform the FME
-    algorithm
-    \begin{figure}[H]
-        \centering
-        \input{tikz/FMEDiagram.tex}
-    \end{figure}
-\end{proposition}
-
-\begin{proof}
-        \input{tikz/ProofFME.tex}
-\end{proof}
-A pair $(x,y)$ is related by $\inlinegen{ge};g;\inlinegen{ge}$ precisely when
-there are $v,w$ with $x\ge v$, $(v,w)\in\llbracket g\rrbracket$ and $w\ge y$,
-so the two bound variables $v,w$ are what the elimination has to remove.
-
-With FME available as a diagrammatic operation, we can now prove the
-normal form theorem for $\mathbf{GPA}_{\rtop}$. We proceed by structural induction,
-handling generators, composition, and tensor product in turn,
-using FME  steps to push all inequality generators into a
-canonical block form.
+As in Graphical Affine Algebra, every diagram admits a normal form.
 
 \begin{theorem}[First Normal Form]\label{thm:FirstNormalForm}
-    Every diagram in $\mathbf{GPA}_{\rtop}$ admits an isomorphic representation,
-    modulo the axioms, of the following form:
+    Every diagram in $\mathbf{GPA}_{\rtop}$ is equal, modulo the axioms,
+    to a diagram of the following form:
     \begin{figure}[H]
         \centering
         \input{tikz/NormalFormGPA_.tex}
     \end{figure}
 \end{theorem}
 
-\begin{proof}
-    We proceed by structural induction. The two base cases are as follows.
-    First, the $\ge$ generator:
-    \input{tikz/NormalFormBaseGe.tex}
 
-    \noindent Second, for any diagram $c$ in $\mathbf{GLA}$:
-    \input{tikz/NormalFormBaseGLA.tex}
+Its interpretation is $Ax\ge By$, the standard inequality description of a
+polyhedral cone relation. Bending the external inputs into outputs gives a
+bijection on hom-sets and allows the relation to be regarded as a cone in
+$k^{m+n}$.
 
-    \noindent
-    For the inductive step, we consider composition of two diagrams
-    $c; d$ in $\mathbf{GPA}_{\rtop}$. By the inductive hypothesis, both
-    $c$ and $d$ are already in normal form:
-    \input{tikz/NormalFormComposition.tex}
-
-    \noindent And for the tensor product:
-    \input{tikz/NormalFormTensor.tex}
-
-    \noindent where $\overline{A} = [A \; C]$ and $\overline{B} = [B \; D]$
-\end{proof}
-
-Working with a normal form defined up to isomorphism is in principle
-weaker than requiring syntactic equality of terms. This choice is motivated
-by the compact-closed structure, which
-provides a canonical bijection $\mathrm{Hom}(A,B) \cong \mathrm{Hom}(\mathbb{1}, A^* \otimes B)$, allowing input wires
-to be treated symmetrically with output wires but only up to
-this isomorphism, not up to equality. As shown in~\cite{bonchi2021polyhedral}, the same completeness
-argument can be carried out using strict diagrammatic equality;
-however, the derivations become significantly more involved. Since
-every result established for the isomorphic normal form carries over
-to the strict one, the only difference being the need to bend wires
-at each step, we adopt the more convenient convention throughout.
-
-This idea was already encountered in the treatment of Graphical Quadratic Algebra \cite{stein2024gqa},
-but it is worth pausing to appreciate its significance.
-The compact-closed structure does not merely allow a more convenient
-notation; it enables diagrammatic reasoning to serve as a rigorous
-replacement for coordinate-based algebraic manipulation:
-bending a wire to the left or to the right
-does exactly what one would expect. Even more, a statement that would
-classically require several lines of matrix algebra, tracking indices,
-transposing, and substituting, can instead be verified by a sequence
-of local wire manipulations, each justified by a single axiom.
-
-This first normal form expresses every diagram as a system of inequalities
-applied to a linear map. A dual normal form can, in turn, be obtained by applying
-bijective operator into it and deriving them, a second normal form.
-By bijective operator, we mean a fully and faithfull endofunctor
-in the categories of diagrams 
-
-This operator is called the polar operator, and plays the role of duality in the polyhedral setting,
-exchanging the  $H$-representation (intersection of halfspaces) with the  $V$-representation
-(conic hull of generators), in direct analogy with  the Farkas lemma
-(see \cite{bonchi2021.9farkas, bonchi2021polyhedral}) for more details on the operator).
-
-\begin{definition}[Polar Operator]
-    The \emph{polar operator} $-^\circ$ is the involution on generators
-    defined by:
+\begin{proposition}[Finitely generated normal form]\label{prop:gpa-generated-form}
+    After bending its inputs into outputs, every diagram in
+    $\mathbf{GPA}_{\rtop}$ is equal to a diagram $d_V:0\to N$, where
+    $N$ is the total number of external wires and
+    \[
+        [d_V]=\{V\lambda\mid\lambda\in k^r,\ \lambda\ge0\}
+    \]
+    for some $V\in k^{N\times r}$.
     \begin{figure}[H]
         \centering
-        \input{tikz/PolarOperator.tex}
-    \end{figure}
-    Its action on diagrams is defined functorially by
-    $(a \circ b)^\circ = a^\circ \circ b^\circ$.
-\end{definition}
-
-\begin{proposition}[Second Normal Form]
-    Every diagram $s \in \mathbf{GPA}_{\rtop}$ can be written as:
-    \begin{figure}[H]
-        \centering
-        % LHS: (A ; ge ; B)^o
-        \begin{tikzpicture}[axpic]
-            \node at (-.6,0.5) {$\Big($};
-                \pic[val=A] (a) at (0.500,0.500) {matrix};
-                \pic (g)        at (1.750,0.500) {ge};
-                \pic[val=B] (b) at (3.000,0.500) {comatrix};
-                \draw (-0.500,0.500) -- (a-in-0);
-                \draw (a-out-0) to[out=0,in=180] (g-in-0);
-                \draw (g-out-0) to[out=0,in=180] (b-in-0);
-                \draw (b-out-0) -- (4.000,0.500);
-            \node at (4.1,0.5) {$\Big)^{\circ}$};
-        \end{tikzpicture}
-        \quad=\quad
-        % RHS: A^T ; copy ; ((ge;cozero) (x) B^T)
-        \begin{tikzpicture}[axpic]
-            \pic[val={A^T}] (a) at (0.500,0.500) {comatrix};
-            \pic (cp)           at (1.750,0.500) {copy};
-            \pic (g)            at (3.000,1.000) {ge};
-            \pic (cz)           at (4.250,1.000) {cozero};
-            \pic[val={B^T}] (b) at (3.500,0.000) {matrix};
-            \draw (-0.500,0.500) -- (a-in-0);
-            \draw (a-out-0) to[out=0,in=180] (cp-in-0);
-            \draw (cp-out-0) to[out=0,in=180] (g-in-0);
-            \draw (g-out-0) to[out=0,in=180] (cz-in-0);
-            \draw (cp-out-1) to[out=0,in=180] (b-in-0);
-            \draw (b-out-0) -- (4.000,0.000);
-        \end{tikzpicture}
+        \input{tikz/GPABentNormalForm.tex}
+        \caption{Bending the inputs of $s:m\to n$ gives a diagram
+        $\widehat{s}:0\to m+n$, with the $x$ coordinates first.
+        Its finitely generated normal form $d_V$ generates
+        $\lambda\ge0$ and applies $V:k^r\to k^{m+n}$. Each labelled
+        wire represents a bundle of coordinates.}
+        \label{fig:gpa-bent-normal-form}
     \end{figure}
 \end{proposition}
 
-\begin{proof}
-    Apply the polar operator to the first normal form of every diagram
-    $c \in \mathbf{GPA}_{\rtop}$. Since the polar operator is an
-    involution and acts functorially, the result is again a valid diagram
-    in $\mathbf{GPA}_{\rtop}$ in the claimed form.
-\end{proof}
+Here $d_V$ is the diagram that generates $r$ non-negative values and
+applies the linear map $V$. This is the second normal form: the relation
+is described by non-negative combinations of the columns of $V$.
+Neither normal form is unique.
+The existence of these forms is established in
+\cite[Theorems~14 and~18]{bonchi2021polyhedral}; the technical derivations
+are collected in Appendix~\ref{appendix:gpa-proofs}.
 
-The second normal form expresses every diagram as a conic combination of
-column vectors, which is precisely the $V$-representation of a polyhedral
-cone. This is the representation that will drive the completeness proof:
-two diagrams that are semantically equal must have the same conic hull,
-and the axioms of $\mathbf{GPA}_{\rtop}$ are exactly sufficient to
-witness this equality diagrammatically.
+\begin{lemma}[Comparison of finitely generated diagrams]\label{lem:gpa-comparison}
+    Let $V\in k^{N\times r}$ and $W\in k^{N\times q}$.
+    If $V=WC$ for a matrix $C\in k^{q\times r}$ with non-negative
+    entries, then $d_V\subseteq d_W$ is derivable in
+    $\mathbf{GPA}_{\rtop}$.
+\end{lemma}
 
-\section{Presentation results for \texorpdfstring{$\mathbf{PCRel}$}{PCRel}}
+This is the comparison fact needed for completeness. It states that a
+non-negative combination of generating columns gives a diagrammatic
+inclusion~\cite[Lemmas~49--50]{bonchi2021polyhedral}.
 
-We now develop the presentation theory for the homogeneous case, proceeding
-to establish the three properties that together yield the presentation of
-$\mathbf{PCRel}$.
 
 \begin{lemma}[Soundness]
-    If $s = t$ in $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$, then
-    $[s] = [t]$ in $\mathbf{PCRel}$.
+    If $s=t$ in $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$, then
+    $[s]=[t]$ in $\mathbf{PCRel}$.
 \end{lemma}
 
 \begin{proof}
@@ -366,11 +261,11 @@ $\mathbf{PCRel}$.
     \input{tikz/GPAProofSoundness.tex}
 \end{proof}
 
+The same checks show that the inequations are interpreted as inclusions.
+
 \begin{lemma}[Expressivity]
-    For every $f : m \to n$ in $\mathbf{PCRel}$ there exists a
-    $\Sigma$-term $s : m \to n$ in
-    $\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}}(m,n)$
-    such that $[s] = f$.
+    For every $f:m\to n$ in $\mathbf{PCRel}$ there exists a term
+    $s:m\to n$ in $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$ such that $[s]=f$.
 \end{lemma}
 
 \begin{proof}
@@ -393,107 +288,61 @@ $\mathbf{PCRel}$.
     \end{figure}
 \end{proof}
 
+Here the diagram expresses a cone with all its coordinates as outputs.
+Bending the first $m$ wires back into inputs gives the required type $m\to n$.
+
 \begin{lemma}[Completeness]
-    If $[s] = [t]$ in $\mathbf{PCRel}$, then $s = t$ in
-    $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$.
+    If $[s]=[t]$ in $\mathbf{PCRel}$, then
+    $s=t$ in $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$.
 \end{lemma}
 
 \begin{proof}
-    By the second normal form, we write $s$ and $t$ in
-    $V$-representation form:
-    \begin{figure}[H]
-        \centering
-        \input{tikz/ProofCompleteness1.tex}
-    \end{figure}
-    The semantics of such a diagram is the conic hull of the column
-    vectors of $V$. Since $[s] = [t]$ implies in particular
-    $[s] \subseteq [t]$, the conic combinations of $V_t$ are a subset
-    of those of $V_s$. Hence there exists a non-negative matrix $C$ such
-    that $CV_t = V_s$. The diagrammatic witness is:
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=1\linewidth]{images/GPA/ProofCompleteness2.png}
-    \end{figure}
-    The inclusion $[s] \subseteq [t]$ follows by the same argument,
-    yielding equality.
+    Bend the inputs into outputs and use the finitely generated normal
+    form to write the two diagrams as $d_{V_s}$ and $d_{V_t}$.
+    Their semantics are the conic hulls of the columns of $V_s$ and $V_t$.
+    Since $[s]=[t]$, each column of $V_s$ is a non-negative combination
+    of columns of $V_t$. Collecting the coefficients gives
+    $V_s=V_tC$ for a non-negative matrix $C$.
+    Lemma~\ref{lem:gpa-comparison} yields $d_{V_s}\subseteq d_{V_t}$.
+    Reversing the roles of $s$ and $t$ yields the opposite inclusion,
+    hence equality. Unbending the wires recovers $s=t$.
 \end{proof}
 
 \begin{theorem}
-    $\mathbf{PCRel}$ is presented by $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$.
+    $\mathbf{PCRel}$ is presented by
+    $\mathrm{FreeP}_{\mathbf{GPA}_{\rtop}}$.
 \end{theorem}
 
-\begin{proof}
-    Soundness, expressivity, and completeness were established by the
-    preceding three lemmas. Together they imply that the canonical PROP
-    morphism is an isomorphism.
-\end{proof}
+Together, soundness, expressivity, and completeness establish this
+presentation~\cite[Corollary~21]{bonchi2021polyhedral}.
 
-This settles the homogeneous case: every polyhedral cone is diagrammatically
-expressible, and two diagrams denote the same cone exactly when the axioms
-can prove them equal. Cones are, however, a narrow class, they always
-contain the origin, so they cannot represent an arbitrary feasible region
-or, later, an arbitrary linear program. The next step lifts this result
-from cones to general polyhedra, replacing the homogeneous inequalities
-$Ax \ge 0$ with the affine $Ax \ge b$, and the machinery developed above
-will carry over almost unchanged.
 
-\section{Semantics: the prop \texorpdfstring{$\mathbf{PolyRel}$}{PolyRel}
-of polyhedra}
-Now we start the presentation of the broader class of polyhedral relations by recalling the definition of a polyhedron.
+Cones always contain the origin, so they cannot represent an arbitrary
+feasible region. We now reintroduce the affine generator $\rtop$ to
+encode the right-hand side vector $b$ in $Ax\ge b$ and extend the theory
+to general polyhedra.
 
-\begin{definition}\label{polyform}
-    A set $P \subseteq \mathbb{R}^n$ is called a \emph{polyhedron} if there
-    exist $A \in \mathbb{R}^{m \times n}$ and $b \in \mathbb{R}^m$ such that
-    \[
-        P = \{x \in \mathbb{R}^n \mid Ax \ge b\}.
-    \]
+We already have a language for cones, what is missing are the
+constants. We add the affine point with its three equations from
+Definition~\ref{def:affine-syntax}, and (P0), which tells us how it
+interacts with the inequality generator. This gives the language of
+polyhedra. We could also have started with Graphical Affine Algebra and added
+the inequality generator with its axioms and (P0); either way, we
+have the same generators and rules~\cite[Section~5]{bonchi2021polyhedral}.
+
+\begin{definition}[Graphical Polyhedral Algebra]\label{def:gpa}
+    We call $\mathbf{GPA}$ the SMIT obtained by adjoining the affine
+    generator $\rtop:0\to1$, interpreted as the constant $1$, to
+    $\mathbf{GPA}_{\rtop}$. We include the affine equations of Affine
+    Algebra and the following additional axiom:
+    \input{tikz/AxiomGPAAffine.tex}
 \end{definition}
 
-Note that a polyhedral cone is a special case of a polyhedron with $b = 0$.
-The distinction is algebraically significant: cones are closed under
-non-negative scaling and admit a purely homogeneous representation, while
-general polyhedra may be translated. This distinction is reflected in the
-two graphical algebras we now define, where $\mathbf{GPA}_{\rtop}$ handles
-the homogeneous case and $\mathbf{GPA}$ extends it with an affine generator.
-
-In that light, one can define the category of polyhedral relations as:
-
-\begin{definition}[The prop $\mathbf{PolyRel}$ of polyhedra]
-    Let $k$ be an ordered field. The prop $\mathbf{PolyRel}_k$ is defined
-    as follows:
-    \begin{itemize}
-        \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
-            as the space $k^n$.
-        \item A morphism $n \to m$ is a polyhedron
-            $R \subseteq k^n \times k^m$
-            for which there exist $p \in \mathbb{N}$,
-            $A \in k^{p \times (n+m)}$, and $b \in k^p$ such that
-            \[
-                R = \left\{ (x,y) \in k^n \times k^m \;\middle|\;
-                A \begin{pmatrix} x \\ y \end{pmatrix} + b \ge 0 \right\}.
-            \]
-        \item Composition is relational composition.
-        \item The monoidal product on objects is addition $n \otimes m := n+m$,
-            and on morphisms is the Cartesian product.
-    \end{itemize}
-\end{definition}
-
-Notice how, the same way that \textbf{PCRel} offered us a more relational way to think about Polyhedral Cones, so does \textbf{PolyRel}.
-Indeed, one may think of polyhedrals as closed spaces in some geometry that respects some linear constraints.
-We argue, however, that this definition is overly convoluted, and a more natural way
-to denote such objects is to think in terms of relations $R$,
-such that $xRy \iff Ax + b \ge By +c$ for some matrices $A,B$ and  vectors $b,c$.
-Once again, we move from a set-theoretic heavy description to a more logical one.
-
-\section{Syntax: the algebra \texorpdfstring{$\mathbf{GPA}$}{GPA}}
-
-We now extend the theory from polyhedral cones to general polyhedra by
-reintroducing the affine generator $\rtop$. Geometrically, this
-corresponds to allowing translations: a polyhedron is a translated
-polyhedral cone, and the generator $\rtop$ provides the syntactic means
-to encode the right-hand side vector $b$ in $Ax \ge b$. The normal form,
-soundness, and expressivity arguments all extend smoothly from the
-homogeneous case.
+The inequality generator and its homogeneous axioms remain those of
+Definition~\ref{def:gpa-conic}; only (P0) is new.
+We write $\mathrm{FreeP}_{\mathbf{GPA}}$ for the ordered PROP generated
+by this extended theory, using the same construction as in
+Definition~\ref{def:free-gpa-conic}.
 
 \begin{theorem}[Normal Form]\label{thm:normalformgpa}
     For every diagram $c$ in $\mathbf{GPA}$, there exists a diagram $d$
@@ -504,115 +353,60 @@ homogeneous case.
     \end{figure}
 \end{theorem}
 
-\begin{proof}
-    The derivation proceeds directly. Let $c$ be a
-    diagram of \textbf{GPA}. Then we can collect all $\rtop$ on the left such
-    that $c'$ is a diagram of $\textbf{GPA}_{\rtop}$
 
-    \begin{figure}[H]
-        \centering
-        \begin{tikzpicture}
-            \begin{scope}[shift={(0.000,0.250)}]
-                \pic[val=C] (g1) at (0.500,0.500) {diagram};
-            \end{scope}
-            \node (rel6) at (1.500,0.750) {$=$};
-            \begin{scope}[shift={(1.500,0.000)}]
-                \begin{scope}[shift={(0.500,1.000)}]
-                    \coordinate (id_in_2) at (0.25,0.050);
-                    \coordinate (id_out_3) at (0.500,0.050);
-                    \draw (id_in_2) -- (id_out_3);
-                \end{scope}
-                \pic (g4) at (0.700,0.450) {affine};
-                \begin{scope}[shift={(1.750,0.250)}]
-                    \pic[val=C'] (g5) at (0.500,0.500) {2ddiagram};
-                \end{scope}
-                \draw (id_out_3) to[out=0,in=180] (g5-in-0);
-                \draw (g4-out-0) to[out=0,in=180] (g5-in-1);
-            \end{scope}
-        \end{tikzpicture}
-    \end{figure}
+The affine block records the offsets, so the interpretation has the form
+$Ax+b\ge By$. The normal form is established in
+\cite[Theorem~24]{bonchi2021polyhedral}; its derivation is collected in
+Appendix~\ref{appendix:gpa-proof-11}.
 
-    From Theorem~\ref{thm:FirstNormalForm} we know that $c'$ admits a normal form in
-    terms of matrices A and B. Breaking down the matrix A in columns we get:
+For completeness, we use the following two facts of the existing theory.
+The first concerns non-empty relations; the second handles infeasibility.
 
-    \begin{figure}[H]
-        \centering
-        \begin{tikzpicture}
-            \begin{scope}[shift={(0.000,0.550)}]
-                \coordinate (id_in_1) at (0,0.500);
-                \coordinate (id_out_2) at (1.000,0.500);
-                \draw (id_in_1) -- (id_out_2);
-            \end{scope}
-            \pic (g3) at (0.500,0.450) {affine};
-            \begin{scope}[shift={(1.750,0.250)}]
-                \pic[val=A] (g4) at (0.500,0.500) {2dmatrix};
-            \end{scope}
-            \draw (id_out_2) to[out=0,in=180] (g4-in-0);
-            \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
-            \begin{scope}[shift={(3.500,0.250)}]
-                \pic (g5) at (0.500,0.500) {ge};
-            \end{scope}
-            \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-            \begin{scope}[shift={(5.250,0.250)}]
-                \pic[val=B] (g6) at (0.500,0.500) {comatrix};
-            \end{scope}
-            \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
-            \node at (7,0.7) {$=$};
-        \end{tikzpicture}\\
-        \vspace{5mm}
-        \begin{tikzpicture}
-            \node at (-.5,1) {$=$};
-            \begin{scope}[shift={(0.750,1.000)}]
-                \pic[val=A_1] (g1) at (0.500,0.500) {matrix};
-            \end{scope}
-            \pic (g2) at (0.500,0.500) {affine};
-            \begin{scope}[shift={(1.500,0.000)}]
-                \pic[val=A_2] (g3) at (0.500,0.500) {matrix};
-            \end{scope}
-            \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
-            \coordinate (a4) at (0.000,0 |- g1-in-0);
-            \draw (g1-in-0) -- (a4);
-            \coordinate (a5) at (2.500,0 |- g1-out-0);
-            \draw (g1-out-0) -- (a5);
-            \begin{scope}[shift={(3.500,0.500)}]
-                \pic (g6) at (0.500,0.500) {multiplication};
-            \end{scope}
-            \draw (a5) to[out=0,in=180] (g6-in-0);
-            \draw (g3-out-0) to[out=0,in=180] (g6-in-1);
-            \begin{scope}[shift={(5.500,0.500)}]
-                \pic (g7) at (0.500,0.500) {ge};
-            \end{scope}
-            \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
-            \begin{scope}[shift={(7.500,0.500)}]
-                \pic[val=B] (g8) at (0.500,0.500) {comatrix};
-            \end{scope}
-            \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
-        \end{tikzpicture}
-    \end{figure}
+\begin{lemma}[Homogeneous comparison]\label{lem:gpa-homogeneous-comparison}
+    For non-empty polyhedra
+    $P_i=\{z\in k^N\mid A_i z+b_i\ge0\}$, define
+    \[
+        P_i^H=\{(z,\lambda)\mid A_i z+b_i\lambda\ge0,\ \lambda\ge0\}.
+    \]
+    Then $P_1\subseteq P_2$ if and only if $P_1^H\subseteq P_2^H$.
+    Replacing the affine constant in a normal-form diagram by a shared
+    non-negative variable gives its homogeneous diagram. Derivable
+    comparisons of those homogeneous diagrams give comparisons of the
+    original diagrams by setting that variable to $1$.
+\end{lemma}
 
-    thus the thesis.
-\end{proof}
+These facts are established in
+\cite[Lemma~25 and Theorem~26]{bonchi2021polyhedral}.
+Their role is to let us use the complete conic calculus for non-empty
+polyhedral relations.
 
-\section{Presentation results for \texorpdfstring{$\mathbf{PolyRel}$}{PolyRel}}
+\begin{lemma}[Empty normal form]\label{lem:gpa-empty-form}
+    For each type $m\to n$, all diagrams of $\mathbf{GPA}$ whose
+    interpretation is empty are equal to the same empty diagram
+    $\bot_{m,n}$.
+\end{lemma}
+
+This fact is established in \cite[Theorem~27]{bonchi2021polyhedral}.
+It is essential: the homogeneous comparison above assumes non-empty
+polyhedra and cannot by itself cover infeasible constraints.
+
 
 \begin{lemma}[Soundness]
-    If $s = t$ in $\mathrm{FreeP}_{\mathbf{GPA}}$, then $[s] = [t]$
-    in $\mathbf{PolyRel}$.
+    If $s=t$ in $\mathrm{FreeP}_{\mathbf{GPA}}$, then
+    $[s]=[t]$ in $\mathbf{PolyRel}$.
 \end{lemma}
 
 \begin{proof}
-    This follows immediately from the soundness of $\mathbf{PCRel}$.
-    Since the generator $\rtop$ introduces no new axioms beyond those
-    already verified for $\mathbf{PCRel}$ and $\mathbf{GAA}$, and both
-    of those theories are sound in $\mathbf{PolyRel}$, soundness carries
-    over directly.
+    The homogeneous axioms are sound by the conic case, and the affine
+    axioms inherited from $\mathbf{GAA}$ are already sound.
+    The remaining axiom (P0) is valid because the constant $1$ satisfies
+    $1\ge0$, so its scalar diagram has the same interpretation as the
+    empty diagram. Thus all axioms preserve the polyhedral semantics.
 \end{proof}
 
 \begin{lemma}[Expressivity]
-    For every $f : m \to n$ in $\mathbf{PolyRel}$ there exists a
-    $\Sigma$-term $s : m \to n$ in
-    $\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GPA}}}(m,n)$
-    such that $[s] = f$.
+    For every $f:m\to n$ in $\mathbf{PolyRel}$ there exists a term
+    $s:m\to n$ in $\mathrm{FreeP}_{\mathbf{GPA}}$ such that $[s]=f$.
 \end{lemma}
 
 \begin{proof}
@@ -627,49 +421,113 @@ homogeneous case.
     \end{figure}
 \end{proof}
 
+As in the conic case, bending the first $m$ coordinates into inputs
+gives a diagram with the required interface.
+
 \begin{lemma}[Completeness]
-    If $[s] = [t]$ in $\mathbf{PolyRel}$, then $s = t$ in
-    $\mathrm{FreeP}_{\mathbf{GPA}}$.
+    If $[s]=[t]$ in $\mathbf{PolyRel}$, then
+    $s=t$ in $\mathrm{FreeP}_{\mathbf{GPA}}$.
 \end{lemma}
 
 \begin{proof}
-    Every polyhedron $P$ can be homogenised by introducing a slack variable,
-    reducing the affine case to the conic one
-    $P^H = \{(x,y) \in k^{n+1} | Ax + by \ge 0, y \ge 0\}$ which
-    admits a normal form (Theorem~\ref{thm:FirstNormalForm}).
-    Under this homogenisation, for each two diagrams $s, t \in \mathbf{GPA}$
-    with $[s] = [t]$ in  $\mathbf{PolyRel}$, there are $s', t'$
-    in $\mathbf{GPA}_{\rtop}$ such that $[s'] = [s]^H, [t'] = [t]^H $.
-    Since two polyhedrals $P,Q$ are equal iff $P^H = Q^H$, then $s$ and
-    $t$ have equal semantics in $\mathbf{PCRel}$.
-    Completeness of $\mathbf{GPA}_{\rtop}$ then gives equality
-    of the  homogenised diagrams, and de-homogenising recovers
-    equality of $s$  and $t$ in $\mathrm{FreeP}_{\mathbf{GPA}}$.
+    If the common interpretation is empty,
+    Lemma~\ref{lem:gpa-empty-form} gives
+    $s=\bot_{m,n}=t$.
 
-    Diagrammatically this goes as follows:
-    \begin{figure}[H]
-        \centering
-        \input{tikz/ProofCompletenessGPA.tex}
-    \end{figure}
-
-    Whereas the interpretation of the last diagram is
-    $\{(x,y,z) \in k^m | Ax + by \ge Bz, y \ge 0\}$, which is the same
-    as $P^H$. Therefore, the semantics of $s'$ is that of the homogenisation
-    of $[s]$ and follows the above argument.
+    Otherwise, put both diagrams in affine normal form.
+    Lemma~\ref{lem:gpa-homogeneous-comparison} gives equal homogeneous
+    interpretations. Completeness of the conic fragment gives equality
+    of the homogeneous diagrams. Setting the shared homogeneous
+    variable to $1$ recovers equality of the affine normal forms,
+    hence $s=t$.
 \end{proof}
 
 \begin{theorem}
     $\mathbf{PolyRel}$ is presented by $\mathrm{FreeP}_{\mathbf{GPA}}$.
 \end{theorem}
 
-\begin{proof}
-    By the preceding three lemmas.
-\end{proof}
+This follows from soundness, expressivity, and completeness
+\cite[Corollary~30]{bonchi2021polyhedral}.
+Every polyhedral relation has a diagrammatic representative, and semantic
+equality can be certified in $\mathbf{GPA}$. It is this presentation,
+together with its normal form, that Chapter~\ref{sec:glp} builds on when
+it adds the generator for the objective function.
 
-This is the result the rest of the thesis leans on: every polyhedral
-relation, not just the conic ones from earlier, has a diagrammatic
-representative, and semantic equality between polyhedra can always be
-certified by a finite rewriting sequence in $\mathbf{GPA}$. It is this
-presentation, together with its normal form, that
-Chapter~\ref{sec:glp} builds on when it adds a single new generator for
-the objective function.
+\section{The transportation constraints revisited}\label{sec:gpa-travel}
+
+Recall the divisible-traffic example from
+Chapter~\ref{chap:lp-background}. We now draw its constraints in
+Graphical Polyhedral Algebra, without the monetary objective. Every node
+in the diagram below is a generator; nothing is abbreviated. We follow the
+two-stage plan of Chapter~\ref{chap:lp-background}: the fuel budget is
+split as $F=f+g$, with $f$ allocated to the first stage and $g$ to the
+second, and the stages share the amount $q$ sent through $B$.
+
+One small pattern occurs three times, so we name it first. The diagram
+\[
+\begin{tikzpicture}[axpic]
+    \pic (g1) at (0.500,0.000) {ge};
+    \pic (g2) at (1.500,0.000) {cozero};
+    \draw (g1-out-0) -- (g2-in-0);
+\end{tikzpicture}
+\]
+denotes $\{(x,*)\mid x\ge0\}$: the inequality generator gives $x\ge y$ and
+the white counit forces $y=0$. We call it the \emph{non-negativity test}.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\linewidth}{!}{\input{tikz/TravelConstraints}}
+    \caption{The transportation constraints in Graphical Polyhedral Algebra.
+    The dotted boxes group the two stages $R_1:2\to1$ and $R_2:2\to0$;
+    they are not new generators. The wires $f$, $g$, and $q$ are internal.}
+    \label{fig:travel-constraints}
+\end{figure}
+
+We read the diagram from left to right.
+\begin{itemize}
+    \item \emph{Fuel split.} The white comultiplication on $F$ imposes
+    $F=f+g$.
+    \item \emph{First stage $R_1$.} The allowance $f$ passes through
+    $\inlinegen{ge}$, which produces a value not exceeding $f$. The black
+    node identifies this value with $p$, so $p\le f$. The white
+    comultiplication then splits $p$ into the two roads leaving $A$,
+    imposing $x_{AB}+x_{AC}=p$. Since this sum is the fuel used by the
+    first stage, the black node states that this fuel fits in $f$.
+    The black copy sends $x_{AB}$ both to the interface, as $q$, and to a
+    non-negativity test; $x_{AC}$ goes to its own test.
+    \item \emph{Second stage $R_2$.} The same pattern appears again. The
+    allowance $g$ passes through $\inlinegen{ge}$ and the black node
+    identifies the result with $q$. The common value is the flow
+    $x_{BC}$ on the road $B\to C$, so $x_{BC}=q\le g$. A final
+    non-negativity test gives $x_{BC}\ge0$.
+\end{itemize}
+Conservation at $B$ requires no node: the flow arriving at $B$ is the wire
+$q$, and the flow leaving $B$ is the same wire.
+
+Composing the generators inside each box gives the two stage relations
+\[
+\begin{aligned}
+(p,f)\,R_1\,q &\iff \exists\,x_{AB},x_{AC}\ge0:\
+x_{AB}+x_{AC}=p,\ x_{AB}=q,\ p\le f,\\
+(q,g)\,R_2\,* &\iff \exists\,x_{BC}\ge0:\ x_{BC}=q,\ x_{BC}\le g.
+\end{aligned}
+\]
+These are the constraints of $U$ and $W$ in
+Chapter~\ref{chap:lp-background}, with $g=F-f$. Relational composition
+then eliminates the internal wires $f$, $g$, and $q$:
+\[
+(p,F)\ \text{accepted}\quad\Longleftrightarrow\quad
+\exists\,x_{AB},x_{BC},x_{AC}\ge0:\
+x_{AB}+x_{AC}=p,\ x_{BC}=x_{AB},\ x_{AB}+x_{BC}+x_{AC}\le F.
+\]
+Indeed, a split $F=f+g$ with $p\le f$ and $x_{BC}\le g$ exists exactly
+when $p+x_{BC}\le F$, and $p+x_{BC}=x_{AB}+x_{BC}+x_{AC}$.
+These are precisely the original constraints. Every feasible pair
+satisfies $p=x_{AB}+x_{AC}\ge0$ and $F\ge p+x_{BC}\ge p$; conversely,
+when $0\le p\le F$, sending everything along the direct road is feasible.
+The feasible pairs are therefore $p\ge0$ and $F\ge p$.
+
+The diagram uses no affine point: every constraint is homogeneous, so it
+lives in the conic fragment $\mathbf{GPA}_{\rtop}$, and its semantics is
+the polyhedral cone $\{(p,F)\mid 0\le p\le F\}$. No cost is attached at
+this stage: the diagram records feasibility only.

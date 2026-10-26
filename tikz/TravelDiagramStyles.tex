@@ -1,0 +1,55 @@
+% Named boxes abbreviate the composite diagrams defined in the chapter text.
+\tikzset{travel-first-constraints/.pic={
+  \draw (-1.2,-0.8999999999999999) rectangle (1.2,0.8999999999999999);
+  \node at (0,0) {$R_1$};
+  \coordinate (-in-0) at (-1.2,0.3);
+  \node[anchor=west,font=\scriptsize] at (-1.15,0.3) {$p$};
+  \coordinate (-in-1) at (-1.2,-0.3);
+  \node[anchor=west,font=\scriptsize] at (-1.15,-0.3) {$F$};
+  \coordinate (-out-0) at (1.2,0.6);
+  \node[anchor=east,font=\scriptsize] at (1.15,0.6) {$q$};
+  \coordinate (-out-1) at (1.2,0.0);
+  \node[anchor=east,font=\scriptsize] at (1.15,0.0) {$f$};
+  \coordinate (-out-2) at (1.2,-0.6);
+  \node[anchor=east,font=\scriptsize] at (1.15,-0.6) {$F$};
+}}
+\tikzset{travel-second-constraints/.pic={
+  \draw (-1.2,-0.8999999999999999) rectangle (1.2,0.8999999999999999);
+  \node at (0,0) {$R_2$};
+  \coordinate (-in-0) at (-1.2,0.6);
+  \node[anchor=west,font=\scriptsize] at (-1.15,0.6) {$q$};
+  \coordinate (-in-1) at (-1.2,0.0);
+  \node[anchor=west,font=\scriptsize] at (-1.15,0.0) {$f$};
+  \coordinate (-in-2) at (-1.2,-0.6);
+  \node[anchor=west,font=\scriptsize] at (-1.15,-0.6) {$F$};
+}}
+\tikzset{travel-first-cost/.pic={
+  \draw (-1.2,-1.2) rectangle (1.2,1.2);
+  \node at (0,0) {$E_1$};
+  \coordinate (-in-0) at (-1.2,0.6);
+  \node[anchor=west,font=\scriptsize] at (-1.15,0.6) {$t$};
+  \coordinate (-in-1) at (-1.2,0.0);
+  \node[anchor=west,font=\scriptsize] at (-1.15,0.0) {$p$};
+  \coordinate (-in-2) at (-1.2,-0.6);
+  \node[anchor=west,font=\scriptsize] at (-1.15,-0.6) {$F$};
+  \coordinate (-out-0) at (1.2,0.9);
+  \node[anchor=east,font=\scriptsize] at (1.15,0.9) {$r$};
+  \coordinate (-out-1) at (1.2,0.3);
+  \node[anchor=east,font=\scriptsize] at (1.15,0.3) {$q$};
+  \coordinate (-out-2) at (1.2,-0.3);
+  \node[anchor=east,font=\scriptsize] at (1.15,-0.3) {$f$};
+  \coordinate (-out-3) at (1.2,-0.9);
+  \node[anchor=east,font=\scriptsize] at (1.15,-0.9) {$F$};
+}}
+\tikzset{travel-second-cost/.pic={
+  \draw (-1.2,-1.2) rectangle (1.2,1.2);
+  \node at (0,0) {$E_2$};
+  \coordinate (-in-0) at (-1.2,0.9);
+  \node[anchor=west,font=\scriptsize] at (-1.15,0.9) {$r$};
+  \coordinate (-in-1) at (-1.2,0.3);
+  \node[anchor=west,font=\scriptsize] at (-1.15,0.3) {$q$};
+  \coordinate (-in-2) at (-1.2,-0.3);
+  \node[anchor=west,font=\scriptsize] at (-1.15,-0.3) {$f$};
+  \coordinate (-in-3) at (-1.2,-0.9);
+  \node[anchor=west,font=\scriptsize] at (-1.15,-0.9) {$F$};
+}}

@@ -1,0 +1,428 @@
+\chapter{The Linear Programming Category}\label{sec:glp}
+
+The theory developed so far has extended the categorical framework
+by adding a new class of  morphisms. We now introduce the
+final and most expressive theory of the thesis:
+a  graphical algebra for parametric linear programs.
+Linear programs combine  both the inequality structure of polyhedra and the notion of an objective function,
+and their value functions are precisely the polyhedral convex  functions.
+The central result of this section is the presentation of a
+complete monoidal theory for right-hand side parametric linear programming.
+
+\section{Semantics: the prop \texorpdfstring{$\mathbf{LPRel}$}{LPRel}}
+
+We begin with several classical results that establish the tight
+relationship between piecewise affine convex functions, polyhedral
+functions, and parametric linear programs. These will serve as the
+semantic foundation for the graphical algebra introduced in the following
+section, and they justify describing the morphisms of this chapter's
+semantic category, $\mathbf{LPRel}$, interchangeably as parametric linear
+programs or as polyhedral functions.
+
+\begin{definition}[Piecewise Affine Convex Function]
+A function $f : \mathbb{R}^n \to \mathbb{R}$ is called
+\emph{piecewise affine convex} if there exist finitely many affine
+functions $a_i^\top x + b_i$, $i = 1,\dots,k$, such that
+\[
+f(x) = \max_{i=1,\dots,k} \{ a_i^\top x + b_i \}.
+\]
+\end{definition}
+
+\begin{definition}[Polyhedral Function]
+A function $f : \mathbb{R}^n \to \mathbb{R} \cup \{+\infty\}$ is
+\emph{polyhedral} if its epigraph
+\[
+\mathrm{epi}(f) := \{ (x,t) \mid t \ge f(x) \}
+\]
+is a polyhedron.
+\end{definition}
+
+\begin{definition}[RHS Parametric Linear Program]
+A \emph{right-hand side parametric linear program} has value function
+\[
+v(b) := \inf_{x} \{ c^\top x \mid Ax \ge b \}.
+\]
+\end{definition}
+
+The following two propositions establish that all three notions above
+are equivalent descriptions of the same class of functions. This
+equivalence is the semantic cornerstone of the section: it is what
+allows us to treat polyhedral functions and parametric linear programs
+as morphisms in the same category.
+
+\begin{proposition}
+A function is piecewise affine convex if and only if it is a polyhedral
+function.
+\end{proposition}
+
+\begin{proof}
+\textbf{($\Rightarrow$)} Let
+$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
+Then
+\[
+\mathrm{epi}(f) = \bigcap_{i=1}^k \{ (x,t) \mid t \ge a_i^\top x + b_i \},
+\]
+which is an intersection of finitely many halfspaces, hence a polyhedron.
+
+\medskip
+\textbf{($\Leftarrow$)} If $f$ is polyhedral, its epigraph is a
+polyhedron, so there exist finitely many affine inequalities
+$t \ge a_i^\top x + b_i$ such that
+$f(x) = \max_{i=1,\dots,k} (a_i^\top x + b_i)$.
+Thus $f$ is piecewise affine and convex.
+\end{proof}
+
+\begin{proposition}
+A function $v : \mathbb{R}^m \to \mathbb{R} \cup \{+\infty\}$ is
+piecewise affine convex if and only if it is the value function of a
+right-hand side parametric linear program.
+\end{proposition}
+
+\begin{proof}
+\textbf{($\Rightarrow$)} Let
+$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$
+and define $Y := \mathrm{conv}\{y^1,\dots,y^k\}$.
+Then $v(b) = \max_{y \in Y} b^\top y$.
+Since $Y$ is a polyhedron admitting the representation
+$Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$,
+linear programming duality gives
+$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
+
+\medskip
+\textbf{($\Leftarrow$)} Let
+$v(b) = \inf \{ c^\top x \mid Ax \ge b \}$.
+Dualising,
+$v(b) = \sup \{ b^\top y \mid A^\top y = c,\; y \ge 0 \}$.
+Since the feasible set $Y = \{ y \mid A^\top y = c,\; y \ge 0 \}$
+is a polyhedron, the supremum is attained at its extreme points
+$y^1,\dots,y^k$, yielding
+$v(b) = \max_{i=1,\dots,k} (y^i)^\top b$.
+Thus $v$ is piecewise affine convex.
+\end{proof}
+
+The following proposition is the key technical lemma for the completeness
+proof of $\mathbf{GLP}$. It states that two parametric linear programs
+with the same value function must share the same epigraph polyhedron.
+
+\begin{proposition}\label{prop:equalepi}
+Let
+\[
+v_i(y) := \inf\{\mathbf{1}^\top x \mid A_i x \ge B_i y\},
+\qquad i=1,2,
+\]
+where $A_i \in \mathbb{R}^{m_i \times n_i}$ and
+$B_i \in \mathbb{R}^{m_i \times k}$. If $v_1(y) = v_2(y)$ for all
+$y \in \mathbb{R}^k$, then both programs admit a common representation
+through the same epigraph polyhedron:
+\[
+v_i(y) = \inf\{t \mid (y,t) \in E\},
+\qquad
+E := \mathrm{epi}(v_1) = \mathrm{epi}(v_2).
+\]
+\end{proposition}
+
+\begin{proof}
+For each $i = 1,2$, the epigraph of $v_i$ satisfies
+\[
+(y,t) \in \mathrm{epi}(v_i)
+\iff
+\exists x : A_i x \ge B_i y,\ \mathbf{1}^\top x \le t,
+\]
+so $\mathrm{epi}(v_i)$ is the projection onto $(y,t)$ of the polyhedron
+$P_i = \{(x,y,t) \mid A_i x \ge B_i y,\ \mathbf{1}^\top x \le t\}$.
+Projections of polyhedra are polyhedra, so each $\mathrm{epi}(v_i)$ is
+a polyhedron. Since $v_1 = v_2$ pointwise, we have
+$\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
+Setting $E = \{(y,t) \mid Cy + dt \ge 0\}$, we obtain
+$v_i(y) = \inf\{t \mid Cy + dt \ge 0\}$ for both $i = 1, 2$.
+\end{proof}
+
+With the equivalences above in place, we now define the semantic
+category of this chapter. $\mathbf{LPRel}$ describes morphisms as
+parametric linear programs; by the propositions above, these coincide
+with polyhedral functions, and we will use both descriptions
+interchangeably according to which is more convenient.
+
+\begin{definition}[The prop $\mathbf{LPRel}$ of Linear Programs]
+The prop $\mathbf{LPRel}$ is defined as follows:
+\begin{itemize}
+    \item Objects are natural numbers $n \in \mathbb{N}$, interpreted
+    as the space $\mathbb{R}^n$.
+    \item A morphism $n \to m$ is a right-hand side parametric linear
+    program with value function
+    \[
+    (x,y) \mapsto \inf_z \{ c^\top z \mid Az \ge B[x\ y]^\top + b \},
+    \]
+    where $x \in \mathbb{R}^n$ and $y \in \mathbb{R}^m$.
+    \item Composition is given by minimisation over the shared variable.
+    \item The monoidal product on objects is addition $n \otimes m := n+m$,
+    and on morphisms is direct sum.
+\end{itemize}
+\end{definition}
+
+\section{Syntax: the algebra \texorpdfstring{$\mathbf{GLP}$}{GLP}}
+
+With the semantic equivalences established, we now introduce the final
+graphical algebra of the thesis. The algebra $\mathbf{GLP}$ extends
+$\mathbf{GPA}$ with a single new generator whose semantics encodes the
+linear objective function $c^\top x$. This new generator lifts $\mathbf{GPA}$
+from polyhedral constraints to full linear programs by attaching a
+linear cost to the feasible region.
+
+\begin{definition}[$\mathbf{GLP}$]\label{def:glp}
+    We call $\mathbf{GLP}$ the symmetric monoidal theory obtained by
+    extending $\mathbf{GPA}$ with the following generator:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/LinearGeneratorSemantics.tex}
+    \end{figure}
+    together with the following axioms governing its interaction with
+    the existing generators:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/AxiomsGLP.tex}
+    \end{figure}
+\end{definition}
+
+The axioms represent expected properties of the linear cost function.
+
+\begin{itemize}
+    \item (linearity) express the linear property $f(x) + f(y) = f(x+y)$.
+    Observe that $f$ is the interpretation of the $\inlinegen{linear}$ and the
+    sum denotes the vertical composition; composing two $\inlinegen{linear}$ vertically
+    (adding) is the same as adding the wires in a single $\inlinegen{linear}$.
+
+    \item (zeroeq) is the tautological fact that $\inf 0 = 0$
+
+    \item (inf) is the epigraph property, this is, the fact
+        that the infimum of the epigraph of a function, is the 
+        function itself $g(y)=\inf\{x:(y,x)\in\operatorname{epi}(f)\}=\inf_{x\ge f(y)}x=f(y).$ 
+\end{itemize}
+
+From this simple axioms, we get immediatly another core property of linear programs,
+namely, that they are invariant to stochastics matrices.
+
+\begin{remark}[Invariance under column-stochastic matrices]\label{rmk:stochastic}
+    The \textit{linearity} axiom encodes the fundamental invariance of linear
+    programs under column-stochastic reweightings of the objective: for any
+    $n \times m$ matrix $S$ whose columns each sum to one,
+    \[
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,0.500) {linear};
+      \pic[val=S] (m1) at (2.000,0.500) {comatrix};
+      \draw (l1-out-0) to[out=0,in=180] (m1-in-0);
+    \end{tikzpicture}
+    \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+    \begin{tikzpicture}[axpic]
+      \pic (l1) at (0.500,0.500) {linear};
+    \end{tikzpicture}
+    \]
+    The proof is diagrammatic,
+    we display the proof for a
+    $2 \times 2$ matrix $S$ with $s_{1,1} + s_{2,1} = s_{1,2} + s_{2,2} = 1$;
+    every step is an instance of an axiom scheme that applies wire-by-wire, so
+    the same chain of rewrites goes through verbatim for arbitrary $n \times m$.
+    \begin{figure}[H]
+        \centering
+        \input{tikz/RemarkStochastic.tex}
+    \end{figure}
+\end{remark}
+
+This is a pattern present in every algebra discussed so far, 
+where a particular class of matrices is invariant to one of it's core generators.
+\footnote{In the digrammatic calculi of Linear subspaces (GLA)
+one can show that surjective matrices are invariant to $\inlinegen{codiscard}$
+which is a very important feature in the completeness of the language itself.
+The same occurs in GPA, where non-negative matrices slide through the $\inlinegen{ge}$.
+Other works have spotted the same pattern, such as 
+\cite{stein2024gqa} which shows that a generator representing the $l_2$ norm is 
+invariant to orthogonal matrices (also are normal distributed random variables).}
+Here, the new class of matrices that interact with the new generator
+$\inlinegen{linear}$ is that of stochastic matrices, agreeing with what one
+would expect when discussing linear problems.
+
+With the SMT above we now define the complete category.
+\begin{definition}
+    We call $\mathrm{FreeP}_{\mathbf{GLP}}$ the PROP freely generated
+    by $\mathbf{GLP}$.
+\end{definition}
+
+The normal form theorem for $\mathbf{GLP}$ extends the one for
+$\mathbf{GPA}$: every diagram can be reduced to a $\mathbf{GPA}$ block
+encoding the constraints, composed with the new generator encoding the
+objective. The proof proceeds by structural induction, using the existing
+normal form for $\mathbf{GPA}$ as the inductive base.
+
+\begin{theorem}[Normal Form]\label{thm:NormalFormGLP}
+    For every diagram $c \in \mathbf{GLP}$, there exists a diagram $c'$
+    in normal form such that $c = c'$:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/NormalFormGLP.tex}
+    \end{figure}
+    With $A$ and $b$ being an affine transformation. Namely:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/AffineTransformation.tex}
+    \end{figure}
+\end{theorem}
+
+\begin{proof}
+    The proof is by structural induction. First we show the two base cases:
+    \begin{itemize}
+        \item The generator $\inlinegen{linear}$
+        \begin{figure}[H]
+            \centering
+            \input{tikz/ProofNormalFormBaseLinear.tex}
+        \end{figure}
+        \item A diagram $c \in \mathbf{GPA}$
+
+        \begin{figure}[H]
+            \centering
+            \input{tikz/ProofNormalFormBaseGPA.tex}
+        \end{figure}
+    \end{itemize}
+    For the inductive step, we verify that for any two diagrams
+    $c, d \in \mathbf{GLP}$ satisfying the inductive hypothesis,
+    both horizontal and vertical composition preserve the normal form.
+    Closure under vertical composition follows by stacking the two normal forms and
+    collapsing the two independent $A_i, \mathrm{ge}, B_i$ blocks into a single
+    block-diagonal matrix pair, as shown below:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/ProofNormalFormVerticalComp.tex}
+    \end{figure}
+    For horizontal composition, the two normal forms are joined along the wire connecting
+    $B_1$ to $A_2$; applying Fourier-Motzkin Elimination to this pair recovers a fresh
+    matrix-$\mathrm{ge}$-comatrix triple, after which the two resulting runs of matrices,
+    one in each direction, compose into a single matrix and a single comatrix, recovering
+    the normal form:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/ProofNormalFormHorizontalComp.tex}
+    \end{figure}
+\end{proof}
+
+The following corollary reveals the geometric meaning of the normal form:
+the $\mathbf{GPA}$ part of every $\mathbf{GLP}$ diagram encodes the
+epigraph of the corresponding value function. This is the key structural
+insight connecting the syntax to the semantic equivalence of
+Proposition~\ref{prop:equalepi}.
+
+\begin{corollary}[Epigraph Form]\label{cor:epigraph form}
+    Given a diagram $d \in \mathbf{GLP}$ in normal form, it can always
+    be rewritten as a diagram $d'$ of the form:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/EpigraphFormGLP.tex}
+    \end{figure}
+    where the semantics of the dotted diagram is
+    \[\left\{(t,y)\mid \exists\, x,\; A'x + a \ge [B\; -C]\, y,\; t\ge x,\; y =
+    \begin{bmatrix} y_1 \\ y_2 \end{bmatrix}\right\}\].
+    This is the epigraph of the original diagram $d$
+    \begin{align*}
+        [d](y_1, y_2) &= \inf_{z} \; z \quad \text{s.t. } A z + a \ge B y_1 - C y_2 \\
+        \mathrm{epi}([d]) &= \left\{(t, y_1, y_2) \mid \exists\, z \le t,\;
+            A z + a \ge B y_1 - C y_2 \right\}
+    \end{align*}
+    such that $A = [A' \;C]$. We call this the \emph{epigraph form} of a linear program.
+\end{corollary}
+
+\begin{proof}
+    Starting from $d$ in normal form, split the relation generator along
+    $A = [A' \; C]$ and pull the resulting $C$-block through the $\inlinegen{ge}$
+    generator using the antipode axiom:
+    \input{tikz/EpigraphProof.tex}
+    The resulting diagram is precisely the claimed form $d'$, with the
+    dotted box exhibiting $\mathrm{epi}([d])$ as a $\mathbf{GPA}$ diagram.
+\end{proof}
+
+\section{Presentation results for \texorpdfstring{$\mathbf{LPRel}$}{LPRel}}
+
+With the syntax and its normal form in place, we are now ready to prove
+the three presentation properties for $\mathbf{GLP}$.
+
+\begin{lemma}[Expressivity]
+    For every $f : m \to n$ in $\mathbf{LPRel}$ there exists a
+    $\Sigma$-term $s : m \to n$ in
+    $\mathrm{Hom}_{\mathrm{FreeP}_{\mathbf{GLP}}}(m,n)$
+    such that $[s] = f$.
+\end{lemma}
+
+\begin{proof} 
+    Any RHS Parametric linear program can be written as 
+    $\inf_z \{ c^\top z \mid Ax + b \ge By$ therefore is enough to show that we
+    can always depict such a problem. The following diagram provides the required
+    syntactic representative:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/ProofExpressivity.tex}
+    \end{figure}
+\end{proof}
+
+\begin{lemma}[Soundness]
+   If $s = t$ in $\mathrm{FreeP}_{\mathbf{GLP}}$, then $[s] = [t]$
+   in $\mathbf{LPRel}$.
+\end{lemma}
+
+\begin{proof}
+    All axioms inherited from $\mathbf{GPA}$ are already sound by the
+    results of the previous section. It suffices to verify that the new
+    axioms involving the LP generator preserve the semantics, which
+    follows by direct computation:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/ProofSoundness.tex}
+    \end{figure}
+\end{proof}
+
+The final result of the thesis is the completeness theorem for
+$\mathbf{GLP}$. The proof brings together all the main tools developed
+throughout: the epigraph form of Corollary~\ref{cor:epigraph form}, the
+shared epigraph property of Proposition~\ref{prop:equalepi}, the
+completeness of $\mathbf{GPA}$, and the FME-based normal form.
+
+\begin{lemma}[Completeness]
+   If $[c] = [d]$ in $\mathbf{LPRel}$, then $c = d$ in
+   $\mathrm{FreeP}_{\mathbf{GLP}}$.
+\end{lemma}
+
+\begin{proof}
+    Let $v_1 = [c]$ and $v_2 = [d]$. By assumption $v_1 = v_2$, so
+    Proposition~\ref{prop:equalepi} gives
+    $\mathrm{epi}(v_1) = \mathrm{epi}(v_2) =: E$.
+
+    By Corollary~\ref{cor:epigraph form}, both $c$ and $d$ admit
+    epigraph forms $c = \inlinegen{linear} ; c^*$ and $d = \inlinegen{linear} ; d^*$
+    with $[c^*] = [d^*] = E$ in $\mathbf{PolyRel}$. Since $c^*$ and $d^*$
+    are $\mathbf{GPA}$ diagrams with the same denotation, completeness of
+    $\mathbf{GPA}$ gives $c^* = d^*$ in $\mathrm{FreeP}_{\mathbf{GPA}}$;
+    in particular both reduce to the same $\mathbf{GPA}$ normal form.
+    Composing this common diagram with the leftover $\inlinegen{linear}$ collapses
+    $c$ and $d$ to the same $\mathbf{GLP}$ diagram:
+    \begin{figure}[H]
+        \centering
+        \input{tikz/ProofCompletenessLemma.tex}
+    \end{figure}
+    Therefore $c = \inlinegen{linear} ; c^* = \inlinegen{linear} ; d^* = d$.
+\end{proof}
+
+As a consequence of the three lemmas above:
+
+\begin{theorem}
+    $\mathbf{LPRel}$ is presented by $\mathrm{FreeP}_{\mathbf{GLP}}$.
+\end{theorem}
+\begin{proof}
+    By the preceding three lemmas.
+\end{proof}
+
+Finally, we've built, through the addition of one generator and three axioms,
+an elegant and complete diagrammatic theory for parametric linear programming.
+This result does unlock a new algebraic and computational way to
+interact with LP problems. A linear
+program is ordinarily presented as a function to be evaluated, an
+$x \mapsto c^\top x$ subject to constraints, solved from the outside by an
+algorithm. Here it is instead a morphism, an object with an interface that
+composes with others of its kind, and solving it, and
+eliminating one of its variables are all the same operation, composition in
+$\mathbf{LPRel}$.

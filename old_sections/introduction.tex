@@ -1,0 +1,364 @@
+\chapter{Introduction}
+
+Mathematics is permeated by this notion of what one
+would call an ``ideal'' object. This notion of ``ideal'' often refers to the
+simplest object that meets a specific criterion, such as being the smallest
+element in a set, or the one through which all others factor uniquely.
+This particular description of ``ideal'' reveals an interesting
+interconnection between categories and optimization \cite{Khadh2026bridging}.
+Many of the constructions mathematics singles
+out as canonical are optimal in this same sense: they are the best object of a
+collection, with respect to an ordering or universal property carried by that
+collection. This thesis aims to explore this idea and provide a formal and
+intuitive view on such topics.
+
+Consider for instance the familiar transitivity condition for a relation
+$R\subseteq X\times X$:
+\[
+\bigl(\exists y\in X:\;xRy\wedge yRz\bigr)\implies xRz,
+\qquad x,z\in X.
+\]
+
+Here the premise demands the existence of an intermediate object, namely $y$.
+Nothing forces $y$ to be unique; in fact, it is often the case that we have
+a set of such objects. The connection with an ``ideal'' object can be made
+explicit if we change the settings of the problem. Consider the indicator function
+representation of $R$ in the sense of convex analysis \cite{rockafellar1970convex},
+$R:X\times X\to\{0,\infty\}$, defined by
+\[
+R(x,y)=
+\begin{cases}
+0, & \text{if }xRy,\\
+\infty, & \text{otherwise}.
+\end{cases}
+\]
+Then the above is the same as:
+\[
+\inf_{y\in X}\bigl(R(x,y)+R(y,z)\bigr)=0
+\implies R(x,z)=0,
+\]
+where $\inf\varnothing=\infty$.
+Since the values are either zero or infinity, this is also equivalent to
+\[
+\inf_{y\in X}\bigl(R(x,y)+R(y,z)\bigr) 
+\ge R(x,z)
+\]
+
+The resemblance is not mere coincidence: these are particular cases of
+a more general construction using quantales
+\cite{lawvere1973metric}.
+More generally, let $Q$ be a unital quantale: a complete lattice equipped
+with an associative operation $\otimes$, with unit $e$, that preserves
+arbitrary joins in each argument.
+By interpreting $\exists$ and $\inf$ through the lattice join
+operator $\bigvee$, and $\wedge$ and $+$ through the monoidal operator
+$\otimes$, we obtain, for a $Q$-valued relation
+$R:X\times X\to Q$, the generalized transitivity condition
+\[
+\bigvee_{y\in X}R(x,y)\otimes R(y,z)\le_Q R(x,z).
+\]
+
+Notice that for the cost quantale $([0,\infty],\ge,+)$ we have
+$a\le_Q b \iff a\ge b$, so this replacement recovers exactly the same
+expression as above.
+
+However, there is still more to it: as one may notice, the commonalities
+between these equations go beyond the simply visual structure;
+they actually share an \textit{algebraic} structure.
+Explicitly, all the expressions on the left of the abstract inequality
+perform the very important role of \textit{variable elimination}.
+The two terms share the same middle variable $y$, and taking the join
+over $y$ produces a new expression depending only on $x$ and $z$.
+
+A join, however, already has an optimization characterization:
+for $A\subseteq Q$, $\bigvee A$ is the least of the upper bounds of $A$,
+the ``ideal'' upper bound inside the order of $Q$.
+Here the collection being aggregated is
+\[
+A_{x,z}=\{R(x,y)\otimes R(y,z):y\in X\}.
+\]
+Eliminating the intermediate variable therefore computes an optimal
+aggregate value. The choice of $Q$ fixes both the order used for aggregation and
+the operation used to combine values.
+Ordinary existential quantification is thus a particular case of this
+order-theoretic aggregation, and its indicator function makes the
+connection with optimization exact.
+
+This variable elimination is precisely how composition of
+quantale-valued relations is defined. Given
+$R:X\times Y\to Q$ and $S:Y\times Z\to Q$, we have
+\[
+(S\circ R)(x,z)
+:=
+\bigvee_{y\in Y}R(x,y)\otimes S(y,z).
+\]
+The generalized transitivity condition above is therefore simply
+\[
+R\circ R\le_Q R,
+\]
+with the inequality understood pointwise.
+In this setting, composition is variable elimination, and the join
+gives it the optimization interpretation described above.
+Sections~\ref{sec:quantale-relations}
+and~\ref{sec:composability} make this precise.
+
+Category theory gives us an abstraction to describe such operations:
+it explicitly encodes the notion of composition inside its own definition.
+Quantale-valued relations form a category under the operation above,
+with identity taking value $e$ on the diagonal and $\bot$ elsewhere.
+More generally, composition in a category $\mathcal C$ is given by
+\[
+\circ:\mathcal C(Y,Z)\times\mathcal C(X,Y)
+\longrightarrow\mathcal C(X,Z),
+\]
+subject to associativity and identity laws.
+Its particular expression as a join over an intermediate variable
+uses the additional quantale-valued structure.
+
+We show that, in the categories treated here, solving an optimization
+problem amounts to composing morphisms, and that composition carries out the
+variable elimination such a solution requires. Convex optimization then admits a
+single compositional presentation \cite{stein2024compositional, hanks2024compositionalopt}, 
+in which optimization is an algebraic operation rather than a technique applied from outside.
+That is, optimization and variable elimination are a syntactic operation,
+namely the composition $\circ$ of two objects $A$ and $B$ that share a common variable, or type.
+
+This compositional view of optimization becomes especially apparent when analyzed through
+the language of string diagrams \cite{joyal1991geometry, selinger2010survey, piedeleu2023introductionstringdiagramscomputer}.
+Originating as a rigorous graphical language for
+monoidal categories, string diagrams provide an intuitive yet mathematically
+precise syntax in which the sequential and parallel composition of morphisms
+correspond directly to vertical and horizontal juxtaposition of diagrams
+(e.g., representing computational processes)
+\cite{joyal1991geometry, maclane1998categories}.
+Graphical languages are remarkably well suited to the case at hand.
+They make the semantics of the underlying mathematics explicit at the syntax level,
+in the sense that one doesn`t need to go through atomic and subtle operations in order
+to express the core ideas of a theory,
+\textit{but the system's main properties are explicit in the syntax operations themselves}.
+
+For example, consider the following diagram. Because of the monoidal structure
+one may parse it by reading in two manners: composing the boxes in the same line
+and then stack them togheter, or stacking the boxes that are vertically aligned 
+and then composing then sequentially, as the dotted boxes shows.
+
+\begin{figure}[H]
+    \begin{center}
+\begin{tikzpicture}[axpic]
+  \pic[val=A] (g1) at (0.500,0.500) {diagram};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic[val=B] (g2) at (0.500,0.500) {diagram};
+  \end{scope}
+  \pic[val=C] (g3) at (0.500,-0.500) {diagram};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic[val=D] (g4) at (0.500,-0.500) {diagram};
+  \end{scope}
+  \draw[dotted, thick] (0,-0.1) rectangle (2.5,-1);
+  \draw[dotted, thick] (0,0.1) rectangle (2.5,1);
+  \draw[dotted, thick] (-0.2,-1.2) rectangle (2.7,1.2);
+
+  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+\end{tikzpicture}
+\begin{tikzpicture}[axpic]
+  \node (rel4) at (3.000,0.500) {$=$};
+\end{tikzpicture}
+\begin{tikzpicture}[axpic]
+  \pic[val=A] (g1) at (0.500,0.500) {diagram};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic[val=B] (g2) at (0.500,0.500) {diagram};
+  \end{scope}
+  \pic[val=C] (g3) at (0.500,-0.500) {diagram};
+  \begin{scope}[shift={(1.500,0.000)}]
+  \pic[val=D] (g4) at (0.500,-0.500) {diagram};
+  \end{scope}
+  \draw[dotted, thick] (0,-1.0) rectangle (1,1.0);
+  \draw[dotted, thick] (2.5,-1.0) rectangle (1.5,1.0);
+  \draw[dotted, thick] (-0.2,-1.2) rectangle (2.7,1.2);
+  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+This denotes the fact that the composition and the monoidal product
+interact nicely, or, formally, that the operator $\otimes$ is actually
+an endofunctor, so $a;b \otimes c;d = a \otimes c; b \otimes d$. Observe how
+this entire property is underloaded by the syntax, so one don't even need to keep
+track of it but simply parse the diagram in any direction. This is what we mean
+when we say that the main properties are in the syntax itself, we don't get to
+invoke the definition or property to show the equality,
+but the very depicting (or drawing) embeds the property.
+
+A fine example, that will be later explained, is one that uses the very syntax
+developed in this work. Consider the equivalence between these two Linear Programs
+\[
+f_1(y) = \inf_{x_1,x_2} \{ x_1 + x_2 \mid \; a_1 x_1 + a_2 x_2 = y\}
+\]
+\[
+f_2(y) = \inf_{w_1,w_2} \{ \inf_{x_1} \{ x_1 \mid a_1 x_1 = w_1 \} + \inf_{x_2} \{ x_2 \mid a_2 x_2 = w_2 \} \mid w_1 + w_2 = y \}
+\]
+
+These two functions are, in fact, the same. To see this, introduce the change of variables
+$ w_1=a_1x_1,\; w_2=a_2x_2. $
+
+Assuming \(a_1,a_2\neq 0\), each inner optimization problem has a unique feasible point,
+so substituting \(w_i=a_ix_i\) yields
+$ f_2(y) = \inf\limits_{a_1x_1+a_2x_2=y} \left\{x_1+x_2\right\} = f_1(y).$
+
+Thus, the second formulation does not change the underlying optimization problem;
+rather, it decomposes the original constraint through the intermediate variables
+\(w_1\) and \(w_2\). Now look at the diagram denoting these same problems.
+
+\begin{figure}[H]
+    \begin{center}
+\begin{tikzpicture}[axpic]
+  \pic (g2) at (-0.500,0.500) {linear};
+  \pic[val=a_1] (g1) at (0.500,0.500) {scalar};
+  \pic (g2) at (-0.500,-0.500) {linear};
+  \pic[val=a_2] (g3) at (0.500,-0.500) {scalar};
+  \pic (g4) at (2.,0.0) {multiplication};
+  \draw[dotted, thick] (0,-0.9) rectangle (2.6,1);
+  \draw[dotted, thick] (-0.9,-0.9) rectangle (-0.1,1);
+  \draw[dotted, thick] (-1.0,-1.2) rectangle (2.7,1.2);
+
+  \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
+\end{tikzpicture}
+\begin{tikzpicture}[axpic]
+  \node (rel4) at (3.000,0.500) {$=$};
+\end{tikzpicture}
+\begin{tikzpicture}[axpic]
+  \pic (g2) at (-0.500,0.500) {linear};
+  \pic[val=a_1] (g1) at (0.500,0.500) {scalar};
+  \pic (g2) at (-0.500,-0.500) {linear};
+  \pic[val=a_2] (g3) at (0.500,-0.500) {scalar};
+  \pic (g4) at (2.,0.0) {multiplication};
+  \draw[dotted, thick] (-.9,0.1) rectangle (1.0,1.1);
+  \draw[dotted, thick] (-.9,-0.1) rectangle (1.0,-.9);
+  \draw[dotted, thick] (1.1,-0.9) rectangle (2.6,1.1);
+  \draw[dotted, thick] (-1.0,-1.2) rectangle (2.7,1.2);
+
+  \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+  \draw (g3-out-0) to[out=0,in=180] (g4-in-1);
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+Once again, both problems are depicted as the very same diagram, being just
+a different order of parsing it. In this case all the variable changing was 
+hidden by the syntax, and only the main semantics -- the \textit{problem itself} --
+is exposed.
+
+Other areas have far off recognize the benefits of such denotation, mainly in 
+engineering fields such as \emph{quantum computing} \cite{coecke2011interacting} and
+\emph{electronics} \cite{baez2018compositional}.
+More recently, mathematicians and computer scientists have also 
+built upon this foundation deriving a rich family of \emph{diagrammatic} 
+or \emph{graphical calculi},
+offering complete axiomatisations of various algebraic structures purely through
+equational diagram rewriting \cite{selinger2010survey, bonchi2017interacting}.
+These calculi have proved remarkably versatile, finding applications across a
+wide range of fields:  \emph{linear algebra} \cite{bonchi2017interacting, bonchi2019affine, defreitas2025generalizinginvertiblematrixtheorem};
+and in \emph{optimisation and probability} \cite{stein2024gqa, stein2025compositional, bonchi2021polyhedral}. 
+
+Throughout this work we explore how, step by step,
+one can enrich the already known theories for linear
+\cite{bonchi2017interacting} algebra by adding one new generator at a time,
+along with a particular
+set of axioms, and derive even richer structures for convex problems \cite{stein2024compositional}.
+
+The development followed a strict linear discipline, adding exactly one new
+generator and verifying that the resulting algebra is
+sound, expressive, and complete with respect to a precisely defined semantic
+category. Each new class of optimization problems then costs a single
+additional generator and a finite set of axioms.
+This is made precise by the normal form and completeness results of
+Theorem~\ref{thm:normalformgpa} and Theorem~\ref{thm:NormalFormGLP}, which follow the
+same pattern already established for graphical linear and affine algebra
+\cite{bonchi2017interacting, bonchi2019affine} and for their quadratic
+\cite{stein2024gqa} and polyhedral \cite{bonchi2021polyhedral} extensions.
+Table~\ref{tab:language-hierarchy} summarizes the resulting hierarchy of
+languages, indicating where each syntax and axiomatisation is introduced.
+
+\begin{table}[H]
+\centering
+\caption{Hierarchy of the graphical languages used in this thesis.}
+\label{tab:language-hierarchy}
+\small
+\begin{tabular}{c p{3.1cm} p{3.5cm} c c}
+    \\
+\toprule
+\textbf{Language} & \textbf{Syntax} & \textbf{Axioms} & \textbf{Reference} & \textbf{Semantics} \\
+\midrule
+$\mathbf{GLA}$
+& Appendix~\ref{sec:appendix-gla}: linear generators
+& Appendix~\ref{sec:appendix-gla}: linear equations
+& \cite{bonchi2017interacting}
+& $\mathbf{LinRel}$ \\
+$\mathbf{GAA}$
+& $\mathbf{GLA}+\rtop$; Table~\ref{tab:appendix-gla-generators}
+& $\mathbf{GLA}$ axioms $+$ affine-point axioms; Appendix~\ref{sec:appendix-gla}
+& \cite{bonchi2019affine}
+& $\mathbf{AffRel}$ \\
+$\mathbf{GPA}$
+& $\mathbf{GAA}+\inlinegen{ge}$; Definition~\ref{def:gpa}
+& $\mathbf{GAA}$ axioms $+$ order axioms; Definition~\ref{def:gpa}
+& \cite{bonchi2021polyhedral}
+& $\mathbf{PolyRel}$ \\
+$\mathbf{GLP}$
+& $\mathbf{GPA}+\inlinegen{linear}$; Definition~\ref{def:glp}
+& $\mathbf{GPA}$ axioms $+$ objective axioms; Definition~\ref{def:glp}
+& This work
+& $\mathbf{LinProg}\;(\mathbf{LPRel})$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We start by recalling how the Symmetric Monoidal Theory of Graphical Affine Algebra (\textbf{GAA}) \cite{bonchi2019affine}
+can be extended into the even more general theory of Symmetric Inequality Monoidal Theory.
+This is achieved by adding the inequality generator $\inlinegen{ge}$. Geometrically,
+this allows our algebra to go beyond affine spaces and start representing polyhedral figures as linear inequality constraints in optimization.
+\[
+	\{| x \in P\} =
+	\begin{cases}
+		0, & Ax+b\ge 0,\\
+		+\infty, & \text{otherwise}.
+	\end{cases}
+\]
+
+Inspired by these observations, and parallel works in this direction \cite{stein2024gqa, lawvere1973metric},
+we make our central contribution in the final chapter: the construction of
+a graphical algebra for parametric linear programming. In this
+setting, a linear program is represented as a morphism that
+can be composed with other optimization blocks, leading to the idea of
+\textit{composing optimization problems}. This gives a symbolic language
+in which the elimination of internal variables
+corresponds directly to categorical composition, allowing optimization problems
+to be manipulated diagrammatically before computation.
+
+For that we present the new prop of Parametric Linear Programas where morphisms
+are linear programas, this will serve as our semantics.
+Additionally, we make the addition of the new generator
+$\inlinegen{linear}$ and other three characteristic axioms,
+and through a epigraph-based argument,
+provide a normal form proof to show that this small set of generators and rules fully
+present the semantics category, i.e, it's sound, complete and expressible.
+
+\paragraph{Thesis overview}
+In Section~\ref{sec:quantale-relations} we set up the algebraic and categorical
+setting on which the rest of the work is built, introducing quantales and
+relations and the interchangeable role they play in a categorical view. Next, in
+Section~\ref{sec:composability}, we apply this theory to convex optimization
+\cite{stein2024compositional, Khadh2026bridging}, showing how several of its
+central constructs fall within the same categorical framework.
+
+Chapter~\ref{sec:gpa} presents the already-known graphical theory of Polyhedral Algebra
+\cite{bonchi2021polyhedral}, where some of the known proofs are recalled and refined.
+
+Finally, in Chapter~\ref{sec:glp}, we present the central contribution of this thesis:
+an entirely new Graphical Algebra, \textbf{GLP}, dedicated to expressing parametric Linear Programs.
+Building on the polyhedral generators of Chapter~\ref{sec:gpa}, we introduce a single new generator
+for the linear objective function and derive a complete axiomatization for right-hand side parametric
+linear programming, proving that \textbf{GLP} presents the prop $\mathbf{LPRel}$.
+This work represents a first step toward a complete diagrammatic calculus for convex optimization.

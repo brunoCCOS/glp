@@ -1,0 +1,62 @@
+% Feasibility constraints of the transportation problem in GPA.
+% Every node is a generator; the dotted boxes only group the two stages.
+% Rows: q = 3, p = 2, f = 1, g = 0.
+\begin{tikzpicture}[axpic]
+  % ---- fuel split F = f + g -------------------------------------------
+  \pic (sF) at (1.000,0.500) {comultiplication};
+  \draw (0,0.500) -- (sF-in-0);
+  \node[anchor=east] at (0,2.000) {$p$};
+  \node[anchor=east] at (0,0.500) {$F$};
+
+  % ---- first stage R_1 : (p,f) -> q -----------------------------------
+  % p <= f : f through ">=", identified with p by the black node
+  \pic (gf) at (2.500,1.000) {ge};
+  \draw (sF-out-0) -- (gf-in-0);
+  \pic (mA) at (3.500,1.500) {cocopy};
+  \draw (0,2.000) -- (mA-in-0);
+  \draw (gf-out-0) -- (mA-in-1);
+  % p = x_AB + x_AC
+  \pic (sA) at (4.500,1.500) {comultiplication};
+  \draw (mA-out-0) -- (sA-in-0);
+  % x_AB is sent to the interface (q) and tested for x_AB >= 0
+  \pic (cB) at (6.500,2.500) {copy};
+  \draw (sA-out-0) to[out=0,in=180] (cB-in-0);
+  \pic (ga) at (7.500,2.000) {ge};
+  \pic (za) at (8.500,2.000) {cozero};
+  \draw (cB-out-1) -- (ga-in-0);
+  \draw (ga-out-0) -- (za-in-0);
+  % x_AC >= 0
+  \pic (gd) at (7.500,1.000) {ge};
+  \pic (zd) at (8.500,1.000) {cozero};
+  \draw (sA-out-1) -- (gd-in-0);
+  \draw (gd-out-0) -- (zd-in-0);
+
+  \node[above,font=\scriptsize] at (1.750,1.000) {$f$};
+  \node[below,font=\scriptsize] at (3.000,0.000) {$g$};
+  \node[below,font=\scriptsize] at (5.600,2.000) {$x_{AB}$};
+  \node[above,font=\scriptsize] at (6.000,1.000) {$x_{AC}$};
+
+  \draw[dotted] (1.900,0.450) rectangle (9.000,3.450);
+  \node[anchor=south west] at (1.900,3.450) {$R_1$};
+
+  % ---- interface wires between the stages ------------------------------
+  \draw (cB-out-0) -- (9.750,3.000);
+  \draw (sF-out-1) -- (9.750,0.000);
+  \node[above,font=\scriptsize] at (9.250,3.000) {$q$};
+
+  % ---- second stage R_2 : (q,g) -> 0 -----------------------------------
+  % x_BC = q <= g, then x_BC >= 0
+  \pic (gg) at (10.250,0.000) {ge};
+  \pic (mB) at (12.250,1.500) {cocopy};
+  \draw (9.750,3.000) to[out=0,in=180] (mB-in-0);
+  \draw (gg-out-0) to[out=0,in=180] (mB-in-1);
+  \pic (gb) at (13.250,1.500) {ge};
+  \pic (zb) at (14.250,1.500) {cozero};
+  \draw (mB-out-0) -- (gb-in-0);
+  \draw (gb-out-0) -- (zb-in-0);
+
+  \node[above,font=\scriptsize] at (12.650,1.500) {$x_{BC}$};
+
+  \draw[dotted] (9.500,-0.450) rectangle (14.600,3.450);
+  \node[anchor=south west] at (9.500,3.450) {$R_2$};
+\end{tikzpicture}

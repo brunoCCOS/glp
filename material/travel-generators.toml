@@ -1,0 +1,36 @@
+# Named composite diagrams, not additional generators of either theory.
+# Rebuild:
+# ../propr/target/release/propr --config material/travel-generators.toml "firstConstraints ; secondConstraints"
+# ../propr/target/release/propr --config material/travel-generators.toml "(linear * id(2)) ; firstCost ; secondCost"
+[generators.firstConstraints]
+sig.arity = 2
+sig.coarity = 3
+pic = "travel-first-constraints"
+width = 2.4
+height = 2.4
+
+[generators.secondConstraints]
+sig.arity = 3
+sig.coarity = 0
+pic = "travel-second-constraints"
+width = 2.4
+height = 2.4
+
+[generators.firstCost]
+sig.arity = 3
+sig.coarity = 4
+pic = "travel-first-cost"
+width = 2.4
+height = 3.0
+
+[generators.secondCost]
+sig.arity = 4
+sig.coarity = 0
+pic = "travel-second-cost"
+width = 2.4
+height = 3.0
+
+[generators.linear]
+sig.arity = 0
+sig.coarity = 1
+pic = "linear"

@@ -1,0 +1,21 @@
+% Classic Beamer theme (Madrid) and shared diagram helpers.
+\usetheme{Madrid}
+\usecolortheme{default}
+\usefonttheme{default}
+\setbeamertemplate{navigation symbols}{}
+
+% Emphasis in the structure colour instead of an ad-hoc palette.
+\newcommand{\hl}[1]{{\color{structure}\bfseries #1}}
+\newcommand{\credit}[1]{\par\vspace{1mm}{\tiny\color{black!55} #1\par}}
+\newcommand{\tagline}[1]{\begin{block}{Takeaway}\bgroup\normalfont\small #1\egroup\end{block}}
+
+\tikzset{
+  process/.style={draw=black,thick,rounded corners=1.5mm,fill=white,
+    minimum width=1cm,minimum height=.7cm,inner sep=3mm},
+  stage/.style={draw=black,thick,rounded corners=1.5mm,fill=white,
+    minimum width=2.2cm,minimum height=1.2cm,align=center,inner sep=3mm,font=\small},
+  proofbox/.style={draw=black,thick,rounded corners=1.5mm,fill=white,
+    minimum height=.85cm,align=center,inner sep=2.5mm,font=\small},
+  wire/.style={draw=black,thick},
+  axpic/.style={baseline=(current bounding box.center),line cap=round}
+}

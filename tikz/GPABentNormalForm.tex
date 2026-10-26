@@ -1,0 +1,22 @@
+% Bundled-wire bending: x is copied by a cup, one leg feeds s and the
+% other becomes an output. The output bundles are ordered x, then y.
+\begin{tikzpicture}[axpic]
+    \node[draw, minimum width=1cm, minimum height=.7cm] (s) at (0,0) {$s$};
+    \draw (-1,0) -- (s.west);
+    \draw (-1,1) .. controls (-2,1) and (-2,0) .. (-1,0);
+    \draw (-1,1) -- (2,1) node[right] {$x\in k^m$};
+    \draw (s.east) -- (2,0) node[right] {$y\in k^n$};
+    \node at (0,-.9) {$\widehat{s}:0\to m+n$};
+\end{tikzpicture}
+\qquad $=$ \qquad
+\begin{tikzpicture}[axpic]
+    \pic (z) at (0,.5) {zero};
+    \pic (g) at (1.5,.5) {coge};
+    \pic[val=V] (v) at (3.5,.5) {matrix};
+    \draw (z-out-0) -- (g-in-0);
+    \draw (g-out-0) -- (v-in-0);
+    \draw (v-out-0) -- (5,.5) node[right] {$\binom{x}{y}$};
+    \node at (.6,1.35) {$0\in k^r$};
+    \node at (2,1.35) {$\lambda\ge0$};
+    \node at (2.5,-.9) {$d_V:0\to m+n$};
+\end{tikzpicture}

@@ -1,0 +1,79 @@
+% The complete transportation program in GLP: the constraint diagram of
+% tikz/TravelConstraints.tex with one priced linear generator per road.
+% Rows: q = 3, p = 2, f = 1, g = -1; the price tags sit on rows 3 and 0.
+\begin{tikzpicture}[axpic]
+  % ---- fuel split F = f + g -------------------------------------------
+  \pic (sF) at (1.000,0.500) {comultiplication};
+  \draw (0,0.500) -- (sF-in-0);
+  \node[anchor=east] at (0,2.000) {$p$};
+  \node[anchor=east] at (0,0.500) {$F$};
+
+  % ---- first stage U : (p,f) -> q -------------------------------------
+  \pic (gf) at (2.750,1.000) {ge};
+  \draw (sF-out-0) -- (gf-in-0);
+  \pic (mA) at (3.750,1.500) {cocopy};
+  \draw (0,2.000) -- (mA-in-0);
+  \draw (gf-out-0) -- (mA-in-1);
+  \pic (sA) at (4.750,1.500) {comultiplication};
+  \draw (mA-out-0) -- (sA-in-0);
+  % price tag 1 on x_AB
+  \pic (la) at (5.250,3.000) {linear};
+  \pic[val=1] (pa) at (6.250,3.000) {coscalar};
+  \draw (la-out-0) -- (pa-in-0);
+  \pic (kA) at (7.250,2.500) {cocopy};
+  \draw (pa-out-0) -- (kA-in-0);
+  \draw (sA-out-0) -- (kA-in-1);
+  % x_AB is sent to the interface (q) and tested for x_AB >= 0
+  \pic (cB) at (8.250,2.500) {copy};
+  \draw (kA-out-0) -- (cB-in-0);
+  \pic (ga) at (9.250,2.000) {ge};
+  \pic (za) at (10.250,2.000) {cozero};
+  \draw (cB-out-1) -- (ga-in-0);
+  \draw (ga-out-0) -- (za-in-0);
+  % price tag 4 on x_AC, then x_AC >= 0
+  \pic (ld) at (5.250,0.000) {linear};
+  \pic[val=4] (pd) at (6.250,0.000) {coscalar};
+  \draw (ld-out-0) -- (pd-in-0);
+  \pic (kD) at (7.250,0.500) {cocopy};
+  \draw (sA-out-1) -- (kD-in-0);
+  \draw (pd-out-0) -- (kD-in-1);
+  \pic (gd) at (9.250,0.500) {ge};
+  \pic (zd) at (10.250,0.500) {cozero};
+  \draw (kD-out-0) -- (gd-in-0);
+  \draw (gd-out-0) -- (zd-in-0);
+
+  \node[above,font=\scriptsize] at (1.900,1.000) {$f$};
+  \node[below,font=\scriptsize] at (6.000,2.000) {$x_{AB}$};
+  \node[above,font=\scriptsize] at (6.000,1.000) {$x_{AC}$};
+
+  \draw[dotted] (2.150,-0.350) rectangle (10.600,3.450);
+  \node[anchor=south west] at (2.150,3.450) {$U$};
+
+  % ---- interface wires between the stages ------------------------------
+  \draw (cB-out-0) -- (11.000,3.000);
+  \draw (sF-out-1) to[out=0,in=180] (3.000,-1.000) -- (11.000,-1.000);
+  \node[above,font=\scriptsize] at (9.700,3.000) {$q$};
+  \node[below,font=\scriptsize] at (3.500,-1.000) {$g$};
+
+  % ---- second stage W : (q,g) -> 0 -------------------------------------
+  \pic (gg) at (11.500,-1.000) {ge};
+  \pic (mB) at (13.750,1.000) {cocopy};
+  \draw (11.000,3.000) to[out=0,in=180] (mB-in-0);
+  \draw (gg-out-0) to[out=0,in=180] (mB-in-1);
+  % price tag 2 on x_BC, then x_BC >= 0
+  \pic (lb) at (14.250,0.000) {linear};
+  \pic[val=2] (pb) at (15.250,0.000) {coscalar};
+  \draw (lb-out-0) -- (pb-in-0);
+  \pic (kB) at (16.250,0.500) {cocopy};
+  \draw (mB-out-0) -- (kB-in-0);
+  \draw (pb-out-0) -- (kB-in-1);
+  \pic (gb) at (17.250,0.500) {ge};
+  \pic (zb) at (18.250,0.500) {cozero};
+  \draw (kB-out-0) -- (gb-in-0);
+  \draw (gb-out-0) -- (zb-in-0);
+
+  \node[above,font=\scriptsize] at (15.000,1.000) {$x_{BC}$};
+
+  \draw[dotted] (10.850,-1.450) rectangle (18.600,3.450);
+  \node[anchor=south west] at (10.850,3.450) {$W$};
+\end{tikzpicture}

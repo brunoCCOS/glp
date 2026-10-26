@@ -1,0 +1,310 @@
+% Build from the repository root: make -C presentation
+% Exactly 25 frames; no overlays or hidden appendix slides.
+\documentclass[aspectratio=169,12pt]{beamer}
+\usepackage[english]{babel}
+\usepackage{fontspec}
+\setsansfont{Inter}
+\setmainfont{Inter}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{shapes,arrows,arrows.meta,intersections,bending,calc,positioning,fit,backgrounds}
+\tikzstyle{whitedot} = [circle, fill=white, draw=black, inner sep=3pt]
+\tikzstyle{blackdot} = [circle, fill=black, draw=black, inner sep=3pt]
+\tikzstyle{boxnode_right} = [rounded rectangle,  rounded rectangle left arc=none, fill=white, draw=black, inner sep=2.5pt, anchor=center]
+\tikzstyle{boxnode_left} = [rounded rectangle,  rounded rectangle right arc=none, fill=white, draw=black, inner sep=2.5pt, anchor=center]
+\tikzstyle{matrixnode_right} = [rounded rectangle,  rounded rectangle right arc=none, fill=white, draw=black, inner sep=8pt, anchor=center]
+\tikzstyle{matrixnode_left} = [rounded rectangle,  rounded rectangle left arc=none, fill=white, draw=black, inner sep=8pt, anchor=center]
+\tikzstyle{relationnode_right}=[draw, chamfered rectangle, chamfered rectangle corners={north east}, fill=white, inner sep=4pt, anchor=center]
+\tikzstyle{relationnode_left}=[draw, chamfered rectangle, chamfered rectangle corners={north west}, fill=white, inner sep=4pt, anchor=center]
+\tikzstyle{diagram}=[draw, rectangle, fill=white, inner sep=6pt, anchor=center]
+\tikzstyle{leftseminode}=[ rounded rectangle, rounded rectangle right arc=none, draw, fill=white, inner sep=4pt, anchor=center ]
+\tikzstyle{rightseminode}=[ rounded rectangle, rounded rectangle left arc=none, draw, fill=white, inner sep=4pt, anchor=center ]
+
+% every pic occupies the uniform frame x in [-0.5, 0.5], y in [-0.5, 0.5].
+% tips live on the left/right edges as (-in-k) / (-out-k), top-first,
+% evenly spaced in [-0.5, 0.5]: for n tips, y_k = 0.5 - k/(n-1) (n >= 2),
+% or y_0 = 0 when n = 1. codegen relies on this convention to align tips
+% across composition without needing tip data in json.
+%
+% coloured node glyphs (whitedot / boxnode_*) are drawn *after* the wires so
+% the fill covers any wire segment passing through the node interior.
+\tikzset{
+  val/.store in = \argval,
+  multiplication/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0.5);
+    \coordinate (-in-1)  at (-0.5,-0.5);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to[bend left=30]  (0,0);
+    \draw (-in-1) to[bend right=30] (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[whitedot] (-node) at (0,0) {};
+  },
+  comultiplication/.pic = {
+    \coordinate (-out-0)  at (0.5, 0.5);
+    \coordinate (-out-1)  at (0.5,-0.5);
+    \coordinate (-in-0) at ( -0.5, 0);
+    \draw (-out-0) to[bend right=30]  (0,0);
+    \draw (-out-1) to[bend left=30] (0,0);
+    \draw (0,0)   to (-in-0);
+    \node[whitedot] (-node) at (0,0) {};
+  },
+  zero/.pic = {
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node[whitedot] (-node) at (0,0) {};
+  },
+  cozero/.pic = {
+    \coordinate (-in-0) at (-0.5, 0);
+    \draw (-in-0) to (0,0);
+    \node[whitedot] (-node) at (0,0) {};
+  },
+  copy/.pic = {
+    \coordinate (-out-0)  at (0.5, 0.5);
+    \coordinate (-out-1)  at (0.5,-0.5);
+    \coordinate (-in-0) at (-0.5, 0);
+    \draw (-out-0) to[bend right=20]  (0,0);
+    \draw (-out-1) to[bend left=20] (0,0);
+    \draw (0,0)   to (-in-0);
+    \node[blackdot] (-node) at (0,0) {};
+  },
+  cocopy/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0.5);
+    \coordinate (-in-1)  at (-0.5,-0.5);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to[bend left=20]  (0,0);
+    \draw (-in-1) to[bend right=20] (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[blackdot] (-node) at (0,0) {};
+  },
+  discard/.pic = {
+    \coordinate (-in-0) at (-0.5, 0);
+    \draw (-in-0) to (0,0);
+    \node[blackdot] (-node) at (0,0) {};
+  },
+  codiscard/.pic = {
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node[blackdot] (-node) at (0,0) {};
+  },
+  scalar/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[boxnode_right] (-node) at (0,0) {$\argval$};
+  },
+  coscalar/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[boxnode_left] (-node) at (0,0) {$\argval$};
+  },
+  matrix/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0);
+    \coordinate (-out-0) at ( 1.0, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[matrixnode_left] (-node) at (0,0) {$\argval$};
+  },
+  comatrix/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0);
+    \coordinate (-out-0) at ( 1.0, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[matrixnode_right] (-node) at (0,0) {$\argval$};
+  },
+  2dmatrix/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0.3);
+    \coordinate (-in-1)  at (-1.0, -0.3);
+    \coordinate (-out-0) at ( 1.0, 0);
+    \draw (-in-0) to (0,0.3);
+    \draw (-in-1) to (0,-0.3);
+    \draw (0,0)   to (-out-0);
+    \node[matrixnode_left] (-node) at (0,0) {$\argval$};
+  },
+  2dcomatrix/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0);
+    \coordinate (-out-0) at ( 1.0, -0.5);
+    \coordinate (-out-1) at ( 1.0, 0.5);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[matrixnode_right] (-node) at (0,0) {$\argval$};
+  },
+  relation/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0);
+    \coordinate (-out-0) at ( 1.0, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[relationnode_right] (-node) at (0,0) {$\argval$};
+  },
+  corelation/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0);
+    \coordinate (-out-0) at ( 1.0, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[relationnode_left] (-node) at (0,0) {$\argval$};
+  },
+  2drelation/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0.3);
+    \coordinate (-in-1)  at (-1.0, -0.3);
+    \coordinate (-out-0) at ( 1.0, 0);
+    \draw (-in-0) to (0,0.3);
+    \draw (-in-1) to (0,-0.3);
+    \draw (0,0)   to (-out-0);
+    \node[relationnode_right] (-node) at (0,0) {$\argval$};
+  },
+  2dcorelation/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0);
+    \coordinate (-out-0) at ( 1.0, -0.5);
+    \coordinate (-out-1) at ( 1.0, 0.5);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[relationnode_left] (-node) at (0,0) {$\argval$};
+  },
+  affine/.pic = {
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node (-node) at (0,0) {$|$};
+  },
+  coaffine/.pic = {
+    \coordinate (-out-0) at (-0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node (-node) at (0,0) {$|$};
+  },
+  ge/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[boxnode_right] (-node) at (0,0) {$\ge$};
+  },
+  coge/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[boxnode_left] (-node) at (0,0) {$\le$};
+  },
+  linear/.pic = {
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (0,0) to (-out-0);
+    \node[leftseminode] (-node) at (0,0) {};
+  },
+  relu/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[draw, fill=white] (-node) at (0,0) {relu};
+  },
+  antipode/.pic = {
+    \coordinate (-in-0) at (-0.5, 0);
+    \coordinate (-out-0) at (0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0) to (-out-0);
+    \node[draw, fill=black] (-node) at (0,0) {};
+  },
+  diagram/.pic = {
+    \coordinate (-in-0)  at (-0.5, 0);
+    \coordinate (-out-0) at ( 0.5, 0);
+    \draw (-in-0) to (0,0);
+    \draw (0,0)   to (-out-0);
+    \node[diagram] (-node) at (0,0) {$\argval$};
+  },
+  2ddiagram/.pic = {
+    \coordinate (-in-0)  at (-1.0, 0.3);
+    \coordinate (-in-1)  at (-1.0, -0.3);
+    \coordinate (-out-0) at ( 1.0, 0);
+    \draw (-in-0) to (0,0.3);
+    \draw (-in-1) to (0,-0.3);
+    \draw (0,0)   to (-out-0);
+    \node[diagram] (-node) at (0,0) {$\argval$};
+  },
+}
+% Minimal 16:9 theme for a spoken mathematical presentation.
+\definecolor{ink}{HTML}{162738}
+\definecolor{teal}{HTML}{007F82}
+\definecolor{muted}{HTML}{5B6875}
+\setbeamercolor{normal text}{fg=ink,bg=white}
+\setbeamercolor{frametitle}{fg=ink,bg=white}
+\setbeamercolor{takeaway}{fg=ink,bg=teal!7}
+\setbeamercolor{footline}{fg=muted,bg=white}
+\setbeamercolor{structure}{fg=teal}
+\setbeamerfont{frametitle}{size=\fontsize{19}{23}\selectfont,series=\bfseries}
+\setbeamersize{text margin left=9mm,text margin right=9mm}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{frametitle}{%
+  \vspace{3mm}
+  \insertframetitle\par
+  \vspace{1.5mm}
+  {\color{teal}\rule{12mm}{.6mm}}\par
+}
+\setbeamertemplate{footline}{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=5mm,dp=2mm,leftskip=9mm,rightskip=9mm]{footline}
+  \fontsize{8}{10}\selectfont
+  \insertsectionhead\hfill\insertframenumber\,/\,25
+  \end{beamercolorbox}
+}
+\setbeamertemplate{itemize items}{\color{teal}\small$\bullet$}
+\setlength{\parskip}{0pt}
+\AtBeginDocument{%
+  \setlength{\abovedisplayskip}{6pt}
+  \setlength{\belowdisplayskip}{6pt}
+  \setlength{\abovedisplayshortskip}{3pt}
+  \setlength{\belowdisplayshortskip}{3pt}
+}
+\tikzset{
+  process/.style={draw=ink,thick,rounded corners=1.5mm,fill=white,
+    minimum width=1cm,minimum height=.7cm,inner sep=3mm},
+  stage/.style={draw=ink,thick,rounded corners=1.5mm,fill=white,
+    minimum width=2.2cm,minimum height=1.2cm,align=center,inner sep=3mm,font=\small},
+  proofbox/.style={draw=ink,thick,rounded corners=1.5mm,fill=white,
+    minimum height=.85cm,align=center,inner sep=2.5mm,font=\small},
+  wire/.style={draw=ink,thick},
+  axpic/.style={baseline=(current bounding box.center),line cap=round}
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\extR}{\overline{\mathbb{R}}}
+\newcommand{\sem}[1]{[\![#1]\!]}
+\newcommand{\ind}[1]{\mathcal I_{#1}}
+\newcommand{\ellcost}{\ell}
+\newcommand{\GPA}{\mathbf{GPA}}
+\newcommand{\GLP}{\mathbf{GLP}}
+\newcommand{\LPRel}{\mathbf{LPRel}}
+\newcommand{\PolyRel}{\mathbf{PolyRel}}
+\newcommand{\epi}{\operatorname{epi}}
+\newcommand{\credit}[1]{\par\vfill{\fontsize{7}{8.5}\selectfont\color{muted}#1\par}}
+\newcommand{\tagline}[1]{\par\vspace{2mm}\begin{beamercolorbox}[sep=2mm,wd=\linewidth]{takeaway}\small #1\end{beamercolorbox}}
+\newcommand{\diagrow}[3]{#1 & \begin{tikzpicture}[baseline=(current bounding box.center)]#2\end{tikzpicture} & $=$ & \begin{tikzpicture}[baseline=(current bounding box.center)]#3\end{tikzpicture}\\[2mm]}
+\newcommand{\costpic}{\begin{tikzpicture}[baseline=(current bounding box.center),scale=1.5]\pic (l) at (0,0) {linear};\node[above] at (0,.32) {$\ell$};\node[right] at (.55,0) {$x$};\end{tikzpicture}}
+\newcommand{\valueplot}[1]{%
+\begin{tikzpicture}
+\begin{axis}[width=6.6cm,height=4.8cm,
+ xmin=-.7,xmax=2.4,ymin=-.3,ymax=4.5,
+ axis lines=left,xlabel={$d$},ylabel={$#1$},
+ xtick={0,1,2},ytick={0,1,3},tick label style={font=\footnotesize},
+ label style={font=\small},clip=true]
+ \def\plotlabel{#1}\def\epilabel{t}\ifx\plotlabel\epilabel
+ \addplot[draw=none,fill=teal!13] coordinates {(-.7,0)(0,0)(1,1)(2.4,3.8)(2.4,4.5)(-.7,4.5)} \closedcycle;
+ \node[font=\small,text=teal] at (axis cs:.6,3.5) {$\epi(v)$};
+ \fi
+ \addplot[very thick,teal] coordinates {(-.7,0)(0,0)(1,1)(2.4,3.8)};
+ \addplot[densely dashed,muted] coordinates {(1,0)(1,1)};
+ \node[font=\footnotesize,anchor=south east] at (axis cs:0,0) {$0$};
+ \node[font=\footnotesize,anchor=south east] at (axis cs:.68,.68) {$d$};
+ \node[font=\footnotesize,anchor=south east] at (axis cs:2,3) {$2d-1$};
+\end{axis}
+\end{tikzpicture}}
+
+\title{A compositional and diagrammatic syntax for parametric linear programming}
+\author{Bruno Llacer Trotti}
+\institute{PPGI / UFRJ}
+\date{Master's qualification \textbullet\ 2026}
+
+\begin{document}
+% Build from the repository root: make -C presentation
+\end{document}

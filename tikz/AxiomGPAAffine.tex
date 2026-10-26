@@ -1,0 +1,14 @@
+% Additional axiom for the affine extension of the conic calculus.
+\begin{center}\begin{tabular}{r c c c}
+  (P0) & \begin{tikzpicture}[axpic]
+    \draw[dotted] (0,0) rectangle (.5,.5);
+  \end{tikzpicture}
+  & \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+  & \begin{tikzpicture}[axpic]
+      \pic (g1) at (0.500,0.500) {affine};
+      \pic (g2) at (1.500,0.500) {ge};
+      \pic (g3) at (2.500,0.500) {cozero};
+      \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+      \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+  \end{tikzpicture} \\[1mm]
+\end{tabular}\end{center}
