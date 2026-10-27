@@ -1,10 +1,12 @@
 \begin{center}
     \begin{tikzpicture}[axpic]
       \pic[val=A'] (g1) at (1.000,1.500) {matrix};
-      \pic (g2) at (1.500,0.500) {affine};
+      \pic (g2) at (1.000,0.500) {affine};
       \pic (g3) at (3.000,1.000) {multiplication};
+      \pic[val=b] (g4) at (2.000,0.500) {scalar};
       \draw (g1-out-0) to[out=0,in=180] (g3-in-0);
-      \draw (g2-out-0) to[out=0,in=180] (g3-in-1);
+      \draw (g4-out-0) to[out=0,in=180] (g3-in-1);
+      \draw (g2-out-0) to[out=0,in=180] (g4-in-0);
     \end{tikzpicture}
     \;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
     \begin{tikzpicture}[axpic]

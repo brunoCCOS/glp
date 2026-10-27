@@ -1,16 +1,20 @@
+% Wire labels give the number of wires in each bundle:
+%   h = cost wires, m = inputs x, n = outputs y, p = constraint rows.
 \begin{center}
+\tikzset{wl/.style={font=\scriptsize, above, inner sep=1pt}}
 \begin{tikzpicture}[axpic]
   \pic (g1) at (0.500,1.300) {linear};
   \coordinate (id_in_2) at (0,0.700);
   \coordinate (id_out_3) at (1.000,0.700);
-  \draw (id_in_2) -- (id_out_3);
+  \draw (id_in_2) -- node[wl] {$m$} (id_out_3);
   \pic[val=A] (g4) at (2.000,1.000) {2drelation};
-  \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+  \draw (g1-out-0) to[out=0,in=180] node[wl] {$h$} (g4-in-0);
   \draw (id_out_3) to[out=0,in=180] (g4-in-1);
   \pic (g5) at (3.500,1.000) {ge};
-  \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
+  \draw (g4-out-0) to[out=0,in=180] node[wl] {$p$} (g5-in-0);
   \pic[val=B] (g6) at (5.000,1.000) {comatrix};
-  \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
+  \draw (g5-out-0) to[out=0,in=180] node[wl] {$p$} (g6-in-0);
+  \node[font=\scriptsize, right] at (g6-out-0) {$n$};
 \end{tikzpicture} \\
 \vspace{3mm}
 
@@ -19,18 +23,19 @@
   \pic (g1) at (0.500,1.500) {linear};
   \coordinate (id_in_2) at (0,0.500);
   \coordinate (id_out_3) at (1.000,0.500);
-  \draw (id_in_2) -- (id_out_3);
+  \draw (id_in_2) -- node[wl] {$m$} (id_out_3);
   \pic[val=A] (g4) at (2.000,1.500) {relation};
   \pic[val=C] (g5) at (2.000,0.500) {matrix};
-  \draw (g1-out-0) to[out=0,in=180] (g4-in-0);
+  \draw (g1-out-0) to[out=0,in=180] node[wl] {$h$} (g4-in-0);
   \draw (id_out_3) to[out=0,in=180] (g5-in-0);
   \pic (g6) at (3.500,1.000) {multiplication};
-  \draw (g4-out-0) to[out=0,in=180] (g6-in-0);
-  \draw (g5-out-0) to[out=0,in=180] (g6-in-1);
+  \draw (g4-out-0) to[out=0,in=180] node[wl] {$p$} (g6-in-0);
+  \draw (g5-out-0) to[out=0,in=180] node[wl, below] {$p$} (g6-in-1);
   \pic (g7) at (4.500,1.000) {ge};
-  \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
+  \draw (g6-out-0) to[out=0,in=180] node[wl] {$p$} (g7-in-0);
   \pic[val=B] (g8) at (6.000,1.000) {comatrix};
-  \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
+  \draw (g7-out-0) to[out=0,in=180] node[wl] {$p$} (g8-in-0);
+  \node[font=\scriptsize, right] at (g8-out-0) {$n$};
 \end{tikzpicture} \\
 \vspace{3mm}
 
@@ -38,40 +43,51 @@
 \begin{tikzpicture}[axpic]
   \pic (g1) at (0.500,1.000) {linear};
   \pic[val=A] (g2) at (2.000,1.000) {relation};
-  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+  \draw (g1-out-0) to[out=0,in=180] node[wl] {$h$} (g2-in-0);
   \pic (g3) at (3.500,1.000) {ge};
-  \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+  \draw (g2-out-0) to[out=0,in=180] node[wl] {$p$} (g3-in-0);
   \pic (g4) at (4.500,1.000) {comultiplication};
-  \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+  \draw (g3-out-0) to[out=0,in=180] node[wl] {$p$} (g4-in-0);
   \pic[val=B] (g5) at (6.000,1.500) {comatrix};
-  \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-  \draw (g5-out-0) -- ++(1.000,0);
+  \draw (g4-out-0) to[out=0,in=180] node[wl] {$p$} (g5-in-0);
+  \draw (g5-out-0) -- node[wl] {$n$} ++(1.000,0);
   \pic (g6) at (5.500,0.500) {antipode};
-  \draw (g4-out-1) to[out=0,in=180] (g6-in-0);
+  \draw (g4-out-1) to[out=0,in=180] node[wl, below] {$p$} (g6-in-0);
   \pic[val=C] (g7) at (7.000,0.500) {comatrix};
-  \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
+  \draw (g6-out-0) to[out=0,in=180] node[wl, below] {$p$} (g7-in-0);
+  \node[font=\scriptsize, right] at (g7-out-0) {$m$};
 \end{tikzpicture} \\
 \vspace{3mm}
 
-\;\begin{tikzpicture}[axpic]\node{$=$};\end{tikzpicture}\;
+\;\begin{tikzpicture}[axpic]\node{$\overset{(linearity),\,(inf)}{=}$};\end{tikzpicture}\;
 \begin{tikzpicture}[axpic]
   \pic (g1) at (0.500,1.000) {linear};
-  \pic (g2) at (1.750,1.000) {comultiplication};
-  \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
-  \pic[val=A] (g3) at (3.750,1.000) {2drelation};
+  \pic (g0) at (1.750,1.000) {ge};
+  \draw (g1-out-0) to[out=0,in=180] node[wl] {$1$} (g0-in-0);
+  \pic (g2) at (3.000,1.000) {comultiplication};
+  \draw (g0-out-0) to[out=0,in=180] node[wl] {$1$} (g2-in-0);
+  \pic[val=A] (g3) at (5.000,1.000) {2drelation};
   \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
   \draw (g2-out-1) to[out=0,in=180] (g3-in-1);
-  \pic (g4) at (5.250,1.000) {ge};
-  \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
-  \pic (g5) at (6.250,1.000) {comultiplication};
-  \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
-  \pic[val=B] (g6) at (7.750,1.500) {comatrix};
-  \draw (g5-out-0) to[out=0,in=180] (g6-in-0);
-  \draw (g6-out-0) -- ++(1.000,0);
-  \pic (g7) at (7.250,0.500) {antipode};
-  \draw (g5-out-1) to[out=0,in=180] (g7-in-0);
-  \pic[val=C] (g8) at (8.750,0.500) {comatrix};
-  \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
-  \draw[dotted] (1.150,-0.050) rectangle (9.500,2.050);
+  % h cost wires: the dots between the two legs stand for the h outputs
+  \node[font=\scriptsize, inner sep=0pt]
+    at ($(g2-out-0)!0.5!(g3-in-1)$) {$\vdots\,h$};
+  \pic (g4) at (6.500,1.000) {ge};
+  \draw (g3-out-0) to[out=0,in=180] node[wl] {$p$} (g4-in-0);
+  \pic (g5) at (7.500,1.000) {comultiplication};
+  \draw (g4-out-0) to[out=0,in=180] node[wl] {$p$} (g5-in-0);
+  \pic[val=B] (g6) at (9.000,1.500) {comatrix};
+  \draw (g5-out-0) to[out=0,in=180] node[wl] {$p$} (g6-in-0);
+  \draw (g6-out-0) -- node[wl] {$n$} ++(1.000,0);
+  \pic (g7) at (8.500,0.500) {antipode};
+  \draw (g5-out-1) to[out=0,in=180] node[wl, below] {$p$} (g7-in-0);
+  \pic[val=C] (g8) at (10.000,0.500) {comatrix};
+  \draw (g7-out-0) to[out=0,in=180] node[wl, below] {$p$} (g8-in-0);
+  \node[font=\scriptsize, right] at (g8-out-0) {$m$};
+  \draw[dotted] (1.150,-0.050) rectangle (10.750,2.050);
 \end{tikzpicture}
+
+\vspace{2mm}
+{\footnotesize Wire labels give bundle sizes: $h$ for the cost wires,
+$m$ for the inputs, $n$ for the outputs, and $p$ for the constraint rows.}
 \end{center}

@@ -9,7 +9,7 @@ which is precisely variable elimination, and it is this
 operation that categorical composition will simulate diagrammatically.
 
 The morphisms encode feasibility constraints through linear inequalities.
-In the weighted framework, these constraints have indicator costs $0$ and
+Through the quantale framework, these constraints have indicator costs $0$ and
 $+\infty$. Their diagrammatic axiomatization is a Symmetric Monoidal
 Inequality Theory (SMIT)~\cite{bonchi2021polyhedral}. This theory provides the
 structural foundation for representing linear programs, where feasibility
@@ -417,8 +417,35 @@ polyhedra and cannot by itself cover infeasible constraints.
     vector $b$:
     \begin{figure}[H]
         \centering
-        \includegraphics[width=1\linewidth]{images/GPA/ExpressivityPolyRel.png}
+        \begin{tikzpicture}[axpic]
+            \node[font=\Large] at (-0.100,0.500) {$\llbracket$};
+            \pic (g1) at (0.500,0.500) {affine};
+            \pic[val=b] (g2) at (1.500,0.500) {scalar};
+            \draw (g1-out-0) to[out=0,in=180] (g2-in-0);
+            \pic (g3) at (3.000,0.500) {coge};
+            \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
+            \pic[val=A] (g4) at (5.000,0.500) {comatrix};
+            \draw (g3-out-0) to[out=0,in=180] (g4-in-0);
+            \node[font=\Large] at (6.300,0.500) {$\rrbracket$};
+            \node[anchor=west] at (6.600,0.500)
+                {$=\;\{x\in\mathbb{R}^N \mid Ax\ge b\}$};
+        \end{tikzpicture}
     \end{figure}
+    Indeed, the interpretation is a symmetric monoidal functor, so the
+    diagram denotes the relational composite of the semantics of its three
+    components:
+    \[
+        \llbracket \rtop\,;b\rrbracket=\{(\bullet,b)\},\qquad
+        \llbracket \inlinegen{coge}\rrbracket=\{(u,w)\mid w\ge u\},\qquad
+        \llbracket A^{\mathrm{op}}\rrbracket=\{(w,x)\mid w=Ax\}.
+    \]
+    Composing them eliminates the internal wires:
+    \[
+        \{(\bullet,x)\mid \exists\,w:\ w\ge b,\ w=Ax\}
+        =\{x\in\mathbb{R}^N\mid Ax\ge b\},
+    \]
+    which is the claimed polyhedron. With $b=0$, this is the diagram of
+    the conic case.
 \end{proof}
 
 As in the conic case, bending the first $m$ coordinates into inputs

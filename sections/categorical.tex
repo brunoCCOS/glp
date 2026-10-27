@@ -745,7 +745,8 @@ a compound diagram gives the same result as interpreting its components and
 then combining their meanings. For a general strong functor, the corresponding
 identifications use its comparison isomorphisms rather than literal equalities.
 The formal compatibility conditions are recalled in
-Appendix~\ref{appendix:monoidal-functor}.
+Appendix~\ref{appendix:monoidal-functor} and the definition of the map is presented
+later in this section.
 
 
 The graphical calculi used in this thesis have one generating wire type.  An
@@ -856,9 +857,40 @@ This resembles formal reasoning about computer programs, which may also be
 composed sequentially or in parallel
 \cite{winskel1993formal,piedeleu2023introductionstringdiagramscomputer}.
 Here, the components are linear programs, and the aim is to reason about their
-compositions using equations in a domain-specific language.
+compositions using equations in a domain-specific language. To interpret them,
+we need a map from those symbols into objects with more expressive meaning.
+ 
+ 
+\begin{definition}[Interpretation]\label{def:glp-interpretation}
+    The interpretation
+    $\llbracket{-}\rrbracket:\mathrm{FreeP}_{\mathbf{P\Sigma_{/E}}}\to\mathcal{C}$
+    is the strict symmetric monoidal functor that sends each
+    generator of $\mathbf{P\Sigma}$ to its semmantics, read as a
+    object in the category $\mathcal{C}$.
+\end{definition}
 
-To connect these proofs to the intended semantics, we require soundness,
+$\mathcal{C}$ here is read as the semantics, that is, the objects and structures
+in which we are interested. A syntax is then another category whose exists a 
+functor $\llbracket \rrbracket$ which maps their objects in the semantics in a suitable
+manner. One can argue to which extent one is really \textit{semantics} and
+the other \textit{syntax}.
+
+We often consider the \textit{syntax} the objects we are interested in using to
+write down the proofs and our reasoning,
+we can then impose over it suitable properties, such as those from SMTs, making
+their use very convenient. In the other hand, semantics are often the objects
+onto one wants to understand facts and propositions about it.
+
+One could say that the semantics
+objects are "more close related" to the actual objects in which it thinks about.
+However, the truth is that when one writes $\llbracket z \rrbracket = f(x,y)$ it is just
+mapping symbols into symbols and the real meaning comes from the very act of reading it.
+We abstain from such philosophical dispute, here those terms
+are differentiated by the way we intent to use them and we will denote as \textit{semantics}
+the traditional mathematical representation of the objects of interest.
+
+   
+To connect these proofs and equations to the intended semantics, we require soundness,
 completeness, and expressivity. These properties specify which semantic
 statements the calculus can establish and which relations it can represent.
 

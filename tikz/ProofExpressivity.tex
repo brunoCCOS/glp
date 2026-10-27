@@ -6,20 +6,20 @@
     \pic[val=A] (g3) at (3.000,1.500) {matrix};
     \draw (g2-out-0) to[out=0,in=180] (g3-in-0);
     % bottom row: affine offset
-    \pic (g4) at (2.500,0.500) {affine};
-    \coordinate (a5) at (4.000,0.500);
-    \draw (g4-out-0) -- (a5);
+    \pic (g4) at (2.000,0.500) {affine};
+    \pic[val=-e] (g5) at (3.250,0.500) {scalar};
+    \draw (g4-out-0) to[out=0,in=180] (g5-in-0);
     % merge, constrain, output
     \pic (g6) at (4.500,1.000) {multiplication};
     \draw (g3-out-0) to[out=0,in=180] (g6-in-0);
-    \draw (a5)       to[out=0,in=180] (g6-in-1);
+    \draw (g5-out-0) to[out=0,in=180] (g6-in-1);
     \pic (g7) at (5.500,1.000) {ge};
     \draw (g6-out-0) to[out=0,in=180] (g7-in-0);
-    \pic[val=B] (g8) at (7.000,1.000) {comatrix};
+    \pic[val={[B\;C]}] (g8) at (7.000,1.000) {comatrix};
     \draw (g7-out-0) to[out=0,in=180] (g8-in-0);
     \node[anchor=west] at ($(g8-out-0)+(0.15,0)$)
         {$
-            \llbracket = \rrbracket \; y \mapsto \inf_x c^\top x
+            \llbracket = \rrbracket \; (x,y) \mapsto \inf_z c^\top z
             \ \text{s.t.}\
-            Ax + b \ge By$};
+            Az \ge Bx + Cy + e$};
 \end{tikzpicture}
